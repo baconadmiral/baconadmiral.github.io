@@ -67,8 +67,11 @@ function draw() {
       howManyWaitingThisCycle++;
     }
     customerList[i].showCustomer();
+
+    if(customerList[i].xLoc > width + 20)
+      customerList.splice(i, 1);
+
   }
 
   customersWaiting = howManyWaitingThisCycle;
-
 }
