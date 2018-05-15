@@ -138,8 +138,11 @@ function Car(id)
 
     for(let i = 0; i < gateList.length; i++)
     {
-      if(minVal >= gateList[i].carsInLane)
+      if(minVal >= gateList[i].carsInLane && gateList[i].gateOpen)
       {
+        if(i == 0 && gateList[i].gateOpen )
+          console.log("alert");
+        
         minVal = gateList[i].carsInLane;
         minIndex = i;
       }

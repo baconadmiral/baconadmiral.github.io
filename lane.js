@@ -4,19 +4,32 @@ function Lane(xLoc, divider)
   this.carQueue = [];
   this.carsInLane = 0;
   this.tollBothSprite;
-  this.tollBoothImg = loadImage('imgs/gate_open.png');
   
   this.tollBoothSprite = createSprite(this.xLoc-35, divider.yLoc);
-  this.tollBoothSprite.addImage(this.tollBoothImg);
+  this.tollBoothSprite.addAnimation("open", "imgs/gate_open.png");
+  this.tollBoothSprite.addAnimation("closed", "imgs/gate closed.png");
+  this.tollBoothSprite.changeAnimation("open");
   this.tollBoothSprite.scale = .18;
-
-
-  this.showLane = function()
+  
+  this.gateAnimationCtr = 0;
+  this.gateOpen = true;
+  
+  this.openCloseGate = function()
   {
-    //fill(120);
-    //rect(this.xLoc, divider.yLoc, 25, 25);
+    if(this.gateAnimationCtr % 2 == 0)
+    {
+      this.tollBoothSprite.changeAnimation("closed");
+      this.gateOpen = false;
+    }
+    else 
+    {
+      this.tollBoothSprite.changeAnimation("open");
+      this.gateOpen = true;
+    }
+    
+    this.gateAnimationCtr++;
   }
-
+  
   this.addCarToLane = function(car)
   {
     let angle;
@@ -46,7 +59,6 @@ function Lane(xLoc, divider)
     //this.shiftCarsUp();
     this.carsInLane = this.carQueue.length;
   }
-  
   
 
 /*  this.shiftCarsUp = function()

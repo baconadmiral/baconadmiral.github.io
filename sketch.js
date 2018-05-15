@@ -35,6 +35,27 @@ function setup() {
   gateList.push(new Lane(160, divider));
   gateList.push(new Lane(240, divider));
   gateList.push(new Lane(320, divider));
+  
+  
+  gateList[0].tollBoothSprite.onMousePressed = function(){    
+    //not sure why I cant bind directly but...ok
+    gateList[0].openCloseGate();
+  }
+  
+  gateList[1].tollBoothSprite.onMousePressed = function(){    
+    //not sure why I cant bind directly but...
+    gateList[1].openCloseGate();
+  }
+  
+  gateList[2].tollBoothSprite.onMousePressed = function(){    
+    //not sure why I cant bind directly but...
+    gateList[2].openCloseGate();
+  }
+  
+  gateList[3].tollBoothSprite.onMousePressed = function(){    
+    //not sure why I cant bind directly but...
+    gateList[3].openCloseGate();
+  }
 
 
 }
