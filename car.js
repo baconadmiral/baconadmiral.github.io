@@ -3,27 +3,33 @@ function Car(id)
 {
 
 
-  let evaluationPoint = windowHeight - 200;
+  let evaluationPoint = 340;
 
+  this.imageNameList = [];
+  this.imageNameList.push('imgs/batmobile.png');
+  this.imageNameList.push('imgs/cop car.png');
+  this.imageNameList.push('imgs/truck2.png');
+  this.imageNameList.push('imgs/yellow car.png');
 
+  this.image = loadImage(random(this.imageNameList));
   this.carId = id;
   this.isLookingForSpot = false;
   this.isWaitingInTraffic = false;
   this.waitingAtGate = false;
   this.yLoc =  height + 10;
-  this.xLoc =  random(laneXVals);
+  this.xLoc =  200;
 
 
-  this.waitTimer = 50;
+  this.waitTimer = 600;
   this.waited = false;
-  this.speed = -21;
+  this.speed = -1.0;
   this.myLaneIndex = -1;
   
   this.carSprite = createSprite(this.xLoc, this.yLoc-20, 30, 30);
-  this.carSprite.addImage(loadImage(random(imageNameList)));
+  this.carSprite.addImage(loadImage(random(this.imageNameList)));
   this.carSprite.velocity.y = this.speed;
   this.carSprite.rotateToDirection = true;
-  this.carSprite.scale = .8;
+  this.carSprite.scale = .25;
 
   this.collisionFinished = false;
   this.annealCollide = 20;
@@ -34,7 +40,7 @@ function Car(id)
   this.update = function(throughPut, carList, gateList, divider)
   {
     //look for the lane with the least cars
-    if(this.carSprite.position.y <= evaluationPoint && !this.waited)
+    if(this.carSprite.position.y <= divider.dividerSprite.position.y + evaluationPoint && !this.waited)
     {
       //Stops Car at gateList
       if(this.carSprite.overlap(divider.dividerSprite))
@@ -72,15 +78,13 @@ function Car(id)
           this.isCollidedWithCars(carList, gateList);
       
       if(this.angle > 260 && this.carSprite.position.x >= gateList[this.myLaneIndex].xLoc && this.waitingAtGate == false)
-          this.carSprite.setSpeed(this.speed, -90);
+          this.carSprite.setSpeed(1.4, -90);
       else if(this.angle < 260 && this.carSprite.position.x <= gateList[this.myLaneIndex].xLoc && this.waitingAtGate == false)  
-          this.carSprite.setSpeed(this.speed, -90);
-
+          this.carSprite.setSpeed(1.4, -90);
+      
+      this.removeCarsNotRenderedFromLane(gateList);
+          
     }
-    
-    
-    this.removeCarsNotRenderedFromLane(gateList);
-        
   }
   
   this.removeCarsNotRenderedFromLane = function(gateList)
@@ -89,10 +93,8 @@ function Car(id)
     {
       for(let i = 0; i < gateList[this.myLaneIndex].carQueue.length; i++)
       {
-        if(gateList[this.myLaneIndex].carQueue[i].carSprite.position.y <  35)
+        if(gateList[this.myLaneIndex].carQueue[i].carSprite.position.y <  - 10)
         {
-            gateList[this.myLaneIndex].carQueue[i].carSprite.remove();
-            gateList[this.myLaneIndex].carQueue[i] = null;
             gateList[this.myLaneIndex].carQueue.splice(i, 1);
         }
       }
@@ -137,7 +139,10 @@ function Car(id)
     for(let i = 0; i < gateList.length; i++)
     {
       if(minVal >= gateList[i].carsInLane && gateList[i].gateOpen)
-      {  
+      {
+        if(i == 0 && gateList[i].gateOpen )
+          console.log("alert");
+        
         minVal = gateList[i].carsInLane;
         minIndex = i;
       }
