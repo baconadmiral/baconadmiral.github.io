@@ -34,19 +34,19 @@ function setup() {
 
   console.log("Display Width: " + displayWidth);
   console.log("Display Height: " + displayHeight);
-  
+
   laneStart = (windowWidth / 30);
   laneWidth = (windowWidth / 10);
   lane0X = 80;
   lane1X = 160;
   lane2X = 240;
   lane3X = 320;
-  
+
   laneXVals.push(lane0X);
   laneXVals.push(lane1X);
   laneXVals.push(lane2X);
   laneXVals.push(lane3X);
-  
+
   this.roadBackground = loadImage('road_background.png');
   idCtr = 0;
 
@@ -54,17 +54,17 @@ function setup() {
   carsWaiting = 0;
 
   canvas = createCanvas(400, 500);
-  
+
   //if(displayWidth > 400 && displayHeight > 600){
   //  createCanvas(400, 600);
   //}
   //else {
   createP(" ");
 
-  
+
   //createCanvas(windowWidth , windowHeight);
 //}
-  
+
 
   arrivalRateSlider = select("#arrival");
   throughputSlider = select("#throughPut");
@@ -76,24 +76,24 @@ function setup() {
   gateList.push(new Lane(160, divider));
   gateList.push(new Lane(240, divider));
   gateList.push(new Lane(320, divider));
-  
-  
-  gateList[0].tollBoothSprite.onMousePressed = function(){    
+
+
+  gateList[0].tollBoothSprite.onMousePressed = function(){
     //not sure why I cant bind directly but...ok
     gateList[0].openCloseGate();
   }
-  
-  gateList[1].tollBoothSprite.onMousePressed = function(){    
+
+  gateList[1].tollBoothSprite.onMousePressed = function(){
     //not sure why I cant bind directly but...
     gateList[1].openCloseGate();
   }
-  
-  gateList[2].tollBoothSprite.onMousePressed = function(){    
+
+  gateList[2].tollBoothSprite.onMousePressed = function(){
     //not sure why I cant bind directly but...
     gateList[2].openCloseGate();
   }
-  
-  gateList[3].tollBoothSprite.onMousePressed = function(){    
+
+  gateList[3].tollBoothSprite.onMousePressed = function(){
     //not sure why I cant bind directly but...
     gateList[3].openCloseGate();
   }
@@ -113,16 +113,10 @@ function addCar()
     carList.push(cust);
 }
 
-function mousePressed(){
-  console.log("MouseX" + mouseX);
-  console.log("MouseY" + mouseY);
-
-}
-
 function draw() {
   background(this.roadBackground);
-  
-    
+
+
   //divider.showDivider();
   text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
   text("Throughput: " + throughputSlider.value(), 10, 50);
@@ -130,7 +124,7 @@ function draw() {
   text("Cars Waiting: " + carsWaiting, 10, 110);
 
 
-  if(frameCount % (50 - arrivalRateSlider.value()) == 0)
+  if(frameCount % (500 - arrivalRateSlider.value()) == 0)
   {
     addCar();
     /*console.log("Car List Sz: " + carList.length);
@@ -150,7 +144,7 @@ function draw() {
     if(carList[i].carSprite.velocity.y == 0)
     {
       howManyWaitingThisCycle++;
-    }    
+    }
 
 
     if(carList[i].carSprite.position.y < -20)
@@ -162,6 +156,6 @@ function draw() {
   }
 
   carsWaiting = howManyWaitingThisCycle;
-  
+
   drawSprites();
 }
