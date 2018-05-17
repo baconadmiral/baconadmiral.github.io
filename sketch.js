@@ -52,8 +52,10 @@ function setup() {
 
   carList = [];
   carsWaiting = 0;
+  const canvasElt = createCanvas(400, 500).elt;
+  canvasElt.style.width = '100%', canvasElt.style.height = '100%';
 
-  canvas = createCanvas(400, 500);
+
 
   //if(displayWidth > 400 && displayHeight > 600){
   //  createCanvas(400, 600);
@@ -114,8 +116,8 @@ function addCar()
 }
 
 function draw() {
-  background(this.roadBackground);
 
+  background(this.roadBackground);
 
   //divider.showDivider();
   text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
