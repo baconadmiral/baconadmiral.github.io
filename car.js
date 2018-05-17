@@ -103,12 +103,12 @@ function Car(id)
 
   this.isCollidedWithCars = function(carList, gateList)
   {
-    let carQue = gateList[this.myLaneIndex].carQueue;
+    /*let carQue = gateList[this.myLaneIndex].carQueue;
     let indexInLane  = carQue.indexOf(this);
 
     if(indexInLane > 0)
-    {
-      for(let i = 0; i < carQue.length; i++)
+    {*/
+      /*for(let i = 0; i < carQue.length; i++)
       {
         if(typeof carQue[i] != 'undefined')
         {
@@ -120,13 +120,13 @@ function Car(id)
             carQue[i].carSprite.displace(this.carSprite);
           }
         }
-      }
+      }*/
 
       /*if(typeof carQue[indexInLane - 1] != 'undefined')
       {
         carQue[indexInLane-1].carSprite.displace(this.carSprite);
       }*/
-    }
+  //  }
   }
 
   this.findLane = function(carList, gateList, divider)
