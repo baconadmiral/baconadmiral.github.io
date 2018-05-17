@@ -81,7 +81,7 @@ function setup() {
   gateList.push(new Lane(320, divider));
 
 
-  gateList[0].tollBoothSprite.onMousePressed = function(){
+  /*gateList[0].tollBoothSprite.onMousePressed = function(){
     //not sure why I cant bind directly but...ok
     gateList[0].openCloseGate();
   }
@@ -99,7 +99,7 @@ function setup() {
   gateList[3].tollBoothSprite.onMousePressed = function(){
     //not sure why I cant bind directly but...
     gateList[3].openCloseGate();
-  }
+  }*/
 
 
 }
@@ -137,7 +137,7 @@ function draw() {
   }
 
 
-  let howManyWaitingThisCycle = 0;
+  /*let howManyWaitingThisCycle = 0;
   for(var i = 0; i < carList.length-1; i++)
   {
     carList[i].update(50, carList, gateList, divider);
@@ -155,7 +155,11 @@ function draw() {
     }
   }
 
-  carsWaiting = howManyWaitingThisCycle;
+  carsWaiting = howManyWaitingThisCycle;*/
 
+  gateList[0].showBooth();
+  gateList[1].showBooth();
+  gateList[2].showBooth();
+  gateList[3].showBooth();
   drawSprites();
 }
