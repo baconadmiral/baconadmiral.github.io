@@ -122,10 +122,10 @@ function draw() {
   text("Cars Waiting: " + carsWaiting, 10, 110);*/
 
 
-  if(frameCount % (50) == 0 && carCt < 3)
+  if(frameCount % (80) == 0)
   {
     addCar();
-    carCt++;
+    //carCt++;
     //console.log("Car List Sz: " + carList.length);
     //console.log("Lane 0 Sz: " +   gateList[0].carQueue.length);
     //console.log("Lane 1 Sz: " +   gateList[1].carQueue.length);
