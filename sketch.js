@@ -119,7 +119,8 @@ function draw() {
   /*text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
   text("Throughput: " + throughputSlider.value(), 10, 50);
   text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
-  text("Cars Waiting: " + carsWaiting, 10, 110);*/
+*/
+  text("Cars Waiting: " + carsWaiting, 10, 110);
 
 
   if(frameCount % (80) == 0)
