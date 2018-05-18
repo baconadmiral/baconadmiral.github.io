@@ -49,7 +49,7 @@ function setup() {
   laneXVals.push(lane2X);
   laneXVals.push(lane3X);
 
-  //this.roadBackground = loadImage('road_background.png');
+  this.roadBackground = loadImage('road_background.png');
   idCtr = 0;
 
   carList = [];
@@ -112,8 +112,8 @@ function addCar()
 }
 
 function draw() {
-  //background(this.roadBackground);
-  background(50, 50, 275);
+  background(this.roadBackground);
+  //background(50, 50, 275);
 
   //divider.showDivider();
   /*text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
