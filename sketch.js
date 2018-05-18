@@ -55,10 +55,10 @@ function setup() {
   carList = [];
   carsWaiting = 0;
 
-  //const canvasElt = createCanvas(400, 500).elt;
-  //canvasElt.style.width = '100%', canvasElt.style.height="100%";
+  const canvasElt = createCanvas(400, 500).elt;
+  canvasElt.style.width = '100%', canvasElt.style.height="100%";
 
-  canvas = createCanvas(400, 500);
+  //canvas = createCanvas(400, 500);
 
   //if(displayWidth > 400 && displayHeight > 600){
   //  createCanvas(400, 600);
@@ -116,10 +116,9 @@ function draw() {
   //background(50, 50, 275);
 
   //divider.showDivider();
-  /*text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
+  text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
   text("Throughput: " + throughputSlider.value(), 10, 50);
   text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
-*/
   text("Cars Are Waiting: " + carsWaiting, 10, 110);
 
 
