@@ -21,6 +21,8 @@ let lane3X;
 let laneShiftX;
 let laneXVals = [];
 
+let maxCarsRendered = 10;
+
 
 let imageNameList = [];
 imageNameList.push('imgs/batmobile.png');
@@ -115,7 +117,7 @@ function draw() {
   text("Cars Are Waiting: " + carsWaiting, 10, 110);
 
 
-  if(frameCount % (80) == 0)
+  if(frameCount % (80) == 0 && carList.length < maxCarsRendered)
   {
     addCar();
     //carCt++;
@@ -130,8 +132,9 @@ function draw() {
 
 
   let howManyWaitingThisCycle = 0;
-  for(var i = 0; i < carList.length-1; i++)
+  for(var i = 0; i < carList.length; i++)
   {
+
     carList[i].update(50, carList, gateList, divider);
     if(carList[i].carSprite.velocity.y == 0)
     {

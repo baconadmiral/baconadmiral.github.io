@@ -45,7 +45,7 @@ function Car(id)
 
       }
 
-      if(this.waitingAtGate == true)
+      if(this.waitingAtGate == true && gateList[this.myLaneIndex].gateOpen)
       {
         this.waitTimer -= throughPut;
       }
@@ -130,8 +130,8 @@ function Car(id)
 
   this.findLane = function(carList, gateList, divider)
   {
-    let minIndex = 0;
-    let minVal = gateList[0].carsInLane;
+    let minIndex = -1;
+    let minVal = maxCarsRendered;
 
     for(let i = 0; i < gateList.length; i++)
     {
@@ -142,13 +142,9 @@ function Car(id)
       }
     }
 
-    //if(!this.isLookingForSpot)
-  //  {
-//      gateList[minIndex].addCarToLane();
-//      this.isLookingForSpot = true;
-    //  this.xLoc = gateList[minIndex].findLaneFrontX();
-    //  console.log("car added to lane: " + minIndex);
-  //  }
+    //All gates are closed
+    if(minIndex == -1)
+      minIndex = floor(random(0, gateList.length-1));
 
     return minIndex;
   }
