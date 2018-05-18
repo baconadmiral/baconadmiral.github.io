@@ -32,9 +32,6 @@ imageNameList.push('imgs/blue car.png');
 
 function setup() {
 
-  console.log("Display Width: " + displayWidth);
-  console.log("Display Height: " + displayHeight);
-
   laneStart = (windowWidth / 30);
   laneWidth = (windowWidth / 10);
   lane0X = 80;
@@ -55,22 +52,17 @@ function setup() {
   carList = [];
   carsWaiting = 0;
 
-  createP("");
-
-
-  //canvas = createCanvas(400, 500);
-
-  /*if(displayWidth > 400 && displayHeight > 600){
+  if(displayWidth > 1024){
     createCanvas(400, 600);
   }
-  else {*/
+  else {
     const canvasElt = createCanvas(400, 500).elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
-  //}
+  }
 
 
-  arrivalRateSlider = select("#arrival");
-  throughputSlider = select("#throughPut");
+  //arrivalRateSlider = select("#arrival");
+  //throughputSlider = select("#throughPut");
 
   divider = new Divider();
 
@@ -116,9 +108,9 @@ function draw() {
   //background(50, 50, 275);
 
   //divider.showDivider();
-  text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
-  text("Throughput: " + throughputSlider.value(), 10, 50);
-  text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
+  //text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
+  //text("Throughput: " + throughputSlider.value(), 10, 50);
+  //text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
 
   text("Cars Are Waiting: " + carsWaiting, 10, 110);
 
