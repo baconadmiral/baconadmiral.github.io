@@ -19,11 +19,11 @@ function Car(id)
   this.speed = -1;
   this.myLaneIndex = -1;
 
-  //this.carSprite = createSprite(this.xLoc, this.yLoc-20, 30, 30);
-  //this.carSprite.addImage(loadImage(random(imageNameList)));
-  //this.carSprite.velocity.y = this.speed;
-  //this.carSprite.rotateToDirection = true;
-  //this.carSprite.scale = .25;
+  this.carSprite = createSprite(this.xLoc, this.yLoc-20, 30, 30);
+  this.carSprite.addImage(loadImage(random(imageNameList)));
+  this.carSprite.velocity.y = this.speed;
+  this.carSprite.rotateToDirection = true;
+  this.carSprite.scale = .25;
 
   this.collisionFinished = false;
   this.annealCollide = 20;
@@ -34,17 +34,17 @@ function Car(id)
   this.update = function(throughPut, carList, gateList, divider)
   {
     //look for the lane with the least cars
-    if(this.yLoc <= evaluationPoint && !this.waited)
+    if(this.carSprite.position.y <= evaluationPoint && !this.waited)
     {
       //Stops Car at gateList
-      /*if(this.carSprite.overlap(divider.dividerSprite))
+      if(this.carSprite.overlap(divider.dividerSprite))
       {
           this.carSprite.rotateToDirection = false;
           this.carSprite.velocity.y = 0;
           this.waitingAtGate = true;
 
 
-      }*/
+      }
 
       if(this.waitingAtGate == true)
       {
@@ -54,7 +54,7 @@ function Car(id)
       if(this.waitTimer <= 0)
       {
         this.waited = true;
-        this.speed = this.speed * 2;
+        this.carSprite.velocity.y  = this.speed * 2;
         gateList[this.myLaneIndex].removeCarFromLane();
       }
 
@@ -65,20 +65,20 @@ function Car(id)
           this.angle = gateList[this.myLaneIndex].addCarToLane(this);
       }
 
-      //if(!this.carSprite.overlap(divider.dividerSprite))
-      //    this.carSprite.velocity.y  = this.speed;
+      if(!this.carSprite.overlap(divider.dividerSprite))
+          this.carSprite.velocity.y  = this.speed;
 
-      /*if(this.myLaneIndex != -1)
+      if(this.myLaneIndex != -1)
           this.isCollidedWithCars(carList, gateList);
 
       if(this.angle > 260 && this.carSprite.position.x >= gateList[this.myLaneIndex].xLoc && this.waitingAtGate == false)
           this.carSprite.setSpeed(this.speed, 90);
       else if(this.angle < 260 && this.carSprite.position.x <= gateList[this.myLaneIndex].xLoc && this.waitingAtGate == false)
-          this.carSprite.setSpeed(this.speed, 90);*/
+          this.carSprite.setSpeed(this.speed, 90);
 
     }
 
-    this.yLoc += this.speed;
+
     this.removeCarsNotRenderedFromLane(gateList);
 
   }
