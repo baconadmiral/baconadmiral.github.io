@@ -13,6 +13,7 @@ let carList;
 let carsWaiting;
 let idCtr;
 let roadBackground;
+let createdWindowWidth;
 
 let lane0X;
 let lane1X;
@@ -21,7 +22,9 @@ let lane3X;
 let laneShiftX;
 let laneXVals = [];
 
-let maxCarsRendered = 10;
+var canvas;
+
+let maxCarsRendered = 15;
 
 
 let imageNameList = [];
@@ -58,10 +61,13 @@ function setup() {
     createCanvas(400, 600);
   }
   else {
-    const canvasElt = createCanvas(400, 500).elt;
+
+    canvas = createCanvas(400, 600);
+    const canvasElt = canvas.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
   }
 
+  createdWindowWidth = displayWidth;
 
   //arrivalRateSlider = select("#arrival");
   //throughputSlider = select("#throughPut");
@@ -105,7 +111,21 @@ function addCar()
     carList.push(cust);
 }
 
+window.onresize = function()
+{
+    if(displayWidth > 1024){
+      canvas.size(400, 600);
+    }
+    else {
+
+      resizeCanvas(400, 600);
+      const canvasElt = canvas.elt;
+      canvasElt.style.width = '100%', canvasElt.style.height="100%";
+        }
+}
+
 function draw() {
+
   background(this.roadBackground);
   //background(50, 50, 275);
 
@@ -136,7 +156,7 @@ function draw() {
   {
 
     carList[i].update(50, carList, gateList, divider);
-    if(carList[i].carSprite.velocity.y == 0)
+    if(carList[i].carSprite.velocity.y <= 0)
     {
       howManyWaitingThisCycle++;
     }
