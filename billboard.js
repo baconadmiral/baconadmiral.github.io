@@ -4,6 +4,7 @@ function Billboard()
   this.yLoc =  50;
   this.billboardSprite = createSprite(this.xLoc, this.yLoc);
   this.billboardSprite.addImage(loadImage("imgs/billboard.png"));
+  this.billboardSprite.depth = 100;
 
 
   this.showLittlesLaw = function(arrival, throughPut, totalCars)

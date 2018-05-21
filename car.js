@@ -23,6 +23,7 @@ function Car(id)
   this.carSprite.addImage(loadImage(random(imageNameList)));
   this.carSprite.velocity.y = this.speed;
   this.carSprite.rotateToDirection = true;
+  this.carSprite.depth = 0;
 
   this.collisionFinished = false;
   this.annealCollide = 20;
