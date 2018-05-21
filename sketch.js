@@ -35,6 +35,8 @@ imageNameList.push('imgs/yellow car.png');
 imageNameList.push('imgs/blue car.png');
   let carCt = 0;
 
+  let billboard;
+
 function setup() {
 
   laneStart = (windowWidth / 30);
@@ -101,6 +103,7 @@ function setup() {
     gateList[3].openCloseGate();
   }
 
+  billboard = new Billboard();
 
 }
 
@@ -114,7 +117,7 @@ function addCar()
 window.onresize = function()
 {
     if(displayWidth > 1024){
-      canvas.size(400, 600);
+      resizeCanvas(400, 600);
     }
     else {
 
@@ -125,7 +128,6 @@ window.onresize = function()
 }
 
 function draw() {
-
   background(this.roadBackground);
   //background(50, 50, 275);
 
@@ -133,8 +135,6 @@ function draw() {
   //text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
   //text("Throughput: " + throughputSlider.value(), 10, 50);
   //text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
-
-  text("Cars Are Waiting: " + carsWaiting, 10, 110);
 
 
   if(frameCount % (80) == 0 && carList.length < maxCarsRendered)
@@ -173,4 +173,6 @@ function draw() {
   carsWaiting = howManyWaitingThisCycle;
 
   drawSprites();
+  billboard.showLittlesLaw(5, 6, 30);
+
 }
