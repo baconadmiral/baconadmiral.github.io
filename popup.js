@@ -11,6 +11,9 @@ function Popup()
   this.value2 = 5;
   this.value3 = 10;
 
+  this.val1X = this.xLoc - 95;
+  this.val2X = this.xLoc - 40;
+  this.val3X = this.xLoc + 20;
   //this.popupGroup = new Group();
 
   this.popupSprite = createSprite(this.xLoc, this.yLoc, this.height, this.width);
@@ -20,22 +23,22 @@ function Popup()
   this.okBtnSprite.addImage(loadImage("imgs/okBtn.png"));
   this.okBtnSprite.depth = 200;
 
-  this.value1UpSprite = createSprite(this.xLoc-95, this.yLoc-40, 20, 20);
+  this.value1UpSprite = createSprite(this.val1X, this.yLoc-40, 20, 20);
   this.value1UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value1DownSprite = createSprite(this.xLoc-95, this.yLoc+30, 20, 20);
+  this.value1DownSprite = createSprite(this.val1X, this.yLoc+30, 20, 20);
   this.value1DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
-  this.value2UpSprite = createSprite(this.xLoc-40, this.yLoc-40, 20, 20);
+  this.value2UpSprite = createSprite(this.val2X, this.yLoc-40, 20, 20);
   this.value2UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value2DownSprite = createSprite(this.xLoc-40, this.yLoc+30, 20, 20);
+  this.value2DownSprite = createSprite(this.val2X, this.yLoc+30, 20, 20);
   this.value2DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
-  this.value3UpSprite = createSprite(this.xLoc + 20, this.yLoc-40, 20, 20);
+  this.value3UpSprite = createSprite(this.val3X, this.yLoc-40, 20, 20);
   this.value3UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value3DownSprite = createSprite(this.xLoc + 20, this.yLoc+30, 20, 20);
+  this.value3DownSprite = createSprite(this.val3X, this.yLoc+30, 20, 20);
   this.value3DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
 
@@ -100,6 +103,7 @@ function Popup()
     text(this.value1, this.xLoc - 110, this.yLoc + 5);
     text(this.value2, this.xLoc - 55, this.yLoc + 5);
     text(this.value3, this.xLoc, this.yLoc + 5);
+
   }
 
   this.clickClose = function()

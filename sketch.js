@@ -139,7 +139,7 @@ function draw() {
   //text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
 
 
-  if(frameCount % (80) == 0 && carList.length < maxCarsRendered)
+  if(frameCount % (80) == 0 && carList.length < maxCarsRendered && !popup.popupVisible)
   {
     addCar();
     //carCt++;
