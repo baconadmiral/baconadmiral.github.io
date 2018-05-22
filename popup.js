@@ -20,22 +20,22 @@ function Popup()
   this.okBtnSprite.addImage(loadImage("imgs/okBtn.png"));
   this.okBtnSprite.depth = 200;
 
-  this.value1UpSprite = createSprite(this.xLoc-100, this.yLoc-25, 20, 20);
+  this.value1UpSprite = createSprite(this.xLoc-95, this.yLoc-40, 20, 20);
   this.value1UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value1DownSprite = createSprite(this.xLoc-100, this.yLoc+25, 20, 20);
+  this.value1DownSprite = createSprite(this.xLoc-95, this.yLoc+30, 20, 20);
   this.value1DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
-  this.value2UpSprite = createSprite(this.xLoc-50, this.yLoc-25, 20, 20);
+  this.value2UpSprite = createSprite(this.xLoc-40, this.yLoc-40, 20, 20);
   this.value2UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value2DownSprite = createSprite(this.xLoc-50, this.yLoc+25, 20, 20);
+  this.value2DownSprite = createSprite(this.xLoc-40, this.yLoc+30, 20, 20);
   this.value2DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
-  this.value3UpSprite = createSprite(this.xLoc, this.yLoc-25, 20, 20);
+  this.value3UpSprite = createSprite(this.xLoc + 20, this.yLoc-40, 20, 20);
   this.value3UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value3DownSprite = createSprite(this.xLoc, this.yLoc+25, 20, 20);
+  this.value3DownSprite = createSprite(this.xLoc + 20, this.yLoc+30, 20, 20);
   this.value3DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
 
@@ -95,10 +95,11 @@ function Popup()
     this.value2DownSprite.visible = true;
     this.value3DownSprite.visible = true;
 
-    fill("white");
-    text(this.value1, this.xLoc - 105, this.yLoc + 5);
+    fill(255, 255, 0);
+    textSize(30);
+    text(this.value1, this.xLoc - 110, this.yLoc + 5);
     text(this.value2, this.xLoc - 55, this.yLoc + 5);
-    text(this.value3, this.xLoc - 5, this.yLoc + 5);
+    text(this.value3, this.xLoc, this.yLoc + 5);
   }
 
   this.clickClose = function()
