@@ -22,7 +22,7 @@ let lane3X;
 let laneShiftX;
 let laneXVals = [];
 
-var canvas;
+let can, btn;
 
 let maxCarsRendered = 15;
 
@@ -36,6 +36,7 @@ imageNameList.push('imgs/blue car.png');
   let carCt = 0;
 
   let billboard;
+  let popup;
 
 function setup() {
 
@@ -46,7 +47,8 @@ function setup() {
   lane2X = 240;
   lane3X = 320;
 
-
+  popup = new Popup();
+  setupPopupEvents();
 
   laneXVals.push(lane0X);
   laneXVals.push(lane1X);
@@ -60,12 +62,12 @@ function setup() {
   carsWaiting = 0;
 
   if(displayWidth > 1024){
-    createCanvas(400, 600);
+    can = createCanvas(400, 600);
   }
   else {
 
-    canvas = createCanvas(400, 600);
-    const canvasElt = canvas.elt;
+    can = createCanvas(400, 600);
+    const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
   }
 
@@ -104,7 +106,7 @@ function setup() {
   }
 
   billboard = new Billboard();
-
+//windowResized();
 }
 
 function addCar()
@@ -117,14 +119,14 @@ function addCar()
 window.onresize = function()
 {
     if(displayWidth > 1024){
-      resizeCanvas(400, 600);
+      can = resizeCanvas(400, 600);
     }
-    else {
-
-      resizeCanvas(400, 600);
-      const canvasElt = canvas.elt;
+    else
+    {
+      can = resizeCanvas(400, 600);
+      const canvasElt = can.elt;
       canvasElt.style.width = '100%', canvasElt.style.height="100%";
-        }
+    }
 }
 
 function draw() {
@@ -174,5 +176,53 @@ function draw() {
 
   drawSprites();
   billboard.showLittlesLaw(5, 6, 30);
+  popup.showPopup();
 
 }
+
+function setupPopupEvents()
+{
+  popup.okBtnSprite.onMousePressed = function()
+  {
+    popup.clickClose();
+  }
+
+  popup.value1UpSprite.onMousePressed = function()
+  {
+    popup.clickUpValue1();
+  }
+
+  popup.value1DownSprite.onMousePressed = function()
+  {
+    popup.clickDownValue1();
+  }
+
+  popup.value2UpSprite.onMousePressed = function()
+  {
+    popup.clickUpValue2();
+  }
+
+  popup.value2DownSprite.onMousePressed = function()
+  {
+    popup.clickDownValue2();
+  }
+
+  popup.value3UpSprite.onMousePressed = function()
+  {
+    popup.clickUpValue3();
+  }
+
+  popup.value3DownSprite.onMousePressed = function()
+  {
+    popup.clickDownValue3();
+  }
+}
+
+/*function windowResized() {
+  can.position(windowWidth - width >> 1, windowHeight - height >> 1);
+
+  const btnX = (width  - btn.width  >> 1) + can.x,
+        btnY = (height - btn.height >> 1) + can.y;
+
+  btn.position(btnX, btnY);
+}*/

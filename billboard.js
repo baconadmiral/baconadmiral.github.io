@@ -10,7 +10,7 @@ function Billboard()
   this.showLittlesLaw = function(arrival, throughPut, totalCars)
   {
     fill(255, 255, 0);
-    text(arrival + "         x         ", this.xLoc/3 + 20,  this.yLoc - 20);
+    text(arrival + "         x", this.xLoc/3 + 20,  this.yLoc - 20);
     text(throughPut + "             =", this.xLoc/2 + 65, this.yLoc - 20);
     text(totalCars, this.xLoc + 60, this.yLoc - 20);
 
