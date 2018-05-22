@@ -14,28 +14,29 @@ function Popup()
   //this.popupGroup = new Group();
 
   this.popupSprite = createSprite(this.xLoc, this.yLoc, this.height, this.width);
+  this.popupSprite.shapeColor="DarkGray";
 
   this.okBtnSprite = createSprite(this.xLoc+100, this.yLoc+75);
   this.okBtnSprite.addImage(loadImage("imgs/okBtn.png"));
   this.okBtnSprite.depth = 200;
 
   this.value1UpSprite = createSprite(this.xLoc-100, this.yLoc-25, 20, 20);
-  this.value1UpSprite.addImage(loadImage("imgs/roadChevronUp.jpeg"));
+  this.value1UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
   this.value1DownSprite = createSprite(this.xLoc-100, this.yLoc+25, 20, 20);
-  this.value1DownSprite.addImage(loadImage("imgs/roadChevronDown.jpg"));
+  this.value1DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
   this.value2UpSprite = createSprite(this.xLoc-50, this.yLoc-25, 20, 20);
-  this.value2UpSprite.addImage(loadImage("imgs/roadChevronUp.jpeg"));
+  this.value2UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
   this.value2DownSprite = createSprite(this.xLoc-50, this.yLoc+25, 20, 20);
-  this.value2DownSprite.addImage(loadImage("imgs/roadChevronDown.jpg"));
+  this.value2DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
   this.value3UpSprite = createSprite(this.xLoc, this.yLoc-25, 20, 20);
-  this.value3UpSprite.addImage(loadImage("imgs/roadChevronUp.jpeg"));
+  this.value3UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
   this.value3DownSprite = createSprite(this.xLoc, this.yLoc+25, 20, 20);
-  this.value3DownSprite.addImage(loadImage("imgs/roadChevronDown.jpg"));
+  this.value3DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
 
 
