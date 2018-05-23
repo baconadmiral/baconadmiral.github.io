@@ -49,8 +49,10 @@ var carSim = function(sketch) {
 
     let inter;
 
-  sketch.setup = function() {
+let proFontWindows;
 
+  sketch.setup = function() {
+    proFontWindows = sketch.loadFont("../font/ProFontWindows.ttf")
     carsThroughCt = 0;
 
     laneStart = (sketch.windowWidth / 30);
@@ -60,7 +62,7 @@ var carSim = function(sketch) {
     lane2X = 240;
     lane3X = 320;
 
-    popup = new Popup(sketch);
+    popup = new Popup(sketch, proFontWindows);
     setupPopupEvents();
 
     laneXVals.push(lane0X);
@@ -121,7 +123,7 @@ var carSim = function(sketch) {
       }
     }
 
-    billboard = new Billboard(sketch);
+    billboard = new Billboard(sketch, proFontWindows);
   }
 
   function timeIt() {

@@ -1,6 +1,6 @@
-function Popup(sketch)
+function Popup(sketch, font)
 {
-  this.questionText = 'If 1 gate takes 5 seconds to check a car, \nhow many gates need to be open in order \nto have 10 cars pass through \nthe gate in 1 minuite '
+  this.questionText = 'If 1 gate takes 5 seconds to \ncheck a single car, how many gates \nneed to be open in order to \nhave 10 cars pass through \nthe gate in 1 minuite '
 
   this.value1Units = "gates";
   this.value2Units = "test";
@@ -124,9 +124,10 @@ function Popup(sketch)
     this.value3DownSprite.visible = this.useValue3;
 
     sketch.fill(255, 255, 0);
+    sketch.textFont(font);
     sketch.textSize(12);
 
-    sketch.text(this.questionText, this.xLoc - 120, this.yLoc - 90);
+    sketch.text(this.questionText, this.xLoc - 130, this.yLoc - 100);
 
 
     if(this.useValue1)

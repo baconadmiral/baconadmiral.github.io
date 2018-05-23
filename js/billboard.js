@@ -1,4 +1,4 @@
-function Billboard(sketch)
+function Billboard(sketch, font)
 {
   this.xLoc =  200;
   this.yLoc =  50;
@@ -10,6 +10,8 @@ function Billboard(sketch)
 
   this.showLittlesLaw = function(carCt, time)
   {
+    sketch.textFont(font);
+    sketch.textSize(10);
     sketch.fill(255, 255, 0);
     /*text(arrival + "         x", this.xLoc/3 + 20,  this.yLoc - 20);
     text(throughPut + "             =", this.xLoc/2 + 65, this.yLoc - 20);
