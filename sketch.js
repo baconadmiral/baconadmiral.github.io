@@ -14,6 +14,7 @@ let carsWaiting;
 let idCtr;
 let roadBackground;
 let createdWindowWidth;
+let carsThroughCt;
 
 let lane0X;
 let lane1X;
@@ -23,7 +24,7 @@ let laneShiftX;
 let laneXVals = [];
 
 let can, btn;
-
+let gateControl = false;
 let maxCarsRendered = 15;
 
 
@@ -38,7 +39,18 @@ imageNameList.push('imgs/blue car.png');
   let billboard;
   let popup;
 
+
+  let timer = "";
+
+  let counter = 60;
+  let seconds;
+  let minutes;
+
+  let inter;
+
 function setup() {
+
+  carsThroughCt = 0;
 
   laneStart = (windowWidth / 30);
   laneWidth = (windowWidth / 10);
@@ -85,28 +97,51 @@ function setup() {
   gateList.push(new Lane(320, divider));
 
 
-  gateList[0].tollBoothSprite.onMousePressed = function(){
-    //not sure why I cant bind directly but...ok
-    gateList[0].openCloseGate();
-  }
+  if(gateControl)
+    {
+    gateList[0].tollBoothSprite.onMousePressed = function(){
+      //not sure why I cant bind directly but...ok
+      gateList[0].openCloseGate();
+    }
 
-  gateList[1].tollBoothSprite.onMousePressed = function(){
-    //not sure why I cant bind directly but...
-    gateList[1].openCloseGate();
-  }
+    gateList[1].tollBoothSprite.onMousePressed = function(){
+      //not sure why I cant bind directly but...
+      gateList[1].openCloseGate();
+    }
 
-  gateList[2].tollBoothSprite.onMousePressed = function(){
-    //not sure why I cant bind directly but...
-    gateList[2].openCloseGate();
-  }
+    gateList[2].tollBoothSprite.onMousePressed = function(){
+      //not sure why I cant bind directly but...
+      gateList[2].openCloseGate();
+    }
 
-  gateList[3].tollBoothSprite.onMousePressed = function(){
-    //not sure why I cant bind directly but...
-    gateList[3].openCloseGate();
+    gateList[3].tollBoothSprite.onMousePressed = function(){
+      //not sure why I cant bind directly but...
+      gateList[3].openCloseGate();
+    }
   }
 
   billboard = new Billboard();
-//windowResized();
+}
+
+function timeIt() {
+  // 1 counter = 1 second
+  if (counter > 0) {
+    counter--;
+  }
+
+  minutes = floor(counter/60);
+  seconds = counter % 60;
+
+  // if (counter < 60)
+
+  billboard.timer = minutes + ":" + seconds;
+
+  if(minutes == 0 && seconds == 55)
+  {
+    clearInterval(inter);
+    counter = 60;
+    popup.popupVisible = true;
+  }
 }
 
 function addCar()
@@ -131,13 +166,6 @@ window.onresize = function()
 
 function draw() {
   background(this.roadBackground);
-  //background(50, 50, 275);
-
-  //divider.showDivider();
-  //text("Arrival Rate: " + arrivalRateSlider.value(), 10, 20);
-  //text("Throughput: " + throughputSlider.value(), 10, 50);
-  //text("Number of Cars: " + arrivalRateSlider.value() * throughputSlider.value(), 10, 80);
-
 
   if(frameCount % (80) == 0 && carList.length < maxCarsRendered && !popup.popupVisible)
   {
@@ -163,19 +191,20 @@ function draw() {
       howManyWaitingThisCycle++;
     }
 
-
     if(carList[i].carSprite.position.y < 35)
     {
         carList[i].carSprite.remove();
         carList[i] = null;
         carList.splice(i, 1);
+        carsThroughCt++;
+
     }
   }
 
   carsWaiting = howManyWaitingThisCycle;
 
   drawSprites();
-  billboard.showLittlesLaw(5, 6, 30);
+  billboard.showLittlesLaw(carsThroughCt, billboard.timer);
   popup.showPopup();
 
 }
@@ -184,7 +213,19 @@ function setupPopupEvents()
 {
   popup.okBtnSprite.onMousePressed = function()
   {
+    for(let i = 0; i < gateList.length; i++)
+    {
+      gateList[i].closeGate();
+    }
+
+    for(let i = 0; i < popup.value3; i++)
+    {
+      gateList[i].openCloseGate();
+    }
     popup.clickClose();
+    inter = setInterval(timeIt, 1000);
+    carsThroughCt = 0;
+
   }
 
   popup.value1UpSprite.onMousePressed = function()
@@ -217,12 +258,3 @@ function setupPopupEvents()
     popup.clickDownValue3();
   }
 }
-
-/*function windowResized() {
-  can.position(windowWidth - width >> 1, windowHeight - height >> 1);
-
-  const btnX = (width  - btn.width  >> 1) + can.x,
-        btnY = (height - btn.height >> 1) + can.y;
-
-  btn.position(btnX, btnY);
-}*/

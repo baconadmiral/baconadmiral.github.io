@@ -8,11 +8,18 @@ function Lane(xLoc, divider)
   this.tollBoothSprite = createSprite(this.xLoc-35, divider.yLoc);
   this.tollBoothSprite.addAnimation("open", "imgs/gate_open.png");
   this.tollBoothSprite.addAnimation("closed", "imgs/gate closed.png");
-  this.tollBoothSprite.changeAnimation("open");
+  this.tollBoothSprite.changeAnimation("closed");
   this.tollBoothSprite.scale = .18;
 
-  this.gateAnimationCtr = 0;
-  this.gateOpen = true;
+  this.gateAnimationCtr = 1;
+  this.gateOpen = false;
+
+  this.closeGate = function()
+  {
+    this.tollBoothSprite.changeAnimation("closed");
+    this.gateAnimationCtr = 1;
+    this.gateOpen = false;
+  }
 
   this.openCloseGate = function()
   {

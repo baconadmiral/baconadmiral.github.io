@@ -1,44 +1,63 @@
 function Popup()
 {
-  this.xLoc = 200;
-  this.yLoc = 300;
+  this.questionText = 'If 1 gate takes 5 seconds to check a car, \nhow many gates need to be open in order \nto have 10 cars pass through \nthe gate in 1 minuite '
 
-  this.height = 300;
-  this.width = 200;
+  this.value1Units = "gates";
+  this.value2Units = "test";
+  this.value3Units = "gates";
+
+  this.value1Max = 10;
+  this.value1Min = 0;
+
+  this.value2Max = 10;
+  this.value2Min = 0;
+
+  this.value3Max = 4;
+  this.value3Min = 0;
+
+  this.xLoc = 200;
+  this.yLoc = 400;
+
+  this.useValue1 = false;
+  this.useValue2 = false;
+  this.useValue3 = true;
+
+  this.height = 250;
+  this.width = 300;
   this.popupVisible = true;
 
   this.value1 = 5;
   this.value2 = 5;
-  this.value3 = 10;
+  this.value3 = 1;
 
   this.val1X = this.xLoc - 95;
   this.val2X = this.xLoc - 40;
   this.val3X = this.xLoc + 20;
   //this.popupGroup = new Group();
 
-  this.popupSprite = createSprite(this.xLoc, this.yLoc, this.height, this.width);
+  this.popupSprite = createSprite(this.xLoc, this.yLoc, this.width, this.height);
   this.popupSprite.shapeColor="DarkGray";
 
   this.okBtnSprite = createSprite(this.xLoc+100, this.yLoc+75);
-  this.okBtnSprite.addImage(loadImage("imgs/okBtn.png"));
+  this.okBtnSprite.addImage(loadImage("imgs/play.png"));
   this.okBtnSprite.depth = 200;
 
-  this.value1UpSprite = createSprite(this.val1X, this.yLoc-40, 20, 20);
+  this.value1UpSprite = createSprite(this.val1X, this.yLoc-20, 20, 20);
   this.value1UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value1DownSprite = createSprite(this.val1X, this.yLoc+30, 20, 20);
+  this.value1DownSprite = createSprite(this.val1X, this.yLoc+50, 20, 20);
   this.value1DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
-  this.value2UpSprite = createSprite(this.val2X, this.yLoc-40, 20, 20);
+  this.value2UpSprite = createSprite(this.val2X, this.yLoc-20, 20, 20);
   this.value2UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value2DownSprite = createSprite(this.val2X, this.yLoc+30, 20, 20);
+  this.value2DownSprite = createSprite(this.val2X, this.yLoc+50, 20, 20);
   this.value2DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
-  this.value3UpSprite = createSprite(this.val3X, this.yLoc-40, 20, 20);
+  this.value3UpSprite = createSprite(this.val3X, this.yLoc-20, 20, 20);
   this.value3UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
 
-  this.value3DownSprite = createSprite(this.val3X, this.yLoc+30, 20, 20);
+  this.value3DownSprite = createSprite(this.val3X, this.yLoc+50, 20, 20);
   this.value3DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
 
 
@@ -56,32 +75,38 @@ function Popup()
 
   this.clickUpValue1 = function()
   {
-    this.value1++;
+    if(this.value1 < this.value1Max)
+      this.value1++;
   }
 
   this.clickDownValue1 = function()
   {
-    this.value1--
+    if(this.value1 > this.value1Min)
+      this.value1--;
   }
 
   this.clickUpValue2 = function()
   {
-    this.value2++;
+    if(this.value2 < this.value2Max)
+      this.value2++;
   }
 
   this.clickDownValue2 = function()
   {
-    this.value2--
+    if(this.value2 > this.value2Min)
+      this.value2--;
   }
 
   this.clickUpValue3 = function()
   {
-    this.value3++;
+    if(this.value3 < this.value3Max)
+      this.value3++;
   }
 
   this.clickDownValue3 = function()
   {
-    this.value3--
+    if(this.value3 > this.value3Min)
+      this.value3--;
   }
 
   this.clickOpen = function()
@@ -90,20 +115,44 @@ function Popup()
     this.popupSprite.visible = true;
     this.okBtnSprite.visible = true;
 
-    this.value1UpSprite.visible = true;
-    this.value2UpSprite.visible = true;
-    this.value3UpSprite.visible = true;
+    this.value1UpSprite.visible = this.useValue1;
+    this.value2UpSprite.visible = this.useValue2;
+    this.value3UpSprite.visible = this.useValue3;
 
-    this.value1DownSprite.visible = true;
-    this.value2DownSprite.visible = true;
-    this.value3DownSprite.visible = true;
+    this.value1DownSprite.visible = this.useValue1;
+    this.value2DownSprite.visible = this.useValue2;
+    this.value3DownSprite.visible = this.useValue3;
 
     fill(255, 255, 0);
-    textSize(30);
-    text(this.value1, this.xLoc - 110, this.yLoc + 5);
-    text(this.value2, this.xLoc - 55, this.yLoc + 5);
-    text(this.value3, this.xLoc, this.yLoc + 5);
+    textSize(12);
 
+    text(this.questionText, this.xLoc - 120, this.yLoc - 90);
+
+
+    if(this.useValue1)
+    {
+      textSize(30);
+      text(this.value1, this.xLoc - 110, this.yLoc + 25);
+      textSize(15);
+      text(this.value1Units, this.xLoc - 110, this.yLoc + 80);
+
+    }
+
+    if(this.useValue2)
+    {
+      textSize(30);
+      text(this.value2, this.xLoc - 55, this.yLoc + 25);
+      textSize(15);
+      text(this.value2Units, this.xLoc - 55, this.yLoc + 80);
+    }
+
+    if(this.useValue3)
+    {
+      textSize(30);
+      text(this.value3, this.xLoc, this.yLoc + 25);
+      textSize(15);
+      text(this.value3Units, this.xLoc, this.yLoc + 80);
+    }
   }
 
   this.clickClose = function()
