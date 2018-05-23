@@ -1,13 +1,13 @@
-function Lane(xLoc, divider)
+function Lane(sketch, xLoc, divider)
 {
   this.xLoc = xLoc;
   this.carQueue = [];
   this.carsInLane = 0;
   this.tollBothSprite;
 
-  this.tollBoothSprite = createSprite(this.xLoc-35, divider.yLoc);
-  this.tollBoothSprite.addAnimation("open", "imgs/gate_open.png");
-  this.tollBoothSprite.addAnimation("closed", "imgs/gate closed.png");
+  this.tollBoothSprite = sketch.createSprite(this.xLoc-35, divider.yLoc);
+  this.tollBoothSprite.addAnimation("open", "../images/game/gate_open.png");
+  this.tollBoothSprite.addAnimation("closed", "../images/game/gate closed.png");
   this.tollBoothSprite.changeAnimation("closed");
   this.tollBoothSprite.scale = .18;
 

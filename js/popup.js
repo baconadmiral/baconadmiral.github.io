@@ -1,4 +1,4 @@
-function Popup()
+function Popup(sketch)
 {
   this.questionText = 'If 1 gate takes 5 seconds to check a car, \nhow many gates need to be open in order \nto have 10 cars pass through \nthe gate in 1 minuite '
 
@@ -35,30 +35,30 @@ function Popup()
   this.val3X = this.xLoc + 20;
   //this.popupGroup = new Group();
 
-  this.popupSprite = createSprite(this.xLoc, this.yLoc, this.width, this.height);
+  this.popupSprite = sketch.createSprite( this.xLoc, this.yLoc, this.width, this.height);
   this.popupSprite.shapeColor="DarkGray";
 
-  this.okBtnSprite = createSprite(this.xLoc+100, this.yLoc+75);
-  this.okBtnSprite.addImage(loadImage("imgs/play.png"));
+  this.okBtnSprite = sketch.createSprite( this.xLoc+100, this.yLoc+75);
+  this.okBtnSprite.addImage(sketch.loadImage("../images/game/play.png"));
   this.okBtnSprite.depth = 200;
 
-  this.value1UpSprite = createSprite(this.val1X, this.yLoc-20, 20, 20);
-  this.value1UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
+  this.value1UpSprite = sketch.createSprite( this.val1X, this.yLoc-20, 20, 20);
+  this.value1UpSprite.addImage(sketch.loadImage("../images/game/roadChevronUp.png"));
 
-  this.value1DownSprite = createSprite(this.val1X, this.yLoc+50, 20, 20);
-  this.value1DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
+  this.value1DownSprite = sketch.createSprite( this.val1X, this.yLoc+50, 20, 20);
+  this.value1DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
 
-  this.value2UpSprite = createSprite(this.val2X, this.yLoc-20, 20, 20);
-  this.value2UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
+  this.value2UpSprite = sketch.createSprite( this.val2X, this.yLoc-20, 20, 20);
+  this.value2UpSprite.addImage(sketch.loadImage("../images/game/roadChevronUp.png"));
 
-  this.value2DownSprite = createSprite(this.val2X, this.yLoc+50, 20, 20);
-  this.value2DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
+  this.value2DownSprite = sketch.createSprite( this.val2X, this.yLoc+50, 20, 20);
+  this.value2DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
 
-  this.value3UpSprite = createSprite(this.val3X, this.yLoc-20, 20, 20);
-  this.value3UpSprite.addImage(loadImage("imgs/roadChevronUp.png"));
+  this.value3UpSprite = sketch.createSprite( this.val3X, this.yLoc-20, 20, 20);
+  this.value3UpSprite.addImage(sketch.loadImage("../images/game/roadChevronUp.png"));
 
-  this.value3DownSprite = createSprite(this.val3X, this.yLoc+50, 20, 20);
-  this.value3DownSprite.addImage(loadImage("imgs/roadChevronDown.png"));
+  this.value3DownSprite = sketch.createSprite( this.val3X, this.yLoc+50, 20, 20);
+  this.value3DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
 
 
 
@@ -123,35 +123,35 @@ function Popup()
     this.value2DownSprite.visible = this.useValue2;
     this.value3DownSprite.visible = this.useValue3;
 
-    fill(255, 255, 0);
-    textSize(12);
+    sketch.fill(255, 255, 0);
+    sketch.textSize(12);
 
-    text(this.questionText, this.xLoc - 120, this.yLoc - 90);
+    sketch.text(this.questionText, this.xLoc - 120, this.yLoc - 90);
 
 
     if(this.useValue1)
     {
-      textSize(30);
-      text(this.value1, this.xLoc - 110, this.yLoc + 25);
-      textSize(15);
-      text(this.value1Units, this.xLoc - 110, this.yLoc + 80);
+      sketch.textSize(30);
+      sketch.text(this.value1, this.xLoc - 110, this.yLoc + 25);
+      sketch.textSize(15);
+      sketch.text(this.value1Units, this.xLoc - 110, this.yLoc + 80);
 
     }
 
     if(this.useValue2)
     {
-      textSize(30);
-      text(this.value2, this.xLoc - 55, this.yLoc + 25);
-      textSize(15);
-      text(this.value2Units, this.xLoc - 55, this.yLoc + 80);
+      sketch.textSize(30);
+      sketch.text(this.value2, this.xLoc - 55, this.yLoc + 25);
+      sketch.textSize(15);
+      sketch.text(this.value2Units, this.xLoc - 55, this.yLoc + 80);
     }
 
     if(this.useValue3)
     {
-      textSize(30);
-      text(this.value3, this.xLoc, this.yLoc + 25);
-      textSize(15);
-      text(this.value3Units, this.xLoc, this.yLoc + 80);
+      sketch.textSize(30);
+      sketch.text(this.value3, this.xLoc, this.yLoc + 25);
+      sketch.textSize(15);
+      sketch.text(this.value3Units, this.xLoc, this.yLoc + 80);
     }
   }
 

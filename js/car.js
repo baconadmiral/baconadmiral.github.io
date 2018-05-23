@@ -1,5 +1,5 @@
 
-function Car(id)
+function Car(sketch, id, imageNameList, maxCarsRendered)
 {
 
 
@@ -10,8 +10,8 @@ function Car(id)
   this.isLookingForSpot = false;
   this.isWaitingInTraffic = false;
   this.waitingAtGate = false;
-  this.yLoc =  height + 10;
-  this.xLoc =  random(laneXVals);
+  this.yLoc =  sketch.height + 10;
+  this.xLoc =  sketch.random(sketch.laneXVals);
 
 
   this.waitTimer = 5000;
@@ -19,8 +19,10 @@ function Car(id)
   this.speed = -1;
   this.myLaneIndex = -1;
 
-  this.carSprite = createSprite(this.xLoc, this.yLoc-20, 30, 30);
-  this.carSprite.addImage(loadImage(random(imageNameList)));
+  this.carSprite = sketch.createSprite(this.xLoc, this.yLoc-20, 30, 30);
+  this.carSprite.addImage(sketch.loadImage(sketch.random(imageNameList)));
+  //this.carSprite.addImage(sketch.loadImage("imgs/truck2.png"));
+
   this.carSprite.velocity.y = this.speed;
   this.carSprite.rotateToDirection = true;
   this.carSprite.depth = 0;
@@ -61,7 +63,7 @@ function Car(id)
 
       if(this.myLaneIndex == -1)
       {
-          this.myLaneIndex = this.findLane(carList, gateList, divider);
+          this.myLaneIndex = this.findLane(carList, gateList, divider, maxCarsRendered);
           this.angle = gateList[this.myLaneIndex].addCarToLane(this);
       }
 
@@ -129,7 +131,7 @@ function Car(id)
     }
   }
 
-  this.findLane = function(carList, gateList, divider)
+  this.findLane = function(carList, gateList, divider, maxCarsRendered)
   {
     let minIndex = -1;
     let minVal = maxCarsRendered;
@@ -145,7 +147,7 @@ function Car(id)
 
     //All gates are closed
     if(minIndex == -1)
-      minIndex = floor(random(0, gateList.length-1));
+      minIndex = sketch.floor(sketch.random(0, gateList.length-1));
 
     return minIndex;
   }

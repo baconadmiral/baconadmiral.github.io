@@ -1,16 +1,16 @@
-function Billboard()
+function Billboard(sketch)
 {
   this.xLoc =  200;
   this.yLoc =  50;
-  this.billboardSprite = createSprite(this.xLoc, this.yLoc);
-  this.billboardSprite.addImage(loadImage("imgs/billboard.png"));
+  this.billboardSprite = sketch.createSprite(this.xLoc, this.yLoc);
+  this.billboardSprite.addImage(sketch.loadImage("../images/game/billboard.png"));
   this.billboardSprite.depth = 100;
 
   this.timer;
 
   this.showLittlesLaw = function(carCt, time)
   {
-    fill(255, 255, 0);
+    sketch.fill(255, 255, 0);
     /*text(arrival + "         x", this.xLoc/3 + 20,  this.yLoc - 20);
     text(throughPut + "             =", this.xLoc/2 + 65, this.yLoc - 20);
     text(totalCars, this.xLoc + 60, this.yLoc - 20);
@@ -20,10 +20,10 @@ function Billboard()
     text("Total Cars", this.xLoc + 40, this.yLoc);*/
 
     if(typeof carCt != 'undefined')
-      text("Total Cars Through: " + carCt, this.xLoc/4 + 10 , this.yLoc);
+      sketch.text("Total Cars Through: " + carCt, this.xLoc/4 + 10 , this.yLoc);
 
     if(typeof time != 'undefined')
-      text("Remaining Time: " + time, this.xLoc + 10, this.yLoc);
+      sketch.text("Remaining Time: " + time, this.xLoc + 10, this.yLoc);
 
   }
 }

@@ -1,18 +1,166 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, minimum-scale=1, width=device-width">
-	<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
-  <!--<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>-->
- 	<script language="javascript" type="text/javascript" src="lib/p5.play.js"></script>
-	<script language="javascript" type="text/javascript" src="sketch.js"></script>
-	<script language="javascript" type="text/javascript" src="car.js"></script>
-	<script language="javascript" type="text/javascript" src="divider.js"></script>
-	<script language="javascript" type="text/javascript" src="lane.js"></script>
-	<script language="javascript" type="text/javascript" src="billboard.js"></script>
-	<script language="javascript" type="text/javascript" src="popup.js"></script>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet"/>
+  <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
+  <style>
+  #topNav{
+    overflow:hidden;
+    position:fixed;
+    z-index:999;
+  }
+  #topNav.hidden{
+    display:none;
+  }
+  .hidden_toggle {
+   display: none;
+ }
+
+ .mouse_point {cursor: pointer;}
+</style>
 </head>
 
 <body>
-</body>
-</html>
+ <nav id="topNav" class = "fluid">
+  <div class="nav-wrapper z-depth-2" >
+   <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+   <a href="#!" class="brand-logo left " style="padding-left:50px;">
+     <span id="pageTitle"></span>
+
+   </a>
+
+   <ul class="right hide-on-med-and-down">
+    <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
+    <li><a class="waves-effect" href="#!">About us</a></li>
+    <li><a class="waves-effect" href="#!">Contact</a></li>
+    <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
+    <li><a class="waves-effect" href="javascript:(loadGame())">Games</a></li>
+    <li><a class="waves-effect" href="javaScript:(loadCalculator())">Calculator</a></li>
+  </ul>
+</div>
+</nav>
+
+<!-- <ul class="side-nav grey lighten-3" style="background: linear-gradient(#fff,#e1f5fe, #fff)" id="mobile-demo" > -->
+ <!--  <ul class="side-nav grey lighten-3"  id="mobile-demo" > -->
+   <ul class="side-nav"  id="mobile-demo" >
+
+     <div class="background center-align">
+      <!--     <img class="center-align" src="images/leadership_diagram.png" style="padding:0 20px 0px 20px; max-width:60%"> -->
+      <h5 style="padding:20px;">Art of the Possible</h5>
+    </div>
+
+    <!--   <li><a href="##" style="font-size:18px;color:rgba(0,0,0,0.87)">MENU</a></li> -->
+    <li><a class="waves-effect" href="javascript:(loadHome())"><i class="small material-icons" style="color:#0077A3">home</i>Home</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect" href=""><i class="small material-icons" style="color:#0077A3">help</i>About us</a></li>
+    <li><a class="waves-effect" href="#!"><i class="small material-icons" style="color:#0077A3">contacts</i>Contact</a></li>
+    <li><a class="waves-effect" href="javascript:(loadResources())" ><i class="small material-icons" style="color:#0077A3">collections</i>Resources</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect" href="javascript:(loadGame())"><i class="small material-icons" style="color:#0077A3">games</i>Games</a></li>
+    <li><a class="waves-effect" href="javaScript:(loadCalculator())"><i class="small material-icons" style="color:#0077A3">grade</i>Calculator</a></li>
+    <li><a class="waves-effect" href=""><i class="small material-icons" style="color:#0077A3">description</i>Newsletter</a></li>
+  </ul>
+
+  <div id="app_cont" >
+  </div>
+
+
+
+  <div id="calc_modal">
+    <div id="modal1" class="modal" style="box-shadow: none;background-color:transparent;">
+      <div class="modal-header" style="text-align: right;">
+      <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())" style="color:#000;padding-top:2px;"><i class="small material-icons">close</i></a>
+    </div>
+    <div id="calc_content" class="modal-content calcModal"
+    style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
+    </div>
+  </div>
+</div>
+
+<footer id="mobileFooter" class="page-footer fluid">
+  <div class="container">
+    <div class="row" style="margin-bottom:3px;">
+
+      <div class="col m4 s4 center-align">
+        <a class="waves-effect" href="javaScript:(loadCalculatorModal())" disabled="disabled">
+          <table class="footerTable">
+            <tr>
+              <td class="center-align">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" style="padding-top:2px;">
+                  <path id="calcsvg" class="calculator" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-17 5c0-1.654 1.346-3 3-3h6v9h-9v-6zm0 14v-6h9v9h-6c-1.654 0-3-1.346-3-3zm20 0c0 1.654-1.346 3-3 3h-6v-9h9v6zm0-8h-9v-9h6c1.654 0 3 1.346 3 3v6zm-2 6h-5v-1h5v1zm-5-11h5v1h-5v-1zm0 13v-1h5v1h-5zm-6-2v1h-2v2h-1v-2h-2v-1h2v-2h1v2h2zm-1.793-10.5l1.414 1.414-.707.707-1.414-1.414-1.414 1.414-.708-.707 1.414-1.414-1.414-1.414.707-.707 1.415 1.414 1.415-1.415.708.708-1.416 1.414zm9.793-2c0-.276.224-.5.5-.5s.5.224.5.5-.224.5-.5.5-.5-.224-.5-.5zm1 4c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5z"
+                  fill="#424242"/></svg>
+
+                </td>
+              </tr>
+              <tr>
+                <td id="calcLabel" class="center-align">Calculator</td>
+              </tr>
+            </table></a>
+          </div>
+          <div class="col m4 s4 center-align">
+            <a class="waves-effect" href="#!">
+              <table class="footerTable">
+                <tr>
+                  <td class="center-align"><i class="small material-icons footerIcons">event_note</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="center-align">Notes</td>
+                </tr>
+              </table></a>
+            </div>
+            <div class="col m4 s4 center-align">
+              <a class="waves-effect" href="#!">
+                <table class="footerTable">
+                  <tr>
+                    <td class="center-align"><i class="small material-icons footerIcons">mail_outline</i>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="center-align">Email</td>
+                  </tr>
+                </table>  </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </footer>
+
+
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="js/aop.js"></script>
+      <script src="js/aopCalc.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+      <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+      <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+
+      <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
+    <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
+    <script language="javascript" type="text/javascript" src="js/car.js"></script>
+    <script language="javascript" type="text/javascript" src="js/divider.js"></script>
+    <script language="javascript" type="text/javascript" src="js/lane.js"></script>
+    <script language="javascript" type="text/javascript" src="js/billboard.js"></script>
+    <script language="javascript" type="text/javascript" src="js/popup.js"></script>
+      <script type="text/javascript">
+        initalLoad();
+        loadHome();
+      </script>
+
+    </body>
+    </html>
