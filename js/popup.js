@@ -1,6 +1,6 @@
-function Popup(sketch, font)
+function Popup(sketch, font, displayText, showValue1, showValue2, showValue3)
 {
-  this.questionText = 'If 1 gate takes 5 seconds to \ncheck a single car, how many gates \nneed to be open in order to \nhave 10 cars pass through \nthe gate in 1 minuite '
+  this.questionText = displayText;
 
   this.value1Units = "gates";
   this.value2Units = "test";
@@ -18,9 +18,9 @@ function Popup(sketch, font)
   this.xLoc = 200;
   this.yLoc = 400;
 
-  this.useValue1 = false;
-  this.useValue2 = false;
-  this.useValue3 = true;
+  this.useValue1 = showValue1;
+  this.useValue2 = showValue2;
+  this.useValue3 = showValue3;
 
   this.height = 250;
   this.width = 300;
@@ -60,10 +60,16 @@ function Popup(sketch, font)
   this.value3DownSprite = sketch.createSprite( this.val3X, this.yLoc+50, 20, 20);
   this.value3DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
 
-
-
   //this.popupGroup.addToGroup(this.popupSprite);
   //this.popupGroup.addToGroup(this.okBtnSprite);
+
+  this.setParams = function(displayText, showValue1, showValue2, showValue3)
+  {
+    this.questionText = displayText;
+    this.useValue1 = showValue1;
+    this.useValue2 = showValue2;
+    this.useValue3 = showValue3;
+  }
 
   this.showPopup = function()
   {

@@ -62,7 +62,10 @@ let proFontWindows;
     lane2X = 240;
     lane3X = 320;
 
-    popup = new Popup(sketch, proFontWindows);
+    questionText = 'If 1 gate takes 5 seconds to \ncheck a single car, how many gates \nneed to be open in order to \nhave 10 cars pass through \nthe gate in 1 minuite '
+
+
+    popup = new Popup(sketch, proFontWindows, questionText, false, false, true);
     setupPopupEvents();
 
     laneXVals.push(lane0X);
@@ -143,6 +146,12 @@ let proFontWindows;
     {
       clearInterval(inter);
       counter = 60;
+
+      if(carsThroughCt < 2)
+        popup.setParams("Failed!", false, false, true);
+      else
+        popup.setParams("Congrats! YouWin!", false, false, false);
+
       popup.popupVisible = true;
     }
   }
