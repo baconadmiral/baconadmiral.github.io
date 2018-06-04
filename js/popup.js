@@ -16,12 +16,12 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
   this.value3Min;
 
   this.xLoc = 200;
-  this.yLoc = 270;
+  this.yLoc = 300;
   this.useValue1 = showValue1;
   this.useValue2 = showValue2;
   this.useValue3 = showValue3;
 
-  this.height = 250;
+  this.height = 300;
   this.width = 300;
   this.popupVisible = true;
 
@@ -123,12 +123,10 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
       this.value3--;
   }
 
-  this.clickOpen = function()//playBtnVisible)
+  this.clickOpen = function()
   {
     this.popupVisible = true;
     this.popupSprite.visible = true;
-    //this.plyBtnSprite.visible = playBtnVisible;
-    //this.okBtnSprite.visible = !playBtnVisible;
 
     this.value1UpSprite.visible = this.useValue1;
     this.value2UpSprite.visible = this.useValue2;
@@ -142,7 +140,7 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
     sketch.textFont(font);
     sketch.textSize(12);
 
-    sketch.text(this.questionText, this.xLoc - 130, this.yLoc - 100);
+    sketch.text(this.questionText, this.xLoc - 130, this.yLoc - 130);
 
 
     if(this.useValue1)

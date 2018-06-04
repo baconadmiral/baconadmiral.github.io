@@ -89,7 +89,7 @@ let proFontWindows;
     }
     else {
 
-      can = sketch.createCanvas(400, 400);
+      can = sketch.createCanvas(400, 500);
       const canvasElt = can.elt;
       canvasElt.style.width = '100%', canvasElt.style.height="100%";
     }
@@ -162,7 +162,7 @@ let proFontWindows;
       if(carsThroughCt < 2)
         popup.setParams("Failed! Not Enough Cars", false, false, true);
       else
-        popup.setParams("Congrats! YouWin! \n" + carsThroughCt + " Cars Through", false, false, false);
+        popup.setParams("Congrats! YouWin! \n\n" + carsThroughCt + " Cars Through", false, false, false);
 
       popup.popupVisible = true;
     }
