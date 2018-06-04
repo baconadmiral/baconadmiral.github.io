@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet"/>
+  <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/css?family=Armata|Montserrat" rel="stylesheet">
+
   <!--Let browser know website is optimized for mobile-->
   <link rel="manifest" href="manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,11 +20,6 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet"/>
-  <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
 
 
   <style>
@@ -76,7 +79,11 @@
   <div id="app_cont" >
   </div>
 
-
+  <div id="animation_container" style="display: none; background-color:rgba(255, 255, 255, 1.00); width:650px; height:350px">
+    <canvas id="canvas" width="650" height="350" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+    <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:650px; height:350px; position: absolute; left: 0px; top: 0px; display: block;">
+    </div>
+  </div>
 
   <div id="calc_modal">
     <div id="modal1" class="modal" style="box-shadow: none;background-color:transparent;">
@@ -143,12 +150,13 @@
 
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+      <script src="content/LittlesLawAnimation.js"></script>
       <script src="js/aop.js"></script>
       <script src="js/aopCalc.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
       <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
       <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
-
       <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
       <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
       <script language="javascript" type="text/javascript" src="js/car.js"></script>

@@ -1,5 +1,6 @@
 function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, defaultVal1, defaultVal2, defaultVal3)
 {
+
   this.questionText = displayText;
 
   this.value1Units = "gates";
@@ -17,6 +18,10 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
 
   this.xLoc = 200;
   this.yLoc = 300;
+
+  this.buttonLocX = this.xLoc+100;
+  this.buttonLocY = this.yLoc+115;
+
   this.useValue1 = showValue1;
   this.useValue2 = showValue2;
   this.useValue3 = showValue3;
@@ -37,12 +42,12 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
   this.popupSprite = sketch.createSprite( this.xLoc, this.yLoc, this.width, this.height);
   this.popupSprite.shapeColor="DarkGray";
 
-  this.okBtnSprite = sketch.createSprite( this.xLoc+100, this.yLoc+75);
+  this.okBtnSprite = sketch.createSprite( this.buttonLocX, this.buttonLocY);
   this.okBtnSprite.addImage(sketch.loadImage("../images/game/okBtn.png"));
   this.okBtnSprite.depth = 200;
   this.okBtnSprite.visible = false;
 
-  this.plyBtnSprite = sketch.createSprite( this.xLoc+100, this.yLoc+75);
+  this.plyBtnSprite = sketch.createSprite( this.buttonLocX, this.buttonLocY);
   this.plyBtnSprite.addImage(sketch.loadImage("../images/game/play.png"));
   this.plyBtnSprite.depth = 200;
   this.plyBtnSprite.visible = false;
