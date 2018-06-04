@@ -28,6 +28,8 @@ var carSim = function(sketch) {
   let gateControl = false;
   let maxCarsRendered = 15;
 
+  let question1Complete = false;
+  let question2Complete = false;
 
   let imageNameList = [];
   imageNameList.push('../images/game/batmobile.png');
@@ -62,10 +64,13 @@ let proFontWindows;
     lane2X = 240;
     lane3X = 320;
 
-    questionText = 'If 1 gate takes 5 seconds to \ncheck a single car, how many gates \nneed to be open in order to \nhave 10 cars pass through \nthe gate in 1 minuite '
+    questionText1 = 'Use the calculator below to \ncalculate WIP, given a \nthroughput of 4 \nand a flowtime of 7';
+    questionText2 = 'If 1 gate takes 5 seconds to \ncheck a single car, how many gates \nneed to be open in order to \nhave 10 cars pass through \nthe gate in 1 minuite '
 
 
-    popup = new Popup(sketch, proFontWindows, questionText, false, false, true);
+    popup = new Popup(sketch, proFontWindows, questionText1, false, false, true, 0, 0, 2);
+    setupQuestion1(popup);
+
     setupPopupEvents();
 
     laneXVals.push(lane0X);
@@ -80,11 +85,11 @@ let proFontWindows;
     carsWaiting = 0;
 
     if(sketch.displayWidth > 1024){
-      can = sketch.createCanvas(400, 600);
+      can = sketch.createCanvas(400, 500);
     }
     else {
 
-      can = sketch.createCanvas(400, 600);
+      can = sketch.createCanvas(400, 400);
       const canvasElt = can.elt;
       canvasElt.style.width = '100%', canvasElt.style.height="100%";
     }
@@ -104,7 +109,7 @@ let proFontWindows;
 
 
     if(gateControl)
-      {
+    {
       gateList[0].tollBoothSprite.onMousePressed = function(){
         //not sure why I cant bind directly but...ok
         gateList[0].openCloseGate();
@@ -140,7 +145,14 @@ let proFontWindows;
 
     // if (counter < 60)
 
-    billboard.timer = minutes + ":" + seconds;
+    if(seconds < 10)
+    {
+      billboard.timer = minutes + ":0" + seconds;
+    }
+    else {
+      billboard.timer = minutes + ":" + seconds;
+
+    }
 
     if(minutes <= 0 && seconds <= 0)
     {
@@ -148,9 +160,9 @@ let proFontWindows;
       counter = 60;
 
       if(carsThroughCt < 2)
-        popup.setParams("Failed!", false, false, true);
+        popup.setParams("Failed! Not Enough Cars", false, false, true);
       else
-        popup.setParams("Congrats! YouWin!", false, false, false);
+        popup.setParams("Congrats! YouWin! \n" + carsThroughCt + " Cars Through", false, false, false);
 
       popup.popupVisible = true;
     }
@@ -166,19 +178,19 @@ let proFontWindows;
   window.onresize = function()
   {
       if(sketch.displayWidth > 1024){
-        can = sketch.resizeCanvas(400, 600);
+        can = sketch.resizeCanvas(400, 500);
       }
       else
       {
-        can = sketch.resizeCanvas(400, 600);
+        can = sketch.resizeCanvas(400, 500);
         const canvasElt = can.elt;
         canvasElt.style.width = '100%', canvasElt.style.height="100%";
       }
   }
 
   sketch.draw = function() {
-    sketch.background(roadBackground);
 
+    sketch.background(roadBackground);
     if(sketch.frameCount % (80) == 0 && carList.length < maxCarsRendered && !popup.popupVisible)
     {
       addCar();
@@ -208,7 +220,9 @@ let proFontWindows;
           carList[i].carSprite.remove();
           carList[i] = null;
           carList.splice(i, 1);
-          carsThroughCt++;
+
+          if(billboard.timer != "0:00")
+            carsThroughCt++;
 
       }
     }
@@ -223,22 +237,46 @@ let proFontWindows;
 
   function setupPopupEvents()
   {
+    popup.plyBtnSprite.onMousePressed = function()
+    {
+      if(popup.plyBtnSprite.visible == true)
+      {
+          for(let i = 0; i < gateList.length; i++)
+        {
+          gateList[i].closeGate();
+        }
+
+        for(let i = 0; i < popup.value3; i++)
+        {
+          gateList[i].openCloseGate();
+        }
+        popup.clickClose();
+        inter = setInterval(timeIt, 1000);
+        carsThroughCt = 0;
+      }
+    }
+
     popup.okBtnSprite.onMousePressed = function()
     {
-      for(let i = 0; i < gateList.length; i++)
+      if(popup.okBtnSprite.visible == true)
       {
-        gateList[i].closeGate();
+        if(popup.questionText.indexOf(questionText1) !== -1)
+        {
+          if(popup.value3 == 28 && question1Complete == false)
+          {
+            popup.setParams("Thats Correct! \n\n Click 'OK' to continue", false, false, false);
+            question1Complete = true;
+          }
+          else {
+            popup.setParams("Thats Incorrect, Please Try Again\n\n" + questionText1, false, false, true);
+          }
+        }
+        else if(question1Complete)
+        {
+          setupQuestion2(popup);
+        }
       }
-
-      for(let i = 0; i < popup.value3; i++)
-      {
-        gateList[i].openCloseGate();
-      }
-      popup.clickClose();
-      inter = setInterval(timeIt, 1000);
-      carsThroughCt = 0;
-
-    }
+  }
 
     popup.value1UpSprite.onMousePressed = function()
     {
@@ -280,4 +318,24 @@ function gameCleanup(s,e_id) {
   s._registeredMethods = { pre: [], post: [], remove: [] };
   s.remove();
   s = null;
+}
+
+function setupQuestion1(popup)
+{
+  popup.value3Min = 20;
+  popup.value3 = 21;
+  popup.value3Max = 50;
+  popup.okBtnSprite.visible = true;
+  popup.value3Units = "WIP";
+}
+
+function setupQuestion2(popup)
+{
+  popup.setParams(questionText2, false, false, true);
+  popup.value3Min = 0;
+  popup.value3 = 1;
+  popup.value3Max = 5;
+  popup.okBtnSprite.visible = false;
+  popup.plyBtnSprite.visible = true;
+  popup.value3Units = "Gates";
 }

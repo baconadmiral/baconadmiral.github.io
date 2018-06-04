@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!--Let browser know website is optimized for mobile-->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon//favicon-16x16.png">
+  <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet"/>
   <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-  <link rel="manifest" href="images/favicon/site.webmanifest">
-  <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
+
 
   <style>
   #topNav{
@@ -26,52 +29,48 @@
     display:none;
   }
   .hidden_toggle {
-   display: none;
- }
+    display: none;
+  }
 
- .mouse_point {cursor: pointer;}
+  .mouse_point {cursor: pointer;}
 </style>
 </head>
 
 <body>
- <nav id="topNav" class = "fluid">
-  <div class="nav-wrapper z-depth-2" >
-   <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-   <a href="#!" class="brand-logo left " style="padding-left:50px;">
-     <span id="pageTitle"></span>
+  <nav id="topNav" class = "fluid">
+    <div class="nav-wrapper z-depth-2" >
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#!" class="brand-logo left " style="padding-left:50px;">
+        <span id="pageTitle"></span>
+      </a>
 
-   </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
+        <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
+         <li><a class="waves-effect" href="javascript:(loadTraining())">Training</a></li>
+        <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
+        <li><a class="waves-effect" href="javascript:(loadGame())">Activity</a></li>
+         <li><a class="waves-effect" href="javascript:(loadNewsletter())">Archived Newsletter</a></li>
+        <li><a class="waves-effect" href="javaScript:(loadCalculator())">Calculator</a></li>
+      </ul>
+    </div>
+  </nav>
 
-   <ul class="right hide-on-med-and-down">
-    <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
-    <li><a class="waves-effect" href="#!">About us</a></li>
-    <li><a class="waves-effect" href="#!">Contact</a></li>
-    <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
-    <li><a class="waves-effect" href="javascript:(loadGame())">Games</a></li>
-    <li><a class="waves-effect" href="javaScript:(loadCalculator())">Calculator</a></li>
-  </ul>
-</div>
-</nav>
 
-<!-- <ul class="side-nav grey lighten-3" style="background: linear-gradient(#fff,#e1f5fe, #fff)" id="mobile-demo" > -->
- <!--  <ul class="side-nav grey lighten-3"  id="mobile-demo" > -->
-   <ul class="side-nav"  id="mobile-demo" >
-
-     <div class="background center-align">
-      <!--     <img class="center-align" src="images/leadership_diagram.png" style="padding:0 20px 0px 20px; max-width:60%"> -->
-      <h5 style="padding:20px;">Art of the Possible</h5>
+  <ul class="side-nav"  id="mobile-demo" >
+    <div class="background center-align">
+      <img class="center-align" src="images/aopAppIcon.png" style="padding:20px 20px 0px 20px; max-width:60%">
+      <h5 style="padding-bottom:20px;">Art of the Possible</h5>
     </div>
 
-    <!--   <li><a href="##" style="font-size:18px;color:rgba(0,0,0,0.87)">MENU</a></li> -->
     <li><a class="waves-effect" href="javascript:(loadHome())"><i class="small material-icons" style="color:#0077A3">home</i>Home</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect" href=""><i class="small material-icons" style="color:#0077A3">help</i>About us</a></li>
-    <li><a class="waves-effect" href="#!"><i class="small material-icons" style="color:#0077A3">contacts</i>Contact</a></li>
-    <li><a class="waves-effect" href="javascript:(loadResources())" ><i class="small material-icons" style="color:#0077A3">collections</i>Resources</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadAboutUs())"><i class="small material-icons" style="color:#0077A3">help</i>About us</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadTraining())" ><i class="small"><img src="css/svg/gearHead.svg"></i>Training</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadResources())" ><i class="small material-icons" style="color:#0077A3">library_books</i>Resources</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect" href="javascript:(loadGame())"><i class="small material-icons" style="color:#0077A3">games</i>Games</a></li>
-    <li><a class="waves-effect" href="javaScript:(loadCalculator())"><i class="small material-icons" style="color:#0077A3">grade</i>Calculator</a></li>
-    <li><a class="waves-effect" href=""><i class="small material-icons" style="color:#0077A3">description</i>Newsletter</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame())"><i class="small material-icons" style="color:#0077A3">grade</i>Activity</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadNewsletter())"> <i class="small"><img src="css/svg/folded-newspaper-small.svg"></i> Archived Newsletter</a></li>
   </ul>
 
   <div id="app_cont" >
@@ -82,10 +81,10 @@
   <div id="calc_modal">
     <div id="modal1" class="modal" style="box-shadow: none;background-color:transparent;">
       <div class="modal-header" style="text-align: right;">
-      <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())" style="color:#000;padding-top:2px;"><i class="small material-icons">close</i></a>
-    </div>
-    <div id="calc_content" class="modal-content calcModal"
-    style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
+        <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())" style="color:#fff;padding-top:2px;"><i class="small material-icons" style="border:3px solid #fff; border-radius:20px;">close</i></a>
+      </div>
+      <div id="calc_content" class="modal-content calcModal"
+      style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
     </div>
   </div>
 </div>
@@ -151,15 +150,15 @@
       <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
 
       <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
-    <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
-    <script language="javascript" type="text/javascript" src="js/car.js"></script>
-    <script language="javascript" type="text/javascript" src="js/divider.js"></script>
-    <script language="javascript" type="text/javascript" src="js/lane.js"></script>
-    <script language="javascript" type="text/javascript" src="js/billboard.js"></script>
-    <script language="javascript" type="text/javascript" src="js/popup.js"></script>
+      <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
+      <script language="javascript" type="text/javascript" src="js/car.js"></script>
+      <script language="javascript" type="text/javascript" src="js/divider.js"></script>
+      <script language="javascript" type="text/javascript" src="js/lane.js"></script>
+      <script language="javascript" type="text/javascript" src="js/billboard.js"></script>
+      <script language="javascript" type="text/javascript" src="js/popup.js"></script>
       <script type="text/javascript">
-        initalLoad();
-        loadHome();
+      initalLoad();
+      loadHome();
       </script>
 
     </body>

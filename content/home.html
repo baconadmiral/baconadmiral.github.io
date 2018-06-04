@@ -2,47 +2,51 @@
 
 <div class="container">
   <div class="row" style="color:#0eabda;font-weight:bold;">
-    <div class="col s12 m6 l4" style="padding:5px;">
-        <div style="padding:5px; " class="card-panel hoverable  center-align">
-            <a href="javascript:(loadSlide())"style="text-decoration:none; color:#0eabda">
-                <i class="large material-icons">flash_on</i>
-                <p class="promo-caption"><h5>Slides</h5></p>
-                <p class="light-center"></p>
-            </a>
-        </div>
-    </div>
-    <div class="col s12 m6 l4" style="padding:5px;">
-        <div style="padding:5px;" class="card-panel hoverable  center-align">
-            <i class=" large material-icons">group</i>
-            <p class="promo-caption"><h5>What is AoP?</h5></p>
-            <p class="light-center"></p>
-        </div>
-    </div>
-    <div class="col s12 m6 l4" style="padding:5px;">
-        <div style="padding:5px;" class="card-panel hoverable  center-align">
-            <i class="large material-icons">settings</i>
-            <p class="promo-caption"><h5>Wall Walks</h5></p>
-            <p class="light-center"></p>
-        </div>
-    </div>
-    <div class="col s12 m6 l4" style="padding:5px;">
-        <div style="padding:5px;" class="card-panel hoverable  center-align">
-            <i class="large material-icons">settings</i>
-            <p class="promo-caption"><h5>Little's Law</h5></p>
-            <p class="light-center"></p>
-        </div>
-    </div>
-    <div class="col s12 m6 l4" style="padding:5px;">
-        <a href="javascript:(loadResources())">
-            <div style="padding:5px;" class="card-panel hoverable  center-align">                
-                <i class="large material-icons">settings</i>
-                <p class="promo-caption"><h5>Resources</h5></p>
-                <p class="light-center"></p>
-            </div>     
-        </a>
-        </div>
 
-        <div>
+    <div class="row">
+     <div class="col s12 m12 l12" >
+       <div class="card" style="border-radius:0px !important;padding:5px;">
+         <div class="card-content">
+           <span class="card-title">Welcome to Art of the Possible</span>
+           <p>Your source for all things AoP</p>
+         </div>
+       </div>
+     </div>
+
+
+     <div class="col s12 m6 l6">
+       <ul class="collapsible" data-collapsible = "accordion">
+        <li>
+          <div class="collapsible-header center-align">
+            <div class="row">
+             <i class="large material-icons gettingStartedHeader center-align">touch_app</i>
+           </div>
+           <div class="row" style="margin-bottom: 0px;">
+            <p class="promo-caption"><h5>Getting Started</h5></p>
+          </div>
         </div>
-    </div>
+        <div class="collapsible-body" style="height:10px;"><span>Lorem ipsum dolor sit amet.</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col s12 m6 l6">
+   <div style="padding:5px; " class="card-panel hoverable  center-align">
+     <a href="javascript:(loadGettingStarted())"style="text-decoration:none; color:#0eabda">
+      <img src="css/svg/folded-newspaper.svg">
+      <p class="promo-caption"><h5>June 2018 Newsletter</h5></p>
+      <p class="light-center"></p>
+    </a>
+  </div>
 </div>
+</div>
+
+</div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.collapsible').collapsible({
+      accordion: false
+    });
+  });
+</script>
