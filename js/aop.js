@@ -259,6 +259,7 @@ function loadTraining(){
     	}
     	exportRoot = new lib.LittlesLawAnimation();
     	stage = new lib.Stage(canvas);
+    	stage.enableMouseOver();
     	//Registers the "tick" event listener.
     	fnStartAnimation = function() {
     		stage.addChild(exportRoot);
