@@ -1,7 +1,7 @@
 function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, defaultVal1, defaultVal2, defaultVal3)
 {
-
   this.questionText = displayText;
+
 
   this.value1Units = "gates";
   this.value2Units = "test";
@@ -75,6 +75,7 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
 
   this.setParams = function(displayText, showValue1, showValue2, showValue3)
   {
+    this.prevQuestionText = this.questionText;
     this.questionText = displayText;
     this.useValue1 = showValue1;
     this.useValue2 = showValue2;
@@ -190,4 +191,5 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
     this.value3DownSprite.visible = false;
 
   }
+
 }

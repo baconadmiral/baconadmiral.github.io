@@ -55,6 +55,15 @@ var carSim = function(sketch) {
   let carInter;
 
   let proFontWindows;
+  let rotateMessage = "Please Rotate Screen \nto Portrait Mode"
+  let prevQuestionText = "";
+  let prevShowValue1 = false;
+  let prevShowValue2 = false;
+  let prevShowValue3 = false;
+  let prevOkBtn = false;
+  let prevPlayBtn = false;
+
+  let canvasElt;
 
   sketch.setup = function() {
     proFontWindows = sketch.loadFont("../font/ProFontWindows.ttf")
@@ -209,9 +218,38 @@ var carSim = function(sketch) {
       }
       else
       {
-        can = sketch.resizeCanvas(400, 500);
-        const canvasElt = can.elt;
-        canvasElt.style.width = '100%', canvasElt.style.height="100%";
+        if(window.outerWidth > window.outerHeight)
+        {
+          //  popup.yLoc = 100;
+          prevQuestionText = popup.questionText;
+          prevShowValue1 = popup.useValue1;
+          prevShowValue2 = popup.useValue2;
+          prevShowValue3 = popup.useValue3;
+
+          popup.setParams(rotateMessage, false, false, false);
+          prevOkBtn = popup.okBtnSprite.visible;
+          prevPlayBtn = popup.plyBtnSprite.visible;
+          popup.okBtnSprite.visible = false;
+          popup.plyBtnSprite.visible = false;
+
+        }
+
+        else {
+            can = sketch.resizeCanvas(400, 500);
+            popup.setParams(prevQuestionText, prevShowValue1, prevShowValue2, prevShowValue3);
+            popup.okBtnSprite.visible = prevOkBtn;
+            popup.plyBtnSprite.visible = prevPlayBtn;
+        }
+
+        if(typeof can != "undefined")
+        {
+          canvasElt = can.elt;
+        }
+
+        if(typeof canvasElt != "undefined")
+        {
+          canvasElt.style.width = '100%', canvasElt.style.height="100%";
+        }
       }
   }
 
