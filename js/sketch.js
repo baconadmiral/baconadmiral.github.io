@@ -211,8 +211,8 @@ var carSim = function(sketch) {
     }
   }
 
-  window.onresize = function()
-  {
+  //window.onresize = function()
+  $(window).resize(function() {
       if(sketch.displayWidth > 1024){
         can = sketch.resizeCanvas(400, 500);
       }
@@ -251,7 +251,7 @@ var carSim = function(sketch) {
           canvasElt.style.width = '100%', canvasElt.style.height="100%";
         }
       }
-  }
+  });
 
   sketch.draw = function() {
 
