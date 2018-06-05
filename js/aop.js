@@ -51,7 +51,7 @@ function closeSidenav()
 
 function loadHome(){
   clearColor();
-  hideTraining();
+
   closeSidenav();
   $("#app_cont").load("content/home.html");
   $("#pageTitle").text('AoP');
@@ -107,7 +107,7 @@ function loadSlide(n){
 
 function loadCalculator(){
   clearColor();
-  hideTraining();
+
   closeSidenav();
   $("#app_cont").load("content/calculator.html");
   $("#pageTitle").text("Little's Law Calculator");
@@ -139,7 +139,7 @@ function loadCalculatorModal(){
 
 function loadResources(){
   clearColor();
-  hideTraining();
+
   closeSidenav();
   $("#app_cont").load("content/resources.html");
   $("#pageTitle").text("Resources");
@@ -147,7 +147,7 @@ function loadResources(){
 
 function loadGettingStarted(){
   clearColor();
-  hideTraining();
+
   closeSidenav();
   $("#app_cont").load("content/gettingStarted.html");
   $("#pageTitle").text("Getting Started");
@@ -155,7 +155,7 @@ function loadGettingStarted(){
 
 function loadNewsletter(){
   clearColor();
-  hideTraining();
+
   closeSidenav();
   $("#app_cont").load("content/newsletter.html");
   $("#pageTitle").text("Archived Newsletters");
@@ -163,7 +163,7 @@ function loadNewsletter(){
 
 function loadAboutUs(){
   clearColor();
-  hideTraining();
+
   closeSidenav();
   $("#app_cont").load("content/aboutUs.html");
   $("#pageTitle").text("About Us");
@@ -182,7 +182,7 @@ function clearColor(){
 
 function loadGame(){
   closeSidenav();
-  hideTraining();
+
   $(function(){
     $("#app_cont").empty();
     car_S = new p5(carSim,'app_cont');
@@ -190,11 +190,6 @@ function loadGame(){
   $("#pageTitle").text("Activity");
 }
 
-function hideTraining()
-{
-  document.getElementById("animation_container").style.display = "none";
-
-}
 
 function loadGuidance(){
   clearColor();
@@ -227,6 +222,26 @@ function loadTraining(){
   $(function(){
     $("#app_cont").empty();
     //$("#app_cont").load("content/LittlesLawAnimation.html");
+
+    var anim_container = document.createElement("div");
+    anim_container.id = "animation_container";
+    anim_container.style = "display: none; background-color:rgba(255, 255, 255, 1.00); width:auto; height:auto";
+
+    var canvas = document.createElement('canvas');
+    canvas.id = "canvas";
+    canvas.width = "100%";
+    canvas.height = "100%";
+    canvas.style = "position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);";
+
+    var dom_overlay_container = document.createElement("div");
+    dom_overlay_container.id = "dom_overlay_container";
+    dom_overlay_container.style = "pointer-events:none; overflow:hidden; width:auto; height:auto; position: absolute; left: 0px; top: 0px; display: block;";
+
+    anim_container.appendChild(canvas);
+    anim_container.appendChild(dom_overlay_container);
+
+    document.getElementById("app_cont").appendChild(anim_container);
+
     document.getElementById("animation_container").style.display = "block";
 
     init();
