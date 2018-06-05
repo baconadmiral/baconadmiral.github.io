@@ -205,6 +205,7 @@ function loadHandbook(){
 
 function loadAcronyms(){
   clearColor();
+ 
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
 }

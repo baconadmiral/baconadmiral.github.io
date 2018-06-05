@@ -179,7 +179,7 @@ var carSim = function(sketch) {
 
     for(let i = 0; i < gateList.length; i ++)
     {
-      if(gateList[i].gateOpen && gateList[i].carQueue.length < 6)
+      if(gateList[i].gateOpen && gateList[i].carQueue.length < 5)
       {
         lanesFull = false;
         //console.log("lane full");
@@ -267,7 +267,7 @@ var carSim = function(sketch) {
         }
         popup.clickClose();
         inter = setInterval(timeIt, 1000);
-        carInter = setInterval(addCar, 1000);
+        carInter = setInterval(addCar, 1250);
         carsThroughCt = 0;
       }
     }
@@ -289,7 +289,8 @@ var carSim = function(sketch) {
         }
         else if(question1Complete)
         {
-          setupQuestion2(popup);
+          popup.clickClose();
+          setTimeout(()=>{setupQuestion2(popup)}, 250);
         }
       }
   }
@@ -354,4 +355,5 @@ function setupQuestion2(popup)
   popup.okBtnSprite.visible = false;
   popup.plyBtnSprite.visible = true;
   popup.value3Units = "Gates";
+  popup.clickOpen();
 }
