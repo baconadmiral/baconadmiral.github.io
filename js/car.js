@@ -32,9 +32,9 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
   this.annealCollide = 20;
 
   this.angle = 0;
+  this.carWaitInter;
 
-
-  this.update = function(throughPut, carList, gateList, divider)
+  this.update = function(throughPut, carList, gateList, divider, waitingCars)
   {
     //look for the lane with the least cars
     if(this.carSprite.position.y <= evaluationPoint && !this.waited)
@@ -42,25 +42,24 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
       //Stops Car at gateList
       if(this.carSprite.overlap(divider.dividerSprite))
       {
-          this.carSprite.rotateToDirection = false;
-          this.carSprite.velocity.y = 0;
-          this.waitingAtGate = true;
+        if(!this.waited && !this.waitingAtGate)
+        {
+          this.stopCar();
+          _this = this;
+          waitingCars.push(_this);
 
-
+          if(typeof this.carWaitInter == "undefined")
+          {
+            this.carWaitInter = setTimeout(()=>{_this.startCar(waitingCars.shift(), gateList);
+            }, 2000);
+          }
+        }
       }
 
-      if(this.waitingAtGate == true && gateList[this.myLaneIndex].gateOpen)
+      /*if(this.waitingAtGate == true && gateList[this.myLaneIndex].gateOpen)
       {
         this.waitTimer -= throughPut;
-      }
-
-      if(this.waitTimer <= 0)
-      {
-        this.waited = true;
-        this.carSprite.velocity.y  = this.speed * 2;
-        gateList[this.myLaneIndex].removeCarFromLane();
-      }
-
+      }*/
 
       if(this.myLaneIndex == -1)
       {
@@ -83,6 +82,23 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
 
 
     this.removeCarsNotRenderedFromLane(gateList);
+
+  }
+
+  this.stopCar = function()
+  {
+    this.carSprite.velocity.y = 0;
+    this.carSprite.rotateToDirection = false;
+    this.waitingAtGate = true;
+  }
+
+  this.startCar = function(_this, gateList)
+  {
+
+    _this.waited = true;
+    _this.carSprite.velocity.y  = this.speed * 2;
+    gateList[_this.myLaneIndex].removeCarFromLane();
+    clearTimeout(_this.carWaitInter);
 
   }
 

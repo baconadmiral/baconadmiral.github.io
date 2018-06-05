@@ -23,6 +23,7 @@ var carSim = function(sketch) {
   let lane3X;
   let laneShiftX;
   let laneXVals = [];
+  let waitingCars = [];
 
   let can, btn;
   let gateControl = false;
@@ -37,22 +38,23 @@ var carSim = function(sketch) {
   imageNameList.push('../images/game/truck2.png');
   imageNameList.push('../images/game/yellow car.png');
   imageNameList.push('../images/game/blue car.png');
-    let carCt = 0;
 
-    let billboard;
-    let popup;
+  let carCt = 0;
+
+  let billboard;
+  let popup;
 
 
-    let timer = "";
+  let timer = "";
 
-    let counter = 30;
-    let seconds;
-    let minutes;
+  let counter = 30;
+  let seconds;
+  let minutes;
 
-    let inter;
-    let carInter;
+  let inter;
+  let carInter;
 
-let proFontWindows;
+  let proFontWindows;
 
   sketch.setup = function() {
     proFontWindows = sketch.loadFont("../font/ProFontWindows.ttf")
@@ -158,6 +160,7 @@ let proFontWindows;
     if(minutes <= 0 && seconds <= 0)
     {
       clearInterval(inter);
+      clearInterval(carInter);
       counter = 60;
 
       if(carsThroughCt < 2)
@@ -176,7 +179,7 @@ let proFontWindows;
 
     for(let i = 0; i < gateList.length; i ++)
     {
-      if(gateList[i].gateOpen && gateList[i].carQueue.length < 7)
+      if(gateList[i].gateOpen && gateList[i].carQueue.length < 6)
       {
         lanesFull = false;
         //console.log("lane full");
@@ -221,7 +224,7 @@ let proFontWindows;
     for(var i = 0; i < carList.length; i++)
     {
 
-      carList[i].update(50, carList, gateList, divider);
+      carList[i].update(50, carList, gateList, divider, waitingCars);
       if(carList[i].carSprite.velocity.y <= 0)
       {
         howManyWaitingThisCycle++;
