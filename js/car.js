@@ -17,7 +17,7 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
 
   this.waitTimer = 7000;
   this.waited = false;
-  this.speed = -1.5;
+  this.speed = -3.5;
   this.myLaneIndex = -1;
 
   this.carSprite = sketch.createSprite(this.xLoc, this.yLoc-20, 30, 30);

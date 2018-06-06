@@ -53,7 +53,7 @@ function Lane(sketch, xLoc, divider)
       else
         angle=225;
 
-      car.carSprite.setSpeed(2.75, angle);
+      car.carSprite.setSpeed(8, angle);
     }
 
     return angle;
