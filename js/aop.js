@@ -51,7 +51,7 @@ function closeSidenav()
 
 function loadHome(){
   clearColor();
-
+  closeGame();
   closeSidenav();
   $("#app_cont").load("content/home.html");
   $("#pageTitle").text('AoP');
@@ -139,6 +139,7 @@ function loadCalculatorModal(){
 
 function loadResources(){
   clearColor();
+  closeGame();
 
   closeSidenav();
   $("#app_cont").load("content/resources.html");
@@ -147,6 +148,7 @@ function loadResources(){
 
 function loadGettingStarted(){
   clearColor();
+  closeGame();
 
   closeSidenav();
   $("#app_cont").load("content/gettingStarted.html");
@@ -155,6 +157,7 @@ function loadGettingStarted(){
 
 function loadNewsletter(){
   clearColor();
+  closeGame();
 
   closeSidenav();
   $("#app_cont").load("content/newsletter.html");
@@ -163,6 +166,7 @@ function loadNewsletter(){
 
 function loadAboutUs(){
   clearColor();
+  closeGame();
 
   closeSidenav();
   $("#app_cont").load("content/aboutUs.html");
@@ -180,6 +184,12 @@ function clearColor(){
   $('body').css('background-color', '#e0e0e0');
 }
 
+function closeGame() {
+  if(typeof car_S != 'undefined' && car_S !== null) {
+    gameCleanup(car_S,'app_cont');
+  }
+}
+
 function loadGame(){
   closeSidenav();
 
@@ -193,25 +203,34 @@ function loadGame(){
 
 function loadGuidance(){
   clearColor();
+  closeGame();
+
   $("#app_cont").load("content/guidance.html");
   $("#pageTitle").text("Guidance");
 }
 
 function loadHandbook(){
   clearColor();
+  closeGame();
+
   $("#app_cont").load("content/handbook.html");
   $("#pageTitle").text("Handbook");
 }
 
 function loadAcronyms(){
   clearColor();
- 
+  closeGame();
+
+
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
 }
 
 function loadWallWalks(){
   clearColor();
+  closeGame();
+
+
   $("#app_cont").load("content/wallWalks.html");
   $("#pageTitle").text("Wall Walks");
 }
@@ -219,6 +238,8 @@ function loadWallWalks(){
 function loadTraining(){
   clearColor();
   closeSidenav();
+  closeGame();
+
   //$("#app_cont").load("content/training.html");
   $(function(){
     $("#app_cont").empty();
@@ -226,17 +247,15 @@ function loadTraining(){
 
     var anim_container = document.createElement("div");
     anim_container.id = "animation_container";
-    anim_container.style = "display: none; background-color:rgba(255, 255, 255, 1.00); width:auto; height:auto";
+    anim_container.style = "display: none; background-color:rgba(255, 255, 255, 1.00);";
 
     var canvas = document.createElement('canvas');
     canvas.id = "canvas";
-    canvas.width = "100%";
-    canvas.height = "100%";
     canvas.style = "position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);";
 
     var dom_overlay_container = document.createElement("div");
     dom_overlay_container.id = "dom_overlay_container";
-    dom_overlay_container.style = "pointer-events:none; overflow:hidden; width:auto; height:auto; position: absolute; left: 0px; top: 0px; display: block;";
+    dom_overlay_container.style = "pointer-events:none; overflow:hidden; position: absolute; left: 0px; top: 0px; display: block;";
 
     anim_container.appendChild(canvas);
     anim_container.appendChild(dom_overlay_container);
@@ -285,11 +304,32 @@ function loadTraining(){
     	//Code to support hidpi screens and responsive scaling.
     	function makeResponsive(isResp, respDim, isScale, scaleType) {
     		var lastW, lastH, lastS=1;
+        var portW, portH;
     		window.addEventListener('resize', resizeCanvas);
     		resizeCanvas();
     		function resizeCanvas() {
     			var w = lib.properties.width, h = lib.properties.height;
-    			var iw = window.innerWidth, ih=window.innerHeight;
+          var iw, ih;
+          if(typeof lastW == 'undefined')
+          {
+            //is portrait?
+            if(window.innerHeight > window.innerWidth)
+            {
+    			       iw = window.innerWidth, ih=window.innerHeight;
+                 portW = iw;
+                 portH = ih;
+            }
+          }
+          else
+          {
+             iw = portW, ih=portH;
+          }
+
+          //Is landscape?
+          if(window.innerWidth > window.innerHeight)
+          {
+            iw = window.innerWidth, ih=window.innerHeight-120;
+          }
     			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
     			if(isResp) {
     				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {

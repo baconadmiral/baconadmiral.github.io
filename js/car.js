@@ -17,7 +17,7 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
 
   this.waitTimer = 7000;
   this.waited = false;
-  this.speed = -1;
+  this.speed = -1.5;
   this.myLaneIndex = -1;
 
   this.carSprite = sketch.createSprite(this.xLoc, this.yLoc-20, 30, 30);
@@ -51,7 +51,7 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
           if(typeof this.carWaitInter == "undefined")
           {
             this.carWaitInter = setTimeout(()=>{_this.startCar(waitingCars.shift(), gateList);
-            }, 2000);
+            }, 3000);
           }
         }
       }

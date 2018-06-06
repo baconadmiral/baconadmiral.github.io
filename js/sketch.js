@@ -170,12 +170,36 @@ var carSim = function(sketch) {
     {
       clearInterval(inter);
       clearInterval(carInter);
-      counter = 60;
+      counter = 30;
 
-      if(carsThroughCt < 2)
-        popup.setParams("Failed! Not Enough Cars", false, false, true);
+      if(carsThroughCt < 15)
+      {
+        popup.setParams("On No! It Looks Like Only " + carsThroughCt +" made it.  \n\nTry again!", false, false, true);
+        popup.plyBtnSprite.visible = true;
+//        removeAllCars();
+
+        /*carList = [];
+        for(let i = 0; i < gateList.length; i ++)
+        {
+          for(let j = 0; j < gateList[i].carQueue.length; i++)
+          {
+            gateList[i].carQueue[j].carsInLane = 0;
+            gateList[i].carQueue[j].carSprite.velocity.y = 10;
+            gateList[i].carQueue[j].carSprite.visible=false;
+            gateList[i].carQueue[j].carSprite.remove();
+            gateList[i].carQueue[j] = null;
+            gateList[i].carQueue.splice(j, 1);
+          }
+
+        }*/
+      }
       else
-        popup.setParams("Congrats! YouWin! \n\n" + carsThroughCt + " Cars Through", false, false, false);
+      {
+        popup.plyBtnSprite.visible = false;
+        popup.setParams("Congrats! You Win! \n\n" + carsThroughCt + " cars made it through the gate", false, false, false);
+        popup.okBtnSprite.visible = true;
+        question2Complete = true;
+      }
 
       popup.popupVisible = true;
     }
@@ -257,7 +281,6 @@ var carSim = function(sketch) {
 
     sketch.background(roadBackground);
 
-
     let howManyWaitingThisCycle = 0;
     for(var i = 0; i < carList.length; i++)
     {
@@ -305,7 +328,7 @@ var carSim = function(sketch) {
         }
         popup.clickClose();
         inter = setInterval(timeIt, 1000);
-        carInter = setInterval(addCar, 1250);
+        carInter = setInterval(addCar, 1000);
         carsThroughCt = 0;
       }
     }
@@ -329,6 +352,10 @@ var carSim = function(sketch) {
         {
           popup.clickClose();
           setTimeout(()=>{setupQuestion2(popup)}, 250);
+        }
+        else if(question2Complete)
+        {
+
         }
       }
   }
@@ -394,4 +421,11 @@ function setupQuestion2(popup)
   popup.plyBtnSprite.visible = true;
   popup.value3Units = "Gates";
   popup.clickOpen();
+}
+
+function removeAllCars()
+{
+
+
+
 }
