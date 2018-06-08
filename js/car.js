@@ -56,11 +56,6 @@ function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
         }
       }
 
-      /*if(this.waitingAtGate == true && gateList[this.myLaneIndex].gateOpen)
-      {
-        this.waitTimer -= throughPut;
-      }*/
-
       if(this.myLaneIndex == -1)
       {
           this.myLaneIndex = this.findLane(carList, gateList, divider, maxCarsRendered);

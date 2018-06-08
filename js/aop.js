@@ -1,6 +1,118 @@
 var slideIndex = 1;
 var total = 20;
 
+var searchDomain = [
+  {key: "AA", value : "Aircraft Availability"},
+  {key: "ABSS", value : "Automated Business Service System"},
+  {key: "ABW", value : "Air Base Wing"},
+  {key: "ACF", value : "Acceptance Check Flight"},
+  {key: "AFI", value : "Air Force Instruction"},
+  {key: "AFMAN", value : "Air Force Manual"},
+  {key: "AFPC", value : "Air Force Personnel Center"},
+  {key: "AFPD", value : "Air Force Policy Directive"},
+  {key: "AFRIMS", value : "Air Force Records Information Management System"},
+  {key: "AFSAS", value : "Air Force Safety Automated System"},
+  {key: "AFSOC", value : "Air Force Special Operations Command"},
+  {key: "AMOC", value : "Aircraft Maintenance Operation Center"},
+  {key: "AO", value : "Action Officer"},
+  {key: "AOC", value : "Air Operations Center"},
+  {key: "AOR", value : "Area of Responsibility "},
+  {key: "CER", value : "Cost Effective Readiness"},
+  {key: "CoF", value : "Complex of the Future"},
+  {key: "CPI", value : "Continuous Process Improvement"},
+  {key: "DBR", value : "Drum Buffer Rope"},
+  {key: "DLA", value : "Defense Logistics Agency"},
+  {key: "DMAIC", value : "Define, Measure, Analyze, Improve, Control"},
+  {key: "DMAWG", value : "Depot Maintenance Activation Working Group"},
+  {key: "DoD", value : "Department of Defense"},
+  {key: "DOTmLPF-P", value : "Doctrine, Organization, Training, material, Leadership, Personnel, Facilities, and Policy"},
+  {key: "DP", value : "Directorate of Personnel"},
+  {key: "FDB", value : "Financial Data Base"},
+  {key: "FM", value : "Financial Management "},
+  {key: "FRIP", value : "Full Rate Initial Production"},
+  {key: "GMT", value : "Gated Management Tool"},
+  {key: "GPC", value : "Government Purchase Card"},
+  {key: "IA", value : "Implements Agreements"},
+  {key: "ICE", value : "Interactive Customer Evaluation"},
+  {key: "IM", value : "Item Manager"},
+  {key: "IMS", value : "Integrated Master Schedule"},
+  {key: "IMSC", value : "Installation and Mission Support Center"},
+  {key: "IPV", value : "Individual Prime Vendor"},
+  {key: "JA", value : "Judge Advocate"},
+  {key: "LAIRMCM", value : "Large Aircraft Infrared Countermeasures"},
+  {key: "LGS", value : "Logistics Directorate's Performance Management Division"},
+  {key: "LRIP", value : "Low Rate Initial Production"},
+  {key: "LRS", value : "Logistics Readiness Squadron"},
+  {key: "LRU", value : "Line Replacement Unit"},
+  {key: "MAPO", value : "Maintenance Aquisition Program Office"},
+  {key: "MDS", value : "Mission Design Series"},
+  {key: "METL", value : "Mission Essential Task List"},
+  {key: "METs", value : "Mission Essential Tasks"},
+  {key: "MGA", value : "Major Graded Area"},
+  {key: "MIPR", value : "Military Interdepartmental Purchase Request"},
+  {key: "MLG", value : "Main Landing Gear"},
+  {key: "MORD", value : "Miscellaneous Obligation Requirements Document"},
+  {key: "NAF", value : "Numbered Air Force"},
+  {key: "OC-ALC", value : "Oklahoma City Air Logistics Complex"},
+  {key: "OO-ALC/OBP", value : "OO-ALC Business Office"},
+  {key: "OFPS", value : "Operational Flight Programs"},
+  {key: "OMS", value : "Occupational Medical Services"},
+  {key: "OO-ALC", value : "Ogden Air Logistics Complex"},
+  {key: "ORB", value : "Opportunity Review Board"},
+  {key: "OPR", value : "Office of  Primary Responsibility"},
+  {key: "OSHA", value : "Occupational Safety and Health Administration"},
+  {key: "PCS", value : "Permanent Change of Station"},
+  {key: "PDM", value : "Programmed Depot Maintenance"},
+  {key: "PM", value : "Program Manager "},
+  {key: "PPA-HQ", value : "Personal Property Headquarters Activity"},
+  {key: "PPPO", value : "Personal Property Processing Office"},
+  {key: "PPSO", value : "Personal Property Shipping Office"},
+  {key: "QA", value : "Quality Assurance"},
+  {key: "RCA", value : "Root Cause Analysis"},
+  {key: "RDS", value : "Records Disposition Schedule"},
+  {key: "RIE", value : "Rapid Identification Worksheet"},
+  {key: "SIO", value : "Single Investigating Officer"},
+  {key: "SME", value : "Subject Matter Expert"},
+  {key: "SPO", value : "System Program Office"},
+  {key: "ToC", value : "Theory of Constraints"},
+  {key: "TSP", value : "Transportation Service Provider"},
+  {key: "UDLM", value : "Unfunded Depot Level Maintenance"},
+  {key: "USR", value : "Unit Safety Representative"},
+  {key: "VPP", value : "Voluntary Protection Program"},
+  {key: "WCD", value : "Work Control Document"},
+  {key: "WIP", value : "Work In Process"},
+  {key: "WR-ALC", value : "Warner Robbins Air Logistics Complex "},
+
+
+{key : "Art of the Possible (AoP)", value : "A constraints based managment system designed to create an environement for success by creating a culture of problem-solvers, defining processes (aka machines), eliminating constratints, and continously improving.  It is the framework for how the AFSC conducts business and how we strive to achieve world class results in warfighter support."},
+{key : "AFTO-202", value : "Noncomforming Technical Assistance Request and Reply.  Process used in AFSC to request engineering disposition to a production process problem."},
+{key : "Andon", value : "A signal used to call for help when an abnormal condition is recongized, or that some sort of action is required.  (Andon comes from an old Japanese word for paper lantern)."},
+{key : "Comfortable in Red", value : "Refers to the Willingness to set aggressive targets with the understanding the metrics will show as 'red' until process throughput efficiencies improve."},
+{key : "Constraint", value : "The gate with the lowest throughput rate."},
+{key : "Critical Path", value : "A sequence of activities in a project plan which must be completed by a specific time for the project to be completed on its needs date.  The AFSC adaption of this term refers to the linkage of critical elements in a process or project that keepan asset realistically moving forward toward completion."},
+{key : "Flowtime", value : "The average time that a unit stays in a production machine."},
+{key : "Implied Tasks", value : "Actions or activities not specifically stated but which must be accomplished to sucessfully complete the mission."},
+{key : "Manloading", value : "A systematic assignment of personnel to jobs or tasks in an effiicient manner."},
+{key : "Maturity Matrix", value : "AFSC method of measuring organizational maturity which regard to the a adaptation of principles found in the 'Execution' section of the AFSC Radiator Chart."},
+{key : "Process Machine", value : "Refers to the science of the process and implies that any process can be gated in order to measure throughput and focus process improvment activities."},
+{key : "Pull System", value : "A system where products, material or information is 'pulled' (once a demand is placed on the process step then it produces) by consumer requests through a production machine."},
+{key : "Push System", value : "A system where products, material or information are pushed through a production machine based on past order history and decisions are based on logn term forecasts."},
+{key : "Queue", value : "Assets awaiting induction to a process.  Also a WIP control tool in gated monitoring system."},
+{key : "Radiator Chart", value : "Model depicting the fundamental components of the AoP methodology."},
+{key : "Rapid Improvment Events (RIE)", value : "A Lean, 6 Sigma or ToC event that allows for root cause and the development of countermeasures in less that 5 days.  The preparation and implementation will occur outside of the RIE."},
+{key : "Road To...", value : "Reflects the throughput-pace required for oth the interest of the customer and the organization.  The goal that sets the pace of the process."},
+{key : "Root Cause Analysis (RCA)", value : "Tracing a problem to it origins.  If you only fix the symptoms, what you see on the surface, the problem will almost certainly happen again which will lead you to fix it, again, and again, and again."},
+{key : "Specified Tasks", value : "Tasks direclty stated in the mission, by the next higher commander, or by law or regulation."},
+{key : "Standard Work", value : "A detailed, documented and sometimes visual system by which members develop and follow a series of predefined process steps."},
+{key : "Tactical Management", value : "An established frequent review of WIP flowing through the process machine.  It focuses on the individual items of WIP flwoing through the process machine rather than the process machine performance at the operational level."},
+{key : "Takt Time", value : "The rate of customer demand, how often a single unit must be produced from a machine (takt is a German word for rhythm or meter)."},
+{key : "Theory of Constraints (ToC)", value : "1. Identify the system's contraint(s), 2. Decide how to exploit the system's constraint(s). 5. Return to step one but beware of inertia WIP."},
+{key : "Throughput", value : "The required output of a production machine expressed in units per time.  Traditional definition based in ToC - The rate at which the system generates money through sales."},
+{key : "Urgency Tools", value : "Process tools that allow an organization to react and quickly resovle constraints encountered during the process execution."},
+{key : "Value Stream Analysis (VSA)", value : "A method of analyzing a value stream map to determine value add process steps as well as waste."},
+{key : "Value Stream Map (VSM)", value : "A method of creating a simple diagram of the material and information flow that bring a product through a value system."},
+{key : "Visual Managment", value : "The use of simple visual indicators to help people determine immediately whether they are working inside the standards or deviating form it, this must be done at the place where the work is done."},
+{key : "Wall Walk", value : "A recurring process-focused review to understand process machine performance, to identify constraints, and to coordinate resolution."}]
 
 
 function initalLoad(){
@@ -112,29 +224,192 @@ function loadCalculator(){
   $("#app_cont").load("content/calculator.html");
   $("#pageTitle").text("Little's Law Calculator");
   $("#calcLabel").css('color','#0EABDA');
-  $('#calcsvg').css({fill: "#0EABDA"});
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','100%');
   $('body').css('background-color', '#e0e0e0');
+  //$("#calcsvg").css({ fill: "#ff0000" });
+
 }
 
 function loadCalculatorModal(){
+  var defaultColor= "#424242";
   var pageTitle = $("#pageTitle").text();
   if(pageTitle !== "Little's Law Calculator"){
     $("#calc_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
     $("#calcLabel").css('color','#0EABDA');
-    $('#calcsvg').css({fill: "#0EABDA"});
+    //$("#calcsvg").css('color','#0EABDA');
+    //$("#calcsvg").css({ fill: "#ff0000" });
+    //$('#calcsvg').css({fill: defaultColor});
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+
     $(document).ready(function(){
-      $('.modal').modal();
+      $('#modal1').modal();
     });
 
-    $('.modal').modal({
+    $('#modal1').modal({
       dismissible:false
     });
-    $('.modal').modal('open');
+    $('#modal1').modal('open');
 
   }
+
+
+}
+
+function loadSearchModal(){
+
+    $("#search_content").load("content/search.html");
+    $("#searchContainer").css('padding-top','0px');
+    //$("#calcLabel").css('color','#0EABDA');
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+
+    $(document).ready(function(){
+      $('#search_modal').modal();
+    });
+
+    $('#search_modal').modal({
+      dismissible:false
+    });
+    $('#search_modal').modal('open');
+
+    $(document).ready(function(){
+      $('input.autocomplete').autocomplete({
+        data: {
+          "AA" : null,
+          "ABSS" : null,
+          "ABW" : null,
+          "ACF" : null,
+          "AFI" : null,
+          "AFMAN" : null,
+          "AFPC" : null,
+          "AFPD" : null,
+          "AFRIMS" : null,
+          "AFSAS" : null,
+          "AFSOC" : null,
+          "AMOC" : null,
+          "AO" : null,
+          "AOC" : null,
+          "AOR" : null,
+          "CER" : null,
+          "CoF" : null,
+          "CPI" : null,
+          "DBR" : null,
+          "DLA" : null,
+          "DMAIC" : null,
+          "DMAWG" : null,
+          "DoD" : null,
+          "DOTmLPF-P" : null,
+          "DP" : null,
+          "FDB" : null,
+          "FM" : null,
+          "FRIP" : null,
+          "GMT" : null,
+          "GPC" : null,
+          "IA" : null,
+          "ICE" : null,
+          "IM" : null,
+          "IMS" : null,
+          "IMSC" : null,
+          "IPV" : null,
+          "JA" : null,
+          "LAIRMCM" : null,
+          "LGS" : null,
+          "LRIP" : null,
+          "LRS" : null,
+          "LRU" : null,
+          "MAPO" : null,
+          "MDS" : null,
+          "METL" : null,
+          "METs" : null,
+          "MGA" : null,
+          "MIPR" : null,
+          "MLG" : null,
+          "MORD" : null,
+          "NAF" : null,
+          "OC-ALC" : null,
+          "OO-ALC/OBP" : null,
+          "OFPS" : null,
+          "OMS" : null,
+          "OO-ALC" : null,
+          "ORB" : null,
+          "OPR" : null,
+          "OSHA" : null,
+          "PCS" : null,
+          "PDM" : null,
+          "PM" : null,
+          "PPA-HQ" : null,
+          "PPPO" : null,
+          "PPSO" : null,
+          "QA" : null,
+          "RCA" : null,
+          "RDS" : null,
+          "RIE" : null,
+          "SIO" : null,
+          "SME" : null,
+          "SPO" : null,
+          "ToC" : null,
+          "TSP" : null,
+          "UDLM" : null,
+          "USR" : null,
+          "VPP" : null,
+          "WCD" : null,
+          "WIP" : null,
+          "WR-ALC" : null,
+
+          "Art of the Possible (AoP)" : null,
+          "AFTO-202" : null,
+          "Andon" : null,
+          "Comfortable in Red" : null,
+          "Constraint" : null,
+          "Critical Path" : null,
+          "Flowtime" : null,
+          "Implied Tasks" : null,
+          "Manloading" : null,
+          "Maturity Matrix" : null,
+          "Process Machine" : null,
+          "Pull System" : null,
+          "Push System" : null,
+          "Queue" : null,
+          "Radiator Chart" : null,
+          "Rapid Improvment Events (RIE)" : null,
+          "Road To..." : null,
+          "Root Cause Analysis (RCA)" : null,
+          "Specified Tasks" : null,
+          "Standard Work" : null,
+          "Tactical Management" : null,
+          "Takt Time" : null,
+          "Theory of Constraints (ToC)" : null,
+          "Throughput" : null,
+          "Urgency Tools" : null,
+          "Value Stream Analysis (VSA)" : null,
+          "Value Stream Map (VSM)" : null,
+          "Visual Managment" : null,
+          "Wall Walk" : null,
+        },
+        onAutocomplete: function(txt, val, val) {
+          $("#search_title").html(txt);
+          $("#search_result" ).html( search(txt, searchDomain) );
+        },
+        limit: 20,
+      });
+    });
+}
+
+function search(nameKey, myArray){
+  for (var i=0; i < myArray.length; i++) {
+      if (myArray[i].key === nameKey) {
+          return nameKey + " - " + myArray[i].value;
+      }
+    }
+    return "No Result Found";
+}
+
+function clearSearchInput()
+{
+  $("#autocomplete-input").value="";
 }
 
 function loadResources(){
@@ -179,9 +454,13 @@ function clearColor(){
   var defaultColor= "#424242"
   $("#calcLabel").css('color',defaultColor);
   $('#calcsvg').css({fill: defaultColor});
+  //$("#calcsvg").css({ fill: "#ff0000" });
+
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','');
   $('body').css('background-color', '#e0e0e0');
+  $("#app_cont").css('filter', '');
+
 }
 
 function closeGame() {
@@ -218,9 +497,9 @@ function loadHandbook(){
 }
 
 function loadAcronyms(){
+  $('#search_modal').modal('close');
   clearColor();
   closeGame();
-
 
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
@@ -240,10 +519,8 @@ function loadTraining(){
   closeSidenav();
   closeGame();
 
-  //$("#app_cont").load("content/training.html");
   $(function(){
     $("#app_cont").empty();
-    //$("#app_cont").load("content/LittlesLawAnimation.html");
 
     var anim_container = document.createElement("div");
     anim_container.id = "animation_container";
