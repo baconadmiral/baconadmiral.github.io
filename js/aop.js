@@ -222,13 +222,13 @@ function loadCalculatorModal(){
 
 
     $(document).ready(function(){
-      $('#modal1').modal();
+      $('.modal').modal();
     });
 
-    $('#modal1').modal({
+    $('.modal').modal({
       dismissible:false
     });
-    $('#modal1').modal('open');
+    $('.modal').modal('open');
 
   }
 
@@ -252,7 +252,7 @@ function loadSearchModal(){
     });
     $('#search_modal').modal('open');
 
-    
+
 }
 
 function search(nameKey, myArray){
