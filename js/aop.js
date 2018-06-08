@@ -117,14 +117,6 @@ var searchDomain = [
 
 function initalLoad(){
 
-  /*var scroll_pos = 0;
-  var scroll_time;*/
-/*
-  $('.collapsible').collapsible({
-    accordion:true
-  });*/
-
-
   $('.button-collapse').sideNav({
     draggable:true,
     edge:'left'
@@ -133,24 +125,6 @@ function initalLoad(){
   $(".drag-target").on("swipeleft", function () {
     $("#sidenav-overlay").trigger("click");
   });
-
-
-/*  $(window).scroll(function() {
-    clearTimeout(scroll_time);
-    var current_scroll = $(window).scrollTop();
-
-    if(current_scroll >= $('#topNav').outerHeight()){
-      if(current_scroll <= scroll_pos) {
-        $('#topNav').removeClass('hidden');
-      }
-      else{
-        $('#topNav').addClass('hidden');
-      }
-    }
-    scroll_time = setTimeout(function() {
-      scroll_pos = $(window).scrollTop();
-    },100);
-  });*/
 }
 
 function closeSidenav()
@@ -238,6 +212,9 @@ function loadCalculatorModal(){
     $("#calc_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
     $("#calcLabel").css('color','#0EABDA');
+    //$("#calcsvg").attr("fill","#0EABDA");
+    $(".calculator").css("fill", "#0EABDA");
+    //$("#calcsvg").css({fill: #0eABDA});
     //$("#calcsvg").css('color','#0EABDA');
     //$("#calcsvg").css({ fill: "#ff0000" });
     //$('#calcsvg').css({fill: defaultColor});
@@ -275,127 +252,7 @@ function loadSearchModal(){
     });
     $('#search_modal').modal('open');
 
-    $(document).ready(function(){
-      $('input.autocomplete').autocomplete({
-        data: {
-          "AA" : null,
-          "ABSS" : null,
-          "ABW" : null,
-          "ACF" : null,
-          "AFI" : null,
-          "AFMAN" : null,
-          "AFPC" : null,
-          "AFPD" : null,
-          "AFRIMS" : null,
-          "AFSAS" : null,
-          "AFSOC" : null,
-          "AMOC" : null,
-          "AO" : null,
-          "AOC" : null,
-          "AOR" : null,
-          "CER" : null,
-          "CoF" : null,
-          "CPI" : null,
-          "DBR" : null,
-          "DLA" : null,
-          "DMAIC" : null,
-          "DMAWG" : null,
-          "DoD" : null,
-          "DOTmLPF-P" : null,
-          "DP" : null,
-          "FDB" : null,
-          "FM" : null,
-          "FRIP" : null,
-          "GMT" : null,
-          "GPC" : null,
-          "IA" : null,
-          "ICE" : null,
-          "IM" : null,
-          "IMS" : null,
-          "IMSC" : null,
-          "IPV" : null,
-          "JA" : null,
-          "LAIRMCM" : null,
-          "LGS" : null,
-          "LRIP" : null,
-          "LRS" : null,
-          "LRU" : null,
-          "MAPO" : null,
-          "MDS" : null,
-          "METL" : null,
-          "METs" : null,
-          "MGA" : null,
-          "MIPR" : null,
-          "MLG" : null,
-          "MORD" : null,
-          "NAF" : null,
-          "OC-ALC" : null,
-          "OO-ALC/OBP" : null,
-          "OFPS" : null,
-          "OMS" : null,
-          "OO-ALC" : null,
-          "ORB" : null,
-          "OPR" : null,
-          "OSHA" : null,
-          "PCS" : null,
-          "PDM" : null,
-          "PM" : null,
-          "PPA-HQ" : null,
-          "PPPO" : null,
-          "PPSO" : null,
-          "QA" : null,
-          "RCA" : null,
-          "RDS" : null,
-          "RIE" : null,
-          "SIO" : null,
-          "SME" : null,
-          "SPO" : null,
-          "ToC" : null,
-          "TSP" : null,
-          "UDLM" : null,
-          "USR" : null,
-          "VPP" : null,
-          "WCD" : null,
-          "WIP" : null,
-          "WR-ALC" : null,
-
-          "Art of the Possible (AoP)" : null,
-          "AFTO-202" : null,
-          "Andon" : null,
-          "Comfortable in Red" : null,
-          "Constraint" : null,
-          "Critical Path" : null,
-          "Flowtime" : null,
-          "Implied Tasks" : null,
-          "Manloading" : null,
-          "Maturity Matrix" : null,
-          "Process Machine" : null,
-          "Pull System" : null,
-          "Push System" : null,
-          "Queue" : null,
-          "Radiator Chart" : null,
-          "Rapid Improvment Events (RIE)" : null,
-          "Road To..." : null,
-          "Root Cause Analysis (RCA)" : null,
-          "Specified Tasks" : null,
-          "Standard Work" : null,
-          "Tactical Management" : null,
-          "Takt Time" : null,
-          "Theory of Constraints (ToC)" : null,
-          "Throughput" : null,
-          "Urgency Tools" : null,
-          "Value Stream Analysis (VSA)" : null,
-          "Value Stream Map (VSM)" : null,
-          "Visual Managment" : null,
-          "Wall Walk" : null,
-        },
-        onAutocomplete: function(txt, val, val) {
-          $("#search_title").html(txt);
-          $("#search_result" ).html( search(txt, searchDomain) );
-        },
-        limit: 20,
-      });
-    });
+    
 }
 
 function search(nameKey, myArray){
@@ -464,8 +321,7 @@ function clearColor(){
   var defaultColor= "#424242"
   $("#calcLabel").css('color',defaultColor);
   $('#calcsvg').css({fill: defaultColor});
-  //$("#calcsvg").css({ fill: "#ff0000" });
-
+  $(".calculator").css("fill", "#424242");
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','');
   $('body').css('background-color', '#e0e0e0');
