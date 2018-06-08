@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="col s12">
 			<ul class="tabs">
-				<li class="tab col s3"><a id="acronym" class="active" href="#acronyms">Acronyms</a></li>
-				<li class="tab col s3"><a id="glossary" style="display: block !important;";href="#glossary">Glossary</a></li>
+				<li class="tab col s3"><a id="acronymTab" class="active" href="#acronyms">Acronyms</a></li>
+				<li class="tab col s3"><a id="glossaryTab" href="#glossary"  >Glossary</a></li>
 			</ul>
 		</div>
 		<div id="acronyms" class="col s12">
@@ -318,7 +318,7 @@
 			{
 				if (area === "gloss")
 				{
-					if("#glossary") $("#glossary").click();
+					if("#glossaryTab") $("#glossaryTab").click();
 				}
 
 				var $this = $(this),
@@ -334,7 +334,7 @@
 				if ($focusElement) $($focusElement).focus();
 				if ($focusElement) $($focusElement).click();
 
-				firstLetter = 'undefined';
+				firstLetter = undefined;
 			}
 	});
 
