@@ -78,7 +78,7 @@ var carSim = function(sketch) {
     lane3X = 320;
 
     questionText1 = 'Use the calculator below to \ncalculate WIP, given a \nthroughput of 4 \nand a flowtime of 7';
-    questionText2 = 'It takes a single car 8 seconds \nto drive through the gate \nand cars arrive every 1 second. \nHow many gates need \nto be open inorder for atleast \n15 cars through in 30 seconds?'
+    questionText2 = 'If a single gate allows 7 cars \nthrough in 30 seconds how many \ngates are needed to let atleast \n17 cars through in 30 seconds?';
 
 
     popup = new Popup(sketch, proFontWindows, questionText1, false, false, true, 0, 0, 2);
@@ -173,7 +173,7 @@ var carSim = function(sketch) {
       clearInterval(carInter);
       counter = 30;
 
-      if(carsThroughCt < 15)
+      if(carsThroughCt < 17)
       {
         popup.setParams("On No! It Looks Like Only " + carsThroughCt +" made it.  \n\nTry again!", false, false, true);
         popup.plyBtnSprite.visible = true;
