@@ -222,13 +222,13 @@ function loadCalculatorModal(){
 
 
     $(document).ready(function(){
-      $('.modal').modal();
+      $('#modal1').modal();
     });
 
-    $('.modal').modal({
+    $('#modal1').modal({
       dismissible:false
     });
-    $('.modal').modal('open');
+    $('#modal1').modal('open');
 
   }
 
