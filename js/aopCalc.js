@@ -58,7 +58,7 @@ function setCalcHTML() {
 }
 
 function calcResult() {
-  $("#val1").text($(".inpt_val1").val());
+  $("#val1").text($("#test").val());
   $("#val2").text($("#inpt_val2").val());
   $("#result").text(calcObj.calculate($(".inpt_val1").val(),$("#inpt_val2").val()));
   $("#result2").text(calcObj.calculate($(".inpt_val1").val(),$("#inpt_val2").val()));
