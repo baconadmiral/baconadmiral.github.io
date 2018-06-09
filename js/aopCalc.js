@@ -16,7 +16,7 @@
 
  calcObj = wip;
 
- /*function pageLoad() {
+ function pageLoad() {
  }
 
  function setFocus() {
@@ -50,9 +50,9 @@ function setCalcHTML() {
  $("#eq_val1").text(calcObj.lbl1);
  $("#eq_val2").text(calcObj.lbl2);
  $("#eq_opr").text(calcObj.opr);
-  $("#opr_val").text(calcObj.opr);*/
+  $("#opr_val").text(calcObj.opr);
   /* $("#lbl_ttl").text(calcObj.lbl0.toUpperCase());*/
-  /* $("#lbl_ttl").text(calcObj.lbl0);
+   $("#lbl_ttl").text(calcObj.lbl0);
     $("#app_cont").css('background-color', '#e0e0e0');
      $("#app_cont").css('height','100%');
 }
@@ -80,4 +80,4 @@ function setCalcType(cType) {
    calcObj = wip;
  }
  setCalcHTML();
-}*/
+}
