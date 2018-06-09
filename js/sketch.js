@@ -278,6 +278,12 @@ var carSim = function(sketch) {
       }
   });
 
+  sketch.reShowMessage = function()
+  {
+    popup.setParams("On No! It Looks Like Only " + carsThroughCt +" made it.  \n\nTry again!", false, false, true);
+
+  }
+
   sketch.draw = function() {
 
     sketch.background(roadBackground);
@@ -423,6 +429,8 @@ function setupQuestion2(popup)
   popup.value3Units = "Gates";
   popup.clickOpen();
 }
+
+
 
 function removeAllCars()
 {
