@@ -20,7 +20,7 @@
  }
 
  function setFocus() {
- 	$("#test").focus();
+ 	$(".inpt_val1").focus();
    $(".inpt_val1").select();
  }
 
