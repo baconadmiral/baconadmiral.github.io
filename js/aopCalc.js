@@ -26,7 +26,7 @@
 
  function clearVals() {
   $("#bob").val(0);
-  $("#inpt_val2").val(0);
+  $("#bob2").val(0);
   $("#val1").text("0");
   $("#val2").text("0");
   $("#result").text("0");
@@ -59,9 +59,9 @@ function setCalcHTML() {
 
 function calcResult() {
   $("#val1").text($("#bob").val());
-  $("#val2").text($("#inpt_val2").val());
-  $("#result").text(calcObj.calculate($("#bob").val(),$("#inpt_val2").val()));
-  $("#result2").text(calcObj.calculate($("#bob").val(),$("#inpt_val2").val()));
+  $("#val2").text($("#bob2").val());
+  $("#result").text(calcObj.calculate($("#bob").val(),$("#bob2").val()));
+  $("#result2").text(calcObj.calculate($("#bob").val(),$("#bob2").val()));
   setFocus();
 }
 
