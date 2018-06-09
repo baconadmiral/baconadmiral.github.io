@@ -25,13 +25,13 @@
  }
 
  function clearVals() {
-  $("#inpt_vall1").val(0);
-  $("#inpt_vall2").val(0);
-  $("#val1").text("0");
-  $("#val2").text("0");
-  $("#result").text("0");
-  $("#result2").text("0");
-  setFocus();
+  //$("#inpt_vall1").val(0);
+  //$("#inpt_vall2").val(0);
+  //$("#val1").text("0");
+  //$("#val2").text("0");
+  //$("#result").text("0");
+  //$("#result2").text("0");
+  //setFocus();
 }
 
 function resetChoice() {
