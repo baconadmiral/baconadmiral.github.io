@@ -25,13 +25,13 @@
  }
 
  function clearVals() {
-  //$("#inpt_vall1").val(0);
-  //$("#inpt_vall2").val(0);
-  //$("#val1").text("0");
-  //$("#val2").text("0");
-  //$("#result").text("0");
-  //$("#result2").text("0");
-  //setFocus();
+  $("#inpt_vall1").val(0);
+  $("#inpt_vall2").val(0);
+  $("#val1").text("0");
+  $("#val2").text("0");
+  $("#result").text("0");
+  $("#result2").text("0");
+  setFocus();
 }
 
 function resetChoice() {
@@ -43,18 +43,18 @@ function resetChoice() {
 }
 
 function setCalcHTML() {
- clearVals();
+/* clearVals();
  $("#lbl_val1").text(calcObj.lbl1);
  $("#lbl_val2").text(calcObj.lbl2);
  $("#eq_result").text(calcObj.lbl0);
  $("#eq_val1").text(calcObj.lbl1);
  $("#eq_val2").text(calcObj.lbl2);
  $("#eq_opr").text(calcObj.opr);
-  $("#opr_val").text(calcObj.opr);
+  $("#opr_val").text(calcObj.opr);*/
   /* $("#lbl_ttl").text(calcObj.lbl0.toUpperCase());*/
-   $("#lbl_ttl").text(calcObj.lbl0);
+  /* $("#lbl_ttl").text(calcObj.lbl0);
     $("#app_cont").css('background-color', '#e0e0e0');
-     $("#app_cont").css('height','100%');
+     $("#app_cont").css('height','100%');*/
 }
 
 function calcResult() {
