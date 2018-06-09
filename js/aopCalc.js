@@ -21,7 +21,7 @@
 
  function setFocus() {
  	$("#test").focus();
-   $(".inpt_val1").select();
+   $("#inpt_val1").select();
  }
 
  function clearVals() {
