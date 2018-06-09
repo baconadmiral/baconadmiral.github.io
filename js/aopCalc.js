@@ -3,30 +3,30 @@
  flowtime_txt = "Flowtime";
  opr1 = " X ";
  opr2 = " / ";
- 
+
  wip = {"lbl0":wip_txt,"lbl1":thruput_txt,"lbl2":flowtime_txt,"opr":opr1};
  thruput = {"lbl0":thruput_txt,"lbl1":wip_txt,"lbl2":flowtime_txt,"opr":opr2};
  flowtime = {"lbl0":flowtime_txt,"lbl1":wip_txt,"lbl2":thruput_txt,"opr":opr2};
- 
+
  calc1 = function (v1,v2) {return v1 * v2};
  calc2 = function (v1,v2) {if(v2==0) {return 0} else {return v1 / v2}};
  wip.calculate = calc1;
  thruput.calculate = calc2;
  flowtime.calculate = calc2;
- 
+
  calcObj = wip;
- 
+
  function pageLoad() {
  }
- 
+
  function setFocus() {
- 	$("#inpt_val1").focus();
-   $("#inpt_val1").select();
+ 	$("#inpt_vall1").focus();
+   $("#inpt_vall1").select();
  }
- 
+
  function clearVals() {
-  $("#inpt_val1").val(0);
-  $("#inpt_val2").val(0);
+  $("#inpt_vall1").val(0);
+  $("#inpt_vall2").val(0);
   $("#val1").text("0");
   $("#val2").text("0");
   $("#result").text("0");
@@ -36,8 +36,8 @@
 
 function resetChoice() {
   clearVals();
-  $("#value_choice").removeClass("hidden_toggle");  
-  $("#calc_sect").addClass("hidden_toggle");  
+  $("#value_choice").removeClass("hidden_toggle");
+  $("#calc_sect").addClass("hidden_toggle");
   $("#calc_ttl").addClass("hidden_toggle");
 
 }
@@ -60,14 +60,14 @@ function setCalcHTML() {
 function calcResult() {
   $("#val1").text($("#inpt_val1").val());
   $("#val2").text($("#inpt_val2").val());
-  $("#result").text(calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val()));
-  $("#result2").text(calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val()));
+  $("#result").text(calcObj.calculate($("#inpt_vall1").val(),$("#inpt_vall2").val()));
+  $("#result2").text(calcObj.calculate($("#inpt_vall1").val(),$("#inpt_vall2").val()));
   setFocus();
 }
 
 function setCalcType(cType) {
-  $("#calc_sect").removeClass("hidden_toggle");  
-  $("#value_choice").addClass("hidden_toggle"); 
+  $("#calc_sect").removeClass("hidden_toggle");
+  $("#value_choice").addClass("hidden_toggle");
   $("#calc_ttl").removeClass("hidden_toggle");
   switch (cType) {
    case 1:
@@ -75,10 +75,9 @@ function setCalcType(cType) {
    break;
    case 2:
    calcObj = flowtime;
-   break;	   
+   break;
    case 0:
    calcObj = wip;
  }
- setCalcHTML(); 
-}  
-
+ setCalcHTML();
+}
