@@ -20,12 +20,12 @@
  }
 
  function setFocus() {
- 	$("#inpt_val1").focus();
-   $("#inpt_val1").select();
+ 	$(".inpt_val1").focus();
+   $(".inpt_val1").select();
  }
 
  function clearVals() {
-  $("#inpt_val1").val(0);
+  $(".inpt_val1").val(0);
   $("#inpt_val2").val(0);
   $("#val1").text("0");
   $("#val2").text("0");
@@ -58,10 +58,10 @@ function setCalcHTML() {
 }
 
 function calcResult() {
-  $("#val1").text($("#inpt_val1").val());
+  $("#val1").text($(".inpt_val1").val());
   $("#val2").text($("#inpt_val2").val());
-  $("#result").text(calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val()));
-  $("#result2").text(calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val()));
+  $("#result").text(calcObj.calculate($(".inpt_val1").val(),$("#inpt_val2").val()));
+  $("#result2").text(calcObj.calculate($(".inpt_val1").val(),$("#inpt_val2").val()));
   setFocus();
 }
 
