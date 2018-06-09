@@ -25,7 +25,7 @@
  }
 
  function clearVals() {
-  $(".inpt_val1").val(0);
+  $("#test").val(0);
   $("#inpt_val2").val(0);
   $("#val1").text("0");
   $("#val2").text("0");
