@@ -318,14 +318,14 @@ function loadAboutUs(){
 
 
 function clearColor(){
-  var defaultColor= "#424242"
+  /*var defaultColor= "#424242"
   $("#calcLabel").css('color',defaultColor);
   $('#calcsvg').css({fill: defaultColor});
   $(".calculator").css("fill", "#424242");
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','');
   $('body').css('background-color', '#e0e0e0');
-  $("#app_cont").css('filter', '');
+  $("#app_cont").css('filter', '');*/
 
 }
 
