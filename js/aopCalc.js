@@ -15,7 +15,7 @@
  flowtime.calculate = calc2;
 
  calcObj = wip;
-/*
+
  function pageLoad() {
  }
 
@@ -50,9 +50,9 @@ function setCalcHTML() {
  $("#eq_val1").text(calcObj.lbl1);
  $("#eq_val2").text(calcObj.lbl2);
  $("#eq_opr").text(calcObj.opr);
-  $("#opr_val").text(calcObj.opr);*/
+  $("#opr_val").text(calcObj.opr);
   /* $("#lbl_ttl").text(calcObj.lbl0.toUpperCase());*/
-/*   $("#lbl_ttl").text(calcObj.lbl0);
+   $("#lbl_ttl").text(calcObj.lbl0);
     $("#app_cont").css('background-color', '#e0e0e0');
      $("#app_cont").css('height','100%');
 }
@@ -64,7 +64,7 @@ function calcResult() {
   $("#result2").text(calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val()));
   setFocus();
 }
-*/
+
 function setCalcType(cType) {
   $("#calc_sect").removeClass("hidden_toggle");
   $("#value_choice").addClass("hidden_toggle");
