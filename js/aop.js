@@ -327,10 +327,6 @@ function clearColor(){
   $('body').css('background-color', '#e0e0e0');
   $("#app_cont").css('filter', '');
 
-  if(typeof car_S != 'undefined')
-  {
-    car_S.reShowMessage();
-  }
 }
 
 function closeGame() {
