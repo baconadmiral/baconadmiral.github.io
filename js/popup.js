@@ -26,6 +26,8 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
   this.useValue2 = showValue2;
   this.useValue3 = showValue3;
 
+
+
   this.height = 300;
   this.width = 300;
   this.popupVisible = true;

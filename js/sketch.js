@@ -56,6 +56,7 @@ var carSim = function(sketch) {
 
   let proFontWindows;
   let rotateMessage = "Please Rotate Screen \nto Portrait Mode"
+
   let prevQuestionText = "";
   let prevShowValue1 = false;
   let prevShowValue2 = false;
@@ -243,6 +244,14 @@ var carSim = function(sketch) {
       }
       else
       {
+        if(prevQuestionText === "")
+        {
+          prevQuestionText = popup.questionText;
+          prevShowValue1 = popup.useValue1;
+          prevShowValue2 = popup.useValue2;
+          prevShowValue3 = popup.useValue3;
+        }
+
         if(window.outerWidth > window.outerHeight)
         {
           //  popup.yLoc = 100;
