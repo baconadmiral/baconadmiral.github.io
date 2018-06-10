@@ -64,7 +64,7 @@ function calcResult() {
   $("#result2").text(calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val()));
   setFocus();
 }
-
+*/
 function setCalcType(cType) {
   $("#calc_sect").removeClass("hidden_toggle");
   $("#value_choice").addClass("hidden_toggle");
@@ -80,4 +80,4 @@ function setCalcType(cType) {
    calcObj = wip;
  }
  setCalcHTML();
-}*/
+}
