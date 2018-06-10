@@ -1,4 +1,4 @@
- /*wip_txt = "WIP";
+ wip_txt = "WIP";
  thruput_txt = "Throughput";
  flowtime_txt = "Flowtime";
  opr1 = " X ";
@@ -15,7 +15,7 @@
  flowtime.calculate = calc2;
 
  calcObj = wip;
-
+/*
  function pageLoad() {
  }
 
