@@ -3,27 +3,27 @@
  flowtime_txt = "Flowtime";
  opr1 = " X ";
  opr2 = " / ";
-
+ 
  wip = {"lbl0":wip_txt,"lbl1":thruput_txt,"lbl2":flowtime_txt,"opr":opr1};
  thruput = {"lbl0":thruput_txt,"lbl1":wip_txt,"lbl2":flowtime_txt,"opr":opr2};
  flowtime = {"lbl0":flowtime_txt,"lbl1":wip_txt,"lbl2":thruput_txt,"opr":opr2};
-
+ 
  calc1 = function (v1,v2) {return v1 * v2};
  calc2 = function (v1,v2) {if(v2==0) {return 0} else {return v1 / v2}};
  wip.calculate = calc1;
  thruput.calculate = calc2;
  flowtime.calculate = calc2;
-
+ 
  calcObj = wip;
-
+ 
  function pageLoad() {
  }
-
+ 
  function setFocus() {
- 	$("#input_val1").focus();
+ 	$("#inpt_val1").focus();
    $("#inpt_val1").select();
  }
-
+ 
  function clearVals() {
   $("#inpt_val1").val(0);
   $("#inpt_val2").val(0);
@@ -36,8 +36,8 @@
 
 function resetChoice() {
   clearVals();
-  $("#value_choice").removeClass("hidden_toggle");
-  $("#calc_sect").addClass("hidden_toggle");
+  $("#value_choice").removeClass("hidden_toggle");  
+  $("#calc_sect").addClass("hidden_toggle");  
   $("#calc_ttl").addClass("hidden_toggle");
 
 }
@@ -66,8 +66,8 @@ function calcResult() {
 }
 
 function setCalcType(cType) {
-  $("#calc_sect").removeClass("hidden_toggle");
-  $("#value_choice").addClass("hidden_toggle");
+  $("#calc_sect").removeClass("hidden_toggle");  
+  $("#value_choice").addClass("hidden_toggle"); 
   $("#calc_ttl").removeClass("hidden_toggle");
   switch (cType) {
    case 1:
@@ -75,9 +75,10 @@ function setCalcType(cType) {
    break;
    case 2:
    calcObj = flowtime;
-   break;
+   break;	   
    case 0:
    calcObj = wip;
  }
- setCalcHTML();
-}
+ setCalcHTML(); 
+}  
+

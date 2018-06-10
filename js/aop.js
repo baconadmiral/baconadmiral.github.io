@@ -209,7 +209,7 @@ function loadCalculatorModal(){
   var defaultColor= "#424242";
   var pageTitle = $("#pageTitle").text();
   if(pageTitle !== "Little's Law Calculator"){
-    $("#calc_content").load("content/calculator.html");
+    $("#modal_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
     $("#calcLabel").css('color','#0EABDA');
     //$("#calcsvg").attr("fill","#0EABDA");
@@ -237,20 +237,57 @@ function loadCalculatorModal(){
 
 function loadSearchModal(){
 
-    $("#search_content").load("content/search.html");
+    $("#modal_content").load("content/search.html");
     $("#searchContainer").css('padding-top','0px');
     //$("#calcLabel").css('color','#0EABDA');
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
 
 
     $(document).ready(function(){
-      $('#search_modal').modal();
+      $('#modal1').modal();
     });
 
-    $('#search_modal').modal({
+    $('#modal1').modal({
       dismissible:false
     });
-    $('#search_modal').modal('open');
+    $('#modal1').modal('open');
+
+
+}
+
+function loadEmailModal(){
+
+    $("#modal_content").load("content/email.html");
+    //$("#calcLabel").css('color','#0EABDA');
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+
+    $(document).ready(function(){
+      $('#modal1').modal();
+    });
+
+    $('#modal1').modal({
+      dismissible:false
+    });
+    $('#modal1').modal('open');
+
+
+}
+
+function loadNotesModal(){
+
+    $("#modal_content").load("content/notes.html");
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+
+    $(document).ready(function(){
+      $('#modal1').modal();
+    });
+
+    $('#modal1').modal({
+      dismissible:false
+    });
+    $('#modal1').modal('open');
 
 
 }
@@ -363,7 +400,7 @@ function loadHandbook(){
 }
 
 function loadAcronyms(){
-  $('#search_modal').modal('close');
+  $('#modal1').modal('close');
   clearColor();
   closeGame();
 
