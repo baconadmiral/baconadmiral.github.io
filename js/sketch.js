@@ -432,7 +432,7 @@ function setupQuestion2(popup)
   popup.setParams(questionText2, false, false, true);
   popup.value3Min = 0;
   popup.value3 = 1;
-  popup.value3Max = 5;
+  popup.value3Max = 4;
   popup.okBtnSprite.visible = false;
   popup.plyBtnSprite.visible = true;
   popup.value3Units = "Gates";
