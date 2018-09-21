@@ -1,5 +1,6 @@
 var convSim = function(sketch) {
 
+  let sliderMax = 10;
   var tSlider, fSlider;
   let can;
   this.widgetList = [];
@@ -16,10 +17,10 @@ var convSim = function(sketch) {
 
     sketch.textSize(12);
 
-    tSlider = sketch.createSlider(1, 10, 5);
+    tSlider = sketch.createSlider(50, 100, 75);
     tSlider.position(sketch.width/8, sketch.height/4);
     tSlider.size(sketch.width/2);
-    fSlider = sketch.createSlider(1, 10, 5);
+    fSlider = sketch.createSlider(1, sliderMax, 5);
     fSlider.position(sketch.width/8, sketch.height/4 + 60);
     fSlider.size(sketch.width/2);
 
@@ -29,7 +30,7 @@ var convSim = function(sketch) {
   sketch.draw = function() {
     sketch.background(this.bgImg);
 
-    sketch.text("Throughput(T): " + tSlider.value(), tSlider.x - 20, 27);
+    sketch.text("Throughput(T): " + tSlider.value() + " per hr", tSlider.x - 20, 27);
     sketch.text("Flowtime(F):   " + fSlider.value(), fSlider.x - 20, 58);
 
     sketch.text("Littles Law: T * F = WIP", tSlider.x + 125, 20 );
@@ -44,9 +45,9 @@ var convSim = function(sketch) {
       this.conveyer4  = new ConveyerBelt(sketch, (sketch.width/4) * 3);
     }
 
+    let arrivalRate = 160 - tSlider.value();
 
-
-    if(sketch.frameCount % 100 == 0)
+    if(sketch.frameCount % arrivalRate == 0)
     {
       //Add widget
       this.widgetList.push(new Widget(sketch));
@@ -54,6 +55,7 @@ var convSim = function(sketch) {
 
     if(typeof this.widgetList != 'undefined')
     {
+
       this.conveyer1.update();
       this.conveyer2.update();
       this.conveyer3.update();
@@ -62,7 +64,10 @@ var convSim = function(sketch) {
 
       for(let i = 0; i < this.widgetList.length; i ++)
       {
-        this.widgetList[i].update();
+
+        let velocity = 1;
+
+        this.widgetList[i].update(velocity);
 
       }
     }

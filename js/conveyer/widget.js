@@ -1,18 +1,16 @@
 function Widget(sketch)
 {
-  this.velocity = 1;
-
   this.crate = sketch.loadImage("images/game/conveyerImgs/crate.svg");
   this.jet = sketch.loadImage("images/game/conveyerImgs/f16sprite.png")
 
   this.posX = 0;
   this.posY = sketch.height/2 + sketch.height/5 - 20;
 
-  this.update = function()
+  this.update = function(velocity)
   {
     if(this.posX < sketch.width)
     {
-      this.posX = this.posX + this.velocity;
+      this.posX = this.posX + velocity;
 
       if(this.posX < sketch.width/2)
       {
