@@ -40,7 +40,10 @@
 <body>
   <nav id="topNav" class = "fluid collapse-large">
     <div class="nav-wrapper z-depth-2" >
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i><img src="css/svg/menu-button.svg" height="30px"
+        width="30px" style="vertical-align: middle">
+
+      </i></a>
       <a href="#!" class="brand-logo left " >
         <span id="pageTitle"></span>
       </a>
@@ -48,7 +51,7 @@
         <a class="waves-effect" href="javaScript:(loadSearchModal())">
           <table class="footerTable">
             <tr>
-              <td class="center-align"><i class="small material-icons footerIcons" style="color: white;">search</i>
+              <td class="center-align"><i class="small" style="color: white;"><img src="css/svg/search.svg" height="24px" width="24px">
               </td>
             </tr>
             <tr>
@@ -56,14 +59,15 @@
             </tr>
           </table>
         </a>
-        </div>
+      </div>
       <ul class="right hide-on-med-and-down">
         <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
         <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
-         <li><a class="waves-effect" href="javascript:(loadTraining())">Training</a></li>
+        <li><a class="waves-effect" href="javascript:(loadTraining())">Training</a></li>
         <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
         <li><a class="waves-effect" href="javascript:(loadGame())">Activity</a></li>
-         <li><a class="waves-effect" href="javascript:(loadNewsletter())">Archived Newsletter</a></li>
+        <li><a class="waves-effect" href="javascript:(loadGame2())">Activity2</a></li>
+        <li><a class="waves-effect" href="javascript:(loadNewsletter())">Archived Newsletter</a></li>
         <li><a class="waves-effect" href="javaScript:(loadCalculator())">Calculator</a></li>
       </ul>
     </div>
@@ -75,13 +79,20 @@
       <img class="center-align" src="images/aopAppIcon.png" style="padding:20px 20px 0px 20px; max-width:60%">
       <h5 style="padding-bottom:20px;">Art of the Possible</h5>
     </div>
-    <li><a class="waves-effect" href="javascript:(loadHome())"><i class="small material-icons" style="color:#0077A3">home</i>Home</a></li>
+    <li><a class="waves-effect" href="javascript:(loadHome())"><i class="small"><img src="css/svg/home-button.svg" height="24px" width="24px"></i>Home</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadAboutUs())"><i class="small material-icons" style="color:#0077A3">help</i>About us</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadAboutUs())"><i class="small">
+      <img src="css/svg/help.svg" height="24px" width="24px">
+    </i>About us</a></li>
     <li><a class="waves-effect sidenav-close" href="javascript:(loadTraining())" ><i class="small"><img src="css/svg/gearHead.svg"></i>Training</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadResources())" ><i class="small material-icons" style="color:#0077A3">library_books</i>Resources</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadResources())" ><i class="small" >
+      <img src="css/svg/photo-library.svg" height="24px" width="24px">
+    </i>Resources</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame())"><i class="small material-icons" style="color:#0077A3">grade</i>Activity</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
+    </i>Activity</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame2())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
+    </i>Activity2</a></li>
     <li><a class="waves-effect sidenav-close" href="javascript:(loadNewsletter())"> <i class="small"><img src="css/svg/folded-newspaper-small.svg"></i> Archived Newsletter</a></li>
   </ul>
 
@@ -106,17 +117,22 @@
 </div>-->
 
 
-  <div id="modal_cont">
-    <div id="modal1"  class="modal" style="box-shadow: none;background-color:transparent;">
-      <div class="modal-header" style="text-align: right;">
-        <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())" style="color:#fff;padding-top:2px;">
-          <i class="small material-icons" style="border:3px solid #fff; border-radius:20px;">close</i>
-        </a>
-      </div>
-      <div id="modal_content" class="modal-content calcModal"
-      style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
-    </div>
+<div id="modal_cont">
+  <div id="modal1"  class="modal" style="box-shadow: none;background-color:transparent;">
+    <div class="modal-header" style="text-align: right;">
+      <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())"
+      style="    border: 3px solid white;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      padding: 5px;">
+      <img src="css/svg/close-button.svg" height="24px" width="24px">
+    </a>
   </div>
+  <div id="modal_content" class="modal-content calcModal"
+  style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
+</div>
+</div>
 </div>
 
 <footer id="mobileFooter" class="page-footer fluid">
@@ -143,59 +159,75 @@
             <a class="waves-effect" href="javaScript:(loadNotesModal())" >
               <table class="footerTable">
                 <tr>
-                  <td class="center-align"><i id="notesIcon" class="small material-icons footerIcons">event_note</i>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="center-align">Notes</td>
-                </tr>
-              </table></a>
-            </div>
-            <div class="col m4 s4 center-align">
-              <a class="waves-effect" href="javaScript:(loadEmailModal())" >
-                <table class="footerTable">
-                  <tr>
-                    <td class="center-align"><i class="small material-icons footerIcons">mail_outline</i>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="center-align">Email</td>
-                  </tr>
-                </table>  </a>
-              </div>
-
-              </div>
-            </div>
-
-
+                  <td class="center-align"><i id="notesIcon" class="footerIcons">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path class="eventNote"  d="M17 10H7v2h10v-2zm2-7h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-5H7v2h7v-2z" fill="#424242"/>
+                    </svg>
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td id="notesLabel" class="center-align">Notes</td>
+              </tr>
+            </table></a>
           </div>
+          <div class="col m4 s4 center-align">
+            <a class="waves-effect" href="javaScript:(loadEmailModal())" >
+              <table class="footerTable">
+                <tr>
+                  <td class="center-align"><i class="small material-icons footerIcons">
+                    <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path fill="none" d="M0 0h24v24H0z"/>
+                      <path class="mailIcon" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z" fill="#424242"/>
+                    </svg>
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td class="center-align" id="mailLabel">Email</td>
+              </tr>
+            </table>  </a>
+          </div>
+
         </div>
-      </footer>
+      </div>
+
+
+    </div>
+  </div>
+</footer>
 
 
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-      <script src="content/LittlesLawAnimation.js"></script>
-      <script src="js/aop.js"></script>
-      <script src="js/aopCalc.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-      <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
-      <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
-      <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
-      <script language="javascript" type="text/javascript" src="js/sketch.js"></script>
-      <script language="javascript" type="text/javascript" src="js/car.js"></script>
-      <script language="javascript" type="text/javascript" src="js/divider.js"></script>
-      <script language="javascript" type="text/javascript" src="js/lane.js"></script>
-      <script language="javascript" type="text/javascript" src="js/billboard.js"></script>
-      <script language="javascript" type="text/javascript" src="js/popup.js"></script>
-      <script type="text/javascript">
-      initalLoad();
-      loadHome();
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="content/LittlesLawAnimation.js"></script>
+<script src="js/aop.js"></script>
+<script src="js/aopCalc.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
+<script language="javascript" type="text/javascript" src="js/sketch.js"></script>
+<script language="javascript" type="text/javascript" src="js/car.js"></script>
+<script language="javascript" type="text/javascript" src="js/divider.js"></script>
+<script language="javascript" type="text/javascript" src="js/lane.js"></script>
+<script language="javascript" type="text/javascript" src="js/billboard.js"></script>
+<script language="javascript" type="text/javascript" src="js/popup.js"></script>
+
+<script language="javascript" type="text/javascript" src="js/conveyer/sketch.js"></script>
+<script language="javascript" type="text/javascript" src="js/conveyer/widget.js"></script>
+<script language="javascript" type="text/javascript" src="js/conveyer/conveyerBelt.js"></script>
+
+<script type="text/javascript">
+  initalLoad();
+  loadHome();
 
 
-      </script>
+</script>
 
-    </body>
-    </html>
+</body>
+</html>
