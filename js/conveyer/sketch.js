@@ -11,18 +11,43 @@ var convSim = function(sketch) {
   let proFontWindows = sketch.loadFont("../font/ProFontWindows.ttf");
   let crateTimeout = setTimeout(addWidget, defaultTPTimeSec * 1000);
 
+  let sliderPosX;
+  let sliderPosY;
+
+  let ftSliderPosX;
+  let ftSliderPosY;
+
+  let xFactor;
+  let yFactor;
+
+  let spacing;
+  let textSpacing;
+
   sketch.setup = function() {
     sketch.frameRate(30);
     can = sketch.createCanvas(400, 500);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
 
+    xFactor = canvasElt.clientWidth/sketch.width;
+    yFactor = canvasElt.clientHeight/sketch.height;
+
+    console.log(canvasElt.clientHeight);
+
+    sliderPosX  = (sketch.width/8) * xFactor;
+    sliderPosY = (sketch.height/6) * yFactor;
+
+    ftSliderPosX = (sketch.width/2.5) * xFactor;
+    ftSliderPosY  = (sketch.height/2) * yFactor;
+
+    spacing = (sketch.height/18) * yFactor;
+
     tSlider = sketch.createSlider(0.1, 1, defaultTPTimeSec, 0.1);
-    tSlider.position(sketch.width/8, sketch.height/4);
-    tSlider.size(sketch.width/2);
+    tSlider.position(sliderPosX, sliderPosY);
+    tSlider.size(sliderPosX * 3);
     fSlider = sketch.createSlider(3, sliderMax, 5, 0.1);
-    fSlider.position(sketch.width/8, sketch.height/4 + 60);
-    fSlider.size(sketch.width/2);
+    fSlider.position(ftSliderPosX, ftSliderPosY + spacing);
+    fSlider.size(sliderPosX * 3);
 
 
   }
@@ -33,11 +58,11 @@ var convSim = function(sketch) {
     sketch.textFont(proFontWindows);
     sketch.textSize(12);
 
-    sketch.text("Throughput(T): " + tSlider.value() + " per sec", tSlider.x - 20, 27);
-    sketch.text("Flowtime(F):   " + fSlider.value() + " sec", fSlider.x - 20, 58);
 
-    sketch.text("Littles Law: T * F = WIP", tSlider.x + 125, 100 );
-    sketch.text(tSlider.value() + " * " + fSlider.value() + " = " + (tSlider.value() * fSlider.value()).toFixed(2), tSlider.x + 200, 120);
+    sketch.text("Throughput(T): " + tSlider.value() + " per sec", sliderPosX / xFactor, (sliderPosY / yFactor) - (spacing/yFactor) - 5);
+
+    sketch.text("Littles Law: T * F = WIP", sliderPosX + 125, 100 );
+    sketch.text(tSlider.value() + " * " + fSlider.value() + " = " + (tSlider.value() * fSlider.value()).toFixed(2), sliderPosX + 200, 120);
 
 
     if(this.conveyer1 == null && typeof sketch.width != 'undefined')
@@ -72,6 +97,13 @@ var convSim = function(sketch) {
     sketch.textSize(20);
     sketch.text("WIP: ", sketch.width/2 - 25, sketch.height/2 + sketch.height/5+10)
     sketch.text((tSlider.value() * fSlider.value()).toFixed(2), sketch.width/2 - 25, sketch.height/2 + sketch.height/5 + 28)
+
+    sketch.textSize(12);
+    fSlider.position((this.conveyer2.posX + 20) * xFactor, (this.conveyer2.posY + 100)  * yFactor);
+    sketch.text("Flowtime(F):   " + fSlider.value() + " sec", this.conveyer2.posX + 20, (this.conveyer2.posY + 110));
+
+    //console.log("conv 2: " +this.conveyer2.posY);
+    //console.log("yFac: " + yFactor);
 
   }
 

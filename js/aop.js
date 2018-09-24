@@ -125,6 +125,8 @@ function initalLoad(){
   $(".drag-target").on("swipeleft", function () {
     $("#sidenav-overlay").trigger("click");
   });
+
+   $("#backToResourcesButton").hide();
 }
 
 function closeSidenav()
@@ -158,7 +160,9 @@ function loadSlide(n){
   clearColor();
   closeSidenav();
   $("#pageTitle").text('AOP Slides');
-  $("#app_cont").load("/content/slideScreen.html", function()
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
+  $("#app_cont").load("content/slideScreen.html", function()
   {
     var numberList = document.getElementById("numberList");
 
@@ -178,7 +182,7 @@ function loadSlide(n){
       progressBar.appendChild(myBar);
       numberListValue.setAttribute("id", "slide" + i);
       numberListValue.setAttribute("class","imageStyle" );
-      numberListValue.setAttribute("style", "background-image: url(/images/IntermediateLevelAoP/Slide"+i+".jpg)");
+      numberListValue.setAttribute("style", "background-image: url(images/IntermediateLevelAoP/Slide"+i+".jpg)");
       pageNumber.setAttribute("id", "pageNumber");
       pageNumber.innerHTML = i + ' of ' + total;
       pageNumber.setAttribute("class", "positionNumber");
@@ -323,6 +327,8 @@ function loadResources(){
   closeSidenav();
   $("#app_cont").load("content/resources.html");
   $("#pageTitle").text("Resources");
+  $("#menuButton").show();
+  $("#backToResourcesButton").hide();
 }
 
 function loadGettingStarted(){
@@ -361,7 +367,7 @@ function loadAboutUs(){
     $(".calculator").css({fill: defaultColor});
     $(".eventNote").css({fill: defaultColor});
     $("#notesLabel").css('color',defaultColor);
-    $(".mailIcon").css({fill: defaultColor});
+     $(".mailIcon").css({fill: defaultColor});
     $("#mailLabel").css('color',defaultColor);
     $("#app_cont").css('background-color', '#e0e0e0');
     $("#app_cont").css('height','');
@@ -380,13 +386,13 @@ function closeGame() {
   }
 }
 
-function loadGame2(){
+function loadGame3(){
   closeGame();
   closeSidenav();
 
   $(function(){
     $("#app_cont").empty();
-    car_S = new p5(convSim,'app_cont');
+    car_S = new p5(cPathSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
 }
@@ -402,6 +408,16 @@ function loadGame(){
   $("#pageTitle").text("Activity");
 }
 
+function loadGame2(){
+  closeGame();
+  closeSidenav();
+   $(function(){
+    $("#app_cont").empty();
+    car_S = new p5(convSim,'app_cont');
+  });
+  $("#pageTitle").text("Activity");
+}
+
 
 function loadGuidance(){
   clearColor();
@@ -409,6 +425,8 @@ function loadGuidance(){
 
   $("#app_cont").load("content/guidance.html");
   $("#pageTitle").text("Guidance");
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
 }
 
 function loadHandbook(){
@@ -426,15 +444,18 @@ function loadAcronyms(){
 
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
 }
 
 function loadWallWalks(){
   clearColor();
   closeGame();
 
-
   $("#app_cont").load("content/wallWalks.html");
   $("#pageTitle").text("Wall Walks");
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
 }
 
 function loadTraining(){
@@ -468,78 +489,78 @@ function loadTraining(){
 
       var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
   function init() {
-  	canvas = document.getElementById("canvas");
-  	anim_container = document.getElementById("animation_container");
-  	dom_overlay_container = document.getElementById("dom_overlay_container");
-  	var comp=AdobeAn.getComposition("D8119AD668E9D44193ADA1BB18D6EFBE");
-  	var lib=comp.getLibrary();
-  	var loader = new createjs.LoadQueue(false);
-  	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
-  	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
-  	var lib=comp.getLibrary();
-  	loader.loadManifest(lib.properties.manifest);
+    canvas = document.getElementById("canvas");
+    anim_container = document.getElementById("animation_container");
+    dom_overlay_container = document.getElementById("dom_overlay_container");
+    var comp=AdobeAn.getComposition("D8119AD668E9D44193ADA1BB18D6EFBE");
+    var lib=comp.getLibrary();
+    var loader = new createjs.LoadQueue(false);
+    loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+    loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+    var lib=comp.getLibrary();
+    loader.loadManifest(lib.properties.manifest);
   }
   function handleFileLoad(evt, comp) {
-  	var images=comp.getImages();
-  	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
+    var images=comp.getImages();
+    if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
   }
   function handleComplete(evt,comp) {
-  	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
-  	var lib=comp.getLibrary();
-  	var ss=comp.getSpriteSheet();
-  	var queue = evt.target;
-  	var ssMetadata = lib.ssMetadata;
-  	for(i=0; i<ssMetadata.length; i++) {
-  		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
-  	}
-  	exportRoot = new lib.LittlesLawAnimationWholeSeq();
-  	stage = new lib.Stage(canvas);
-  	stage.enableMouseOver();
-  	//Registers the "tick" event listener.
-  	fnStartAnimation = function() {
-  		stage.addChild(exportRoot);
-  		createjs.Ticker.setFPS(lib.properties.fps);
-  		createjs.Ticker.addEventListener("tick", stage);
-  	}
-  	//Code to support hidpi screens and responsive scaling.
-  	function makeResponsive(isResp, respDim, isScale, scaleType) {
-  		var lastW, lastH, lastS=1;
-  		window.addEventListener('resize', resizeCanvas);
-  		resizeCanvas();
-  		function resizeCanvas() {
-  			var w = lib.properties.width, h = lib.properties.height;
-  			var iw = window.innerWidth, ih=window.innerHeight;
-  			var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
-  			if(isResp) {
-  				if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {
-  					sRatio = lastS;
-  				}
-  				else if(!isScale) {
-  					if(iw<w || ih<h)
-  						sRatio = Math.min(xRatio, yRatio);
-  				}
-  				else if(scaleType==1) {
-  					sRatio = Math.min(xRatio, yRatio);
-  				}
-  				else if(scaleType==2) {
-  					sRatio = Math.max(xRatio, yRatio);
-  				}
-  			}
-  			canvas.width = w*pRatio*sRatio;
-  			canvas.height = h*pRatio*sRatio;
-  			canvas.style.width = dom_overlay_container.style.width = anim_container.style.width =  w*sRatio+'px';
-  			canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = h*sRatio+'px';
-  			stage.scaleX = pRatio*sRatio;
-  			stage.scaleY = pRatio*sRatio;
-  			lastW = iw; lastH = ih; lastS = sRatio;
-  			stage.tickOnUpdate = false;
-  			stage.update();
-  			stage.tickOnUpdate = true;
-  		}
-  	}
-  	makeResponsive(true,'both',true,1);
-  	AdobeAn.compositionLoaded(lib.properties.id);
-  	fnStartAnimation();
+    //This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+    var lib=comp.getLibrary();
+    var ss=comp.getSpriteSheet();
+    var queue = evt.target;
+    var ssMetadata = lib.ssMetadata;
+    for(i=0; i<ssMetadata.length; i++) {
+      ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+    }
+    exportRoot = new lib.LittlesLawAnimationWholeSeq();
+    stage = new lib.Stage(canvas);
+    stage.enableMouseOver();
+    //Registers the "tick" event listener.
+    fnStartAnimation = function() {
+      stage.addChild(exportRoot);
+      createjs.Ticker.setFPS(lib.properties.fps);
+      createjs.Ticker.addEventListener("tick", stage);
+    }
+    //Code to support hidpi screens and responsive scaling.
+    function makeResponsive(isResp, respDim, isScale, scaleType) {
+      var lastW, lastH, lastS=1;
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      function resizeCanvas() {
+        var w = lib.properties.width, h = lib.properties.height;
+        var iw = window.innerWidth, ih=window.innerHeight;
+        var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
+        if(isResp) {
+          if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {
+            sRatio = lastS;
+          }
+          else if(!isScale) {
+            if(iw<w || ih<h)
+              sRatio = Math.min(xRatio, yRatio);
+          }
+          else if(scaleType==1) {
+            sRatio = Math.min(xRatio, yRatio);
+          }
+          else if(scaleType==2) {
+            sRatio = Math.max(xRatio, yRatio);
+          }
+        }
+        canvas.width = w*pRatio*sRatio;
+        canvas.height = h*pRatio*sRatio;
+        canvas.style.width = dom_overlay_container.style.width = anim_container.style.width =  w*sRatio+'px';
+        canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = h*sRatio+'px';
+        stage.scaleX = pRatio*sRatio;
+        stage.scaleY = pRatio*sRatio;
+        lastW = iw; lastH = ih; lastS = sRatio;
+        stage.tickOnUpdate = false;
+        stage.update();
+        stage.tickOnUpdate = true;
+      }
+    }
+    makeResponsive(true,'both',true,1);
+    AdobeAn.compositionLoaded(lib.properties.id);
+    fnStartAnimation();
   }
   });
   $("#pageTitle").text("Training");

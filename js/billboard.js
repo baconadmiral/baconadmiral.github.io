@@ -3,7 +3,7 @@ function Billboard(sketch, font)
   this.xLoc =  200;
   this.yLoc =  50;
   this.billboardSprite = sketch.createSprite(this.xLoc, this.yLoc);
-  this.billboardSprite.addImage(sketch.loadImage("../images/game/billboard.png"));
+  this.billboardSprite.addImage(sketch.loadImage("images/game/billboard.png"));
   this.billboardSprite.depth = 100;
 
   this.timer;

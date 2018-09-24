@@ -6,8 +6,8 @@ function Lane(sketch, xLoc, divider)
   this.tollBothSprite;
 
   this.tollBoothSprite = sketch.createSprite(this.xLoc-35, divider.yLoc);
-  this.tollBoothSprite.addAnimation("open", "../images/game/gate_open.png");
-  this.tollBoothSprite.addAnimation("closed", "../images/game/gate closed.png");
+  this.tollBoothSprite.addAnimation("open", "images/game/gate_open.png");
+  this.tollBoothSprite.addAnimation("closed", "images/game/gate closed.png");
   this.tollBoothSprite.changeAnimation("closed");
   this.tollBoothSprite.scale = .18;
 

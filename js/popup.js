@@ -43,32 +43,32 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
   this.popupSprite.shapeColor="DarkGray";
 
   this.okBtnSprite = sketch.createSprite( this.buttonLocX, this.buttonLocY);
-  this.okBtnSprite.addImage(sketch.loadImage("../images/game/okBtn.png"));
+  this.okBtnSprite.addImage(sketch.loadImage("images/game/okBtn.png"));
   this.okBtnSprite.depth = 200;
   this.okBtnSprite.visible = false;
 
   this.plyBtnSprite = sketch.createSprite( this.buttonLocX, this.buttonLocY);
-  this.plyBtnSprite.addImage(sketch.loadImage("../images/game/play.png"));
+  this.plyBtnSprite.addImage(sketch.loadImage("images/game/play.png"));
   this.plyBtnSprite.depth = 200;
   this.plyBtnSprite.visible = false;
 
   this.value1UpSprite = sketch.createSprite( this.val1X, this.yLoc-20, 20, 20);
-  this.value1UpSprite.addImage(sketch.loadImage("../images/game/roadChevronUp.png"));
+  this.value1UpSprite.addImage(sketch.loadImage("images/game/roadChevronUp.png"));
 
   this.value1DownSprite = sketch.createSprite( this.val1X, this.yLoc+50, 20, 20);
-  this.value1DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
+  this.value1DownSprite.addImage(sketch.loadImage("images/game/roadChevronDown.png"));
 
   this.value2UpSprite = sketch.createSprite( this.val2X, this.yLoc-20, 20, 20);
-  this.value2UpSprite.addImage(sketch.loadImage("../images/game/roadChevronUp.png"));
+  this.value2UpSprite.addImage(sketch.loadImage("images/game/roadChevronUp.png"));
 
   this.value2DownSprite = sketch.createSprite( this.val2X, this.yLoc+50, 20, 20);
-  this.value2DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
+  this.value2DownSprite.addImage(sketch.loadImage("images/game/roadChevronDown.png"));
 
   this.value3UpSprite = sketch.createSprite( this.val3X, this.yLoc-20, 20, 20);
-  this.value3UpSprite.addImage(sketch.loadImage("../images/game/roadChevronUp.png"));
+  this.value3UpSprite.addImage(sketch.loadImage("images/game/roadChevronUp.png"));
 
   this.value3DownSprite = sketch.createSprite( this.val3X, this.yLoc+50, 20, 20);
-  this.value3DownSprite.addImage(sketch.loadImage("../images/game/roadChevronDown.png"));
+  this.value3DownSprite.addImage(sketch.loadImage("images/game/roadChevronDown.png"));
 
   //this.popupGroup.addToGroup(this.popupSprite);
   //this.popupGroup.addToGroup(this.plyBtnSprite);
