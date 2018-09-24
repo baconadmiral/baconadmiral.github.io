@@ -1,6 +1,7 @@
 var cPathSim = function(sketch) {
   var gateBoxList = [];
   var defaultBoxSpacing = 90;
+  var defaultBoxSpacingWidth = 120;
   var defaultWidth = 60;
 
   sketch.setup = function() {
@@ -24,7 +25,27 @@ var cPathSim = function(sketch) {
     var washBox = new GateBox(sketch, centerBox, sandingBox.posY - defaultBoxSpacing, "Wash", 40, sandingBox);
     gateBoxList.push(washBox);
 
-    var receiveBox = new GateBox(sketch, centerBox, washBox.posY - defaultBoxSpacing, "Receive", 40, washBox);
+    var rootPathList = [];
+    rootPathList.push(washBox);
+
+    //Not critical path boxes
+    var hammeringBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, paintBox.posY - defaultBoxSpacing, "Nailing", 5, sendBox);
+    gateBoxList.push(hammeringBox);
+    var flatteningBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, hammeringBox.posY - defaultBoxSpacing, "Flattening", 5, hammeringBox);
+    gateBoxList.push(flatteningBox);
+
+    rootPathList.push(flatteningBox);
+
+    var rivetingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, sendBox.posY - defaultBoxSpacing, "Welding", 5, sendBox);
+    gateBoxList.push(rivetingBox);
+    var weldingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, rivetingBox.posY - defaultBoxSpacing, "Riveting", 5, rivetingBox);
+    gateBoxList.push(weldingBox);
+    var gluingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, weldingBox.posY - defaultBoxSpacing, "Gluing", 5, weldingBox);
+    gateBoxList.push(gluingBox);
+
+    rootPathList.push(gluingBox);
+
+    var receiveBox = new GateBox(sketch, centerBox, washBox.posY - defaultBoxSpacing, "Receive", 40, rootPathList);
     gateBoxList.push(receiveBox);
 
 
@@ -46,7 +67,7 @@ var cPathSim = function(sketch) {
     {
       if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
       {
-        gateBoxList[i].r = 100;
+        gateBoxList[i].clickSuccess();
       }
     }
   }
