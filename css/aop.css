@@ -44,6 +44,14 @@ html, body{
   max-width:100%;
   overflow-x: hidden;
 }
+
+.row{
+  margin-bottom:0px;
+}
+
+.rowBottom{
+  margin-bottom:10px;
+}
 .splashBackground{
   background: #01579b;
   background: radial-gradient(circle,#fff 10%,#01579b);
@@ -399,17 +407,17 @@ a.middle-indicator-text{
   }
 
   .modal{
-    top:5% !important;
+    top:2% !important;
     z-index:600;
     border-radius: 5px;
-    max-height:90% !important;
+    max-height:95% !important;
     /*overflow-y:hidden !important;*/
   }
 
   @media only screen and (max-width:992px)
   {
   .modal{
-    width:90%; 
+    width:95%; 
   }
   }
   @media only screen and (min-height: 569px)
@@ -433,7 +441,7 @@ a.middle-indicator-text{
 
   .gettingStartedHeader{
     width: auto !important;
-    line-height:initial !important;
+   /* line-height:initial !important;*/
     display: block !important;
     font-size:6rem !important;
     float:none !important;
@@ -490,3 +498,70 @@ a.middle-indicator-text{
 .indicator{
   display:none !important; 
 }
+
+.resultTable{
+  padding-top:5px !important;
+  text-align:center;
+}
+
+ .tooltipped{
+border:1px solid #039be5;
+border-radius:50%; 
+padding:2px 5px;  
+background-color: #039be5; 
+color:#fff; 
+font-weight:bold; 
+margin-left:2px; 
+}
+
+div.burger{
+  height:35px; 
+  width:35px; 
+  /*background-color:tan; */
+  border-radius:3px; 
+  position:relative; 
+}
+
+span.patty1{
+  background-color:#fff; 
+  height:4px; 
+  width:24px; 
+  position:absolute; 
+  top:45%; 
+  left:15%; 
+  -webkit-transition:all .5s ease; 
+}
+
+span.patty0{
+  background-color:#fff; 
+  height:4px; 
+  width:24px; 
+  position:absolute; 
+  top:20%; 
+  left:15%; 
+  -webkit-transition:all .5s ease; 
+}
+
+span.patty2{
+  background-color:#fff; 
+  height:4px; 
+  width:24px; 
+  position:absolute; 
+  top:70%; 
+  left:15%; 
+  -webkit-transition:all .5s ease; 
+}
+
+nav a.button-collapse{
+  display:inline; 
+  float:none !important; 
+  position:initial !important; 
+  z-index: 1 !important; 
+  height:56px !important; 
+  margin:0 !important; 
+}
+
+nav .button-collapse{
+
+}
+

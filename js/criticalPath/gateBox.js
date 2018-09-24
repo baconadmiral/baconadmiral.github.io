@@ -1,5 +1,6 @@
 function GateBox(sketch, posX, posY, description, flow, afterBoxList)
 {
+  this.clicked = false;
   this.posX = posX;
   this.posY = posY;
 
@@ -16,6 +17,7 @@ function GateBox(sketch, posX, posY, description, flow, afterBoxList)
 
   this.update = function()
   {
+    sketch.textSize(12);
     sketch.fill(0);
     sketch.text(this.description, this.posX + 5, this.posY + this.h/3);
     sketch.text("Flow: " + this.flow, this.posX + 5, this.posY + this.h/2 + this.h/4);
@@ -43,8 +45,19 @@ function GateBox(sketch, posX, posY, description, flow, afterBoxList)
     sketch.line(this.posX+this.w/2, this.posY+this.h, afterBox.posX+this.w/2, afterBox.posY);
   }
 
-  this.clickSuccess = function()
+  this.click = function()
   {
-    this.g = 255;
+    this.r = 204;
+    this.g = 102;
+    this.b = 0;
+    this.clicked = true;
+  }
+
+  this.unclick = function()
+  {
+    this.r = 10;
+    this.g = 10;
+    this.b = 10;
+    this.clicked = false;
   }
 }

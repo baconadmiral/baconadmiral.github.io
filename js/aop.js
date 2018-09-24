@@ -1,5 +1,5 @@
 var slideIndex = 1;
-var total = 20;
+var total = 146;
 
 var searchDomain = [
   {key: "AA", value : "Aircraft Availability", area : "acro"},
@@ -117,30 +117,43 @@ var searchDomain = [
 
 function initalLoad(){
 
-  $('.button-collapse').sideNav({
-    draggable:true,
-    edge:'left'
-  });
-
   $(".drag-target").on("swipeleft", function () {
     $("#sidenav-overlay").trigger("click");
   });
+  
+   $("#backButton").hide(); 
+    $("#menuButton").hide(); 
+   
+   loadSidenav(); 
+}
 
-   $("#backToResourcesButton").hide();
+function loadSidenav()
+{
+  /*var sideNavButton = document.getElementById("menuButton"); 
+  sideNavButton.setAttribute('data-activates', 'mobile-demo');  
+  sideNavButton.setAttribute('class', 'button-collapse');*/
+  
+    $('.button-collapse').sideNav({
+    draggable:true,
+    edge:'left'
+  });  
 }
 
 function closeSidenav()
 {
   $('.button-collapse').sideNav('hide');
+   $('.button-collapse').sideNav({
+  closeOnClick: true
+   });
 }
-
-
-
 
 function loadHome(){
   clearColor();
   closeGame();
   closeSidenav();
+  //loadSidenav(); 
+  $("#menuButton").show();
+//  $("#backButton").css('display', 'none'); 
   $("#app_cont").load("content/home.html");
   $("#pageTitle").text('AoP');
   $("#app_cont").css('background-color', '#e0e0e0');
@@ -160,8 +173,7 @@ function loadSlide(n){
   clearColor();
   closeSidenav();
   $("#pageTitle").text('AOP Slides');
-  $("#menuButton").hide();
-  $("#backToResourcesButton").show();
+  animateArrow(); 
   $("#app_cont").load("content/slideScreen.html", function()
   {
     var numberList = document.getElementById("numberList");
@@ -182,7 +194,7 @@ function loadSlide(n){
       progressBar.appendChild(myBar);
       numberListValue.setAttribute("id", "slide" + i);
       numberListValue.setAttribute("class","imageStyle" );
-      numberListValue.setAttribute("style", "background-image: url(images/IntermediateLevelAoP/Slide"+i+".jpg)");
+      numberListValue.setAttribute("style", "background-image: url(/images/IntermediateLevelAoP/Slide"+i+".jpg)");
       pageNumber.setAttribute("id", "pageNumber");
       pageNumber.innerHTML = i + ' of ' + total;
       pageNumber.setAttribute("class", "positionNumber");
@@ -327,8 +339,10 @@ function loadResources(){
   closeSidenav();
   $("#app_cont").load("content/resources.html");
   $("#pageTitle").text("Resources");
-  $("#menuButton").show();
-  $("#backToResourcesButton").hide();
+  $("#menuButton").show(); 
+  $("#backButton").hide(); 
+  //add a transform for the lines. 
+  
 }
 
 function loadGettingStarted(){
@@ -358,9 +372,7 @@ function loadAboutUs(){
   $("#pageTitle").text("About Us");
 }
 
-
-
-  function clearColor(){
+function clearColor(){
     var defaultColor= "#424242"
     $("#calcLabel").css('color',defaultColor);
     $('#calcsvg').css({fill: defaultColor});
@@ -386,17 +398,6 @@ function closeGame() {
   }
 }
 
-function loadGame3(){
-  closeGame();
-  closeSidenav();
-
-  $(function(){
-    $("#app_cont").empty();
-    car_S = new p5(cPathSim,'app_cont');
-  });
-  $("#pageTitle").text("Activity");
-}
-
 function loadGame(){
   closeGame();
   closeSidenav();
@@ -418,6 +419,17 @@ function loadGame2(){
   $("#pageTitle").text("Activity");
 }
 
+function loadGame3(){
+  closeGame();
+  closeSidenav();
+
+  $(function(){
+    $("#app_cont").empty();
+    car_S = new p5(cPathSim,'app_cont');
+  });
+  $("#pageTitle").text("Activity");
+}
+
 
 function loadGuidance(){
   clearColor();
@@ -425,8 +437,7 @@ function loadGuidance(){
 
   $("#app_cont").load("content/guidance.html");
   $("#pageTitle").text("Guidance");
-  $("#menuButton").hide();
-  $("#backToResourcesButton").show();
+  animateArrow(); 
 }
 
 function loadHandbook(){
@@ -444,20 +455,53 @@ function loadAcronyms(){
 
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
-  $("#menuButton").hide();
-  $("#backToResourcesButton").show();
+  
+  animateArrow(); 
 }
 
 function loadWallWalks(){
   clearColor();
   closeGame();
-
+  
   $("#app_cont").load("content/wallWalks.html");
   $("#pageTitle").text("Wall Walks");
-  $("#menuButton").hide();
-  $("#backToResourcesButton").show();
+
+  animateArrow(); 
 }
 
+function animateArrow()
+{
+  $("#menuButton").hide();
+    $("#backButton").show();
+ 
+  var topPatty = document.getElementById("pat1"); 
+  var bottomPatty = document.getElementById("pat3"); 
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%"; 
+  
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"; 
+  bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";   
+}
+
+function clickBackToResources()
+{ 
+  var burger1 = document.getElementById("bur1"); 
+  var burger3 = document.getElementById("bur3"); 
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";   
+  loadResources(); 
+  resetArrow(); 
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+
+}
+
+function resetArrow()
+{
+  var topPatty = document.getElementById("pat1"); 
+  var bottomPatty = document.getElementById("pat3"); 
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;"; 
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";   
+}
 function loadTraining(){
   clearColor();
   closeSidenav();
