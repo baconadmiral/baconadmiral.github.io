@@ -23,6 +23,8 @@ var convSim = function(sketch) {
   let spacing;
   let textSpacing;
 
+  let headerOffset = $("#topNav").outerHeight();
+
   sketch.setup = function() {
     sketch.frameRate(30);
     can = sketch.createCanvas(400, 500);
@@ -31,8 +33,6 @@ var convSim = function(sketch) {
 
     xFactor = canvasElt.clientWidth/sketch.width;
     yFactor = canvasElt.clientHeight/sketch.height;
-
-    console.log(canvasElt.clientHeight);
 
     sliderPosX  = (sketch.width/8) * xFactor;
     sliderPosY = (sketch.height/6) * yFactor;
@@ -99,12 +99,12 @@ var convSim = function(sketch) {
     sketch.text((tSlider.value() * fSlider.value()).toFixed(2), sketch.width/2 - 25, sketch.height/2 + sketch.height/5 + 28)
 
     sketch.textSize(12);
-    fSlider.position((this.conveyer2.posX + 20) * xFactor, (this.conveyer2.posY + 100)  * yFactor);
-    sketch.text("Flowtime(F):   " + fSlider.value() + " sec", this.conveyer2.posX + 20, (this.conveyer2.posY + 110));
-
-    //console.log("conv 2: " +this.conveyer2.posY);
-    //console.log("yFac: " + yFactor);
-
+    fSlider.position((this.conveyer2.posX + 25) * xFactor, (425 * yFactor) + headerOffset);
+    sketch.text(fSlider.value() + " sec", sketch.width/2 - 20, (this.conveyer2.posY + 50));
+    sketch.text("Flowtime(F)", sketch.width/2 - 35, (this.conveyer2.posY + 70));
+    sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 200, sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 185);
+    sketch.line(this.building.width + 105 * (1/5 * fSlider.value()), sketch.height/2 + sketch.height/5 - this.building.height + 200, this.building.width + 105 * (1/5 * fSlider.value()), sketch.height/2 + sketch.height/5 - this.building.height + 185);
+    sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 200, this.building.width + 105 * (1/5 * fSlider.value()), sketch.height/2 + sketch.height/5 - this.building.height + 200);
   }
 
   function addWidget()
