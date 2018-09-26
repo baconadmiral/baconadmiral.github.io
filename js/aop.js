@@ -384,6 +384,8 @@ function loadLandscapeModal(){
     $('#landscapeModal').modal('open');
 }
 
+}
+
 function loadGuidance(){
   clearColor();
   closeGame();
