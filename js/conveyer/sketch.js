@@ -45,6 +45,8 @@ var convSim = function(sketch) {
     tSlider = sketch.createSlider(0.1, 1, defaultTPTimeSec, 0.1);
     tSlider.position(sliderPosX, sliderPosY);
     tSlider.size(sliderSize);
+    tSlider.style.disabled = true;
+
     fSlider = sketch.createSlider(3, sliderMax, 5, 0.1);
     fSlider.position(((sketch.width/4) + 25) * xFactor, (425 * yFactor) + headerOffset);
     fSlider.size(sliderSize);

@@ -386,6 +386,24 @@ function loadLandscapeModal(){
 
 }
 
+function loadCharts()
+{
+  clearColor();
+  closeGame();
+  closeSidenav();
+  $("#app_cont").load("content/charts.html");
+  $("#pageTitle").text("Charts");
+}
+
+function loadTemplate(){
+  clearColor();
+  closeGame();
+
+  $("#app_cont").load("content/template.html");
+  $("#pageTitle").text("Templates");
+  animateArrow();
+}
+
 function loadGuidance(){
   clearColor();
   closeGame();
