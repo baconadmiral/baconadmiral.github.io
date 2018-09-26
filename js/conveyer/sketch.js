@@ -6,7 +6,7 @@ var convSim = function(sketch) {
   let can;
   this.widgetList = [];
   this.conveyer = null;
-  this.bgImg = sketch.loadImage("images/game/conveyerImgs/bakground.jpg");
+  this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.svg");
   this.buildingBack = sketch.loadImage("images/game/conveyerImgs/hangar2.svg");
   this.building = sketch.loadImage("images/game/conveyerImgs/hangar.svg");
   let proFontWindows = sketch.loadFont("../font/ProFontWindows.ttf");
