@@ -14,16 +14,16 @@ var cPathSim = function(sketch) {
     var centerBox = sketch.width/2 - defaultWidth/2;
 
     //box list needs to be constructed backwards
-    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 0);
+    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 10);
     gateBoxList.push(sendBox);
 
-    var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Paint", 5, sendBox);
+    var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 5, sendBox);
     gateBoxList.push(paintBox);
 
-    var sandingBox = new GateBox(sketch, centerBox,paintBox.posY - defaultBoxSpacing, "Sand", 18, paintBox);
+    var sandingBox = new GateBox(sketch, centerBox,paintBox.posY - defaultBoxSpacing, "Sanding", 18, paintBox);
     gateBoxList.push(sandingBox);
 
-    var washBox = new GateBox(sketch, centerBox, sandingBox.posY - defaultBoxSpacing, "Wash", 12, sandingBox);
+    var washBox = new GateBox(sketch, centerBox, sandingBox.posY - defaultBoxSpacing, "Washing", 12, sandingBox);
     gateBoxList.push(washBox);
 
     var rootPathList = [];

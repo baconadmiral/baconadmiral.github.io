@@ -1,18 +1,22 @@
-<div class="slider fullscreen container" data-interval="false" style="overflow-x: hidden;overflow-y: hidden;">
+<div class="slider fullscreen container" data-interval="false" style="overflow-x: hidden;overflow-y: hidden;"
+ ondblclick="javascript:(loadLandscapeModal())">
   <ul id="numberList" class="slides" >
   </ul>
 
   <div id="leftArrow" class="left">
-    <a href="#" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator" onclick="clickPrevSlide()" 
-    ><i class="large middle-indicator-text">
+    <a href="#" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator" onclick="clickPrevSlide()" style="height:100%;">
+      <i class="large middle-indicator-text">
       <img src="css/svg/chevron-left.svg">
     </i></a>
   </div>
 
-  <a href="#" class="moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator" onclick="clickNextSlide()">
+  
   <div id="rightArrow" class="right rightPadding" >   
-    <i class="large  middle-indicator-text"> 
-      <img src="css/svg/chevron-right.svg"></i>
+    <a href="#" class="moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator" onclick="clickNextSlide()" style="height:100%;">
+     <!--  <i class="large  middle-indicator-text">  -->
+        <img src="css/svg/chevron-right.svg">
+      <!-- </i> -->
+    </a>
   </div>
-  </a>
+  
 </div> 

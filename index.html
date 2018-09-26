@@ -50,6 +50,13 @@
             <span class="patty2" id="pat3"></span>
           </div>
         </a>
+        <a id ="backActivityButton" href="javascript:(clickBackToActivity())" style="display:none;">
+          <div class="burger">
+            <span class="patty0" id="patAct1"></span>
+            <span class="patty1" id="patAct2"></span>
+            <span class="patty2" id="patAct3"></span>
+          </div>
+        </a>
       </td>
       <td style="padding:0">
         <a href="#!" style="font-size:20px; color:#fff; margin-left:10px;" >
@@ -83,11 +90,13 @@
         <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
         <li><a class="waves-effect" href="javascript:(loadTraining())">Training</a></li>
         <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
-        <li><a class="waves-effect" href="javascript:(loadGame())">Activity</a></li>
-        <li><a class="waves-effect" href="javascript:(loadGame2())">Activity2</a></li>
+        <li><a class="waves-effect" href="javascript:(loadActivityPage())">Activity</a></li>
+    <li><a class="waves-effect" href="javascriptL(loadCharts())">Charts</a></li>
         <li><a class="waves-effect" href="javascript:(loadNewsletter())">Archived Newsletters</a></li>
         <li><a class="waves-effect" href="javaScript:(loadCalculator())">Calculator</a></li>
+        <li><a class="waves-effect" href="javaScript:(loadSettings())">Settings</a></li>
       </ul>
+
     </div>
   </nav>
   <ul class="side-nav"  id="mobile-demo" >
@@ -105,13 +114,15 @@
       <img src="css/svg/photo-library.svg" height="24px" width="24px">
     </i>Resources</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
-    </i>Activity</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame2())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
-    </i>Activity2</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame3())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
-    </i>Activity3</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadNewsletter())"> <i class="small"><img src="css/svg/folded-newspaper-small.svg"></i> Archived Newsletter</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadActivityPage())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
+    </i>Activities</a></li>
+
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadCharts())"><i class="small"><img src="css/svg/chart.svg" height="24px" width="24px">
+    </i>Charts</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadNewsletter())"> <i class="small"><img src="css/svg/folded-newspaper-small.svg"></i> Archived Newsletters</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadSettings())"><i class="small"><img src="css/svg/settings.svg" height="24px" width="24px">
+    </i>Settings</a></li>
   </ul>
   <div id="app_cont" >
   </div>
@@ -131,7 +142,7 @@
   </div>
 </div>-->
 <div id="modal_cont">
-  <div id="modal1"  class="modal" style="box-shadow: none;background-color:transparent;">
+  <div id="modal1"  class="modal calcModal" style="box-shadow: none;background-color:transparent;">
     <div class="modal-header" style="text-align: right;">
       <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())"
       style="    border: 3px solid white;
@@ -147,6 +158,27 @@
 </div>
 </div>
 </div>
+
+<div id="modal_land">
+  <div id="landscapeModal"  class="modal landscapeModal" style="box-shadow: none;background-color:transparent;">
+    <div class="modal-header" style="text-align: right;">
+      <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())"
+      style="    border: 3px solid white;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      padding: 5px;">
+      <img src="css/svg/close-button.svg" height="24px" width="24px">
+    </a>
+  </div>
+  <div id="modal_content_landscape" class="modal-content">
+</div>
+</div>
+</div>
+
+
+
+
 <footer id="mobileFooter" class="page-footer fluid">
   <div class="container">
     <div class="row" style="margin-bottom:3px;">
@@ -172,15 +204,38 @@
               <table class="footerTable">
                 <tr>
                   <td class="center-align"><i id="notesIcon" class="footerIcons">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                   <!--  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
                       <path d="M0 0h24v24H0z" fill="none"/>
                       <path class="eventNote"  d="M17 10H7v2h10v-2zm2-7h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-5H7v2h7v-2z" fill="#424242"/>
-                    </svg>
+                    </svg> -->
+
+                   <svg id="binderIcon" class="eventNote" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.22 558"
+                   width="28" height="28" fill="#424242">
+                    <defs><style>.cls-1,.cls-2,.cls-3,.cls-4{stroke:#424242;stroke-miterlimit:10;}
+                    .cls-2,.cls-4{stroke-width:8px;}
+                    .cls-3,.cls-4{fill:none;}
+                    .cls-3{stroke-width:11px;}
+                  </style></defs><title>binder</title>
+                  <rect class="cls-1" x="78.72" y="325" width="44" height="143" fill="" />
+                  <rect class="cls-1" x="78.72" y="170" width="44" height="143"/>
+                  <polygon class="cls-1" points="480.71 31.5 480.71 0.5 122.72 0.5 78.72 0.5 78.72 44.5 78.72 158 122.72 158 122.72 44.5 467.71 44.5 467.71 513.5 122.72 513.5 122.72 480 78.72 480 78.72 526.5 109.72 526.5 109.72 557.5 467.71 557.5 511.71 557.5 511.71 513.5 511.71 31.5 480.71 31.5"/>
+                  <circle class="cls-2" cx="167.22" cy="129" r="25"/>
+                  <path class="cls-3" d="M252.5,589.63c-3-.08-6-.13-9-.13-56.45,0-102.22,15.22-102.22,34s45.77,34,102.22,34c3,0,6,0,9-.13Z" transform="translate(-134.78 -498)"/>
+                  <path class="cls-4" d="M247,656c9.82,6.8,69.4-2.07,67-8" transform="translate(-134.78 -498)"/>
+                  <path class="cls-3" d="M252.5,743.63c-3-.08-6-.13-9-.13-56.45,0-102.22,15.22-102.22,34s45.77,34,102.22,34c3,0,6,0,9-.13Z" transform="translate(-134.78 -498)"/>
+                  <path class="cls-3" d="M251.5,896.63c-3-.08-6-.13-9-.13-56.45,0-102.22,15.22-102.22,34s45.77,34,102.22,34c3,0,6,0,9-.13Z" transform="translate(-134.78 -498)"/>
+                  <path class="cls-4" d="M243,810c9.82,6.8,69.4-2.07,67-8" transform="translate(-134.78 -498)"/>
+                  <path class="cls-4" d="M244,963c9.82,6.8,69.4-2.07,67-8" transform="translate(-134.78 -498)"/>
+                  <circle class="cls-2" cx="167.22" cy="282" r="25"/>
+                  <circle class="cls-2" cx="167.22" cy="437" r="25" /></svg>
+
+
+
                   </i>
                 </td>
               </tr>
               <tr>
-                <td id="notesLabel" class="center-align">Notes</td>
+                <td id="notesLabel" class="center-align">Binder</td>
               </tr>
             </table></a>
           </div>
@@ -216,7 +271,7 @@
 <script src="js/aop.js"></script>
 <script src="js/aopCalc.js"></script>
 <script src="js/materialize.min.js"></script>
-<!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+<script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.dom.min.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
@@ -229,6 +284,10 @@
 <script language="javascript" type="text/javascript" src="js/conveyer/sketch.js"></script>
 <script language="javascript" type="text/javascript" src="js/conveyer/widget.js"></script>
 <script language="javascript" type="text/javascript" src="js/conveyer/conveyerBelt.js"></script>
+<script language="javascript" type="text/javascript" src="js/conveyer/pointer.js"></script>
+<script language="javascript" type="text/javascript" src="js/conveyer/textBubble.js"></script>
+
+
 <script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
 
 

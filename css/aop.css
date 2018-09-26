@@ -374,9 +374,6 @@ a.middle-indicator-text{
     margin-top: 0;
   }
 
-  
-
-
   .calcResultTable{
     width:100%;
     color: #000;
@@ -407,11 +404,14 @@ a.middle-indicator-text{
   }
 
   .modal{
-    top:2% !important;
     z-index:600;
     border-radius: 5px;
     max-height:95% !important;
     /*overflow-y:hidden !important;*/
+  }
+
+  .calcModal{
+     top:2% !important;
   }
 
   @media only screen and (max-width:992px)
@@ -561,7 +561,95 @@ nav a.button-collapse{
   margin:0 !important; 
 }
 
-nav .button-collapse{
-
+.iconTab{
+  padding:0px !important; 
+  text-align:center !important;   
 }
 
+.iconTabText{
+  padding-top:15px !important; 
+  text-align:center !important;   
+  font-size:10px !important;
+  padding-left:0px;
+  padding-right:0px;
+}
+
+.headerCollapsible{
+  display:block; 
+  cursor:pointer; 
+  min-height:3rem; 
+  line-height:3rem; 
+  background-color:#fff; 
+  border-bottom:1px solid #ddd; 
+}
+
+.collapseGroup{
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2); 
+  margin: .5rem 0 1rem 0;
+  background-color:#eee; 
+}
+
+.collapseBody{
+  width:100%; 
+  padding:10px !important;
+  border-bottom:0px; 
+  background-color:#eeeeee;
+  /*border-right:1px solid #ddd; 
+  border-left: 1px solid #ddd; */
+}
+
+.carGameBackground{
+  background-image: url("../css/svg/carGame.PNG");
+  background-repeat: no-repeat;
+  background-size:100% auto;
+}
+
+.activityTitle{
+  font-weight: bold; 
+  /*color:#000;*/
+  vertical-align: middle;
+ /* text-shadow: -3px 0px 6px rgba(150, 150, 150, 1);*/
+}
+
+.landscapeMode{
+  color:#2E64D2;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.landscapeModal{
+  top:25% !important;
+}
+
+.activityCard{
+  padding:5px; 
+  margin:0;
+  height:150px;
+  border-radius:10px;
+}
+
+.input-field .prefix.active{
+  color: #0eabda;
+  fill: #0eabda;
+}
+
+.input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label {
+  color: #0eabda;
+}
+
+.input-field input[type=text]:focus, .input-field input[type=email]:focus  {
+  border-bottom: 1px solid #0eabda;
+  box-shadow: 0 1px 0 0 #0eabda;     
+}
+
+[type="radio"]:checked + label::after, [type="radio"].with-gap:checked + label::after {
+    background-color: #0eabda !important;
+}
+[type="radio"]:checked + label::after, [type="radio"].with-gap:checked + label::before, [type="radio"].with-gap:checked + label::after {
+    border: 2px solid #0eabda !important;
+}
+
+.precisionRadio{
+  display:inline;
+}
