@@ -4,7 +4,7 @@ function Widget(sketch)
   this.jet = sketch.loadImage("images/game/conveyerImgs/plane.svg")
 
   this.posX = 0;
-  this.posY = sketch.height/2 + sketch.height/5 - 20;
+  this.posY = sketch.height/2 + sketch.height/5 - 10;
 
   this.update = function(velocity)
   {
