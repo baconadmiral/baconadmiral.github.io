@@ -1,7 +1,7 @@
 function Widget(sketch)
 {
   this.crate = sketch.loadImage("images/game/conveyerImgs/crate.svg");
-  this.jet = sketch.loadImage("images/game/conveyerImgs/f16sprite.png")
+  this.jet = sketch.loadImage("images/game/conveyerImgs/plane.svg")
 
   this.posX = 0;
   this.posY = sketch.height/2 + sketch.height/5 - 20;
@@ -17,7 +17,7 @@ function Widget(sketch)
         sketch.image(this.crate, this.posX, this.posY, this.crate.width/6.5, this.crate.height/6.5);
       }
       else {
-        sketch.image(this.jet, this.posX, this.posY);
+        sketch.image(this.jet, this.posX, this.posY, this.jet.width/6.5, this.jet.height/6.5);
       }
     }
   }
