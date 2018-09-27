@@ -6,9 +6,11 @@ var convSim = function(sketch) {
   let can;
   this.widgetList = [];
   this.conveyer = null;
-  this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.svg");
-  this.buildingBack = sketch.loadImage("images/game/conveyerImgs/hangar2.svg");
-  this.building = sketch.loadImage("images/game/conveyerImgs/hangar.svg");
+  this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.png");
+  this.buildingBack = sketch.loadImage("images/game/conveyerImgs/hangar2.png");
+  this.building = sketch.loadImage("images/game/conveyerImgs/hangar.png");
+  this.touchAppImg = sketch.loadImage("images/game/conveyerImgs/touch_app.png");
+
   let proFontWindows = sketch.loadFont("../font/ProFontWindows.ttf");
   let crateTimeout = setTimeout(addWidget, defaultTPTimeSec * 1000);
 
@@ -29,6 +31,7 @@ var convSim = function(sketch) {
 
   sketch.setup = function() {
     sketch.frameRate(30);
+    sketch.pixelDensity(1);
     can = sketch.createCanvas(400, 500);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
@@ -52,11 +55,12 @@ var convSim = function(sketch) {
     fSlider.size(sliderSize);
 
     let pointerList = [];
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Welcome to the Littles Law Simulator. This demonstration is intended to explain the basic concepts of Littles Law", pointerPos: "left"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Little’s law is an equation showing that the average number of items in a queueing system is equal to their average throughput multiplied by the average amount of time they spend in the system", pointerPos: "left"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "To begin using Littles Law lets first identify our process machine...", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : 15, posY : 40, text : "        To advance tap the screen                                                                                                                                                                                                                                                                                                                                                 ", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Welcome to the Littles Law Simulator. This demonstration is intended to explain the basic concepts of Littles Law", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Little’s law is an equation showing that the average number of items in a queueing system is equal to their average throughput multiplied by the average amount of time they spend in the system", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "To begin using Littles Law lets first identify our process machine...", pointerPos: "left"}); //Littles Law Intro
     pointerList.push({posX : 40, posY : 250, text : "We can assume that our process machine is this hangar right here...", pointerPos: "center", pointerRotation:"down"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 290, text : "Its input is boxes of parts  ", pointerPos: "left", pointerRotation:"down"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/12), posY : 290, text : "Its input is boxes of parts  ", pointerPos: "left", pointerRotation:"down"}); //Littles Law Intro
     pointerList.push({posX : 70, posY : 290, text : "Its output is airplanes", pointerPos: "right", pointerRotation:"down"}); //Littles Law Intro
 
     pointerList.push({posX : 65, posY : 350, text : "The time that it takes for our machine (hangar) to turn a box of parts into an airplane is our Flowtime", pointerPos: "center", pointerYOffset: 25, pointerRotation:"left"}); //Flowtime
@@ -76,9 +80,6 @@ var convSim = function(sketch) {
     pointerList.push({posX : 50, posY : 80, text : "Try increasing the throughput to 0.7 or above", onCheckStep: true, checkFor: "throughput"});
     //add Throughput check
     pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
-
-
-
 
     pointer = new Pointer(sketch, pointerList, tSlider, fSlider);
   }
@@ -141,14 +142,19 @@ var convSim = function(sketch) {
     //sketch.text(tSlider.value() + " sec", sketch.width/2 - this.buildingBack.width/2 + (buildingShift/2) + this.buildingBack.width * (1/5 * fSlider.value())+15, sketch.height/2 + sketch.height/5 - this.building.height + 100);
 
     sketch.text("Flowtime(F)", sketch.width/2 - 35, (this.conveyer2.posY + 70));
-    sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 200, sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 185);
-    sketch.line(this.building.width + 105 * (1/5 * fSlider.value()), sketch.height/2 + sketch.height/5 - this.building.height + 200, this.building.width + 105 * (1/5 * fSlider.value()), sketch.height/2 + sketch.height/5 - this.building.height + 185);
-    sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 200, this.building.width + 105 * (1/5 * fSlider.value()), sketch.height/2 + sketch.height/5 - this.building.height + 200);
-
+    var flowLineY = sketch.height/2 + sketch.height/5 - this.building.height + 230;
+    sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), flowLineY, sketch.width/2 - this.building.width/2 + (buildingShift/2), flowLineY-15);
+    sketch.line(this.building.width + 105 * (1/5 * fSlider.value()), flowLineY, this.building.width + 105 * (1/5 * fSlider.value()), flowLineY-15);
+    sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), flowLineY, this.building.width + 105 * (1/5 * fSlider.value()), flowLineY);
 
     if(typeof pointer != 'undefined')
     {
       pointer.update();
+
+      if(pointer.ctr == 0)
+      {
+        sketch.image(this.touchAppImg, 155, 75, 75, 75);
+      }
     }
   }
 

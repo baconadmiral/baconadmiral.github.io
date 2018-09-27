@@ -392,7 +392,7 @@ function calcResult() {
   isRounded = false;
 }
 
-function buildCalcObj(name, calcObj){
+function buildCalcObj(name, group, calcObj){
   let calcDBObject = {
     "name" : name,
     "cType" : "",
@@ -403,7 +403,7 @@ function buildCalcObj(name, calcObj){
     "thrTimeType" : "",
     "flowTimeType" : "",
     "taktTimeType" : "",
-    "group" : "group_placeholder"
+    "group" : group
   };
   switch (calcObj) {
     case wip_w_thruput:
@@ -459,8 +459,13 @@ function openDatabase(){
 }
 
 function saveResults(){
-  myCalcDBObject = buildCalcObj("Test2", calcObj);
-  itemDB.createItem(databaseStore, myCalcDBObject, function() {});
+  if(enableCalc && $("#fld_save_name").val()){
+    var myName = $("#fld_save_name").val();
+    var myGroup = $("#fld_save_group").val();
+    myCalcDBObject = buildCalcObj(myName, myGroup, calcObj);
+    itemDB.createItem(databaseStore, myCalcDBObject, function() {});
+    //document.getElementById('btn_display_results').style.display="block";
+  }
 }
 
 function setCalcType(cType) {

@@ -118,7 +118,25 @@
 				<div class="row" style="text-align:center; margin-bottom:0;">
 					    <span id="result2" style="color:#651fa9;text-align:center; font-weight:bold; font-size:8vw">0</span>
 						<span id="result2units" style="color:#651fa9;padding:5px;text-align:center; font-weight:bold; font-size:8vw"></span>
-						<input type="button" value="Save Result" id="btn_save" onclick="saveResults()" class="btn waves-effect waves-light" style="width:100%;background-color:#BCBCBC;">
+						<div class="row">
+							<form class="col s12">
+	                <div class="row">
+										<div class="col">
+	                    <div class="input-field col s6">
+	                        <input id="fld_save_name" type="text" class="validate" required />
+	                        <label for="fld_save_name">Name</label>
+	                    </div>
+											<div class="input-field col s6">
+	                        <input id="fld_save_group" type="text" class="validate"/>
+	                        <label for="fld_save_group">Group</label>
+	                    </div>
+										</div>
+	                    <div class="input-field col s6">
+	                        <button class="btn waves-effect waves-light blue darken-1" id="btn_save" onclick="saveResults()" style="width:100%;">Save Results</button>
+	                    </div>
+	                </div>
+	            </form>
+						</div>
 				</div>
 				<div class="row" style="border-top:1px solid lightgray; margin-bottom:5px;">
 					<table border="0" style="border-spacing: 0px;border-bottom:none; text-align:center;" class="calcResultTable calcResults centered">

@@ -653,3 +653,18 @@ nav a.button-collapse{
 .precisionRadio{
   display:inline;
 }
+
+
+.templateCard{
+  padding:5px; 
+  margin:0;
+  height:100px;
+  border-radius:10px;
+}
+
+.burndownBackground{
+  background-image: url("../images/thumbnails/burndown_thmb.png");
+  background-repeat: no-repeat;
+  background-size:80% auto;
+  background-position: center;
+}

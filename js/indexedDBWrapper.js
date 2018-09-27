@@ -82,6 +82,31 @@ var itemDB = ( function() {
   };
 
   /**
+  * Opens a simple instance of the database with just the name and version
+  */
+   iDB.simpleOpen = function(databaseName, version, datastoreName, callback){
+     // Open a connection to the datastore.
+     console.log("version: " + version);
+     var request = indexedDB.open(databaseName, version);
+
+     // Handle successful datastore access.
+     request.onsuccess = function(e) {
+       // Get a reference to the DB.
+       let db = e.target.result;
+
+       datastores[datastoreName] = db;
+       console.log(e.target.result);
+
+       databases[databaseName] = request.result;
+
+       callback();
+     };
+
+     // Handle errors when opening the datastore.
+     request.onerror = iDB.onerror;
+   };
+
+  /**
   * Returns all database objects with the specific properties that match the
   * particular values.
   * Parameters:
