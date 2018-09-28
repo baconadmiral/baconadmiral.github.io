@@ -88,7 +88,9 @@ var convSim = function(sketch) {
     //add Throughput check
     pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
     pointerList.push({posX : 50, posY : 80, text : "Play with the sliders and see how changing the Throughput and Flowtime affect WIP"}); //Increase throughput
+    pointerList.push({endText : true}); //Increase throughput
 
+    
     pointer = new Pointer(sketch, pointerList, tSlider, fSlider);
 
     conveyer1  = new ConveyerBelt(sketch, 0);

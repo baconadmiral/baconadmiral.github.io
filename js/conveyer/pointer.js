@@ -19,10 +19,14 @@ function Pointer(sketch, positionList, tSlider, fSlider)
   this.bounceCtr = 1;
   
   this.bounceUp = true;
-
+  this.endAnim = false;
+  
   this.update = function()
   {
-    if(typeof positionList != "undefined")
+    if(typeof this.endAnim == "undefined")
+      this.endAnim = false;
+      
+    if(typeof positionList != "undefined" && this.endAnim == false)
     {
       let handPosX = this.posX;
       let handPosY = this.posY;
@@ -107,6 +111,7 @@ function Pointer(sketch, positionList, tSlider, fSlider)
     this.textBubble.textAnimIndex = 0;
     if(this.ctr < positionList.length)
     {
+      this.endAnim = positionList[this.ctr].endAnim;
       this.posX = positionList[this.ctr].posX;
       this.posY = positionList[this.ctr].posY;
       this.pointerPosition = positionList[this.ctr].pointerPos;
