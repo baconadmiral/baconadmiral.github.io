@@ -87,6 +87,7 @@ var convSim = function(sketch) {
     pointerList.push({posX : 50, posY : 80, text : "Try increasing the throughput to 0.7 or above", onCheckStep: true, checkFor: "throughput"});
     //add Throughput check
     pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
+    pointerList.push({posX : 50, posY : 80, text : "Play with the sliders and see how changing the Throughput and Flowtime affect WIP"}); //Increase throughput
 
     pointer = new Pointer(sketch, pointerList, tSlider, fSlider);
 

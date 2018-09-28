@@ -16,6 +16,9 @@ function Pointer(sketch, positionList, tSlider, fSlider)
   this.handRightImg = sketch.loadImage("images/game/conveyerImgs/handRight.png");
 
   this.textBubble = new TextBubble(sketch);
+  this.bounceCtr = 1;
+  
+  this.bounceUp = true;
 
   this.update = function()
   {
@@ -23,7 +26,19 @@ function Pointer(sketch, positionList, tSlider, fSlider)
     {
       let handPosX = this.posX;
       let handPosY = this.posY;
-
+      
+      if(this.bounceCtr == 10)
+        this.bounceUp = false;
+      else if(this.bounceCtr == 0)
+        this.bounceUp = true;
+        
+      if(this.bounceUp)
+        this.bounceCtr++;
+      else
+        this.bounceCtr--;
+        
+      console.log(this.bounceCtr);
+        
       if(this.pointerPosition == "left")
       {
         handPosX = this.posX;
@@ -43,13 +58,13 @@ function Pointer(sketch, positionList, tSlider, fSlider)
         this.pointerXOffset = 0;
 
       if(this.pointerRotation === "down")
-        sketch.image(this.handDownImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handDownImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 30, 30);
       else if(this.pointerRotation === "up")
-        sketch.image(this.handUpImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handUpImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 30, 30);
       else if(this.pointerRotation === "left")
-        sketch.image(this.handLeftImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handLeftImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 30, 30);
       else if(this.pointerRotation === "right")
-        sketch.image(this.handRightImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handRightImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 30, 30);
 
       if(this.onCheckStep == true)
       {
