@@ -52,7 +52,9 @@
 
 
 	<div id="searches" class="col s12">
-		Your saved search terms will be displayed here.
+		<div id="searchesBlurb" class="col s12" style="display:block">
+			Your saved search terms will be displayed here.
+		</div>
 	</div>
 
 	<div id="activityStatus" class="col s12">
@@ -89,6 +91,7 @@
 		$(".calculatorIcon").css("fill", "#424242");
 		$(".activityIcon").css("fill", "#424242");
 
+		displaySearchesInBinder();
 	}
 
 	function setActivityColor()

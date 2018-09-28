@@ -38,12 +38,18 @@ function saveSearch() {
     //create item to save to database.
     let thisSearch = {
       "terms": terms,
-      "domains": {
-        "acronyms": acrnm.checked,
-        "glossary": gloss.checked,
-        "handbook": handbook.checked
-      }
+      "domains": []
     };
+
+    if (acrnm.checked) {
+      thisSearch.domains.push("acronyms");
+    }
+    if (gloss.checked) {
+      thisSearch.domains.push("glossary");
+    }
+    if (handbook.checked) {
+      thisSearch.domains.push("handbook");
+    }
 
     itemDB.createItem(searchTermsDS, thisSearch, () => {
       console.log(terms + " search saved successfully...");
@@ -51,14 +57,11 @@ function saveSearch() {
   }
 }
 
-function getSearches() {
-  //let viewResults = document.getElementById("");
+function getAllSearches(callback) {
 
-  itemDb.fetchAll(searchTermsDS, (results) => {
-    results.forEach( (result) => {
-      //put results in viewResults.
-      console.log(JSON.stringify(result));
-    });
+  itemDB.fetchAll(searchTermsDS, (results) => {
+
+    callback(results);
   });
 }
 
@@ -188,6 +191,51 @@ function getIndex(type) {
 
   }
 
+}
+
+function displaySearchesInBinder() {
+  let viewResults = document.getElementById("searches");
+  // viewResults.innerHTML = "";
+
+
+  getAllSearches( (results) => {
+    if (results.length === 0) {
+      document.getElementById("searchesBlurb").style.display = "block";
+    } else {
+      document.getElementById("searchesBlurb").style.display = "none";
+
+      let searchUl = document.getElementById("searchList");
+      if (searchUl == null) {
+        searchUl = document.createElement("ul");
+        searchUl.setAttribute("id", "searchList");
+      } else {
+        searchUl.innerHTML = "";
+      }
+
+
+
+      results.forEach( (result) => {
+        let termLi = document.createElement("li");
+        let text = '"' + result.terms + '" in domains:';
+        result.domains.forEach( (domain) => {
+          text += ' "' + domain + '"';
+        });
+
+        text += ".";
+
+        let record = document.createTextNode(text);
+        termLi.appendChild(record);
+        searchUl.appendChild(termLi);
+
+      });
+
+      if (!$('searches').find('#searchList').length) {
+
+        viewResults.appendChild(searchUl);
+      }
+
+    }
+  });
 }
 
 openSearchDB();

@@ -8,16 +8,24 @@ const groupPropertyName = "group";
 * and creates a list of records.
 */
 function notesFetchAllCalcGroups(){
-  itemDB.simpleOpen(databaseName, version, datastoreName, function() {
-    itemDB.fetchAll(datastoreName, function(myRecords){
-      buildCalcGroups(myRecords, groupPropertyName);
-    });
-  });
+  itemDB.databaseExists(databaseName, version, datastoreName, function(datastoreExists){
+    if(datastoreExists){
+      itemDB.simpleOpen(databaseName, version, datastoreName, function() {
+        itemDB.fetchAll(datastoreName, function(myRecords){
+          buildCalcGroups(myRecords, groupPropertyName);
+        });
+      });
+    }
+  })
+
 }
 
 /**
 * Sorts the collection using the given property.
 * This builds a 2d array sorted by the property.
+* Parameters:
+* collection - group of records from the database.
+* property - the property we wish to categorize by.
 */
 function buildCalcGroups(collection, property){
   var i = 0, val, index,
@@ -37,6 +45,8 @@ function buildCalcGroups(collection, property){
 
 /**
 * Creates a string containing the formula built using the given record
+* Parameters:
+* record - a single record we use to create the formula with using its properties.
 */
 function buildCalcFormula(record){
   var str = "";
@@ -66,6 +76,8 @@ function buildCalcFormula(record){
 /**
 * Runs through a list of records and displays the calculations
 * on the html page using Jquery
+* Parameters:
+* records - collection of categorized records to display
 */
 function displayCalcGroups(records){
   if(records[0] != null){
@@ -92,7 +104,7 @@ function displayCalcGroups(records){
     class: "collapsible ",
     style: "background-color:#eeeeee;"
 }).append( $('<li>', {        //<li>
-  	id: records[0][i].group
+  	id: i
 }).append( $('<div>', {				//<div id="groupA" class="col s10 collapsible-header"><b>All</b></div>
     id: "group" + i,
     class: "col s10 collapsible-header",
@@ -129,6 +141,9 @@ function displayCalcGroups(records){
 /**
 * Creates a single list element containing the calculation for a specific
 * calculation group.
+* Parameters:
+* record - a single record we wish to put into a list item
+* ulID - identifies which group we want to append the list item to
 */
 function createCalcListElement(record, ulID){
   var ul = document.getElementById(ulID);
@@ -147,13 +162,17 @@ function createCalcResultsEventListener(){
   var el = document.getElementById("calculations");
   if(el){
     el.addEventListener("click", function(e) {
+      console.log(e.path[0]);
       if(e.target && e.target.nodeName == "LI") {
-        console.log(e.target.innerText + " was clicked");
+        console.log(e.target.id + " was clicked");
+      }
+      else if(e.target && e.target.nodeName == "IMG"){
+        console.log("image was clicked");
       }
     });
   }
 }
 
-function displayAlert(){
-  alert("We have clickoff!");
+function displayAlert(groupID){
+  alert(groupID + " has clickoff!");
 }

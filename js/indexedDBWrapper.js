@@ -106,6 +106,29 @@ var itemDB = ( function() {
      request.onerror = iDB.onerror;
    };
 
+   /**
+   * Checks if a datastore exists in the database
+   */
+   iDB.databaseExists = function(databaseName, version, datastoreName, callback){
+     var dbStoreExists = true;
+     var request = indexedDB.open(databaseName, version);
+
+     request.onupgradeneeded = function(e) {
+       var db = e.target.result;
+
+       // Delete the old datastore.
+       if (!db.objectStoreNames.contains(datastoreName)) {
+         dbStoreExists = false;
+         db.close();
+         indexedDB.deleteDatabase(databaseName);
+       }
+       else{
+         e.target.transaction.abort();
+       }
+     };
+    callback(dbStoreExists);
+  };
+
   /**
   * Returns all database objects with the specific properties that match the
   * particular values.
@@ -131,20 +154,45 @@ var itemDB = ( function() {
     request.onerror = iDB.onerror;
   };
 
- /**
+  /**
+  * Finds the first record that matches the query
+  * Parameters:
+  * datastoreName - string name of the datastore in the database.
+  * property - the property of the object which we wish to search for.
+  * value - the value of the object we wish to match.
+  * callback - function to call once the database has been opened.
+  */
+ iDB.fetchOneByIndex = function(datastoreName, property, value, callback) {
+   let db = datastores[datastoreName];
+   let transaction = db.transaction([datastoreName], 'readwrite');
+   let objStore = transaction.objectStore(datastoreName);
+
+   let request = objStore.index(property).get(value);
+
+   transaction.oncomplete = function(e) {
+     callback(request.result);
+   };
+
+   transaction.onsuccess = function(e) {
+     console.log('Request successful...');
+   };
+
+   request.onerror = iDB.onerror;
+ };
+
+  /**
  * Finds the first record that matches the query
  * Parameters:
  * datastoreName - string name of the datastore in the database.
- * property - the property of the object which we wish to search for.
- * value - the value of the object we wish to match.
+ * key - the key of the object we wish to match to keyPath.
  * callback - function to call once the database has been opened.
  */
-iDB.fetchOne = function(datastoreName, property, value, callback) {
+iDB.fetchOneByKey = function(datastoreName, key, callback) {
   let db = datastores[datastoreName];
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
-  let request = objStore.index(property).get(value);
+  let request = objStore.get(key);
 
   transaction.oncomplete = function(e) {
     callback(request.result);

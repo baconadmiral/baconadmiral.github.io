@@ -139,8 +139,14 @@ var convSim = function(sketch) {
         let velocity = 1;
 
         this.widgetList[i].update(velocity);
-
       }
+      
+      //remove non rendered widgets
+      if(typeof this.widgetList[this.widgetList.length-1] != 'undefined' && this.widgetList[0].posX >= sketch.width)
+      {
+        this.widgetList.shift();
+      }
+      
     }
 
 
