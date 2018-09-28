@@ -4,6 +4,8 @@ var cPathSim = function(sketch) {
   var defaultBoxSpacingWidth = 120;
   var defaultWidth = 60;
   var flowTotal = 0;
+  let mouseSlower = false;//This is to prevent mouse bounces since we cant use mouse clicked
+  let mouseSlowerCtr = 0;
 
   sketch.setup = function() {
     sketch.frameRate(30);
@@ -65,25 +67,40 @@ var cPathSim = function(sketch) {
     sketch.textSize(20);
     sketch.text("Selected Flow: " + flowTotal, 130, 30);
 
+    if(mouseSlower == true)
+    {
+      mouseSlowerCtr++;
+      if(mouseSlowerCtr > 15)
+      {
+        mouseSlower = false;
+        mouseSlowerCtr = 0;
+      }
+    }
   }
 
-  sketch.mouseClicked = function()
+  sketch.mousePressed = function()
   {
-    for(let i = 0; i < gateBoxList.length; i++)
+    if(mouseSlower == false)
     {
-      if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
+      mouseSlower = true;
+      
+      for(let i = 0; i < gateBoxList.length; i++)
       {
-        if(!gateBoxList[i].clicked)
+        if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
         {
-          flowTotal += gateBoxList[i].flow;
-          gateBoxList[i].click();
-        }
-        else {
-          flowTotal -= gateBoxList[i].flow;
-          gateBoxList[i].unclick();
-        }
+          if(!gateBoxList[i].clicked)
+          {
+            flowTotal += gateBoxList[i].flow;
+            gateBoxList[i].click();
+          }
+          else {
+            flowTotal -= gateBoxList[i].flow;
+            gateBoxList[i].unclick();
+          }
 
+        }
       }
+      
     }
   }
 

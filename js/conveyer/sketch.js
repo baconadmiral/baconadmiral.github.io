@@ -149,8 +149,6 @@ var convSim = function(sketch) {
       
     }
 
-
-
     buildingShift = this.building.width - this.building.width * (1/5 * fSlider.value())
     sketch.image(this.building, sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 30, this.building.width * (1/5 * fSlider.value()), this.building.height);
     sketch.textSize(20);
