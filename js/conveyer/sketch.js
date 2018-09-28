@@ -71,7 +71,7 @@ var convSim = function(sketch) {
     pointerList.push({posX : 70, posY : 290, text : "Its output is airplanes", pointerPos: "right", pointerRotation:"down"}); //Littles Law Intro
 
     pointerList.push({posX : 65, posY : 350, text : "The time that it takes for our machine (hangar) to turn a box of parts into an airplane is our Flowtime", pointerPos: "center", pointerYOffset: 25, pointerRotation:"left"}); //Flowtime
-    pointerList.push({posX : 65, posY : 275, text : "The rate at which airplaines come out of our machine (hangar) is known as the Throughput", pointerPos: "right", pointerRotation: "down"}); //Throughput
+    pointerList.push({posX : 65, posY : 275, text : "The rate at which airplaines come out of our machine (hangar) is known as Throughput", pointerPos: "right", pointerRotation: "down"}); //Throughput
     pointerList.push({posX : 0, posY : 275, text : "The number of units being worked on (boxes being turned into airplanes) that are inside our machine (hangar) is known as our Work in Process (WIP)", pointerPos: "center", pointerXOffset: -20, pointerYOffset: 50, pointerRotation: "right"}); //WIP
 
     pointerList.push({posX : 50, posY : 80, text : "How do we improve the speed of our process?"}); //Speed
@@ -113,14 +113,6 @@ var convSim = function(sketch) {
     let buildingShift = this.buildingBack.width - this.buildingBack.width * (1/5 * fSlider.value())
     sketch.image(this.buildingBack, sketch.width/2 - this.buildingBack.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 30, this.buildingBack.width * (1/5 * fSlider.value()), this.buildingBack.height);
 
-
-    /*if(this.conveyer1 == null && typeof sketch.width != 'undefined')
-    {
-      this.conveyer1  = new ConveyerBelt(sketch, 0);
-      this.conveyer2  = new ConveyerBelt(sketch, (sketch.width/4) * 1);
-      this.conveyer3  = new ConveyerBelt(sketch, (sketch.width/4) * 2);
-      this.conveyer4  = new ConveyerBelt(sketch, (sketch.width/4) * 3);
-    }*/
 
     if(typeof this.widgetList != 'undefined' && typeof conveyer1 != 'undefined')
     {

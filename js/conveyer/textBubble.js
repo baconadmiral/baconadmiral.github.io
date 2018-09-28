@@ -5,6 +5,7 @@ function TextBubble(sketch)
   this.txtBubbleHeightSingleLine = 18;
   this.numLines = 1;
   var roundedCorner = 10;
+  this.textAnimIndex = 0;
 
 
   this.update = function(posX, posY, text, position)
@@ -21,7 +22,9 @@ function TextBubble(sketch)
 
     sketch.rect(posX, posY, boxWidth * 7, this.txtBubbleHeightSingleLine * this.numLines, roundedCorner);
 //  sketch.image(this.textBubbleImg, posX+20, posY-42, maxLengthDefault * 9, this.txtBubbleHeightSingleLine * this.numLines);
-    sketch.text(outText, posX + 8, posY + 15);
+
+    sketch.text(outText.substring(0, this.textAnimIndex), posX + 8, posY + 15);
+    this.textAnimIndex++;
 
   }
 

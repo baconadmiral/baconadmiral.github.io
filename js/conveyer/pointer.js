@@ -91,6 +91,7 @@ function Pointer(sketch, positionList, tSlider, fSlider)
   this.advance = function()
   {
     this.ctr++;
+    this.textBubble.textAnimIndex = 0;
     if(this.ctr < positionList.length)
     {
       this.posX = positionList[this.ctr].posX;

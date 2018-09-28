@@ -7,10 +7,10 @@ function initalLoad(){
     $("#sidenav-overlay").trigger("click");
   });
 
-   $("#backButton").hide();
-    $("#menuButton").hide();
+  $("#backButton").hide();
+  $("#menuButton").hide();
 
-   loadSidenav();
+  loadSidenav();
 }
 
 function loadActivityPage()
@@ -39,7 +39,7 @@ function loadSidenav()
   sideNavButton.setAttribute('data-activates', 'mobile-demo');
   sideNavButton.setAttribute('class', 'button-collapse');*/
 
-    $('.button-collapse').sideNav({
+  $('.button-collapse').sideNav({
     draggable:true,
     edge:'left'
   });
@@ -48,9 +48,9 @@ function loadSidenav()
 function closeSidenav()
 {
   $('.button-collapse').sideNav('hide');
-   $('.button-collapse').sideNav({
-  closeOnClick: true
-   });
+  $('.button-collapse').sideNav({
+    closeOnClick: true
+  });
 }
 
 function loadHome(){
@@ -60,11 +60,11 @@ function loadHome(){
   //loadSidenav();
   $("#menuButton").show();
 //  $("#backButton").css('display', 'none');
-  $("#app_cont").load("content/home.html");
-  $("#pageTitle").text('AoP');
-  $("#app_cont").css('background-color', '#e0e0e0');
-  $("#app_cont").css('height','100%');
-  $('body').css('background-color', '#e0e0e0');
+$("#app_cont").load("content/home.html");
+$("#pageTitle").text('AoP');
+$("#app_cont").css('background-color', '#e0e0e0');
+$("#app_cont").css('height','100%');
+$('body').css('background-color', '#e0e0e0');
 }
 
 function clickNextSlide(){
@@ -159,8 +159,8 @@ function loadCalculatorModal(){
 
 function loadSearchModal(){
 
-    $("#modal_content").load("content/search.html");
-    $("#searchContainer").css('padding-top','0px');
+  $("#modal_content").load("content/search.html");
+  $("#searchContainer").css('padding-top','0px');
     //$("#calcLabel").css('color','#0EABDA');
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
 
@@ -175,13 +175,13 @@ function loadSearchModal(){
     $('#modal1').modal('open');
 
 
-}
+  }
 
   function loadEmailModal(){
 
     $("#modal_content").load("content/email.html");
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-      $(".mailIcon").css("fill", "#0EABDA");
+    $(".mailIcon").css("fill", "#0EABDA");
     $("#mailLabel").css('color','#0EABDA');
 
     $(document).ready(function(){
@@ -196,7 +196,7 @@ function loadSearchModal(){
 
   }
 
- function loadNotesModal(){
+  function loadNotesModal(){
 
     $("#modal_content").load("content/notes.html");
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
@@ -214,15 +214,15 @@ function loadSearchModal(){
 
   }
 
-function loadResources(){
-  clearColor();
-  closeGame();
+  function loadResources(){
+    clearColor();
+    closeGame();
 
-  closeSidenav();
-  $("#app_cont").load("content/resources.html");
-  $("#pageTitle").text("Resources");
-  $("#menuButton").show();
-  $("#backButton").hide();
+    closeSidenav();
+    $("#app_cont").load("content/resources.html");
+    $("#pageTitle").text("Resources");
+    $("#menuButton").show();
+    $("#backButton").hide();
   //add a transform for the lines.
 
 }
@@ -255,20 +255,20 @@ function loadAboutUs(){
 }
 
 function clearColor(){
-    var defaultColor= "#424242"
-    $("#calcLabel").css('color',defaultColor);
-    $('#calcsvg').css({fill: defaultColor});
-    $(".calculator").css({fill: defaultColor});
-    $(".eventNote").css({fill: defaultColor});
-    $("#notesLabel").css('color',defaultColor);
-     $(".mailIcon").css({fill: defaultColor});
-    $("#mailLabel").css('color',defaultColor);
-    $("#app_cont").css('background-color', '#e0e0e0');
-    $("#app_cont").css('height','');
-    $('body').css('background-color', '#e0e0e0');
-    $("#app_cont").css('filter', '');
+  var defaultColor= "#424242"
+  $("#calcLabel").css('color',defaultColor);
+  $('#calcsvg').css({fill: defaultColor});
+  $(".calculator").css({fill: defaultColor});
+  $(".eventNote").css({fill: defaultColor});
+  $("#notesLabel").css('color',defaultColor);
+  $(".mailIcon").css({fill: defaultColor});
+  $("#mailLabel").css('color',defaultColor);
+  $("#app_cont").css('background-color', '#e0e0e0');
+  $("#app_cont").css('height','');
+  $('body').css('background-color', '#e0e0e0');
+  $("#app_cont").css('filter', '');
 
-  }
+}
 
 function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
@@ -278,12 +278,14 @@ function closeGame() {
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
     gameCleanup(exportRoot,'app_cont');
   }
+
+
 }
 
 function loadGame(){
   closeGame();
   closeSidenav();
-animateActivityArrow();
+  animateActivityArrow();
   $(function(){
     $("#app_cont").empty();
     car_S = new p5(carSim,'app_cont');
@@ -295,8 +297,10 @@ function loadGame2(){
   closeGame();
   closeSidenav();
   animateActivityArrow();
-   $(function(){
+  $(function(){
     $("#app_cont").empty();
+    $("html").css('background-color', '#39b54a');
+    $("#app_cont").css('background-image', 'linear-gradient(180deg, #00e5ff 50%, #39b54a 50%)');
     car_S = new p5(convSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
@@ -329,7 +333,7 @@ function loadLandscapeModal(){
       dismissible: false
     });
     $('#landscapeModal').modal('open');
-}
+  }
 
 }
 
@@ -392,7 +396,7 @@ function loadWallWalks(){
 function animateArrow()
 {
   $("#menuButton").hide();
-    $("#backButton").show();
+  $("#backButton").show();
 
   var topPatty = document.getElementById("pat1");
   var bottomPatty = document.getElementById("pat3");
@@ -428,6 +432,10 @@ function clickBackToActivity()
   resetActivityArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+
+  $("html").css('background-color', 'unset');
+  $("#app_cont").css('background-color', 'none');
+  $("#app_cont").css('background-image', 'none');
 }
 
 function clickBackToResources()
@@ -487,24 +495,24 @@ function loadTraining(){
 
     init();
 
-      var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
-  function init() {
-    canvas = document.getElementById("canvas");
-    anim_container = document.getElementById("animation_container");
-    dom_overlay_container = document.getElementById("dom_overlay_container");
-    var comp=AdobeAn.getComposition("D8119AD668E9D44193ADA1BB18D6EFBE");
-    var lib=comp.getLibrary();
-    var loader = new createjs.LoadQueue(false);
-    loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
-    loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
-    var lib=comp.getLibrary();
-    loader.loadManifest(lib.properties.manifest);
-  }
-  function handleFileLoad(evt, comp) {
-    var images=comp.getImages();
-    if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
-  }
-  function handleComplete(evt,comp) {
+    var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+    function init() {
+      canvas = document.getElementById("canvas");
+      anim_container = document.getElementById("animation_container");
+      dom_overlay_container = document.getElementById("dom_overlay_container");
+      var comp=AdobeAn.getComposition("D8119AD668E9D44193ADA1BB18D6EFBE");
+      var lib=comp.getLibrary();
+      var loader = new createjs.LoadQueue(false);
+      loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+      loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+      var lib=comp.getLibrary();
+      loader.loadManifest(lib.properties.manifest);
+    }
+    function handleFileLoad(evt, comp) {
+      var images=comp.getImages();
+      if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }
+    }
+    function handleComplete(evt,comp) {
     //This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
     var lib=comp.getLibrary();
     var ss=comp.getSpriteSheet();
@@ -562,6 +570,6 @@ function loadTraining(){
     AdobeAn.compositionLoaded(lib.properties.id);
     fnStartAnimation();
   }
-  });
-  $("#pageTitle").text("Training");
+});
+$("#pageTitle").text("Training");
 }
