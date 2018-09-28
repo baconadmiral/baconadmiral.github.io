@@ -33,6 +33,9 @@ var convSim = function(sketch) {
 
   let headerOffset = $("#topNav").outerHeight();
 
+  let mouseSlower = false;//This is to prevent mouse bounces since we cant use mouse clicked
+  let mouseSlowerCtr = 0;
+
   sketch.setup = function() {
     sketch.frameRate(30);
     sketch.pixelDensity(1);
@@ -165,6 +168,16 @@ var convSim = function(sketch) {
         sketch.image(this.touchAppImg, 155, 75, 75, 75);
       }
     }
+    if(mouseSlower == true)
+    {
+      mouseSlowerCtr++;
+      if(mouseSlowerCtr > 30)
+      {
+        mouseSlower = false;
+        mouseSlowerCtr = 0;
+      }
+    }
+
   }
 
   function addWidget()
@@ -176,8 +189,12 @@ var convSim = function(sketch) {
 
   sketch.mousePressed = function()
   {
-    if(!pointer.onCheckStep)
-      pointer.advance();
+    if(mouseSlower == false)
+    {
+      mouseSlower = true;
+      if(!pointer.onCheckStep)
+        pointer.advance();
+    }
   }
 
 }
