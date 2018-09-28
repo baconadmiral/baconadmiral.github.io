@@ -69,7 +69,7 @@ var cPathSim = function(sketch) {
 
   }
 
-  sketch.mouseClicked = function()
+  sketch.onMousePressed = function()
   {
     for(let i = 0; i < gateBoxList.length; i++)
     {
