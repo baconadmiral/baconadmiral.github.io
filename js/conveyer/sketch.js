@@ -174,7 +174,7 @@ var convSim = function(sketch) {
     crateTimeout = setTimeout(addWidget, 1000/tSlider.value() );
   }
 
-  sketch.mouseClicked = function()
+  sketch.mousePressed = function()
   {
     if(!pointer.onCheckStep)
       pointer.advance();

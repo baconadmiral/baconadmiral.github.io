@@ -4,8 +4,6 @@ var cPathSim = function(sketch) {
   var defaultBoxSpacingWidth = 120;
   var defaultWidth = 60;
   var flowTotal = 0;
-  this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.png");
-
 
   sketch.setup = function() {
     sketch.frameRate(30);
@@ -69,7 +67,7 @@ var cPathSim = function(sketch) {
 
   }
 
-  sketch.onMousePressed = function()
+  sketch.mouseClicked = function()
   {
     for(let i = 0; i < gateBoxList.length; i++)
     {
