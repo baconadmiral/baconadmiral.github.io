@@ -5,7 +5,11 @@ var convSim = function(sketch) {
   let defaultTPTimeSec = 0.4;
   let can;
   this.widgetList = [];
-  this.conveyer = null;
+  var conveyer1;
+  var conveyer2;
+  var conveyer3;
+  var conveyer4;
+
   this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.png");
   this.buildingBack = sketch.loadImage("images/game/conveyerImgs/hangar2.png");
   this.building = sketch.loadImage("images/game/conveyerImgs/hangar.png");
@@ -82,6 +86,11 @@ var convSim = function(sketch) {
     pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
 
     pointer = new Pointer(sketch, pointerList, tSlider, fSlider);
+
+    conveyer1  = new ConveyerBelt(sketch, 0);
+    conveyer2  = new ConveyerBelt(sketch, (sketch.width/4) * 1);
+    conveyer3  = new ConveyerBelt(sketch, (sketch.width/4) * 2);
+    conveyer4  = new ConveyerBelt(sketch, (sketch.width/4) * 3);
   }
 
   sketch.draw = function() {
@@ -102,21 +111,21 @@ var convSim = function(sketch) {
     sketch.image(this.buildingBack, sketch.width/2 - this.buildingBack.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 30, this.buildingBack.width * (1/5 * fSlider.value()), this.buildingBack.height);
 
 
-    if(this.conveyer1 == null && typeof sketch.width != 'undefined')
+    /*if(this.conveyer1 == null && typeof sketch.width != 'undefined')
     {
       this.conveyer1  = new ConveyerBelt(sketch, 0);
       this.conveyer2  = new ConveyerBelt(sketch, (sketch.width/4) * 1);
       this.conveyer3  = new ConveyerBelt(sketch, (sketch.width/4) * 2);
       this.conveyer4  = new ConveyerBelt(sketch, (sketch.width/4) * 3);
-    }
+    }*/
 
-    if(typeof this.widgetList != 'undefined')
+    if(typeof this.widgetList != 'undefined' && typeof conveyer1 != 'undefined')
     {
 
-      this.conveyer1.update();
-      this.conveyer2.update();
-      this.conveyer3.update();
-      this.conveyer4.update();
+      conveyer1.update();
+      conveyer2.update();
+      conveyer3.update();
+      conveyer4.update();
 
 
       for(let i = 0; i < this.widgetList.length; i ++)
@@ -138,10 +147,10 @@ var convSim = function(sketch) {
     sketch.text((tSlider.value() * fSlider.value()).toFixed(2), sketch.width/2 - 25, sketch.height/2 + sketch.height/5 + 28)
 
     sketch.textSize(12);
-    sketch.text(fSlider.value() + " sec", sketch.width/2 - 20, (this.conveyer2.posY + 50));
+    sketch.text(fSlider.value() + " sec", sketch.width/2 - 20, (conveyer2.posY + 50));
     //sketch.text(tSlider.value() + " sec", sketch.width/2 - this.buildingBack.width/2 + (buildingShift/2) + this.buildingBack.width * (1/5 * fSlider.value())+15, sketch.height/2 + sketch.height/5 - this.building.height + 100);
 
-    sketch.text("Flowtime(F)", sketch.width/2 - 35, (this.conveyer2.posY + 70));
+    sketch.text("Flowtime(F)", sketch.width/2 - 35, (conveyer2.posY + 70));
     var flowLineY = sketch.height/2 + sketch.height/5 - this.building.height + 230;
     sketch.line(sketch.width/2 - this.building.width/2 + (buildingShift/2), flowLineY, sketch.width/2 - this.building.width/2 + (buildingShift/2), flowLineY-15);
     sketch.line(this.building.width + 105 * (1/5 * fSlider.value()), flowLineY, this.building.width + 105 * (1/5 * fSlider.value()), flowLineY-15);

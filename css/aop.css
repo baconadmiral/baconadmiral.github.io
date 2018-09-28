@@ -604,6 +604,14 @@ nav a.button-collapse{
   background-size:100% auto;
 }
 
+.conveyorBeltGameBackground{
+  background-image:url("svg/game2.png");
+  background-repeat: no-repeat;
+  background-size:100% auto; 
+  background-position-y:bottom;
+
+}
+
 .activityTitle{
   font-weight: bold; 
   /*color:#000;*/
