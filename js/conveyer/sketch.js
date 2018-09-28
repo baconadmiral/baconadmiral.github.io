@@ -30,11 +30,15 @@ var convSim = function(sketch) {
   let textSpacing;
 
   let pointer;
+  
+  let rotateMessage = "Please Rotate Screen \nto Portrait Mode"
 
   let headerOffset = $("#topNav").outerHeight();
 
   let mouseSlower = false;//This is to prevent mouse bounces since we cant use mouse clicked
   let mouseSlowerCtr = 0;
+  
+  let portraitMode = true;
 
   sketch.setup = function() {
     sketch.frameRate(30);
@@ -61,6 +65,7 @@ var convSim = function(sketch) {
     fSlider.position(((sketch.width/4) + 25) * xFactor, (425 * yFactor) + headerOffset);
     fSlider.size(sliderSize);
 
+    
     let pointerList = [];
     pointerList.push({posX : 15, posY : 40, text : "        To advance tap the screen                                                                                                                                                                                                                                                                                                                                                 ", pointerPos: "left"}); //Littles Law Intro
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Welcome to the Littles Law Simulator. This demonstration is intended to explain the basic concepts of Littles Law", pointerPos: "left"}); //Littles Law Intro
@@ -102,6 +107,8 @@ var convSim = function(sketch) {
   sketch.draw = function() {
     sketch.background(this.bgImg);
 
+
+    
     sketch.textFont(proFontWindows);
     sketch.textSize(12);
 
@@ -172,6 +179,18 @@ var convSim = function(sketch) {
         mouseSlowerCtr = 0;
       }
     }
+    
+    if(window.outerWidth > window.outerHeight)
+    {
+      portraitMode = false;
+      sketch.textSize(20);
+      sketch.rect(20, 20, 300, 70, 10);
+      sketch.text(rotateMessage, 30, 40);
+      
+    }
+    else {
+      portraitMode = true;
+    }
 
   }
 
@@ -184,7 +203,7 @@ var convSim = function(sketch) {
 
   sketch.mousePressed = function()
   {
-    if(mouseSlower == false)
+    if(mouseSlower == false && portraitMode == true)
     {
       mouseSlower = true;
       if(!pointer.onCheckStep)
