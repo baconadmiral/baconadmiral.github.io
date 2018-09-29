@@ -1,6 +1,7 @@
 const databaseName = "Calculations";
 const datastoreName = "calculations";
 const version = 1;
+const properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTimeType", "flowTimeType", "taktTimeType", "group"];
 const groupPropertyName = "group";
 
 /**
@@ -8,16 +9,11 @@ const groupPropertyName = "group";
 * and creates a list of records.
 */
 function notesFetchAllCalcGroups(){
-  itemDB.databaseExists(databaseName, version, datastoreName, function(datastoreExists){
-    if(datastoreExists){
-      itemDB.simpleOpen(databaseName, version, datastoreName, function() {
-        itemDB.fetchAll(datastoreName, function(myRecords){
-          buildCalcGroups(myRecords, groupPropertyName);
-        });
-      });
-    }
-  })
-
+  itemDB.open(databaseName, version, datastoreName, "", properties, true, function() {
+    itemDB.fetchAll(datastoreName, function(myRecords){
+      buildCalcGroups(myRecords, groupPropertyName);
+    });
+  });
 }
 
 /**
@@ -100,41 +96,41 @@ function displayCalcGroups(records){
 
     $('<div>', {							//<div class="row collapseGroup">
     class: "row collapseGroup"
-}).append( $('<ul>', {				//<ul class="collapsible " style="background-color:#eeeeee;">
-    class: "collapsible ",
-    style: "background-color:#eeeeee;"
+  }).append( $('<ul>', {				//<ul class="collapsible " style="background-color:#eeeeee;">
+  class: "collapsible ",
+  style: "background-color:#eeeeee;"
 }).append( $('<li>', {        //<li>
-  	id: i
+  id: i
 }).append( $('<div>', {				//<div id="groupA" class="col s10 collapsible-header"><b>All</b></div>
-    id: "group" + i,
-    class: "col s10 collapsible-header",
-    text: groupID
+id: "group" + i,
+class: "col s10 collapsible-header",
+text: groupID
 })).append( $('<div>', {			//<div class="col s1 headerCollapsible" style="padding:0">				</div>
-    class: "col s1 headerCollapsible",
-    style: "padding:0"
+class: "col s1 headerCollapsible",
+style: "padding:0"
 }).append( $('<img>', {				//<img src="css/svg/mail.svg" height="20px" width="20px" style="vertical-align:middle;">
-    src: "css/svg/mail.svg",
-    id: "mailImg",
-    style: "vertical-align:middle; width: 20px; height: 20px;",
-    onclick: "displayAlert();"
+src: "css/svg/mail.svg",
+id: "mailImg",
+style: "vertical-align:middle; width: 20px; height: 20px;",
+onclick: "displayAlert();"
 }))).append( $('<div>', {			//<div class="col s1 headerCollapsible" style="padding:0">			</div>
-    class: "col s1 headerCollapsible",
-    style: "padding:0"
+class: "col s1 headerCollapsible",
+style: "padding:0"
 }).append( $('<img>', {				//<img src="css/svg/trash.svg" height="20px" width="20px" style="vertical-align:middle;">
-    src: "css/svg/trash.svg",
-    id: "trashImg",
-    style: "vertical-align:middle; width: 20px; height: 20px;",
-    onclick: "displayAlert();"
+src: "css/svg/trash.svg",
+id: "trashImg",
+style: "vertical-align:middle; width: 20px; height: 20px;",
+onclick: "displayAlert();"
 }))).append( $('<div>', {			//<div class="col 12 collapsible-body collapseBody">
-    class: "col 12 collapsible-body collapseBody"
+class: "col 12 collapsible-body collapseBody"
 }).append( $('<ul>', {				//<ul id="groupName"></ul>
-    id: groupID
+id: groupID
 }))))).appendTo('#calculations');
-    $('.collapsible').collapsible();
-    for(var j = 0; j < records[i].length; j++){
-      createCalcListElement(records[i][j], groupID);
-    }
-  }
+$('.collapsible').collapsible();
+for(var j = 0; j < records[i].length; j++){
+  createCalcListElement(records[i][j], groupID);
+}
+}
 
 }
 
