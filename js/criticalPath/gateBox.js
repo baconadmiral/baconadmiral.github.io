@@ -37,7 +37,7 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     {
       this.animIndex++;
       
-      if(this.animIndex > 2)
+      if(this.animIndex >= imageOnList.length)
         this.animIndex = 0;
     }
     

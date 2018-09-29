@@ -13,7 +13,11 @@ var cPathSim = function(sketch) {
   let birdImgOff;
   let beakerImgList = [];
   let birdImgList = [];
-  let gumballImgList = []
+  let gumballImgList = [];
+  let pointer;
+  
+  this.touchAppImg = sketch.loadImage("images/game/conveyerImgs/touch_app.png");
+
 
   sketch.setup = function() {
     
@@ -72,6 +76,33 @@ var cPathSim = function(sketch) {
     sendBox.setWaitForBoxList(sendBoxWaitList);
     
     
+    ////////////
+    
+    //Pointer Setup//
+    
+    ///////////
+    
+    let pointerList = [];
+    pointerList.push({posX : 15, posY : 40, text : "        To advance tap the screen                                                                                                                                                                                                                                                                                                                                                 ", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Welcome to the Critical Path demonstration!", pointerPos: "left"}); //Intro
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Today we will be learning about the Critical Path", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "The Critical Path is the sequence of stages determining the minimum time needed for an operation to finish...", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "In other words it is the part of your process or chain of processes that takes the longest to complete", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "We can understand this by looking at the diagram below", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "This is a map of our process...", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "As you can see different items of work are performed at each stage of our process", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Each stage our of process can be referred to as a process machine with its own Flow time.", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "The Flow time is the time that it takes for one unit of work to go through that machine", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "In other words its the time it takes for the machine to take one unit input and produce one unit of output", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "In our process map the lines indicate which processes need to be completed before others can start", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try touching any process to observe how the flow occurs", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "In some cases a process may not be able to start unless other processes have already finished", pointerPos: "left"}); // Point to converging processes
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try to identify the Critical Path in our process map, remember it will be the path with the longest total flow time", pointerPos: "left"});
+
+
+
+    pointer = new Pointer(sketch, pointerList);
+    
   }
 
   sketch.draw = function() {
@@ -107,6 +138,16 @@ var cPathSim = function(sketch) {
         gateBoxList[i].wasPowered = false;
       }
     }
+    
+    if(typeof pointer != 'undefined')
+    {
+      pointer.update();
+
+      if(pointer.ctr == 0)
+      {
+        sketch.image(this.touchAppImg, 155, 75, 75, 75);
+      }
+    }
   }
 
 
@@ -124,10 +165,12 @@ var cPathSim = function(sketch) {
           {
             flowTotal += gateBoxList[i].flow;
             gateBoxList[i].powerOn();
-            
+            return;
           }
         }
       }
+      
+      pointer.advance();
       
     }
   }
@@ -145,6 +188,7 @@ var cPathSim = function(sketch) {
     birdImgList.push(sketch.loadImage("images/game/criticalPath/bird1.png"));
     birdImgList.push(sketch.loadImage("images/game/criticalPath/bird2.png"));
     birdImgList.push(sketch.loadImage("images/game/criticalPath/bird3.png"));
+    birdImgList.push(sketch.loadImage("images/game/criticalPath/bird4.png"));
     
     gumballImgOff = sketch.loadImage("images/game/criticalPath/gumballOff.png");
     
