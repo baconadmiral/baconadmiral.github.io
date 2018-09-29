@@ -14,7 +14,10 @@ var cPathSim = function(sketch) {
   let beakerImgList = [];
   let birdImgList = [];
   let gumballImgList = [];
+  let ferrisWheelImgOff;
+  let ferrisWheelImgList = [];
   let pointer;
+  let gateBoxesEnabled = true;
   
   this.touchAppImg = sketch.loadImage("images/game/conveyerImgs/touch_app.png");
 
@@ -32,7 +35,7 @@ var cPathSim = function(sketch) {
     var centerBox = sketch.width/2 - defaultWidth/2;
 
     //box list needs to be constructed backwards
-    sendBox = new GateBox(sketch, centerBox, 400, "Send", 2, beakerImgList, beakerImgOff, 25, 45, null, null);
+    sendBox = new GateBox(sketch, centerBox, 400, "Send", 2, ferrisWheelImgList, ferrisWheelImgOff, 35, 45, null, null);
     gateBoxList.push(sendBox);
 
     var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 2, beakerImgList, beakerImgOff,  25, 45, sendBox);
@@ -106,7 +109,11 @@ var cPathSim = function(sketch) {
   }
 
   sketch.draw = function() {
-    sketch.background(255);
+    
+    if(pointer.ctr > 11)
+      gateBoxesEnabled = true;
+      
+    sketch.background(178, 223, 218);
     
     for(let i = 0; i < gateBoxList.length; i++)
     {
@@ -155,17 +162,20 @@ var cPathSim = function(sketch) {
   {
     if(mouseSlower == false)
     {
-      mouseSlower = true;
       
-      for(let i = 0; i < gateBoxList.length; i++)
-      {
-        if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
+        mouseSlower = true;
+        if(gateBoxesEnabled)
         {
-          if(!gateBoxList[i].hasPower)
+        for(let i = 0; i < gateBoxList.length; i++)
+        {
+          if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
           {
-            flowTotal += gateBoxList[i].flow;
-            gateBoxList[i].powerOn();
-            return;
+            if(!gateBoxList[i].hasPower)
+            {
+              flowTotal += gateBoxList[i].flow;
+              gateBoxList[i].powerOn();
+              return;
+            }
           }
         }
       }
@@ -198,7 +208,12 @@ var cPathSim = function(sketch) {
     gumballImgList.push(sketch.loadImage("images/game/criticalPath/gumball4.png"));
     gumballImgList.push(sketch.loadImage("images/game/criticalPath/gumball5.png"));
 
-    
+    ferrisWheelImgOff = sketch.loadImage("images/game/criticalPath/ferris_wheel_off.png");
+    ferrisWheelImgList.push(sketch.loadImage("images/game/criticalPath/ferris_wheel_1.png"));
+    ferrisWheelImgList.push(sketch.loadImage("images/game/criticalPath/ferris_wheel_2.png"));
+    ferrisWheelImgList.push(sketch.loadImage("images/game/criticalPath/ferris_wheel_3.png"));
+    ferrisWheelImgList.push(sketch.loadImage("images/game/criticalPath/ferris_wheel_4.png"));
+
   }
 
 }
