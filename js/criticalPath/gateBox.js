@@ -20,14 +20,18 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
   
   this.imageScaleY = 45;
   this.imageScaleY = 25;
-
+  
+  this.wasPowered = false;
+  
   this.update = function()
   {
-
+    sketch.strokeWeight(1);
+    sketch.stroke(0, 0, 0);
     
+    sketch.rect(this.posX, this.posY, this.w, this.h, roundedCorner);
+
     sketch.textSize(12);
     sketch.text("Flow: " + this.flow + " s", this.posX + 5, this.posY + this.h-4);
-    //sketch.rect(this.posX, this.posY, this.w, this.h, roundedCorner);
     
     if(sketch.frameCount % 5 == 0)
     {
@@ -44,6 +48,13 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     else
       sketch.image(this.imageOff, this.posX + 14, this.posY, imgScaleWidth, imageScaleHeight);
 
+      if(this.wasPowered)
+      {
+        sketch.strokeWeight(3);
+        sketch.stroke(255, 255, 0);
+      }
+    
+    
     if(typeof afterBoxList != 'undefined' && afterBoxList != null)
     if($.isArray(afterBoxList))
     {
@@ -73,7 +84,7 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
         }
       }
     }
-  
+    
     if(startPower)
     {
       this.hasPower = true;
@@ -87,7 +98,8 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
   this.powerOff = function(refThis, afterBoxList)
   {
     refThis.hasPower = false;
-    
+    refThis.wasPowered = true;
+
     if(typeof afterBoxList != 'undefined')
     if($.isArray(afterBoxList))
     {
@@ -99,6 +111,7 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     else if(afterBoxList != null) {
       afterBoxList.powerOn();
     }
+    
   }
   
   this.setWaitForBoxList = function(waitForBoxList)

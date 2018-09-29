@@ -5,6 +5,7 @@ var cPathSim = function(sketch) {
   var defaultBoxSpacingWidth = 120;
   var defaultWidth = 60;
   var flowTotal = 0;
+  var sendBox;
   let mouseSlower = false;//This is to prevent mouse bounces since we cant use mouse clicked
   let mouseSlowerCtr = 0;
   let beakerImgOff;
@@ -27,7 +28,7 @@ var cPathSim = function(sketch) {
     var centerBox = sketch.width/2 - defaultWidth/2;
 
     //box list needs to be constructed backwards
-    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 2, beakerImgList, beakerImgOff, 25, 45, null, null);
+    sendBox = new GateBox(sketch, centerBox, 400, "Send", 2, beakerImgList, beakerImgOff, 25, 45, null, null);
     gateBoxList.push(sendBox);
 
     var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 2, beakerImgList, beakerImgOff,  25, 45, sendBox);
@@ -69,13 +70,13 @@ var cPathSim = function(sketch) {
     gateBoxList.push(receiveBox);
     
     sendBox.setWaitForBoxList(sendBoxWaitList);
-
-
+    
+    
   }
 
   sketch.draw = function() {
     sketch.background(255);
-
+    
     for(let i = 0; i < gateBoxList.length; i++)
     {
       gateBoxList[i].update();
@@ -83,6 +84,9 @@ var cPathSim = function(sketch) {
 
     sketch.fill(0);
     sketch.textSize(20);
+    sketch.stroke(0, 0, 0);
+    sketch.strokeWeight(1);
+
     sketch.text("Selected Flow: " + flowTotal, 130, 30);
 
     if(mouseSlower == true)
@@ -94,16 +98,17 @@ var cPathSim = function(sketch) {
         mouseSlowerCtr = 0;
       }
     }
-  }
-  
-  function startFlow()
-  {
-    //go backwards through list
-    for(let i = gateBoxList.length; i > 0; i--)
+    
+    //Reset power lines when animation is done
+    if(typeof sendBox != 'undefined' && sendBox.wasPowered == true)
     {
-      
+      for(let i = 0; i < gateBoxList.length; i++)
+      {
+        gateBoxList[i].wasPowered = false;
+      }
     }
   }
+
 
   sketch.mousePressed = function()
   {
