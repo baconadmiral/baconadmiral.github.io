@@ -17,7 +17,8 @@ var cPathSim = function(sketch) {
   let ferrisWheelImgOff;
   let ferrisWheelImgList = [];
   let pointer;
-  let gateBoxesEnabled = true;
+  let gateBoxesEnabled = false;
+  let pathSelectionEnabled = false;
   
   this.touchAppImg = sketch.loadImage("images/game/conveyerImgs/touch_app.png");
 
@@ -35,7 +36,7 @@ var cPathSim = function(sketch) {
     var centerBox = sketch.width/2 - defaultWidth/2;
 
     //box list needs to be constructed backwards
-    sendBox = new GateBox(sketch, centerBox, 400, "Send", 2, ferrisWheelImgList, ferrisWheelImgOff, 35, 45, null, null);
+    sendBox = new GateBox(sketch, centerBox, 400, "Send", 9, ferrisWheelImgList, ferrisWheelImgOff, 35, 45, null, null);
     gateBoxList.push(sendBox);
 
     var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 2, beakerImgList, beakerImgOff,  25, 45, sendBox);
@@ -94,15 +95,14 @@ var cPathSim = function(sketch) {
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "We can understand this by looking at the diagram below", pointerPos: "left"});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "This is a map of our process...", pointerPos: "left"});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "As you can see different items of work are performed at each stage of our process", pointerPos: "left"});
-    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Each stage our of process can be referred to as a process machine with its own Flow time.", pointerPos: "left"});
-    pointerList.push({posX : (sketch.width/12), posY : 40, text : "The Flow time is the time that it takes for one unit of work to go through that machine", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Each stage our of process can be referred to as a process machine with its own Flow time.", pointerPos: "left", pointerPos: "center", pointerXOffset: 35, pointerYOffset: 30, pointerRotation:"left"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "The Flow time is the time that it takes for one unit of work to go through that machine", pointerPos: "left", pointerPos: "center", pointerXOffset: -50, pointerYOffset: 30, pointerRotation:"right"});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "In other words its the time it takes for the machine to take one unit input and produce one unit of output", pointerPos: "left"});
-    pointerList.push({posX : (sketch.width/12), posY : 40, text : "In our process map the lines indicate which processes need to be completed before others can start", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 140, text : "In our process map the lines indicate which processes need to be completed before others can start", pointerPos: "center", pointerXOffset: -26, pointerYOffset: 50, pointerRotation:"right"});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try touching any process to observe how the flow occurs", pointerPos: "left"});
-    pointerList.push({posX : (sketch.width/12), posY : 40, text : "In some cases a process may not be able to start unless other processes have already finished", pointerPos: "left"}); // Point to converging processes
+    pointerList.push({posX : (sketch.width/12), posY : 340, text : "In some cases a process may not be able to start unless other processes have already finished", pointerPos: "center", pointerXOffset: -26, pointerYOffset: 25, pointerRotation:"right"}); // Point to converging processes
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try to identify the Critical Path in our process map, remember it will be the path with the longest total flow time", pointerPos: "left"});
-
-
+    pointerList.push({endText : true}); //Increase throughput
 
     pointer = new Pointer(sketch, pointerList);
     
@@ -164,20 +164,30 @@ var cPathSim = function(sketch) {
     {
       
         mouseSlower = true;
-        if(gateBoxesEnabled)
-        {
+        
         for(let i = 0; i < gateBoxList.length; i++)
         {
           if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
           {
-            if(!gateBoxList[i].hasPower)
+            if(gateBoxesEnabled)
             {
-              flowTotal += gateBoxList[i].flow;
-              gateBoxList[i].powerOn();
-              return;
+              if(!gateBoxList[i].hasPower)
+              {
+                gateBoxList[i].powerOn();
+                return;
+              }
+            }
+            if(pathSelectionEnabled)
+            {
+              if(!gateBoxList[i].hasPower)
+              {
+                flowTotal += gateBoxList[i].flow;
+                gateBoxList[i].selectBox();
+                return;
+              }
             }
           }
-        }
+        
       }
       
       pointer.advance();
