@@ -128,6 +128,7 @@ var cPathSim = function(sketch) {
     pointerList.push({endText : true, onCheckStep: true, checkFor: "correctCriticalPath"});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Incorrect Please Try Again...", pointerPos: "left", endText: false});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Good Job! You have identified the Critical Path!", pointerPos: "left", endText: false});
+    pointerList.push({endText : true}); 
 
 
     pointer = new Pointer(sketch, pointerList);
@@ -135,6 +136,15 @@ var cPathSim = function(sketch) {
   }
 
   sketch.draw = function() {
+    
+    if(pointer.ctr == 15)
+    {
+      //clear wasPowered
+      for(let i = 0; i < gateBoxList.length; i++)
+      {
+        gateBoxList[i].wasPowered = false;
+      }
+    }
     
     if(pointer.ctr > 11 && pointer.ctr < 13)
       gateBoxesEnabled = true;
