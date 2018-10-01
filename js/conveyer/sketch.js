@@ -89,7 +89,7 @@ var convSim = function(sketch) {
     pointerList.push({posX : 50, posY : 360, text : "Notice that the WIP is reduced", pointerRotation: "right", pointerXOffset: -65, pointerYOffset: -7, pointerPos: "center"}); //Reduce Flowtime
 
     pointerList.push({posX : 50, posY : 80, text : "The other way is to increase our throughput"});
-    pointerList.push({posX : 30, posY : 160, text : "Try increasing the throughput to 0.7 ", onCheckStep: true, checkFor: "throughput", pointerXOffset: -40, pointerYOffset: -10, pointerPos: "right", pointerRotation: "down"});
+    pointerList.push({posX : 30, posY : 130, text : "Try increasing the throughput to 0.7 ", onCheckStep: true, checkFor: "throughput", pointerXOffset: -40, pointerYOffset: -10, pointerPos: "right", pointerRotation: "down"});
     //add Throughput check
     pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
     pointerList.push({posX : 50, posY : 80, text : "Play with the sliders and see how changing the Throughput and Flowtime affect WIP"}); //Increase throughput
