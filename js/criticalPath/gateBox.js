@@ -2,6 +2,7 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
 {
   this.hasPower = false;
   this.waitForBoxList;
+  this.selected = false;
     
   this.posX = posX;
   this.posY = posY;
@@ -28,11 +29,19 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     sketch.strokeWeight(1);
     sketch.stroke(0, 0, 0);
     
+    if(this.selected)
+    {
+      sketch.fill(255, 255, 102);
+    }
+    else {
+      sketch.fill(255);
+    }    
     sketch.rect(this.posX, this.posY, this.w, this.h, roundedCorner);
 
+    sketch.fill(0);
     sketch.textSize(12);
     sketch.text("Flow: " + this.flow + " s", this.posX + 5, this.posY + this.h-4);
-    
+
     if(sketch.frameCount % 5 == 0)
     {
       this.animIndex++;
@@ -69,6 +78,11 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     }
   }
   
+  this.selectBox = function()
+  {
+    this.selected = !this.selected;
+  }
+  
   this.powerOn = function()
   {    
     var refThis = this;
@@ -78,7 +92,7 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     {
       for(let i = 0; i < this.waitForBoxList.length; i++)
       {
-        if(this.waitForBoxList[i].hasPower)
+        if(!this.waitForBoxList[i].wasPowered)
         {
           startPower = false;
         }

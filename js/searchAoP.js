@@ -5,9 +5,9 @@
 * properties - all of the attributes for a SearchTerm DB objectStore
 * [ terms - the string of values searched for
 *   domains - a list of domains searched through.
-*    [  acronyms - true/false
-*       glossary - true/false
-*       handbook - true/false
+*    [  "acronyms",
+*       "glossary",
+*       "handbook"
 *       *** may modify amount of domains in future ***
 *    ]
 * ]
@@ -217,18 +217,9 @@ function displaySearchesInBinder() {
       }).append( $('<li>', {
       }).append( $('<div>', {
         id: result.id,
-        class:  "col s10 collapsible-header",
+        class:  "col s11 collapsible-header",
         text: result.terms
       })).append( $('<div>', {
-        class: "col s1 headerCollapsible",
-        style: "padding:0"
-      }).append( $('<input>', {
-        type: "checkbox",
-        id: "searchBox" + result.id
-      })).append( $('<label>', {
-        for: "searchBox" + result.id,
-        style: "vertical-align:middle;"
-      }))).append( $('<div>', {
         class: "col s1 headerCollapsible",
         style: "padding:0"
       }).append( $('<img>', {
@@ -262,4 +253,4 @@ function deleteSearchItem(searchId) {
 }
 
 
-openSearchDB();
+//openSearchDB();

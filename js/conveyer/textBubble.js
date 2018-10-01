@@ -10,6 +10,8 @@ function TextBubble(sketch)
 
   this.update = function(posX, posY, text, position)
   {
+    sketch.strokeWeight(1);
+    sketch.stroke(0,0,0);
     posX += 40;
     posY -= 35;
     let outText = this.spaceOutText(text);

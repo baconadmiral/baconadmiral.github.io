@@ -120,7 +120,7 @@ style: "padding:0"
 src: "css/svg/trash.svg",
 id: "trashImg",
 style: "vertical-align:middle; width: 20px; height: 20px;",
-onclick: "displayAlert();"
+onclick: "removeGroup(" + i + ")"
 }))).append( $('<div>', {			//<div class="col 12 collapsible-body collapseBody">
 class: "col 12 collapsible-body collapseBody"
 }).append( $('<ul>', {				//<ul id="groupName"></ul>
@@ -132,6 +132,18 @@ for(var j = 0; j < records[i].length; j++){
 }
 }
 
+}
+
+function removeGroup(groupID){
+  var groupStringId = "#group" + groupID;
+  var groupText = $(groupStringId).text();
+  var groupProperty = ""
+  if(groupText != "No Group"){
+    groupProperty = groupText;
+  }
+  itemDB.deleteWithoutKey(databaseName, datastoreName, "group", groupProperty, function(){
+    notesFetchAllCalcGroups();
+  })
 }
 
 /**

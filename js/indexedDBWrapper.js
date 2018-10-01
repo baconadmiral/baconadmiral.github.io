@@ -228,7 +228,7 @@ iDB.fetchAll = (datastoreName, callback) => {
     }
 
     items.push(cursor.value);
-    console.log("added to 'items' " + JSON.stringify(cursor.value));
+    //console.log("added to 'items' " + JSON.stringify(cursor.value));
     cursor.continue();
   };
 
@@ -300,6 +300,43 @@ iDB.deleteItem = function(datastoreName, key, callback) {
   request.onerror = function(e) {
     console.log(e);
   }
+};
+
+iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, callback) {
+  var db = datastores[datastoreName];
+  var transaction = db.transaction([datastoreName], "readwrite");
+  var store       = transaction.objectStore(datastoreName);
+  var index       = store.index(property);
+  var request     = index.openCursor(IDBKeyRange.only(value));
+
+  request.onsuccess = function() {
+    var cursor = request.result;
+
+    if (cursor) {
+        cursor.delete();
+        cursor.continue();
+    }
+  };
+  callback();
+}
+
+iDB.updateItemById = (datastoreName, id, item, callback) => {
+  console.log("updating item by ID");
+  let db = datastores[datastoreName];
+  let transaction = db.transaction([datastoreName], 'readwrite');
+  let objStore = transaction.objectStore(datastoreName);
+
+  item.id = id;
+
+  let request = objStore.put(item);
+
+  request.onsuccess = () => {
+    callback();
+  };
+
+  request.onerror = (e) => {
+    console.log(e);
+  };
 };
 
 /**

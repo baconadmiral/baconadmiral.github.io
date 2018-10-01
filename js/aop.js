@@ -79,6 +79,8 @@ function loadSlide(n){
   clearColor();
   closeSidenav();
   $("#pageTitle").text('AOP Slides');
+  $("#app_cont").addClass("slideScreenHide");
+
   animateArrow();
   $("#app_cont").load("content/slideScreen.html", function()
   {
@@ -214,6 +216,22 @@ function loadSearchModal(){
 
   }
 
+  function loadQuizModal() {
+
+    $("#quiz_content").load("content/quiz.html");
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+    $("#quiz_content").css('padding-top','0px');
+
+    $(document).ready(function(){
+      $('#quizModal').modal();
+    });
+
+    $('#quizModal').modal({
+      dismissible:false
+    });
+    $('#quizModal').modal('open');
+  }
+
   function loadResources(){
     clearColor();
     closeGame();
@@ -243,6 +261,7 @@ function loadNewsletter(){
   closeSidenav();
   $("#app_cont").load("content/newsletter.html");
   $("#pageTitle").text("Archived Newsletters");
+  animateArrow();
 }
 
 function loadAboutUs(){
@@ -278,8 +297,6 @@ function closeGame() {
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
     gameCleanup(exportRoot,'app_cont');
   }
-
-
 }
 
 function loadGame(){
@@ -300,6 +317,7 @@ function loadGame2(){
   $(function(){
     $("#app_cont").empty();
     $("html").css('background-color', '#39b54a');
+    $("#app_cont").css('background-color', '#39b54a');
     $("#app_cont").css('background-image', 'linear-gradient(180deg, #00e5ff 50%, #39b54a 50%)');
     car_S = new p5(convSim,'app_cont');
   });
@@ -312,6 +330,8 @@ function loadGame3(){
   animateActivityArrow();
   $(function(){
     $("#app_cont").empty();
+    $("html").css('background-color', '#B2DFDA');
+    $("#app_cont").css('background-color', '#B2DFDA');
     car_S = new p5(cPathSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
@@ -337,6 +357,7 @@ function loadLandscapeModal(){
 
 }
 
+
 function loadCharts()
 {
   clearColor();
@@ -344,6 +365,18 @@ function loadCharts()
   closeSidenav();
   $("#app_cont").load("content/charts.html");
   $("#pageTitle").text("Charts");
+}
+
+function loadBarChart() {
+  animateArrow();
+  $("#app_cont").load("content/gatebar.html");
+  $("#pageTitle").text("Process Machine Chart");
+}
+
+function loadTableChart() {
+  animateArrow();
+  $("#app_cont").load("content/machinetable.html");
+  $("#pageTitle").text("Gate Performance Chart");
 }
 
 function loadTemplate(){
@@ -423,7 +456,6 @@ function animateActivityArrow()
 
 function clickBackToActivity()
 {
-
   var burger1 = document.getElementById("bur1");
   var burger3 = document.getElementById("bur3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
@@ -436,6 +468,7 @@ function clickBackToActivity()
   $("html").css('background-color', 'unset');
   $("#app_cont").css('background-color', 'none');
   $("#app_cont").css('background-image', 'none');
+
 }
 
 function clickBackToResources()
@@ -448,7 +481,24 @@ function clickBackToResources()
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+  portraitStyle();
 
+
+}
+
+function portraitStyle()
+{
+    $("#mobileFooter").css('display', 'unset');
+      $("#sliderScreen").css('margin-top', '0px');
+      $(".footerIcons").css('display', 'unset');
+      $(".page-footer").css('display', 'unset');
+      $("nav").css('height', '56px');
+      $("nav").css('transition', 'none');
+      $(".imageStyle").css('background-size', 'contain');
+      $(".myProgress").css('bottom', '65px');
+       $('nav').hover(function() {
+      $(this).stop().css('height','56px')
+      })
 }
 
 function resetActivityArrow()
