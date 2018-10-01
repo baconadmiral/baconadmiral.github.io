@@ -163,7 +163,7 @@
 
 .quizBody {padding: 2px 16px;}
 </style> -->
-<!-- <button id="testQuiz" href="javaScript:(loadQuizModal())">Test Quiz Engine</button> -->
+<button id="testQuiz" href="javaScript:(loadQuizModal())">Test Quiz Engine</button>
 <!-- <div class="quizModal" id="testQuizModal"
   style="display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -205,27 +205,27 @@
     });
   });
 
-  // let button = document.getElementById("testQuiz");
+   let button = document.getElementById("testQuiz");
   // // let modal = document.getElementById("modal_quiz");
   // let close = document.getElementById('closeQuiz');
   //
-  // button.onclick = () => {
-  //
-  //   // modal.style.display = "block";
-  //   loadQuizModal();
-  //   setupQuiz();
-  // }
+  button.onclick = () => {
+
+    // modal.style.display = "block";
+    loadQuizModal();
+    setupQuiz();
+  }
   //
   // close.onclick = () => {
   //   modal.style.display = "none";
   // }
   //
-  // openQuestionsNScores();
-  // function setupQuiz() {
-  //   //document.getElementById().style.display = "block";
-  //   console.log("in quiz setup!");
-  //   setupQuestions('Art of the Possible', 2, (questions) => {
-  //     createQuiz(questions);
-  //   });
-  // }
+  openQuestionsNScores();
+  function setupQuiz() {
+    //document.getElementById().style.display = "block";
+    console.log("in quiz setup!");
+    setupQuestions('Art of the Possible', 2, (questions) => {
+      createQuiz(questions);
+    });
+  }
 </script>

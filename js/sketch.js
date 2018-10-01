@@ -68,6 +68,11 @@ var carSim = function(sketch) {
 
   sketch.setup = function() {
     openQuestionsNScores();
+    loadQuizModal();
+
+    setupQuestions('Flow Time', 3, (questions) => {
+      createQuiz(questions);
+    });
 
     sketch.frameRate(30);
     proFontWindows = sketch.loadFont("font/ProFontWindows.ttf")

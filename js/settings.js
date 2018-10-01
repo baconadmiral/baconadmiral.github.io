@@ -10,7 +10,7 @@ let userInfoDSName = "UserInfo";
 let userInfoVersion = 1;
 let userInfoProp = ["name", "primaryEmail", "secondaryEmail", "decimalPrecision"];
 
-function openUserInfoDB() {
+function openUserInfoDBset() {
   itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, () => {
     console.log(userInfoDBName + " database opened...");
 
@@ -20,9 +20,16 @@ function openUserInfoDB() {
         document.getElementById("name").value = results[0].name;
         document.getElementById("email_primary").value = results[0].primaryEmail;
         document.getElementById("email_secondary").value = results[0].secondaryEmail;
+        document.getElementById(results[0].decimalPrecision).checked = "checked";
         Materialize.updateTextFields();
       }
     })
+  });
+}
+
+function openUserInfoDB() {
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, () => {
+    console.log(userInfoDBName + " database opened...");
   });
 }
 

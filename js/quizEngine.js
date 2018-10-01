@@ -34,7 +34,7 @@ function openQuestionsNScores() {
 function dummyQuestions () {
 	let quizQuestions = [];
 	quizQuestions.push({
-		"Subject": "",
+		"Subject": "Little's Law",
 		"Topic": "Wall Walks",
 		"Question": "What is a constraint?",
 		"Answers": [
@@ -47,7 +47,7 @@ function dummyQuestions () {
 	});
 
 	quizQuestions.push({
-		"Subject": "",
+		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is takt time?",
 		"Answers": [
@@ -60,7 +60,7 @@ function dummyQuestions () {
 	});
 
 	quizQuestions.push({
-		"Subject": "",
+		"Subject": "Little's Law",
 		"Topic": "Wall Walks",
 		"Question": "What is a Wall Walk?",
 		"Answers": [
@@ -73,7 +73,7 @@ function dummyQuestions () {
 	});
 
 	quizQuestions.push({
-		"Subject": "",
+		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is the equation for evaluating Takt Time?",
 		"Answers": [
@@ -86,7 +86,7 @@ function dummyQuestions () {
 	});
 
 	quizQuestions.push({
-		"Subject": "",
+		"Subject": "Little's Law",
 		"Topic": "The Process Machine",
 		"Question": "Are queued assets good or bad for the machine? Why?",
 		"Answers": [
@@ -99,18 +99,41 @@ function dummyQuestions () {
 	});
 
 	quizQuestions.push({
-		"Subject": "",
-		"Topic": "The Process Machine",
-		"Question": "Are queued assets good or bad for the machine? Why?",
+		"Subject": "Little's Law",
+		"Topic": "Flow Time",
+		"Question": "Given that there is a set amount of cars queued in front of the gate.  How would you reduce the flow time of each car?",
 		"Answers": [
-			"Good: it identifies a constraint",
-			"Bad: because there is a constraint in the machine",
-			"Bad: queue is waste",
-			"Both: It does create waste, but it also identifies a constraint"
+			"Tell them to go home",
+			"Open another gate to allow more cars to get through",
+			"There is nothing you can do to improve flow time"
 		],
-		"CorrectAnswers": ["Both: It does create waste, but it also identifies a constraint"]
+		"CorrectAnswers": ["Open another gate to allow more cars to get through"]
 	});
 
+  quizQuestions.push({
+		"Subject": "Little's Law",
+		"Topic": "Flow Time",
+		"Question": "Given that all the gates are open, what would happen to throughput if you close all but one gate?",
+		"Answers": [
+			"Nothing. It stays the same",
+			"It increases",
+			"It decreases",
+      "It will decrease or increase depending on something else"
+		],
+		"CorrectAnswers": ["It decreases"]
+	});
+
+  quizQuestions.push({
+    "Subject": "Little's Law",
+    "Topic": "Flow Time",
+    "Question": "Opening more gates will:",
+    "Answers": [
+      "Increase flow time",
+      "Decrease flow time",
+      "Have no affect"
+    ],
+    "CorrectAnswers": ["Decrease flow time"]
+  });
 
 	return quizQuestions;
 }
