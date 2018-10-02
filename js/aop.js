@@ -340,11 +340,7 @@ function loadGame3(){
     $("#app_cont").empty();
     $("html").css('background-color', '#B2DFDA');
     $("#app_cont").css('background-color', '#B2DFDA');
-    if(typeof c_PathSim != 'undefined' && c_PathSim !== null)
-      c_PathSim = new p5(cPathSim,'app_cont');
-    else {
-      cPathSim.loop();
-    }
+    c_PathSim = new p5(cPathSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
 }
