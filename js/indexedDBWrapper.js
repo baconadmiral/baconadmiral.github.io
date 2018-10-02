@@ -149,7 +149,7 @@ var itemDB = ( function() {
       callback(request.result);
     };
     transaction.onsuccess = function(e) {
-      console.log('Request successful...');
+      //console.log('Request successful...');
     };
     request.onerror = iDB.onerror;
   };
@@ -174,7 +174,7 @@ var itemDB = ( function() {
    };
 
    transaction.onsuccess = function(e) {
-     console.log('Request successful...');
+     //console.log('Request successful...');
    };
 
    request.onerror = iDB.onerror;
@@ -199,7 +199,7 @@ iDB.fetchOneByKey = function(datastoreName, key, callback) {
   };
 
   transaction.onsuccess = function(e) {
-    console.log('Request successful...');
+    //console.log('Request successful...');
   };
 
   request.onerror = iDB.onerror;
@@ -252,7 +252,7 @@ iDB.fetchAll = (datastoreName, callback) => {
 * callback - function to call once the database has been opened.
 */
 iDB.createItem = function(datastoreName, item, callback) {
-  console.log("In createItem of " + datastoreName + "...");
+  //console.log("In createItem of " + datastoreName + "...");
   // Get a reference to the db.
   var db = datastores[datastoreName];
 
@@ -271,7 +271,7 @@ iDB.createItem = function(datastoreName, item, callback) {
   // Handle a successful datastore put.
   request.onsuccess = function(e) {
     // Execute the callback function.
-    console.log("creation successful...");
+    //console.log("creation successful...");
     callback("Create Item");
   };
 
@@ -321,7 +321,7 @@ iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, c
 }
 
 iDB.updateItemById = (datastoreName, id, item, callback) => {
-  console.log("updating item by ID");
+  //console.log("updating item by ID");
   let db = datastores[datastoreName];
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
@@ -360,7 +360,7 @@ iDB.updateItem = (datastoreName, key_path, key, item, callback) => {
       if(cursor.value[key_path] === key){
         var request = cursor.update(item);
         request.onsuccess = () => {
-          console.log('Update Successful');
+          //console.log('Update Successful');
           callback("Update");
         };
         request.onerror = (e) => {

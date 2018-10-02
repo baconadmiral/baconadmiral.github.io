@@ -295,15 +295,15 @@ function closeGame() {
   }
   
   if(typeof conv_Sim != 'undefined' && conv_Sim !== null) {
-    gameCleanup(convSim,'app_cont');
+    gameCleanup(conv_Sim,'app_cont');
   }
   
   if(typeof c_PathSim != 'undefined' && c_PathSim !== null) {
-    gameCleanup(cPathSim,'app_cont');
+    gameCleanup(c_PathSim,'app_cont');
   }
 
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
-    gameCleanup(exportRoot,'app_cont');
+    gameCleanupCar(exportRoot,'app_cont');
   }
 }
 

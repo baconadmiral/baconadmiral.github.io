@@ -76,6 +76,7 @@ function buildCalcFormula(record){
 * records - collection of categorized records to display
 */
 function displayCalcGroups(records){
+  document.getElementById("savedCalculations").innerHTML = "";
   if(records[0] != null){
     document.getElementById("calculationsBlurb").style.display = "none";
   }
@@ -125,7 +126,7 @@ onclick: "removeGroup(" + i + ")"
 class: "col 12 collapsible-body collapseBody"
 }).append( $('<ul>', {				//<ul id="groupName"></ul>
 id: groupID
-}))))).appendTo('#calculations');
+}))))).appendTo('#savedCalculations');
 $('.collapsible').collapsible();
 for(var j = 0; j < records[i].length; j++){
   createCalcListElement(records[i][j], groupID);

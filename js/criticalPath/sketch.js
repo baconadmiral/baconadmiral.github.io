@@ -358,5 +358,4 @@ var cPathSim = function(sketch) {
     ferrisWheelImgList.push(sketch.loadImage("images/game/criticalPath/ferris_wheel_4.png"));
 
   }
-
 }

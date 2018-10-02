@@ -102,20 +102,24 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
 
  function setPrecision() {
    getUserInfo( (info) => {
-     switch (info.decimalPrecision) {
-       case "precision0":
-       precision = 1;
-       break;
-       case "precision1":
-       precision = 10;
-       break;
-       case "precision2":
-       precision = 100;
-       break;
-       case "precision3":
-       default:
+     if (info != null) {
+       switch (info.decimalPrecision) {
+         case "precision0":
+         precision = 1;
+         break;
+         case "precision1":
+         precision = 10;
+         break;
+         case "precision2":
+         precision = 100;
+         break;
+         case "precision3":
+         default:
+         precision = 1000;
+         break;
+       }
+     } else {
        precision = 1000;
-       break;
      }
      console.log("Rounding Precision set to: " + precision);
    });

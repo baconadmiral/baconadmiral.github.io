@@ -1,6 +1,6 @@
 const questionDBName = "Questions";
 const questionDSName = "questions";
-const questionVersion = 1;
+const questionVersion = 2;
 const questionIndecies = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
@@ -159,7 +159,7 @@ function dummyQuestions () {
 
 function setupQuestions (topic, numQuestions, callback) {
 	// grab all questions in topic from database.
-	console.log("In setupQuestions");
+	//console.log("In setupQuestions");
 	itemDB.fetchAllByQuery(questionDSName, "Topic", topic, (results) => {
 	 	//TODO: shuffle the results.
 
@@ -169,8 +169,8 @@ function setupQuestions (topic, numQuestions, callback) {
 }
 
 function createQuiz (questions) {
-	console.log("In createQuiz");
-	console.log(questions);
+	//console.log("In createQuiz");
+	//console.log(questions);
 	// local score variables
 	score = {"Subject": questions[0].Subject,
 		"Topic": questions[0].Topic,
@@ -221,7 +221,7 @@ function createQuiz (questions) {
 
 
 	//determine answers and update score.
-	console.log(JSON.stringify(questions[counter]));
+	//console.log(JSON.stringify(questions[counter]));
 	nextQuestion(questions[counter].id);
 
 	document.getElementById("submitQuestionButton").addEventListener("click", function(){
