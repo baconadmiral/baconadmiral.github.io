@@ -303,7 +303,7 @@ function closeGame() {
   }
 
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
-    gameCleanupCar(exportRoot,'app_cont');
+    gameCleanup(exportRoot,'app_cont');
   }
 }
 
