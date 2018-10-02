@@ -293,6 +293,14 @@ function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
     gameCleanup(car_S,'app_cont');
   }
+  
+  if(typeof conv_Sim != 'undefined' && conv_Sim !== null) {
+    gameCleanup(convSim,'app_cont');
+  }
+  
+  if(typeof c_PathSim != 'undefined' && c_PathSim !== null) {
+    gameCleanup(cPathSim,'app_cont');
+  }
 
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
     gameCleanup(exportRoot,'app_cont');
@@ -319,7 +327,7 @@ function loadGame2(){
     $("html").css('background-color', '#39b54a');
     $("#app_cont").css('background-color', '#39b54a');
     $("#app_cont").css('background-image', 'linear-gradient(180deg, #00e5ff 50%, #39b54a 50%)');
-    car_S = new p5(convSim,'app_cont');
+    conv_Sim = new p5(convSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
 }
@@ -332,7 +340,7 @@ function loadGame3(){
     $("#app_cont").empty();
     $("html").css('background-color', '#B2DFDA');
     $("#app_cont").css('background-color', '#B2DFDA');
-    car_S = new p5(cPathSim,'app_cont');
+    c_PathSim = new p5(cPathSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
 }
