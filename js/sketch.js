@@ -1,4 +1,11 @@
 var carSim = function(sketch) {
+  
+  loadQuizModal();
+
+  setupQuestions('Flow Time', 3, (questions) => {
+    createQuiz(questions);
+  });
+  
   var bgcolor;
   var throughputSlider;
   var arrivalRateSlider;
@@ -67,11 +74,7 @@ var carSim = function(sketch) {
   let canvasElt;
 
   sketch.setup = function() {
-    loadQuizModal();
-
-    setupQuestions('Flow Time', 3, (questions) => {
-      createQuiz(questions);
-    });
+    
 
     sketch.frameRate(30);
     proFontWindows = sketch.loadFont("font/ProFontWindows.ttf")
@@ -443,13 +446,4 @@ function setupQuestion2(popup)
   popup.plyBtnSprite.visible = true;
   popup.value3Units = "Gates";
   popup.clickOpen();
-}
-
-
-
-function removeAllCars()
-{
-
-
-
 }
