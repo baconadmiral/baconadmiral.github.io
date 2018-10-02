@@ -76,7 +76,9 @@ function buildBarChartTable() {
   var rowLegend = [ null, "Remaining Days", "Actual Days", "Total Days", "Last 5 Avg.", "Requirement" ];
   var rowValues = [ barChartInput.xAxisCategories, barChartInput.remainingDays, barChartInput.actualDays, barChartInput.totalDays, barChartInput.last5Avg, barChartInput.requirement ];
 
+
   legendTable = document.getElementById("barchart_legendTable");
+  legendTable.innerHTML = "";
 
   for (let r = 0; r < rowLegend.length; r++) {
     let row;
@@ -88,7 +90,7 @@ function buildBarChartTable() {
       row.style.height = '25px';
     }
 
-    appendTds(row, rowLegend[r], rowValues[r], r);
+    appendBarTds(row, rowLegend[r], rowValues[r], r);
 
     legendTable.appendChild(row);
   }
@@ -98,7 +100,7 @@ function buildBarChartTable() {
   }
 }
 
-function appendTds(row, rowLabel, rowData, index) {
+function appendBarTds(row, rowLabel, rowData, index) {
   /*var style = {
   border : "1px solid black"
 };*/

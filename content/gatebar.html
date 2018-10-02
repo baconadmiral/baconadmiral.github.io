@@ -38,7 +38,7 @@
           </form>
         </div>
         <div class="row" style="margin-bottom:0">
-          <div id="barchart_save_chart_properties_btn" class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" disabled="disabled" style="background:#0EABDA;" onclick="gateValues();">Next</div>
+          <div id="barchart_save_chart_properties_btn" class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" disabled="disabled" style="background:#0EABDA;" onclick="barGateValues();">Next</div>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
 		<p id="barchart_status_msg" class="hidden_toggle" style="float: auto;color:Black; font-size:30px">Gathering your
 			Data...</p>
 	</div>
-	<div id="barchart_container" style="visibility: hidden">
+	<div id="barchart_container" style="visibility: hidden; overflow-x: auto;">
 		<table style="width:100%;text-align:center">
 			<tr>
 				<td style="width:15%;"></td>
@@ -102,6 +102,11 @@
 			</td>
 			</tr>
 		</table>
+    <div class="col s10">
+      <div class="col s2">
+        <input type="button" class="mouse_point waves-effect waves-light btn calculatorButton" value="Go Back" onclick="returnToBarChartList();"style="float: right;">
+      </div>
+    </div>
 	</div>
  </div>
 

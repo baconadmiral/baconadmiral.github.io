@@ -9,23 +9,40 @@ var wipTableTdWidth;
 
 function showGateTableChart(chartObj){
   getTableChartData(chartObj);
-  // onReady(function() {
-  //   show('gate_chart', true);
-  // });
+  document.getElementById("table_chart_title").innerText = chartObj.name;
+
   buildTableChartTable();
 }
 
 function getTableChartData(chartObj) {
-    input = {
-            availableDays : 365,
-            requiredOutput: 480,
-            tact: .76,
-            gates: [['Gate 1 (Init Inv)',1.3,1],
-            ['Gate 2 (Classify)',7.9,6],
-            ['Gate 3 (Inv)',6.6,5],
-            ['Gate 4 (Report)',6.6,5],
-            ['Gate 5 (Rel of Rep)',6.6,5]]
-        };
+  var gateItem = [];
+  var gateSet = [];
+  chartObj.gates.forEach((gate) => {
+    gateItem.push(gate.title);
+    var nWip = parseFloat(gate.wip).toFixed(5);
+    gateItem.push(parseFloat(nWip));
+    var nFlow = parseFloat(gate.flowdays).toFixed(5);
+    gateItem.push(parseFloat(nFlow));
+    gateSet.push(gateItem);
+    gateItem = [];
+  });
+
+  input = {
+          availableDays : parseFloat(chartObj.availDays),
+          requiredOutput: parseFloat(chartObj.reqOutput),
+          tact: parseFloat(chartObj.takt),
+          gates: gateSet
+      };
+    // input = {
+    //         availableDays : 365,
+    //         requiredOutput: 480,
+    //         tact: .76,
+    //         gates: [['Gate 1 (Init Inv)',1.3,1],
+    //         ['Gate 2 (Classify)',7.9,6],
+    //         ['Gate 3 (Inv)',6.6,5],
+    //         ['Gate 4 (Report)',6.6,5],
+    //         ['Gate 5 (Rel of Rep)',6.6,5]]
+    //     };
 
     computeInputChanges();
 }
@@ -76,7 +93,9 @@ function computeInputChanges() {
 }
 
 function buildTableChartTable() {
+    //document.getElementById("wipTableDetail").innerHTML = "";
     legendTable = document.getElementById("wipTableDetail");
+    legendTable.innerHTML = "";
 
     // build header row
     let headderRow = document.createElement('tr');
@@ -90,16 +109,16 @@ function buildTableChartTable() {
     let fdRow = document.createElement('tr');
     fdRow.style.height = '25px';
 
-    appendTds(headderRow, input.headderRowValues, 'white');
-    appendTds(wipRow, input.wipRowValues, 'Orange');
-    appendTds(fdRow, input.fdRowValues, 'YellowGreen ');
+    appendTableTds(headderRow, input.headderRowValues, 'white');
+    appendTableTds(wipRow, input.wipRowValues, 'Orange');
+    appendTableTds(fdRow, input.fdRowValues, 'YellowGreen ');
 
     legendTable.appendChild(headderRow);
     legendTable.appendChild(wipRow);
     legendTable.appendChild(fdRow);
 }
 
-function appendTds(row, rowData, rowColor) {
+function appendTableTds(row, rowData, rowColor) {
     for (let c = 0; c < rowData.length; c++) {
         let tempTd = document.createElement('td');
         tempTd.style.width = wipTableTdWidth;

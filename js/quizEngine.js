@@ -199,6 +199,8 @@ function createQuiz (questions) {
 	submitButton = document.createElement("button");
 	submitButton.setAttribute("type", "button");
 	submitButton.setAttribute("id", "submitQuestionButton");
+	submitButton.setAttribute("class", "btn");
+	submitButton.setAttribute("style", "width:45%");
 	//submitButton.setAttribute("value", "Submit");
 	let submitText = document.createTextNode("Check Answer");
 	//submitButton.disabled = true;
@@ -210,6 +212,8 @@ function createQuiz (questions) {
 	nextButton.setAttribute("type", "button");
 	nextButton.setAttribute("id", "nextButton");
 	nextButton.setAttribute("value", "Next");
+	nextButton.setAttribute("class", "btn");
+	nextButton.setAttribute("style", "margin-left:10px; width:45%;");
 	nextButton.disabled = true;
 	let nextText = document.createTextNode("Next Question");
 	//put the right function in there
@@ -234,7 +238,7 @@ function createQuiz (questions) {
 		} else if(counter < numQuestions){
 			let submitQuizButton = document.getElementById("nextButton");
       submitQuizButton.innerText = "Submit Quiz";
-      submitQuizButton.setAttribute("class", "modal-close waves-effect ");
+      submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
 			nextQuestion(questions[counter].id);
 		}
 		else{

@@ -48,15 +48,15 @@
                 </div>
                 <div style="float:left;">
                   <label>
-                  <input id="table_wip_goal" name="chart_goal_group"/>
-                  <span style="float:left; position:relative; left:30px; text-align:center">WIP</span>
-                </label>
+                    <input id="table_wip_goal" name="chart_goal_group"/>
+                    <span style="float:left; position:relative; left:30px; text-align:center">WIP</span>
+                  </label>
                 </div>
                 <div style="float:left; position:relative; left:30px;">
                   <label>
-                  <input id="table_flowdays_goal" name="chart_goal_group"/>
-                  <span style="float:left; position:relative; left:30px; text-align:center">FlowDays</span>
-                </label>
+                    <input id="table_flowdays_goal" name="chart_goal_group"/>
+                    <span style="float:left; position:relative; left:30px; text-align:center">FlowDays</span>
+                  </label>
                 </div>
               </div>
             </fieldset>
@@ -85,15 +85,15 @@
               <div class="table_gate_goal_group">
                 <div style="float:left;">
                   <label>
-                  <input id="gate_wip_goal" name="table_gate_goal_group"/>
-                  <span style="float:left; position:relative; left:30px; text-align:center">WIP</span>
-                </label>
+                    <input id="gate_wip_goal" name="table_gate_goal_group"/>
+                    <span style="float:left; position:relative; left:30px; text-align:center">WIP</span>
+                  </label>
                 </div>
                 <div style="float:left; position:relative; left:30px;">
                   <label>
-                  <input id="gate_flowdays_goal" name="table_gate_goal_group"/>
-                  <span style="float:left; position:relative; left:30px; text-align:center">FlowDays</span>
-                </label>
+                    <input id="gate_flowdays_goal" name="table_gate_goal_group"/>
+                    <span style="float:left; position:relative; left:30px; text-align:center">FlowDays</span>
+                  </label>
                 </div>
               </div>
               <div id="buttonContainer">
@@ -108,16 +108,10 @@
     </div>
   </div>
 
-  <div id="gate_chart" class="hidden_toggle col s12" style="padding:0;">
+  <div id="gate_chart" class="hidden_toggle col s12" style="padding:0; overflow-x: auto;">
     <div id="wipTable">
       <table style="background-color:LightGoldenRodYellow ;width: 100%; border:2px solid black;">
-        <tr style="width: 100%;">
-          <td style="width: 2%;" />
-          <td style="width: 32%;" >WIP = (22 /365) X 480 &asymp; 29</td>
-          <td style="width: 32%;text-align:center;" >TAKT = 365 / 480 = .76</td>
-          <td style="width: 32%;text-align:right;" >WIP = FD / TAKT</td>
-          <td style="width: 2%;" />
-        </tr>
+        <caption align="top" id="table_chart_title">Title</caption>
         <tr>
           <td/>
           <td colspan="3">
@@ -128,10 +122,15 @@
         </tr>
       </table>
     </div>
+    <div class="col s10">
+      <div class="col s2">
+        <input type="button" class="mouse_point waves-effect waves-light btn calculatorButton" value="Go Back" onclick="returnToTableChartList();"style="float: right;">
+      </div>
+    </div>
   </div>
 
   <script>
   $(document).ready(function(){
-    //getAllChartObjects();
+    getAllTableChartObjects();
   });
   </script>

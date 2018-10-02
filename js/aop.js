@@ -384,7 +384,7 @@ function loadBarChart() {
 }
 
 function loadTableChart() {
-  animateArrow();
+  animateChartArrow();
   $("#app_cont").load("content/machinetable.html");
   $("#pageTitle").text("Gate Performance Chart");
 }
@@ -499,7 +499,7 @@ function clickBackToResources()
   var burger3 = document.getElementById("bur3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
-  loadActivityPage(); 
+  loadResources(); 
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";

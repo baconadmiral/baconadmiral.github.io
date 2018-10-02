@@ -58,7 +58,7 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
  flowtime_w_thruput = {"lbl0":flowtime_txt,"lbl1":wip_txt,"lbl2":thruput_txt,"opr":opr2,"val1tip":wip_tip,"val2tip":thruput_tip,"res_typ":empty_str};
  flowtime_w_takt = {"lbl0":flowtime_txt,"lbl1":wip_txt,"lbl2":takt_txt,"opr":opr1,"val1tip":wip_tip,"val2tip":takt_tip,"res_typ":empty_str};
  thruput = {"lbl0":thruput_txt,"lbl1":wip_txt,"lbl2":flowtime_txt,"opr":opr2,"val1tip":wip_tip,"val2tip":flowtime_tip,"res_typ":units_type};
- takt = {"lbl0":takt_txt,"lbl1":flowtime_txt,"lbl2":wip_txt,"opr":opr2,"val1tip":flowtime_tip,"val2tip":wip_tip,"res_typ":units_type};
+ takt = {"lbl0":takt_txt,"lbl1":flowtime_txt,"lbl2":wip_txt,"opr":opr2,"val1tip":flowtime_tip,"val2tip":wip_tip,"res_typ":empty_str};
 
 
  const calc1 = function (v1,v2) {return v1 * v2};
@@ -452,7 +452,12 @@ function calcResult() {
     }
     $("#result").text(calcResultVal);
     $("#result2").text(calcResultVal);
-    $("#result2units").text(calcObj.res_typ);
+    if(calcObj.lbl0 == thruput_txt) {
+      $("#result2units").text(calcObj.res_typ + " per " + $("#seltime2").val());
+    } else {
+      $("#result2units").text(calcObj.res_typ);
+    }
+    
   }
   isRounded = false;
 }
@@ -533,10 +538,18 @@ function saveResults(){
     });
     //document.getElementById('btn_display_results').style.display="block";
   }
+  $("#saveCalcButton").addClass("hidden_toggle");
+  $("#save_sect").addClass("hidden_toggle");
+  $("#openSaveButton").removeClass("hidden_toggle");
+  
 }
 
 function openSave() {
-  $("#save_sect").removeClass("hidden_toggle");
+  if(enableCalc) {
+    $("#openSaveButton").addClass("hidden_toggle");
+    $("#save_sect").removeClass("hidden_toggle");
+    $("#saveCalcButton").removeClass("hidden_toggle");
+  }
 }
 
 function setCalcType(cType) {

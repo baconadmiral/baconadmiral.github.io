@@ -34,7 +34,6 @@ function resetTableGlobalValues(){
 */
 function defineTableChart() {
   resetTableGlobalValues();
-  //displaySavedCharts();
   $("#table_chart_choice").addClass("hidden_toggle");
   $("#table_chart_define").removeClass("hidden_toggle");
   resetTableInputBooleanValues();
@@ -82,8 +81,9 @@ function addTableChartGate() {
   }
   else{
     currGateNum++;
+    clearAllTableInputTextFields();
   }
-  clearAllTableInputTextFields();
+
   resetTableInputBooleanValues();
   checkForAllTableChartInputs();
 }
@@ -336,13 +336,13 @@ function displaySavedTableCharts(){
 /*
 * Retrieves all saved charts from the database.
 */
-// function getAllTableChartObjects(){
-//   itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
-//     itemDB.fetchAll("barchartDatastore", function(results){
-//       displayListOfCharts(results);
-//     });
-//   });
-// }
+function getAllTableChartObjects(){
+  itemDB.open("TableChartDatabase", 1, "tablechartDatastore", "", tablechartIndexes, true, function(){
+    itemDB.fetchAll("tablechartDatastore", function(results){
+      displayListOfTableCharts(results);
+    });
+  });
+}
 
 /*
 * Sends a chart object to the database to be saved.
@@ -353,6 +353,26 @@ function sendTableChartToDB(chartDBObject){
   itemDB.open("TableChartDatabase", 1, "tablechartDatastore", "", tablechartIndexes, true, function(){
     itemDB.createItem("tablechartDatastore", chartDBObject, function(){});
   });
+}
+
+function buildTableChartFromDatabase(id){
+  itemDB.open("TableChartDatabase", 1, "tablechartDatastore", "", tablechartIndexes, true, function(){
+    itemDB.fetchOneByKey("tablechartDatastore", id, function(result){
+      $("#table_chart_choice").addClass("hidden_toggle");
+      $("#table_chart_define").addClass("hidden_toggle");
+      $("#tablechart_gate_values").addClass("hidden_toggle");
+      $("#gate_chart").removeClass("hidden_toggle");
+      showGateTableChart(result);
+    });
+  });
+}
+
+function returnToTableChartList(){
+  $("#gate_chart").addClass("hidden_toggle");
+  $("#table_chart_choice").removeClass("hidden_toggle");
+  document.getElementById("saved_table_charts").innerHTML = "";
+  clearAllTableInputTextFields();
+  getAllTableChartObjects();
 }
 
 /*
@@ -370,25 +390,18 @@ function displayListOfTableCharts(charts){
       style: "background-color:#eeeeee;",
       id: "chartList"
     }).append( $('<div>', {
-      class: "col s10 collapsible-header",
+      class: "tableChartItem col s11 collapsible-header",
       text: chart.name,
       id: chart.id
     })).append( $('<li>', {
     }).append( $('<div>', {
       class: "col s1 headerCollapsible",
-      style: "padding:0"
-    }).append( $('<img>', {
-      src: "css/svg/mail.svg",
-      id: "mailImg",
-      style: "vertical-align:middle; width: 20px; height: 20px;"
-    }))).append( $('<div>', {
-      class: "col s1 headerCollapsible",
-      style: "padding:0"
+      style: "padding:0",
     }).append( $('<img>', {
       src: "css/svg/trash.svg",
-      id: "trashImg",
+      id: chart.id,
       style: "vertical-align:middle; width: 20px; height: 20px;"
-    }))))).appendTo('#saved_charts');
+    }))))).appendTo('#saved_table_charts');
   });
   createTableChartsListEventListener();
 }
@@ -397,12 +410,14 @@ function displayListOfTableCharts(charts){
 * Builds the event listener for the list items. Makes them clickable
 */
 function createTableChartsListEventListener(){
-  var el = document.getElementById("bar_saved_charts");
+  var el = document.getElementById("saved_table_charts");
   if(el){
     el.addEventListener("click", function(e) {
       console.log(e.path[0]);
-      if(e.target && e.target.nodeName == "LI") {
-        console.log(e.target.id + " was clicked");
+      if(e.target && e.target.classList[0] == "tableChartItem") {
+        var strId = e.target.id;
+        var numId = parseInt(strId);
+        buildTableChartFromDatabase(numId);
       }
       else if(e.target && e.target.nodeName == "IMG"){
         console.log("image was clicked");
