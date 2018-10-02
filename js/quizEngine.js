@@ -352,6 +352,7 @@ function submitQuiz(){
 		console.log("Score has been submitted");
 
     // close the quiz modal.
+    document.getElementById("quizContainer").innerHTML = "";
 
 	});
 }

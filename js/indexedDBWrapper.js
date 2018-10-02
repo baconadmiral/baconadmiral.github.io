@@ -14,7 +14,7 @@ var itemDB = ( function() {
  */
   iDB.open = function(databaseName, version, datastoreName, key_path, indices, useAutoIncrement,callback) {
     // Open a connection to the datastore.
-    console.log("version: " + version);
+    //console.log("version: " + version);
     var request = indexedDB.open(databaseName, version);
 
     // Handle datastore upgrades.
