@@ -10,14 +10,14 @@ last5Avg:[0]};
 
 function showGateBarChart(chartObj) {
   //alert('show chart button clicked');
-  $("#chart_status_msg").removeClass("hidden_toggle");
+  $("#barchart_status_msg").removeClass("hidden_toggle");
   getBarChartData(chartObj);
   onReady(function() {
-    show('container', true);
-    show('containerData', true);
-    show('loading', false);
+    show('barchart_container', true);
+    show('barchart_containerData', true);
+    show('barchart_loading', false);
   });
-  buildTable();
+  buildBarChartTable();
 }
 
 
@@ -71,12 +71,12 @@ function getBarChartData(chartObj) {
 
 }
 
-function buildTable() {
+function buildBarChartTable() {
   document.createElement('table');
   var rowLegend = [ null, "Remaining Days", "Actual Days", "Total Days", "Last 5 Avg.", "Requirement" ];
   var rowValues = [ barChartInput.xAxisCategories, barChartInput.remainingDays, barChartInput.actualDays, barChartInput.totalDays, barChartInput.last5Avg, barChartInput.requirement ];
 
-  legendTable = document.getElementById("legendTable");
+  legendTable = document.getElementById("barchart_legendTable");
 
   for (let r = 0; r < rowLegend.length; r++) {
     let row;
@@ -140,7 +140,7 @@ function onReady(callback) {
     if (!buildstarted) {
       buildstarted = true;
       // alert('about to start');
-      buildCharts(finishedChart);
+      buildBarCharts(finishedChart);
     }
 
     window.clearInterval(intervalID);
@@ -153,9 +153,9 @@ function show(id, value) {
 }
 
 
-function buildCharts(finishedChart) {
+function buildBarCharts(finishedChart) {
 
-  Highcharts.chart('containerChart', {
+  Highcharts.chart('barchart_containerChart', {
     title : {
       text : barChartInput.chartTitle
     },
@@ -211,6 +211,6 @@ function buildCharts(finishedChart) {
     } ]
   });
 
-  document.getElementById("tableLegend");
+  document.getElementById("barchart_tableLegend");
   finishedChart = true;
 }

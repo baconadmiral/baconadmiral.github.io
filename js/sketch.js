@@ -67,7 +67,6 @@ var carSim = function(sketch) {
   let canvasElt;
 
   sketch.setup = function() {
-    openQuestionsNScores();
     loadQuizModal();
 
     setupQuestions('Flow Time', 3, (questions) => {

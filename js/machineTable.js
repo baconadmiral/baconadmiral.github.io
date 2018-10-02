@@ -1,216 +1,127 @@
 var finishedChart = false;
-var barChartInput= {chartTitle:'',
-xAxisCategories:[''],
-yAxisTitle: '',
-remainingDays:[0],
-actualDays:[0],
-requirement:0,
-last5Avg:[0]};
+var input;
+var wipTableTdWidth;
+//
+// window.onload = function() {
+//     getData();
+//     buildTable();
+// }
 
-
-function showGateBarChart(chartObj) {
-  //alert('show chart button clicked');
-  $("#chart_status_msg").removeClass("hidden_toggle");
-  getBarChartData(chartObj);
-  onReady(function() {
-    show('container', true);
-    show('containerData', true);
-    show('loading', false);
-  });
-  buildTable();
+function showGateTableChart(chartObj){
+  getTableChartData(chartObj);
+  // onReady(function() {
+  //   show('gate_chart', true);
+  // });
+  buildTableChartTable();
 }
 
+function getTableChartData(chartObj) {
+    input = {
+            availableDays : 365,
+            requiredOutput: 480,
+            tact: .76,
+            gates: [['Gate 1 (Init Inv)',1.3,1],
+            ['Gate 2 (Classify)',7.9,6],
+            ['Gate 3 (Inv)',6.6,5],
+            ['Gate 4 (Report)',6.6,5],
+            ['Gate 5 (Rel of Rep)',6.6,5]]
+        };
 
-function getBarChartData(chartObj) {
-  console.log("inside getBarChartData");
-  var gateTitles = [];
-  var gateRem = [];
-  var gateAct = [];
-  var gateAvg = [];
-  chartObj.gates.forEach((gate) => {
-    gateTitles.push(gate.title);
-    gateRem.push(Number(gate.remDays));
-    gateAct.push(Number(gate.actDays));
-    gateAvg.push(Number(gate.avgDays));
-  });
+    computeInputChanges();
+}
+function computeInputChanges() {
+    // Find sums for wip and fd
+    var totalWip = 0;
+    var totalFd = 0;
 
+    // Add first two static columns
+    var headderRowValues = ['Available Days', 'Required Output'];
+    var wipRowValues = [input.availableDays, input.requiredOutput];
+    var fdRowValues = [null, null];
 
-  barChartInput = {
-    chartTitle : chartObj.name,
-    xAxisCategories : gateTitles,
-    yAxisTitle : '',
-    remainingDays : gateRem,
-    actualDays : gateAct,
-    requirement : chartObj.numReq,
-    last5Avg : gateAvg
-    // chartTitle : chartObj.name,
-    // xAxisCategories : [ '62-3507', '63-7982', '61-0309', '60-0322', '60-0316', '58-0057', '62-3514', '60-0351', '62-3566' ],
-    // yAxisTitle : '',
-    // remainingDays : [ 0, 0, 0, 0, 0, 15, 27, 40, 50 ],
-    // actualDays : [ 76, 65, 63, 51, 47, 40, 28, 15, 5 ],
-    // requirement : 45,
-    // last5Avg : [ 60.8, 64.4, 62.8, 61.8, 60.4, null, null, null, null ]
-  };
+    // build full row data arrays
+    for (let i = 0; i < input.gates.length; i++) {
+        let columnHeadder = input.gates[i][0];
+        let wip = input.gates[i][1];
+        let fd = input.gates[i][2];
+        totalWip += (wip ? wip : 0);
+        totalFd += (fd ? fd : 0);
 
-
-
-  if (Array.isArray(barChartInput.requirement) === false) {
-    var requirement = barChartInput.requirement;
-    var extrapolatedRequirement = [];
-    for (let i = 0; i < barChartInput.xAxisCategories.length; i++) {
-      extrapolatedRequirement.push(Number(requirement));
+        headderRowValues.push(columnHeadder);
+        wipRowValues.push(wip);
+        fdRowValues.push(fd);
     }
-    barChartInput.requirement = extrapolatedRequirement;
-  }
+    // remove erronious trailing math digits
+    totalWip = Math.floor(totalWip*100)/100;
+    totalFd = Math.floor(totalFd*100)/100;
 
-  var totalDays = [];
-  for (let i = 0; i < barChartInput.xAxisCategories.length; i++) {
-    totalDays.push(barChartInput.actualDays[i] + barChartInput.remainingDays[i]);
-  }
-  barChartInput.totalDays = totalDays;
+    // Add total column
+    headderRowValues.push('TOTALS');
+    wipRowValues.push(totalWip);
+    fdRowValues.push(totalFd);
 
+    // Add static trailing column
+    headderRowValues.push('');
+    wipRowValues.push('WIP');
+    fdRowValues.push('FD');
+
+    // push row value arrays back onto input
+    input.headderRowValues = headderRowValues;
+    input.wipRowValues = wipRowValues;
+    input.fdRowValues = fdRowValues;
+
+    // 4 static rows (available days, required oputput, totals, and WIP/FD)
+    wipTableTdWidth = 100/(4+input.gates.length);
+    wipTableTdWidth = "" + wipTableTdWidth + "%";
 }
 
-function buildTable() {
-  document.createElement('table');
-  var rowLegend = [ null, "Remaining Days", "Actual Days", "Total Days", "Last 5 Avg.", "Requirement" ];
-  var rowValues = [ barChartInput.xAxisCategories, barChartInput.remainingDays, barChartInput.actualDays, barChartInput.totalDays, barChartInput.last5Avg, barChartInput.requirement ];
+function buildTableChartTable() {
+    legendTable = document.getElementById("wipTableDetail");
 
-  legendTable = document.getElementById("legendTable");
+    // build header row
+    let headderRow = document.createElement('tr');
+    headderRow.style.height = '50px';
 
-  for (let r = 0; r < rowLegend.length; r++) {
-    let row;
-    if (r == 0) {
-      row = document.createElement('tr')
-      row.style.height = '50px';
-    } else {
-      row = document.createElement('tr')
-      row.style.height = '25px';
+    // build wip row
+    let wipRow = document.createElement('tr');
+    wipRow.style.height = '50px';
+
+    // build fd row
+    let fdRow = document.createElement('tr');
+    fdRow.style.height = '25px';
+
+    appendTds(headderRow, input.headderRowValues, 'white');
+    appendTds(wipRow, input.wipRowValues, 'Orange');
+    appendTds(fdRow, input.fdRowValues, 'YellowGreen ');
+
+    legendTable.appendChild(headderRow);
+    legendTable.appendChild(wipRow);
+    legendTable.appendChild(fdRow);
+}
+
+function appendTds(row, rowData, rowColor) {
+    for (let c = 0; c < rowData.length; c++) {
+        let tempTd = document.createElement('td');
+        tempTd.style.width = wipTableTdWidth;
+        if (rowData[c] != null)
+        {
+            tempTd.style.border = "1px solid black";
+            tempTd.innerHTML = rowData[c];
+
+            if (rowData[c] === 'WIP' || rowData[c] === 'FD')
+            {
+                tempTd.style.backgroundColor = 'white';
+            }
+            else
+            {
+                tempTd.style.backgroundColor = rowColor;
+            }
+        }
+        else
+        {
+            // transparent
+        }
+
+        row.appendChild(tempTd);
     }
-
-    appendTds(row, rowLegend[r], rowValues[r], r);
-
-    legendTable.appendChild(row);
-  }
-
-  for (let i = 0; i < barChartInput.xAxisCategories.length; i++) {
-    document.createElement('td');
-  }
-}
-
-function appendTds(row, rowLabel, rowData, index) {
-  /*var style = {
-  border : "1px solid black"
-};*/
-
-let rowLabelDetail = document.createElement('td');
-rowLabelDetail.style.width = "19%"
-if (rowLabel) {
-  var innerHtmlString;
-  if (index === 1) {
-    innerHtmlString = "<table><tr><td><div style='vertical-align:center; margin:2px; height:10px; width: 40px; background-color:DarkTurquoise'></div></td><td><div>" + rowLabel + "</div></td></tr></table>"
-  } else if (index === 2) {
-    innerHtmlString = "<table><tr><td><div style='vertical-align:center; margin:2px; height:10px; width: 40px; background-color:SteelBlue'></div></td><td><div>" + rowLabel + "</div></td></tr></table>"
-  } else if (index === 3) {
-    innerHtmlString = "<table><tr><td><div style='vertical-align:center; margin:2px; height:5px; width: 40px; background-color:white'></div></td><td><div>" + rowLabel + "</div></td></tr></table>"
-  } else if (index === 4) {
-    innerHtmlString = "<table><tr><td><div style='vertical-align:center; margin:2px; height:5px; width: 40px; background-color:red'></div></td><td><div>" + rowLabel + "</div></td></tr></table>"
-  } else if (index === 5) {
-    innerHtmlString = "<table><tr><td><div style='vertical-align:center; margin:2px; height:5px; width: 40px; background-color:green'></div></td><td><div>" + rowLabel + "</div></td></tr></table>"
-  }
-  rowLabelDetail.innerHTML = innerHtmlString;
-  rowLabelDetail.style.border = "1px solid black";
-}
-row.appendChild(rowLabelDetail);
-
-for (let c = 0; c < barChartInput.xAxisCategories.length; c++) {
-  let tempTd = document.createElement('td');
-  tempTd.style.border = "1px solid black";
-  tempTd.innerHTML = rowData[c];
-  row.appendChild(tempTd);
-}
-}
-
-
-function onReady(callback) {
-  var buildstarted = false;
-
-  var intervalID = window.setInterval(checkReady, 1000);
-  function checkReady() {
-    if (!buildstarted) {
-      buildstarted = true;
-      // alert('about to start');
-      buildCharts(finishedChart);
-    }
-
-    window.clearInterval(intervalID);
-    callback.call(this);
-  }
-}
-
-function show(id, value) {
-  document.getElementById(id).style.visibility = value ? 'visible' : 'hidden';
-}
-
-
-function buildCharts(finishedChart) {
-
-  Highcharts.chart('containerChart', {
-    title : {
-      text : barChartInput.chartTitle
-    },
-    xAxis : {
-      tickLength : 0,
-      labels : {
-        enabled : false
-      },
-      categories : barChartInput.xAxisCategories
-    },
-    yAxis : {
-      min : 0,
-      title : {
-        text : barChartInput.yAxisTitle
-      }
-    },
-    legend : {
-      enabled : false
-    },
-    plotOptions : {
-      column : {
-        stacking : 'normal'
-      }
-    },
-    series : [ {
-      type : 'column',
-      name : 'Remaining Days',
-      data : barChartInput.remainingDays,
-      color : 'DarkTurquoise'
-    }, {
-      type : 'column',
-      name : 'Actual Days',
-      data : barChartInput.actualDays,
-      color : 'SteelBlue'
-    }, {
-      type : 'line',
-      name : 'Requirement',
-      data : barChartInput.requirement,
-      color : 'Green',
-      lineWidth : 3,
-      marker : {
-        enabled : false
-      }
-    }, {
-      type : 'line',
-      name : 'Last 5 Avg.',
-      data : barChartInput.last5Avg,
-      color : 'Red',
-      lineWidth : 3,
-      marker : {
-        enabled : false
-      }
-    } ]
-  });
-
-  document.getElementById("tableLegend");
-  finishedChart = true;
 }

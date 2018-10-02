@@ -17,7 +17,7 @@
   <link rel="apple-touch-startup-image" sizes="1668x2224" href="images/splash/1668x2224.png">
   <link rel="apple-touch-startup-image" sizes="1536x2048" href="images/splash/1536x2048.png">
   <link rel="apple-touch-startup-image" sizes="1242x2208" href="images/splash/1242x2208.png">
-  <link rel="apple-touch-startup-image" sizes="1125x2436" href="images/splash/1125x2436.png"> 
+  <link rel="apple-touch-startup-image" sizes="1125x2436" href="images/splash/1125x2436.png">
   <link rel="apple-touch-startup-image" sizes="750x1334" href="images/splash/750x1334.png">
   <link rel="apple-touch-startup-image" sizes="640x1136" href="images/splash/640x1136.png">
   <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
@@ -65,6 +65,13 @@
                 <span class="patty2" id="patAct3"></span>
               </div>
             </a>
+            <a id ="backChartsButton" href="javascript:(clickBackToCharts())" style="display:none;">
+              <div class="burger">
+                <span class="patty0" id="patChart1"></span>
+                <span class="patty1" id="patChart2"></span>
+                <span class="patty2" id="patChart3"></span>
+              </div>
+            </a>
           </td>
           <td style="padding:0">
             <a href="#!" style="font-size:20px; color:#fff; margin-left:10px;" >
@@ -96,7 +103,7 @@
         <ul class="right hide-on-med-and-down">
           <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
           <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
-          <li><a class="waves-effect" href="javascript:(loadTraining())">Training</a></li>
+          <li><a class="waves-effect" href="javascript:(loadTraining())">Tutorials</a></li>
           <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
           <li><a class="waves-effect" href="javascript:(loadActivityPage())">Activity</a></li>
           <li><a class="waves-effect" href="javascriptL(loadCharts())">Charts</a></li>
@@ -117,7 +124,7 @@
       <li><a class="waves-effect sidenav-close" href="javascript:(loadAboutUs())"><i class="small">
         <img src="css/svg/help.svg" height="24px" width="24px">
       </i>About us</a></li>
-      <li><a class="waves-effect sidenav-close" href="javascript:(loadTraining())" ><i class="small"><img src="css/svg/gearHead.svg"></i>Training</a></li>
+      <li><a class="waves-effect sidenav-close" href="javascript:(loadTraining())" ><i class="small"><img src="css/svg/gearHead.svg"></i>Tutorials</a></li>
       <li><a class="waves-effect sidenav-close" href="javascript:(loadResources())" ><i class="small" >
         <img src="css/svg/photo-library.svg" height="24px" width="24px">
       </i>Resources</a></li>
@@ -294,8 +301,10 @@
 <script src="js/highcharts-more.js"></script>
 
 <script language="javascript" type="text/javascript" src="js/searchDomain.js"></script>
+<script language="javascript" type="text/javascript" src="js/settings.js"></script>
 <script language="javascript" type="text/javascript" src="js/searchAoP.js"></script>
 <script language="javascript" type="text/javascript" src="js/quizEngine.js"></script>
+<script language="javascript" type="text/javascript" src="js/activityStatus.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.dom.min.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
@@ -314,6 +323,8 @@
 <script language="javascript" type="text/javascript" src="js/emailWrapper.js"></script>
 <script language="javascript" type="text/javascript" src="js/gatebarchart.js"></script>
 <script language="javascript" type="text/javascript" src="js/barchartBuilder.js"></script>
+<script language="javascript" type="text/javascript" src="js/machineTableBuilder.js"></script>
+<script language="javascript" type="text/javascript" src="js/machineTable.js"></script>
 
 
 

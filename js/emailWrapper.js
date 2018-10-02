@@ -5,14 +5,17 @@ function setUpEmail() {
   // open up the calculator DB.
   openCalculationsDB();
   // open up the activity DB.
-  
+  openScoresDB();
 }
 
-function setP2ToS2To() {
-  let pEmail = getPrimaryEmail();
-  let sEmail = getSecondaryEmail();
+function setP2ToS2To(callback) {
+  getUserInfo( (info) => {
+    //console.log(JSON.stringify(info));
+    let pEmail = info.primaryEmail;
+    let sEmail = info.secondaryEmail;
 
-  return pEmail + ";" + sEmail;
+    callback(pEmail + ";" + sEmail);
+  });
 }
 
 function setP2ToS2CC() {
@@ -45,10 +48,10 @@ function setSubjectCalc() {
   // return "?subject=" + groupName;
 }
 
-function setSubjectActivity() {
+function setSubjectActivity(score) {
   // set the email subject to the activity name.
 
-  // return "?subject=" + activityName;
+  return "?subject=Score of Activity: " + score.Subject + " - " + score.Topic;
 }
 
 function setBodyCalc() {
@@ -61,8 +64,10 @@ function setBodyCalc() {
   // return "?body=" + calculations;
 }
 
-function setBodyActivity() {
+function setBodyActivity(score) {
   // add the records of the activity to the email body.
-
-  // return "?body=" + record;
+  let body = "&body=";
+  body += score.Subject + " - " + score.Topic + ": " + score.ActualScore + "/" + score.TotalPossible;
+  body += "\n";
+  return body;
 }

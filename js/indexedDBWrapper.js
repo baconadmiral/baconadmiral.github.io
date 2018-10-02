@@ -62,7 +62,7 @@ var itemDB = ( function() {
       databases[databaseName] = request.result;
 
       // Execute the callback.
-      callback("open");
+      callback();
     };
 
     // Handle errors when opening the datastore.
@@ -216,7 +216,7 @@ iDB.fetchAll = (datastoreName, callback) => {
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
-  //var keyRange = IDBKeyRange.lowerBound(0);
+  var keyRange = IDBKeyRange.lowerBound(0);
   var cursorRequest = objStore.openCursor();
 
   let items = [];

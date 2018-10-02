@@ -59,7 +59,10 @@
 	</div>
 
 	<div id="activityStatus" class="col s12">
-		As you complete activities and quizes your results will be displayed here.
+		<div id="activityBlurb" class="col s12" style="display:block">
+			As you complete activities and quizes your results will be displayed here.
+		</div>
+		<div id="savedScores" class="col s12"></div>
 	</div>
 
 </div>
@@ -71,6 +74,8 @@
 
 <script type="text/javascript">
 openSearchDB();
+openUserInfoDB();
+openScoresDB();
 	$(document).ready(function(){
 		$('.tabs').tabs();
 		$('.collapsible').collapsible();
@@ -102,6 +107,7 @@ openSearchDB();
 		 $(".searchIcon").css("fill", "#424242");
 		 $(".calculatorIcon").css("fill", "#424242");
 
+		 displayScoresInBinder();
 	}
 
 

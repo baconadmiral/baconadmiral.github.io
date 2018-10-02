@@ -707,12 +707,8 @@ ul#horizontal-list li{
 
 /*Background images for the template section*/
 .templateTitle{
-<<<<<<< HEAD
-  font-weight: bold;
-=======
   margin-top:10px;
   font-weight: bold; 
->>>>>>> 32aba1bf21f8706f7a5849ae141c59facb12e72a
   vertical-align: middle;
   line-height: 90%;
   font-size:25px;
@@ -799,15 +795,6 @@ ul#horizontal-list li{
   bottom:0px;
   right:0px;
 }
-<<<<<<< HEAD
-/*.pdfIcon{
- image:url("images/docTypeIcons/pdf.png");
- background-size:40px 40px;
-        z-index: 5000;
-        position: absolute;"
-}*/
-/*----------------------------------------------*/
-=======
 
 #gateTimeQualityCard{
   position:relative;
@@ -900,4 +887,24 @@ ul#horizontal-list li{
 }
 
 /*----------------------------------------------*/
->>>>>>> 32aba1bf21f8706f7a5849ae141c59facb12e72a
+.gateChartBackground{
+  background-image: url("../images/charts/gate_chart_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.processMachineChartBackground{
+  background-image: url("../images/charts/proc_machine_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.chartTitle{
+  font-weight: bold; 
+  vertical-align: middle;
+  line-height: 90%;
+  color:#fff;
+  text-shadow: 2px 2px 0 #333333, 2px -2px 0 #333333, -2px 2px 0 #333333, -2px -2px 0 #333333, 2px 0px 0 #333333, 
+  0px 2px 0 #333333, -2px 0px 0 #333333, 0px -2px 0 #333333, 8px 6px 4px rgba(51,51,51,0.72);}

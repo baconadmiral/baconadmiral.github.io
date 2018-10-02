@@ -170,7 +170,7 @@ function createCalcResultsEventListener(){
   var el = document.getElementById("calculations");
   if(el){
     el.addEventListener("click", function(e) {
-      console.log(e.path[0]);
+      //console.log(e.path[0]);
       if(e.target && e.target.nodeName == "LI") {
         console.log(e.target.id + " was clicked");
       }
