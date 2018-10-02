@@ -1,10 +1,10 @@
 var carSim = function(sketch) {
   
-  loadQuizModal();
+  /*loadQuizModal();
 
   setupQuestions('Flow Time', 3, (questions) => {
     createQuiz(questions);
-  });
+  });*/
   
   var bgcolor;
   var throughputSlider;
