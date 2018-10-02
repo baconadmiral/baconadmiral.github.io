@@ -419,7 +419,8 @@ var carSim = function(sketch) {
 
 function gameCleanup(s,e_id) {
   $(e_id).empty();
-
+  
+  s.noLoop();
   //clear registered methods
   for (var member in s._registeredMethods) delete s._registeredMethods[member];
   s._registeredMethods = { pre: [], post: [], remove: [] };
