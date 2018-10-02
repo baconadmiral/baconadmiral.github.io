@@ -272,13 +272,13 @@ function nextQuestion(questionId) {
 		answerForm.innerHTML = "";
 		var currentAnswer, answerText, answerLabel;
 		//create input elements
-		for(var i = 0; i < question.Answers.length; i++){
+		for(var i = 1; i <= question.Answers.length; i++){
 			//create the input element and set attributes
 			currentAnswer = document.createElement("input");
 			currentAnswer.setAttribute("id", i);
 			currentAnswer.setAttribute("type", "radio");
 			currentAnswer.setAttribute("name", "answerGroup");
-			currentAnswer.setAttribute("value", question.Answers[i]);
+			currentAnswer.setAttribute("value", question.Answers[i - 1]);
 
       answerLabel = document.createElement("label");
       answerLabel.setAttribute("for", i);
@@ -287,7 +287,7 @@ function nextQuestion(questionId) {
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
       // answerContainer.setAttribute("for", i);
-			answerText = document.createTextNode(question.Answers[i]);
+			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
       answerContainer.appendChild(answerLabel);

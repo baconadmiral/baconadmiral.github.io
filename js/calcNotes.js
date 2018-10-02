@@ -113,7 +113,7 @@ style: "padding:0"
 src: "css/svg/mail.svg",
 id: "mailImg",
 style: "vertical-align:middle; width: 20px; height: 20px;",
-onclick: "displayAlert();"
+onclick: "createCalculationsEmail();"
 }))).append( $('<div>', {			//<div class="col s1 headerCollapsible" style="padding:0">			</div>
 class: "col s1 headerCollapsible",
 style: "padding:0"
@@ -132,6 +132,31 @@ for(var j = 0; j < records[i].length; j++){
   createCalcListElement(records[i][j], groupID);
 }
 }
+
+}
+
+function createCalculationsEmail(groupId) {
+  let mailString = "mailto:";
+
+  getUserInfo( (info) => {
+    if (info != null && (info.primaryEmail != null && info.secondaryEmail != null)) {
+      setP2ToS2To( (emails) => {
+        mailString += emails;
+
+        console.log(mailString);
+
+        itemDB.fetchAllByQuery(datastoreName, groupPropertyName, groupId, (results) => {
+          mailString += setSubjectCalc(results[0]);
+          mailString += "&body=" + results[0].group + " Calculations: %0D%0A";
+          results.forEach( (result) => {
+            mailString += buildCalcFormula(result) + '%0D%0A';
+          });
+
+          window.open(mailString);
+        });
+      });
+    }
+  });
 
 }
 

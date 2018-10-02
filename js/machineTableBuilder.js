@@ -13,6 +13,7 @@ var tableGateFlowFilled = false;
 // var tableGateActualFilled = false;
 // var tableGateAvgDaysFilled = false;
 
+var isTableEventListenerOn = false;
 var globalTakt;
 var tableChartProperties = [];
 var tableGates = [];
@@ -375,6 +376,15 @@ function returnToTableChartList(){
   getAllTableChartObjects();
 }
 
+function deleteTableChartFromDatabase(id){
+  itemDB.deleteItem("tablechartDatastore", id, function(){
+    document.getElementById("saved_table_charts").innerHTML = "";
+    itemDB.fetchAll("tablechartDatastore", function(results){
+      displayListOfTableCharts(results);
+    });
+  });
+}
+
 /*
 * Displays the list of charts received in the first window of the charts page
 * Parameters:
@@ -395,7 +405,7 @@ function displayListOfTableCharts(charts){
       id: chart.id
     })).append( $('<li>', {
     }).append( $('<div>', {
-      class: "col s1 headerCollapsible",
+      class: "tableDeleteButton col s1 headerCollapsible",
       style: "padding:0",
     }).append( $('<img>', {
       src: "css/svg/trash.svg",
@@ -410,8 +420,9 @@ function displayListOfTableCharts(charts){
 * Builds the event listener for the list items. Makes them clickable
 */
 function createTableChartsListEventListener(){
+
   var el = document.getElementById("saved_table_charts");
-  if(el){
+  if(!isTableEventListenerOn && el){
     el.addEventListener("click", function(e) {
       console.log(e.path[0]);
       if(e.target && e.target.classList[0] == "tableChartItem") {
@@ -420,8 +431,11 @@ function createTableChartsListEventListener(){
         buildTableChartFromDatabase(numId);
       }
       else if(e.target && e.target.nodeName == "IMG"){
-        console.log("image was clicked");
+        var strId = e.target.id;
+        var numId = parseInt(strId);
+        deleteTableChartFromDatabase(numId);
       }
     });
   }
+  isTableEventListenerOn = true;
 }

@@ -12,6 +12,8 @@ var currBarGateNum = 1;
 var barChartProperties = [];
 var barGates = [];
 
+var isBarChartEventListenerOn = false;
+
 const barchartIndexes = ["name", "numGates", "numReq"];
 
 function resetBarGlobalValues(){
@@ -276,6 +278,15 @@ function returnToBarChartList(){
   clearAllBarInputTextFields();
   getAllBarChartObjects();
 }
+
+function deleteBarChartFromDatabase(id){
+  itemDB.deleteItem("barchartDatastore", id, function(){
+    document.getElementById("bar_saved_charts").innerHTML = "";
+    itemDB.fetchAll("barchartDatastore", function(results){
+      displayListOfBarCharts(results);
+    });
+  });
+}
 /*
 * Displays the list of charts received in the first window of the charts page
 * Parameters:
@@ -300,7 +311,7 @@ function displayListOfBarCharts(charts){
       style: "padding:0"
     }).append( $('<img>', {
       src: "css/svg/trash.svg",
-      id: "trashImg",
+      id: chart.id,
       style: "vertical-align:middle; width: 20px; height: 20px;"
     }))))).appendTo('#bar_saved_charts');
   });
@@ -312,7 +323,7 @@ function displayListOfBarCharts(charts){
 */
 function createBarChartsListEventListener(){
   var el = document.getElementById("bar_saved_charts");
-  if(el){
+  if(!isBarChartEventListenerOn && el){
     el.addEventListener("click", function(e) {
       console.log(e.path[0]);
       if(e.target && e.target.classList[0] == "barChartItem") {
@@ -321,8 +332,11 @@ function createBarChartsListEventListener(){
         buildBarChartFromDatabase(numId);
       }
       else if(e.target && e.target.nodeName == "IMG"){
-        console.log("image was clicked");
+        var strId = e.target.id;
+        var numId = parseInt(strId);
+        deleteBarChartFromDatabase(numId);
       }
     });
   }
+  isBarChartEventListenerOn = true;
 }

@@ -39,29 +39,16 @@ function setP2CCS2CC() {
   return "?cc=" + pEmail + ";" + sEmail;
 }
 
-function setSubjectCalc() {
-  // set the email subject to the group name.
-
-  // grab the group name.
+function setSubjectCalc(calc) {
 
   // return the string name of the group with mailto specifics.
-  // return "?subject=" + groupName;
+  return "?subject=" + calc.group + " Calculations";
 }
 
 function setSubjectActivity(score) {
   // set the email subject to the activity name.
 
   return "?subject=Score of Activity: " + score.Subject + " - " + score.Topic;
-}
-
-function setBodyCalc() {
-  // add all of the calculations in the group to the email body.
-
-  // let calculations = "";
-
-  // loop through the calculations in the group. append each item to the body.
-
-  // return "?body=" + calculations;
 }
 
 function setBodyActivity(score) {

@@ -78,7 +78,7 @@ function displayScoresInBinder() {
 function createActivityEmail(id) {
   //setUpEmail();
   let mailString = "mailto:";
-  console.log(mailString);
+  //console.log(mailString);
 
   setP2ToS2To( (emails) => {
     //console.log(emails);
@@ -89,7 +89,7 @@ function createActivityEmail(id) {
       mailString += setSubjectActivity(result);
       mailString += setBodyActivity(result);
 
-      console.log(mailString);
+      //console.log(mailString);
       window.open(mailString);
     });
   });
