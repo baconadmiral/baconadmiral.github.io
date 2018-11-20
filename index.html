@@ -7,8 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Armata|Montserrat" rel="stylesheet">
   <!--Let browser know website is optimized for mobile-->
   <link rel="manifest" href="manifest.json" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
   <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon-180x180.png">
   <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
@@ -73,6 +72,13 @@
                 <span class="patty2" id="patChart3"></span>
               </div>
             </a>
+            <a id ="backQuizButton" href="javascript:(clickBackToQuiz())" style="display:none;">
+              <div class="burger">
+                <span class="patty0" id="patQuiz1"></span>
+                <span class="patty1" id="patQuiz2" ></span>
+                <span class="patty2" id="patQuiz3" ></span>
+              </div>
+            </a>
           </td>
           <td style="padding:0">
             <a href="#!" style="font-size:20px; color:#fff; margin-left:10px;" >
@@ -104,7 +110,7 @@
         <ul class="right hide-on-med-and-down">
           <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
           <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
-          <li><a class="waves-effect" href="javascript:(loadTraining())">Tutorials</a></li>
+          <li><a class="waves-effect" href="javascript:(loadQuizList())">Quizzes</a></li>
           <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
           <li><a class="waves-effect" href="javascript:(loadActivityPage())">Activity</a></li>
           <li><a class="waves-effect" href="javascriptL(loadCharts())">Charts</a></li>
@@ -125,7 +131,7 @@
       <li><a class="waves-effect sidenav-close" href="javascript:(loadAboutUs())"><i class="small">
         <img src="css/svg/help.svg" height="24px" width="24px">
       </i>About us</a></li>
-      <li><a class="waves-effect sidenav-close" href="javascript:(loadTraining())" ><i class="small"><img src="css/svg/gearHead.svg"></i>Tutorials</a></li>
+      <li><a class="waves-effect sidenav-close" href="javascript:(loadQuizList())" ><i class="small"><img src="css/svg/gearHead.svg"></i>Quizzes</a></li>
       <li><a class="waves-effect sidenav-close" href="javascript:(loadResources())" ><i class="small" >
         <img src="css/svg/photo-library.svg" height="24px" width="24px">
       </i>Resources</a></li>
@@ -178,10 +184,10 @@
 <div id="modal_quiz">
   <div id="quizModal"  class="modal calcModal" style="box-shadow: none;background-color:transparent;">
     <div class="modal-header" style="text-align: right;" id="quizHeader">
+    </div>
+    <div id="quiz_content" class="modal-content calcModal"
+    style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
   </div>
-  <div id="quiz_content" class="modal-content calcModal"
-  style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
-</div>
 </div>
 </div>
 
@@ -292,6 +298,7 @@
 </footer>
 <!--JavaScript at end of body for optimized loading-->
 <script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
+<script language="javascript" type="text/javascript" src="js/quizEngineDB.js"></script>
 <script language="javascript" type="text/javascript" src="js/settings.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/createjs-2015.11.26.min.js"></script>
@@ -304,6 +311,7 @@
 
 <script language="javascript" type="text/javascript" src="js/searchDomain.js"></script>
 <script language="javascript" type="text/javascript" src="js/searchAoP.js"></script>
+<script language="javascript" type="text/javascript" src="js/quizQuestions.js"></script>
 <script language="javascript" type="text/javascript" src="js/quizEngine.js"></script>
 <script language="javascript" type="text/javascript" src="js/activityStatus.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.js"></script>

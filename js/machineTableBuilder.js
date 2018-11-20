@@ -1,3 +1,4 @@
+//Global chart properties boolean values
 var tableChartNameFilled = false;
 var numTableGatesFilled = false
 var tableAvailDaysFilled = false;
@@ -5,13 +6,10 @@ var tableReqOutputFilled = false;
 var tableWIPFilled = false;
 var tableFlowFilled = false;
 
+//Global gate boolean values
 var tableGateTitleFilled = false;
 var tableGateWIPFilled = false;
 var tableGateFlowFilled = false;
-// var tableGateTitleFilled = false;
-// var tableGateRemainingFilled = false;
-// var tableGateActualFilled = false;
-// var tableGateAvgDaysFilled = false;
 
 var isTableEventListenerOn = false;
 var globalTakt;
@@ -20,13 +18,23 @@ var tableGates = [];
 var currTableGateNum = 1;
 var numOfTableGates;
 
+var builtExampleTableChart = false;
+
 
 const tablechartIndexes = ["name", "availDays", "reqOutput", "takt", "wip", "flowdays"];
 
+/**
+* Resets global values used for each session of creating a table chart
+*/
 function resetTableGlobalValues(){
   currGateNum = 1;
   tableChartProperties = [];
   tableGates = [];
+}
+
+function helpTableSwitch(){
+  $("#table_chart_choice").addClass("hidden_toggle");
+  $("#tablechart_help_start").removeClass("hidden_toggle");
 }
 
 /**
@@ -35,7 +43,7 @@ function resetTableGlobalValues(){
 */
 function defineTableChart() {
   resetTableGlobalValues();
-  $("#table_chart_choice").addClass("hidden_toggle");
+  $("#tablechart_help_start").addClass("hidden_toggle");
   $("#table_chart_define").removeClass("hidden_toggle");
   resetTableInputBooleanValues();
   setupTableKeyEvents();
@@ -47,7 +55,12 @@ function defineTableChart() {
 */
 function tableGateValues() {
   numOfGates = parseInt($("#table_num_gates_id").val());
-  tableChartProperties = [$("#tablechart_name_id").val(), $("#table_avail_days_id").val(), $("#table_req_output_id").val(), $("#table_takt_id").val(), $("#table_wip_goal").val(), $("#table_flowdays_goal").val()];
+  tableChartProperties = [$("#tablechart_name_id").val(),
+                          $("#table_avail_days_id").val(),
+                          $("#table_req_output_id").val(),
+                          $("#table_takt_id").val(),
+                          $("#table_wip_goal").val(),
+                          $("#table_flowdays_goal").val()];
   globalTakt = $("#table_takt_id").val();
   $("#table_chart_define").addClass("hidden_toggle");
   $("#tablechart_gate_values").removeClass("hidden_toggle");
@@ -70,12 +83,14 @@ function showTableChart() {
 * has been reached and clears each input and handles disabling/enabling buttons.
 */
 function addTableChartGate() {
+  //Builds a new gate object
   let oneGateObj = {
     "title" : $("#table_gate_title_id").val(),
     "wip" : $("#gate_wip_goal").val(),
     "flowdays" : $("#gate_flowdays_goal").val()
   }
   tableGates.push(oneGateObj);
+  //Checks if we've built the requested amount of gates, enabling the create button if true
   if(numOfGates === currGateNum){
     document.getElementById("tablechart_next_gate_btn").style.display = 'none';
     document.getElementById("tablechart_create_chart_btn").style.display = 'inline-block';
@@ -84,7 +99,6 @@ function addTableChartGate() {
     currGateNum++;
     clearAllTableInputTextFields();
   }
-
   resetTableInputBooleanValues();
   checkForAllTableChartInputs();
 }
@@ -94,6 +108,11 @@ function addTableChartGate() {
 * input before being allowed to continue.
 */
 function setupTableKeyEvents(){
+
+  /*******************************************
+  ***Table Properties Input Event Listeners***
+  ********************************************/
+
   document.getElementById('tablechart_name_id').onkeyup = function(event) {
     if (this.value.length === 0) {
       tableChartNameFilled = false;
@@ -161,7 +180,7 @@ function setupTableKeyEvents(){
   }
 
   /**********************************
-  ************Gate Event Listeners****
+  *****Gate Input Event Listeners****
   **********************************/
 
   document.getElementById('table_gate_title_id').onkeyup = function(event) {
@@ -201,18 +220,26 @@ function setupTableKeyEvents(){
   }
 }
 
+/*
+* Determines what input boxes can display text and what those values are by calculating them
+*/
 function updateTablePropertyCalc(){
+  //If both input boxes Available Days and Required Output are Filled
   if(tableAvailDaysFilled && tableReqOutputFilled){
+    //Calculate the takt property by Available Days / Required Output
     var takt = parseInt($("#table_avail_days_id").val()) / parseInt($("#table_req_output_id").val());
     $('#table_takt_id').val(takt);
+    //If WIP input is filled, calculate Flowdays property by WIP * Takt
     if(tableWIPFilled){
       var calcFD = parseInt($('#table_wip_goal').val()) * parseFloat($('#table_takt_id').val());
       $('#table_flowdays_goal').val(calcFD);
     }
+    //If Flowdays input is filled, calculate WIP property by Flowdays / Takt
     else if(tableFlowFilled){
       var calcFD = parseFloat($('#table_flowdays_goal').val()) / parseFloat($('#table_takt_id').val());
       $('#table_wip_goal').val(calcFD);
     }
+    //If neither WIP or Flowdays are filled, then clear both WIP and Flowdays
     else{
       $('#table_wip_goal').val("");
       $('#table_flowdays_goal').val("");
@@ -220,6 +247,7 @@ function updateTablePropertyCalc(){
       tableFlowFilled = false;
     }
   }
+  //If neither Available Days or Required Output are filled, clear Takt, WIP and Flowdays input
   else {
         $('#table_takt_id').val("");
         $('#table_wip_goal').val("");
@@ -227,9 +255,12 @@ function updateTablePropertyCalc(){
         tableWIPFilled = false;
         tableFlowFilled = false;
   }
-
 }
 
+/*
+* If the WIP or Flowdays input are changed, this will recalculate the rowValues
+* to reflect the correct calculations
+*/
 function updateGatePropertyCalc(){
   if(tableGateWIPFilled){
     var calcFD = parseInt($('#gate_wip_goal').val()) * globalTakt;
@@ -262,7 +293,7 @@ function resetTableInputBooleanValues(){
 }
 
 /*
-* Clears all gate window text inputs
+* Clears all gate and chart property window text inputs
 */
 function clearAllTableInputTextFields(){
   $("#tablechart_name_id").val("");
@@ -284,13 +315,12 @@ function clearAllTableInputTextFields(){
 * Specific to the barchart properties window.
 */
 function checkForAllTableChartInputs(){
-  if(tableChartNameFilled && numTableGatesFilled && tableAvailDaysFilled && tableReqOutputFilled && (tableWIPFilled || tableFlowFilled)){
+  if(tableChartNameFilled && numTableGatesFilled && tableAvailDaysFilled
+    && tableReqOutputFilled && (tableWIPFilled || tableFlowFilled)){
     $('#save_table_chart_properties_btn').removeAttr('disabled');
-    //$('#save_chart_properties_btn').addClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
   else{
     $('#save_table_chart_properties_btn').attr('disabled', 'disabled');
-    //$('#save_chart_properties_btn').removeClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
 }
 
@@ -301,11 +331,9 @@ function checkForAllTableChartInputs(){
 function checkForAllTableGateChartInputs(){
   if(tableGateTitleFilled && (tableGateFlowFilled || tableGateWIPFilled)){
     $('#tablechart_next_gate_btn').removeAttr('disabled');
-    //$('#save_chart_properties_btn').addClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
   else{
     $('#tablechart_next_gate_btn').attr('disabled', 'disabled');
-    //$('#save_chart_properties_btn').removeClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
 }
 
@@ -356,6 +384,12 @@ function sendTableChartToDB(chartDBObject){
   });
 }
 
+/*
+* Gets a chart from the database with the given id and sends it to machineTable.js to be
+* generated and displayed.
+* Parameters:
+* id - the id of the chart stored in the database
+*/
 function buildTableChartFromDatabase(id){
   itemDB.open("TableChartDatabase", 1, "tablechartDatastore", "", tablechartIndexes, true, function(){
     itemDB.fetchOneByKey("tablechartDatastore", id, function(result){
@@ -368,6 +402,10 @@ function buildTableChartFromDatabase(id){
   });
 }
 
+/*
+* Called with the back button when displaying a chart, refreshes the chart list and
+* displays the list.
+*/
 function returnToTableChartList(){
   $("#gate_chart").addClass("hidden_toggle");
   $("#table_chart_choice").removeClass("hidden_toggle");
@@ -376,6 +414,11 @@ function returnToTableChartList(){
   getAllTableChartObjects();
 }
 
+/*
+* Deletes a chart from the database when the delete button is pressed on the list.
+* Parameters:
+* id - the id of the chart stored in the database
+*/
 function deleteTableChartFromDatabase(id){
   itemDB.deleteItem("tablechartDatastore", id, function(){
     document.getElementById("saved_table_charts").innerHTML = "";
@@ -395,25 +438,21 @@ function displayListOfTableCharts(charts){
 
   charts.forEach((chart) =>{
     $('<div>', {
-      class: "row collapseGroup"
-    }).append( $('<ul>', {
-      style: "background-color:#eeeeee;",
-      id: "chartList"
+      class: "row collapseGroup",
+      style: "background-color:#eeeeee;"
     }).append( $('<div>', {
       class: "tableChartItem col s11 collapsible-header",
       text: chart.name,
       id: chart.id
-    })).append( $('<li>', {
-    }).append( $('<div>', {
+    })).append( $('<div>', {
       class: "tableDeleteButton col s1 headerCollapsible",
       style: "padding:0",
     }).append( $('<img>', {
       src: "css/svg/trash.svg",
       id: chart.id,
       style: "vertical-align:middle; width: 20px; height: 20px;"
-    }))))).appendTo('#saved_table_charts');
+    }))).appendTo('#saved_table_charts');
   });
-  createTableChartsListEventListener();
 }
 
 /**
@@ -422,7 +461,7 @@ function displayListOfTableCharts(charts){
 function createTableChartsListEventListener(){
 
   var el = document.getElementById("saved_table_charts");
-  if(!isTableEventListenerOn && el){
+  if(el){
     el.addEventListener("click", function(e) {
       console.log(e.path[0]);
       if(e.target && e.target.classList[0] == "tableChartItem") {
@@ -437,5 +476,43 @@ function createTableChartsListEventListener(){
       }
     });
   }
-  isTableEventListenerOn = true;
+}
+
+function buildExampleTableChart(){
+  if(!builtExampleTableChart){
+  exampleGates = [{
+    title : "Init Inv",
+    wip : "1.3",
+    flowdays: "1"
+  },{
+    title : "Classify",
+    wip : "7.9",
+    flowdays: "6"
+  },{
+    title : "Inv",
+    wip : "6.6",
+    flowdays: "5"
+  },{
+    title : "Report",
+    wip : "6.6",
+    flowdays: "5"
+  },{
+    title : "Rel of Rep",
+    wip : "6.6",
+    flowdays: "5"
+  }];
+
+  let chartDBObject = {
+    "name" : "Gated Machine Example #2",
+    "wip" : "29",
+    "availDays": "365",
+    "flowdays" : "22",
+    "reqOutput" : "480",
+    "takt" : ".76",
+    "gates" : exampleGates
+  }
+
+  builtExampleTableChart = true;
+  sendTableChartToDB(chartDBObject);
+}
 }

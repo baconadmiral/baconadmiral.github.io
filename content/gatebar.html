@@ -8,12 +8,21 @@
       </div>
       <div class="card-content" style="padding: 10px 20px 5px 20px">
         <div class="row" style="margin-bottom:0">
-          <div class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" style="background:#0EABDA;" onclick="defineBarChart();">New BarChart</div>
+          <div class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" style="background:#0EABDA;" onclick="helpBarSwitch();">New BarChart</div>
         </div>
       </div>
     </div>
   </div>
 
+<div id="barchart_help_start" class="hidden_toggle col s12" style="padding:0; background=white;">
+<div class="card">
+  <span>To Get Started:<p>
+  Create a name for your chart. Define the number of gates for your process machine. Establish the expected requirement that will apply to each gate.<p>
+  For each gate, you will be prompted to provide a name for the gate. Enter the remaining days, actual days and last average number of days for each gate.<p>
+  Continue until all gate information has been entered. Then create the chart.<p></span>
+  <div class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" style="background:#0EABDA;" onclick="defineBarChart();">New BarChart</div>
+</div>
+</div>
   <div id="bar_chart_define" class="hidden_toggle col s12" style="padding:0;">
     <div class="card">
       <div class="card-content" style="padding: 10px 20px 5px 20px">
@@ -111,7 +120,7 @@
  </div>
 
 <script>
- $(document).ready(function(){
+   createBarChartsListEventListener();
+   buildExampleBarChart();
    getAllBarChartObjects();
- });
  </script>

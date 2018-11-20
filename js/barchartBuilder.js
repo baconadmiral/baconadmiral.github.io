@@ -1,6 +1,9 @@
+//Global chart properties boolean values
 var barchartNameFilled = false;
 var numBarGatesFilled = false
 var numBarReqsFilled = false;
+
+//Global gate boolean values
 var gateBarTitleFilled = false;
 var gateBarRemainingFilled = false;
 var gateBarActualFilled = false;
@@ -8,11 +11,10 @@ var gateBarAvgDaysFilled = false;
 
 var numOfBarGates;
 var currBarGateNum = 1;
-
 var barChartProperties = [];
 var barGates = [];
 
-var isBarChartEventListenerOn = false;
+var builtExampleBarChart = false;
 
 const barchartIndexes = ["name", "numGates", "numReq"];
 
@@ -22,6 +24,11 @@ function resetBarGlobalValues(){
   barGates = [];
 }
 
+function helpBarSwitch(){
+  $("#bar_chart_choice").addClass("hidden_toggle");
+  $("#barchart_help_start").removeClass("hidden_toggle");
+}
+
 /**
 * Closes the window that displays the list of charts and displays a list of
 * chart properties to input for the user
@@ -29,7 +36,7 @@ function resetBarGlobalValues(){
 function defineBarChart() {
   resetBarGlobalValues();
   //displaySavedCharts();
-  $("#bar_chart_choice").addClass("hidden_toggle");
+  $("#barchart_help_start").addClass("hidden_toggle");
   $("#bar_chart_define").removeClass("hidden_toggle");
   resetBarInputBooleanvalues();
   setupBarKeyEvents();
@@ -41,7 +48,9 @@ function defineBarChart() {
 */
 function barGateValues() {
   numOfBarGates = parseInt($("#barchart_num_gates_id").val());
-  barChartProperties = [$("#barchart_name_id").val(), $("#barchart_num_gates_id").val(), $("#barchart_num_req_id").val()];
+  barChartProperties = [$("#barchart_name_id").val(),
+                        $("#barchart_num_gates_id").val(),
+                        $("#barchart_num_req_id").val()];
   $("#bar_chart_define").addClass("hidden_toggle");
   $("#barchart_gate_values").removeClass("hidden_toggle");
 }
@@ -76,8 +85,9 @@ function addBarChartGate() {
   }
   else{
     currBarGateNum++;
+    clearAllBarInputTextFields();
   }
-  clearAllBarInputTextFields();
+
   resetBarInputBooleanvalues();
   checkForAllBarGateChartInputs();
 }
@@ -87,6 +97,10 @@ function addBarChartGate() {
 * input before being allowed to continue.
 */
 function setupBarKeyEvents(){
+
+  /********************************************
+  **BarChart Properties Input Event Listeners**
+  ********************************************/
   document.getElementById('barchart_name_id').onkeyup = function(event) {
     if (this.value.length === 0) {
       barchartNameFilled = false;
@@ -116,6 +130,10 @@ function setupBarKeyEvents(){
     }
     checkForAllBarChartInputs();
   }
+
+  /**********************************
+  *****Gate Input Event Listeners****
+  **********************************/
 
   document.getElementById('barchart_gate_title_id').onkeyup = function(event) {
     if (this.value.length === 0) {
@@ -193,11 +211,9 @@ function clearAllBarInputTextFields(){
 function checkForAllBarChartInputs(){
   if(barchartNameFilled && numBarGatesFilled && numBarReqsFilled){
     $('#barchart_save_chart_properties_btn').removeAttr('disabled');
-    //$('#save_chart_properties_btn').addClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
   else{
     $('#barchart_save_chart_properties_btn').attr('disabled', 'disabled');
-    //$('#save_chart_properties_btn').removeClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
 }
 
@@ -208,11 +224,9 @@ function checkForAllBarChartInputs(){
 function checkForAllBarGateChartInputs(){
   if(gateBarTitleFilled && gateBarRemainingFilled && gateBarActualFilled && gateBarAvgDaysFilled){
     $('#barchart_next_gate_btn').removeAttr('disabled');
-    //$('#save_chart_properties_btn').addClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
   else{
     $('#barchart_next_gate_btn').attr('disabled', 'disabled');
-    //$('#save_chart_properties_btn').removeClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
 }
 
@@ -255,12 +269,17 @@ function getAllBarChartObjects(){
 * chartDBObject - object containing all the relevant properties of the chart to be saved
 */
 function sendBarChartToDB(chartDBObject){
-
   itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
     itemDB.createItem("barchartDatastore", chartDBObject, function(){});
   });
 }
 
+/*
+* Gets a chart from the database with the given id and sends it to machineTable.js to be
+* generated and displayed.
+* Parameters:
+* id - the id of the chart stored in the database
+*/
 function buildBarChartFromDatabase(id){
   itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
     itemDB.fetchOneByKey("barchartDatastore", id, function(result){
@@ -271,6 +290,10 @@ function buildBarChartFromDatabase(id){
   });
 }
 
+/*
+* Called with the back button when displaying a chart, refreshes the chart list and
+* displays the list.
+*/
 function returnToBarChartList(){
   $("#barchart_gate_chart").addClass("hidden_toggle");
   $("#bar_chart_choice").removeClass("hidden_toggle");
@@ -279,6 +302,11 @@ function returnToBarChartList(){
   getAllBarChartObjects();
 }
 
+/*
+* Deletes a chart from the database when the delete button is pressed on the list.
+* Parameters:
+* id - the id of the chart stored in the database
+*/
 function deleteBarChartFromDatabase(id){
   itemDB.deleteItem("barchartDatastore", id, function(){
     document.getElementById("bar_saved_charts").innerHTML = "";
@@ -315,7 +343,6 @@ function displayListOfBarCharts(charts){
       style: "vertical-align:middle; width: 20px; height: 20px;"
     }))))).appendTo('#bar_saved_charts');
   });
-  createBarChartsListEventListener();
 }
 
 /**
@@ -323,7 +350,7 @@ function displayListOfBarCharts(charts){
 */
 function createBarChartsListEventListener(){
   var el = document.getElementById("bar_saved_charts");
-  if(!isBarChartEventListenerOn && el){
+  if(el){
     el.addEventListener("click", function(e) {
       console.log(e.path[0]);
       if(e.target && e.target.classList[0] == "barChartItem") {
@@ -338,5 +365,66 @@ function createBarChartsListEventListener(){
       }
     });
   }
-  isBarChartEventListenerOn = true;
+}
+
+function buildExampleBarChart(){
+  if(!builtExampleBarChart){
+  exampleGates = [{
+    title : "62-3507",
+    remDays : 0,
+    actDays: 76,
+    avgDays: 60.8
+  },{
+    title : "63-7982",
+    remDays : 0,
+    actDays: 65,
+    avgDays: 64.4
+  },{
+    title : "61-0309",
+    remDays : 0,
+    actDays: 63,
+    avgDays: 62.8
+  },{
+    title : "60-0322",
+    remDays : 0,
+    actDays: 51,
+    avgDays: 61.8
+  },{
+    title : "60-0316",
+    remDays : 0,
+    actDays: 47,
+    avgDays: 60.4
+  },{
+    title : "58-057",
+    remDays : 15,
+    actDays: 40,
+    avgDays: "null"
+  },{
+    title : "62-3514",
+    remDays : 27,
+    actDays: 28,
+    avgDays: "null"
+  },{
+    title : "60-0351",
+    remDays : 40,
+    actDays: 15,
+    avgDays: "null"
+  },{
+    title : "62-3566",
+    remDays : 50,
+    actDays: 5,
+    avgDays: "null"
+  }];
+
+  let chartDBObject = {
+    "name" : "KC-135 Block 45 Mod Last 5 Produced & A/C In-Work",
+    "numGates" : 9,
+    "numReq" : 45,
+    "gates" : exampleGates
+    //["62-3507", 0, 76, 60.8], ["63-7982", 0, 65, 64.4], ["61-0309", 0, 63, 62.8], ["60-0322", 0, 51, 61.8],
+    //["60-0316", 0, 47, 60.4], ["58-0057", 15, 40, null], ["62-3514", 27, 28, null], ["60-0351", 40, 15, null], ["62-3566", 50, 5, null]]
+  };
+  builtExampleBarChart = true;
+  sendBarChartToDB(chartDBObject);
+}
 }

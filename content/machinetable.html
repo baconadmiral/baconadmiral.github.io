@@ -8,10 +8,22 @@
       </div>
       <div class="card-content" style="padding: 10px 20px 5px 20px">
         <div class="row" style="margin-bottom:0">
-          <div class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" style="background:#0EABDA;" onclick="defineTableChart();">New Table Chart</div>
+          <div class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" style="background:#0EABDA;" onclick="helpTableSwitch();">New Table Chart</div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="tablechart_help_start" class="hidden_toggle col s12" style="padding:0; background=white;">
+  <div class="card">
+    <span>To Get Started:<p></span>
+      <span>
+    Create a name for your chart. Define the available days for your project and the required output to complete that number of days.<p>
+    Establish either the WIP goal or the Flowdays goal. Entering one will calculate the other. <p>
+    Determine the number of gates. For each gate, you will be prompted to provide a name for the gate and either the WIP or Flowdays. Entering one will calculate the other.<p>
+    Continue until all gate information has been entered. Then create the chart.<p></span>
+    <div class="col s12 m12 mouse_point waves-effect waves-light btn calculatorButton" style="background:#0EABDA;" onclick="defineTableChart();">New Table Chart</div>
+  </div>
   </div>
 
   <div id="table_chart_define" class="hidden_toggle col s12" style="padding:0;">
@@ -130,7 +142,7 @@
   </div>
 
   <script>
-  $(document).ready(function(){
-    getAllTableChartObjects();
-  });
-  </script>
+     createTableChartsListEventListener();
+     buildExampleTableChart();
+     getAllTableChartObjects();
+   </script>

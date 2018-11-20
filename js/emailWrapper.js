@@ -11,6 +11,9 @@ function setUpEmail() {
 function setP2ToS2To(callback) {
   getUserInfo( (info) => {
     //console.log(JSON.stringify(info));
+    if (info == undefined)
+      alert("ERROR: No email address defined!");
+
     let pEmail = info.primaryEmail;
     let sEmail = info.secondaryEmail;
 
@@ -54,7 +57,7 @@ function setSubjectActivity(score) {
 function setBodyActivity(score) {
   // add the records of the activity to the email body.
   let body = "&body=";
-  body += score.Subject + " - " + score.Topic + ": " + score.ActualScore + "/" + score.TotalPossible;
+  body += score.Subject + " - " + score.Topic + ": " + displayPercentCorrect(score);
   body += "\n";
   return body;
 }

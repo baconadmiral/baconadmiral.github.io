@@ -91,7 +91,7 @@ function searchInValue(term, myArray) {
     if (myArray[i].value.includes(term)) {
       area = myArray[i].area;
       if (area === "handbook-pdf") {
-        let link = term + ' - <a href="../pdf/aop-handbook.pdf#page=' + myArray[i].page + '" target="_blank">' +
+        let link = term + ' - <a href="pdf/aop-handbook.pdf#page=' + myArray[i].page + '" target="_blank">' +
         myArray[i].key + '</a></br>'
         results.push(link);
       } else {

@@ -1,0 +1,59 @@
+<div class="container" style="width:95%;">
+  <div class="card-panel">
+    <div id="quizInfo" style="border-bottom:1px solid #ddd; padding-bottom:5px;">
+      <div class="row">
+        <div class="col s9">
+          <h5 id="quizTopic" style="margin:0px;"></h5>
+        </div>
+        <div class="col s3">
+          <p id="questionNumber" style="margin:0px;"></p>
+        </div>
+      </div>
+
+      <div id="scoreInfo">
+        <p id="currentScore" style="display: none;"></p>
+      </div>
+    </div>
+
+    <div id="finishQuiz" style="display: none;">
+      <button type="button" id="closeQuizButton" class="modal-close waves-effect btn" style="width:45%;">Close Quiz</button>
+      <button type="button" id="retakeQuizButton" class="waves-effect btn" style="width:45%; margin-left:10px;">Retake
+        Quiz</button>
+    </div>
+
+    <div id="quizContainer">
+      <h5 id="quizQuestion" style="text-align:center;"></h5>
+      <form id="answerForm">
+
+      </form>
+
+      <div class="row">
+        <div class="col s6">
+          <!-- 	<button type="button" id="submitQuestionButton" class="btn btn-small">Check</button> -->
+          <input type="button" value="Check" id="submitQuestionButton" class="btn waves-effect waves-light" style="width:100%;font-weight:bold;">
+
+        </div>
+        <div class="col s6">
+          <!-- <button type="button" id="nextButton" value="Next"
+  		 class="btn btn-small ">Next</button> -->
+          <input type="button" value="Next" id="nextButton" class="btn waves-effect waves-light" style="width:100%;font-weight:bold;">
+
+        </div>
+      </div>
+
+    </div>
+    <div id="closeQuiz">
+      </br>
+      </br>
+      <a href="javascript: saveAndCloseQuiz();" id="closeQuizButton" class="">Save and Close Quiz</a>
+    </div>
+
+    <div class="row">
+
+
+    </div>
+  </div>
+</div>
+<script>
+  readQuestions(currentQuiz);
+</script>

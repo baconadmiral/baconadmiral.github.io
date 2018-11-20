@@ -5,10 +5,10 @@
   userInfoProp
 */
 
-let userInfoDBName = "UserInformation";
-let userInfoDSName = "UserInfo";
-let userInfoVersion = 1;
-let userInfoProp = ["name", "primaryEmail", "secondaryEmail", "decimalPrecision"];
+userInfoDBName = "UserInformation";
+userInfoDSName = "UserInfo";
+userInfoVersion = 1;
+userInfoProp = ["name", "primaryEmail", "secondaryEmail", "decimalPrecision"];
 
 function openUserInfoDBset() {
   itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, () => {
