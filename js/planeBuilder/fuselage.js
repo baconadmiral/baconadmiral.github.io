@@ -1,7 +1,7 @@
 function Fuselage(sketch, fuselageImg, airplaneCompImg, cockpitImg, fuselageCImg, fuselageTImg, fuselageWImg, fuselageCTImg, fuselageCWImg, fuselageWTImg, wingsImg)
 {
   this.posX = -55;
-  this.posY = sketch.height/2 + sketch.height/5 - 35;
+  this.posY = sketch.height/2 - 35;
   
   this.hasTail = false;
   this.hasWings = false;
