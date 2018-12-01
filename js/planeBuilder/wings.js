@@ -6,9 +6,10 @@ function Wings(sketch, posX, posY, wingsImg)
   
   this.update = function()
   {
-    sketch.image(wingsImg, this.xPos - 8, this.yPos - 20, 50, 50);
+    sketch.rect(posX - 4 , posY - 28 , 65 , 65,5);
+    sketch.image(wingsImg, this.xPos - 4, this.yPos - 20, 50, 50);
     sketch.textSize(22);
-    sketch.text("Wings", this.xPos, this.yPos - 30);
+    sketch.text("Wings", posX, posY - 30);
   }
   
   this.touchStarted = function(wingXpos, wingYpos)
@@ -49,8 +50,8 @@ function Wings(sketch, posX, posY, wingsImg)
   {
     if(this.drag)
     {
-      this.xPos = sketch.mouseX;
-      this.yPos = sketch.mouseY;
+      this.xPos = sketch.mouseX - 20;
+      this.yPos = sketch.mouseY - 20;
     }
   }
   

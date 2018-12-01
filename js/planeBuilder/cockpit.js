@@ -6,9 +6,10 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   
   this.update = function()
   {
-    sketch.image(cockpitImg, this.xPos - 4, this.yPos - 20, 75, 25);
+    sketch.rect(posX + 4 , posY - 28 , 65 , 65,5);
+    sketch.image(cockpitImg, this.xPos + 9, this.yPos - 10, 60, 20);
     sketch.textSize(22);
-    sketch.text("Cockpit", this.xPos, this.yPos - 30);
+    sketch.text("Cockpit", posX, posY - 30);
   }
   
   this.touchStarted = function(cockpitXpos, cockpitYpos)
@@ -49,8 +50,8 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   {
     if(this.drag)
     {
-      this.xPos = sketch.mouseX;
-      this.yPos = sketch.mouseY;
+      this.xPos = sketch.mouseX - 20;
+      this.yPos = sketch.mouseY - 20;
     }
   }
   
