@@ -6,7 +6,8 @@ function Wings(sketch, posX, posY, wingsImg)
   
   this.update = function()
   {
-    sketch.image(wingsImg, this.xPos - 15, this.yPos - 20, 50, 50);
+    sketch.image(wingsImg, this.xPos - 8, this.yPos - 20, 50, 50);
+    sketch.textSize(22);
     sketch.text("Wings", this.xPos, this.yPos - 30);
   }
   
@@ -21,7 +22,7 @@ function Wings(sketch, posX, posY, wingsImg)
     }
   }
   
-  this.touchEnded = function(fuselageList)
+  this.touchEnded = function(attachSnd)
   {
     
     //I dont exactly like this but not sure atm how else to do it
@@ -33,8 +34,8 @@ function Wings(sketch, posX, posY, wingsImg)
         {
           if(fuselageList[i].hasWings == false)
           {
-            fuselageList[i].fuselageText = fuselageList[i].fuselageText + "\nWings";
             fuselageList[i].hasWings = true;
+            attachSnd.play();
           }
         }
       }

@@ -6,7 +6,8 @@ function Tail(sketch, posX, posY, tailImg)
   
   this.update = function()
   {
-    sketch.image(tailImg, this.xPos - 25, this.yPos - 20, 50, 50);
+    sketch.image(tailImg, this.xPos - 12, this.yPos - 20, 50, 50);
+    sketch.textSize(22);
     sketch.text("Tail", this.xPos, this.yPos - 30);
   }
   
@@ -21,7 +22,7 @@ function Tail(sketch, posX, posY, tailImg)
     }
   }
   
-  this.touchEnded = function()
+  this.touchEnded = function(attachSnd)
   {
     
     //I dont exactly like this but not sure atm how else to do it
@@ -34,6 +35,7 @@ function Tail(sketch, posX, posY, tailImg)
           if(fuselageList[i].hasTail == false)
           {
             fuselageList[i].hasTail = true;
+            attachSnd.play();
           }
         }
       }

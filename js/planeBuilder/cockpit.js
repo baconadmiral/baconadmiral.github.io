@@ -6,7 +6,8 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   
   this.update = function()
   {
-    sketch.image(cockpitImg, this.xPos - 10, this.yPos - 20, 75, 25);
+    sketch.image(cockpitImg, this.xPos - 4, this.yPos - 20, 75, 25);
+    sketch.textSize(22);
     sketch.text("Cockpit", this.xPos, this.yPos - 30);
   }
   
@@ -21,7 +22,7 @@ function Cockpit(sketch, posX, posY, cockpitImg)
     }
   }
   
-  this.touchEnded = function()
+  this.touchEnded = function(attachSnd)
   {
     //I dont exactly like this but not sure atm how else to do it
     if(this.drag)
@@ -32,8 +33,9 @@ function Cockpit(sketch, posX, posY, cockpitImg)
         {
           if(fuselageList[i].hasCockpit == false)
           {
-            fuselageList[i].fuselageText = fuselageList[i].fuselageText + "\nCockpit";
             fuselageList[i].hasCockpit = true;
+            attachSnd.play();
+
           }
         }
       }
