@@ -12,6 +12,7 @@ var planeBuilderSim = function(sketch) {
   var fuselageWTImg;
   var airplaneCompImg;
   
+  var statsDisplay;
   var wings;
   var tail;
   var cockpit;
@@ -25,6 +26,8 @@ var planeBuilderSim = function(sketch) {
   var attachSnd;
   var successSnd;
   var gameOverSnd;
+  
+  var numberForWin = 10;
   
   this.fuselageList = [];
   
@@ -41,6 +44,7 @@ var planeBuilderSim = function(sketch) {
     attachSnd = sketch.loadSound('sounds/attach.wav');
     successSnd = sketch.loadSound('sounds/success.wav');
     gameOverSnd = sketch.loadSound('sounds/gameOver.mp3');
+    levelWinSnd = sketch.loadSound('sounds/levelWin.mp3');
     
     sketch.frameRate(30);
     can = sketch.createCanvas(700, 350);
@@ -55,17 +59,20 @@ var planeBuilderSim = function(sketch) {
     tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY, tailImg);
     cockpit = new Cockpit(sketch, defaultToolsLocationX + 100, defaultToolsLocationY, cockpitImg );
     conveyerBelt = new ConveyerBelt(sketch, 50);
-    
+    statsDisplay = new StatsDisplay(sketch);
     
   }
 
   sketch.draw = function() {
-    
+        
     if(gameRunning)
     {
       sketch.background(this.bgImg);
+      
+      statsDisplay.update(winCount);
+      
       sketch.textSize(28);
-      sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
+      //sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
       
       conveyerBelt.update();
 
@@ -85,6 +92,12 @@ var planeBuilderSim = function(sketch) {
         {
           successSnd.play();
           winCount++;
+          
+          if(winCount >= numberForWin)
+          {
+            levelWinSnd.play();
+            gameRunning = false;
+          }
         }
         else {
           //You lose game stops
