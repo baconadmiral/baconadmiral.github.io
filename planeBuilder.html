@@ -29,6 +29,14 @@
     <script language="javascript" type="text/javascript" src="js/planeBuilder/conveyerBeltPlane.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/sketch.js"></script>
     <script>
+    
+    
+    $("body").bind("touchstart", function(e) {
+        if(e.target.nodeName === "BODY"){
+           e.preventDefault();
+        }
+    });
+    
     $(function(){
       $("#app_cont").empty();
       plane_S = new p5(planeBuilderSim,'app_cont');
