@@ -11,7 +11,7 @@ function setUpEmail() {
 function setP2ToS2To(callback) {
   getUserInfo( (info) => {
     //console.log(JSON.stringify(info));
-    if (info == undefined)
+    if (info == undefined || info.primaryEmail == "")
       alert("ERROR: No email address defined!");
 
     let pEmail = info.primaryEmail;

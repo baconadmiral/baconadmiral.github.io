@@ -1,8 +1,8 @@
 var carSim = function(sketch) {
   
-  loadQuizModal();
+  //loadQuizModal();
 
-  readQuestions('littlesLaw');
+  //readQuestions('littlesLaw');
   
   var bgcolor;
   var throughputSlider;

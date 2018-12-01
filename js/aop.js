@@ -748,4 +748,3 @@ function loadTraining(){
 });
 $("#pageTitle").text("Training");
 }
-

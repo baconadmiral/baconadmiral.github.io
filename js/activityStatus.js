@@ -90,7 +90,7 @@ function createActivityEmail(id) {
       mailString += setBodyActivity(result);
 
       //console.log(mailString);
-      window.open(mailString);
+      window.location.href = mailString;
     });
   });
 }
