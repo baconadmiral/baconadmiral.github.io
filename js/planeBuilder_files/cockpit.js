@@ -14,7 +14,7 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   
   this.touchStarted = function(cockpitXpos, cockpitYpos)
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, cockpitXpos + 30, cockpitYpos+20) < 60)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, cockpitXpos, cockpitYpos) < 50)
     {
       this.drag = true;
     }
@@ -30,7 +30,7 @@ function Cockpit(sketch, posX, posY, cockpitImg)
     {
       for(let i = 0; i < fuselageList.length; i++)
       {
-        if(sketch.dist(sketch.mouseX, sketch.mouseY, fuselageList[i].posX + 40, fuselageList[i].posY + 25) < 50)
+        if(sketch.dist(sketch.mouseX, sketch.mouseY, fuselageList[i].posX + 25, fuselageList[i].posY + 25) < 50)
         {
           if(fuselageList[i].hasCockpit == false)
           {

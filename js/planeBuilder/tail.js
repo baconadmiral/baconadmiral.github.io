@@ -14,7 +14,7 @@ function Tail(sketch, posX, posY, tailImg)
   
   this.touchStarted = function(tailXpos, tailYpos)
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, tailXpos, tailYpos) < 50)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, tailXpos, tailYpos) < 60)
     {
       this.drag = true;
     }

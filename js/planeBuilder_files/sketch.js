@@ -53,7 +53,7 @@ var planeBuilderSim = function(sketch) {
     
     
     let defaultToolsLocationX = sketch.width/2;
-    let defaultToolsLocationY = sketch.height - sketch.height/6;
+    let defaultToolsLocationY = sketch.height - sketch.height/4;
     
     wings = new Wings(sketch, defaultToolsLocationX, defaultToolsLocationY, wingsImg);
     tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY, tailImg);

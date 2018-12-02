@@ -14,7 +14,7 @@ function Wings(sketch, posX, posY, wingsImg)
   
   this.touchStarted = function(wingXpos, wingYpos)
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, wingXpos, wingYpos) < 50)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, wingXpos, wingYpos) < 60)
     {
       this.drag = true;
     }

@@ -1,16 +1,25 @@
 var trafficSim = function(sketch) {
-var carImgs = [];
-var complete = false;
-var numberOfLanes = 3;
-var nuumberOfOpenLanes = 3;
-var frameRate = 30;
-var carWidth = 50;
-var carHeight = 100;
-var velocity = 3;
-var intervalTime = 3000;
-var ySpawnWindowHeight = velocity*frameRate*(intervalTime/1000)-carHeight;
-var carLaneXs = [];
-this.carList = [];
+  var carImgs = [];
+  var complete = false;
+  var numberOfLanes = 3;
+  var frameRate = 30;
+  var carWidth = 50;
+  var carHeight = 100;
+  var velocity = 30;
+  var intervalTime = 400;
+  var ySpawnWindowHeight = velocity*frameRate*(intervalTime/1000)-carHeight;
+  var carLaneXs = [];
+  var finishedCarCount = 0;
+  this.carList = [];
+
+  startCars = function(numberOfOpenLanes)
+  {
+    for(let i=1; i<=numberOfOpenLanes; i++)
+    {
+      addCar(i);
+    }
+  }
+
   sketch.setup = function() {
 
     loadImages();
@@ -18,27 +27,31 @@ this.carList = [];
     sketch.frameRate(frameRate);
     can = sketch.createCanvas(360, 640);
     const canvasElt = can.elt;
-    canvasElt.style.width = '100%', canvasElt.style.height="100%";
+          canvasElt.style.width = '100%', canvasElt.style.height="100%";
     carLaneXs = calcLanes(numberOfLanes);
-
-    for(let i=1; i<=nuumberOfOpenLanes; i++)
-    {
-      addCar(i);
-    }
   }
 
   sketch.draw = function() {
     sketch.background(0);
-    console.log("Drawing " + carList.length + " cars");
 
-    var deleteIndex = null;
     for (let i=0; i<carList.length; i++)
     {
-      if (this.carList[i].update(velocity) == false)
-        deleteIndex = i;
+      if (carList[i])
+      {
+        if (this.carList[i].update(velocity) == false)
+        {
+          // remove car maintaining index
+          carList.splice(i,1);
+          finishedCarCount++;
+          // console.log("Removing index: " + i);
+          // console.log("COUNT: " + finishedCarCount);
+          // decriment index so that the car after the
+          // one we deleted still gets rendered
+          i--;
+        }
+      }
     }
-    if (deleteIndex)
-      carList.splice(deleteIndex, 1);
+    $("#completionCount").text(finishedCarCount);
   }
 
   function addCar(lane)
@@ -46,11 +59,9 @@ this.carList = [];
     var laneWidth = can.width/3;
     var yStart = Math.random() * ySpawnWindowHeight;
     var carImg = carImgs[Math.floor(Math.random()*(carImgs.length))];
-    this.carList.unshift(
+    this.carList.push(
       new Car(sketch, carImg, carLaneXs[lane],
       can.height+yStart, carWidth, carHeight));
-    console.log("added car @ " + carLaneXs[lane] +
-      ", " +can.height+yStart);
 
     if (!complete)
     {
@@ -83,5 +94,27 @@ function calcLanes(numberOfLanes)
       carImgs[9] = sketch.loadImage("images/game/cars/10.png");
       carImgs[10] = sketch.loadImage("images/game/cars/11.png");
       carImgs[11] = sketch.loadImage("images/game/cars/12.png");
+  }
+}
+
+function loadTrafficModal(){
+  console.log("loadTrafficModal()");
+  var defaultColor= "#424242";
+  var pageTitle = $("#pageTitle").text();
+  console.log(pageTitle);
+  if(pageTitle === "Traffic Simulator"){
+    console.log("populating modal");
+    $("#traffic_modal_content").load("content/trafficModal.html");
+
+    $(document).ready(function(){
+      $('#traffic_modal_content').modal();
+    });
+
+    $('#traffic_modal_content').modal({
+      dismissible:false
+    });
+
+    $('#traffic_modal_content').modal('open');
+
   }
 }

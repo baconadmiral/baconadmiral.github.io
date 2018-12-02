@@ -9,14 +9,15 @@ function Car(sketch, carImg, startX, startY, carWidth, carHeight)
 
   this.update = function(velocity)
   {
-    if(this.posY <= (-1*this.carHeight))
+    if(this.posY < (-1*this.carHeight))
     {
       return false;
     }
     else
     {
       this.posY = this.posY - velocity;
-      sketch.image(this.carImg, this.posX, this.posY, this.carWidth, this.carHeight);
+      sketch.image(this.carImg, this.posX,
+        this.posY, this.carWidth, this.carHeight);
       return true;
     }
   }

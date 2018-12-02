@@ -1,4 +1,4 @@
-function Cockpit(sketch, posX, posY, cockpitImg)
+function Tail(sketch, posX, posY, tailImg)
 {
   this.drag = false;
   this.xPos = posX;
@@ -6,15 +6,15 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   
   this.update = function()
   {
-    sketch.rect(posX + 4 , posY - 28 , 65 , 65,5);
-    sketch.image(cockpitImg, this.xPos + 9, this.yPos - 10, 60, 20);
+    sketch.rect(posX - 18 , posY - 28 , 65 , 65,5);
+    sketch.image(tailImg, this.xPos - 12, this.yPos - 20, 50, 50);
     sketch.textSize(22);
-    sketch.text("Cockpit", posX, posY - 30);
+    sketch.text("Tail", posX, posY - 30);
   }
   
-  this.touchStarted = function(cockpitXpos, cockpitYpos)
+  this.touchStarted = function(tailXpos, tailYpos)
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, cockpitXpos + 30, cockpitYpos+20) < 60)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, tailXpos, tailYpos) < 50)
     {
       this.drag = true;
     }
@@ -25,28 +25,30 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   
   this.touchEnded = function(attachSnd)
   {
+    
     //I dont exactly like this but not sure atm how else to do it
     if(this.drag)
     {
       for(let i = 0; i < fuselageList.length; i++)
       {
-        if(sketch.dist(sketch.mouseX, sketch.mouseY, fuselageList[i].posX + 40, fuselageList[i].posY + 25) < 50)
+        if(sketch.dist(sketch.mouseX, sketch.mouseY, fuselageList[i].posX + 25, fuselageList[i].posY + 25) < 50)
         {
-          if(fuselageList[i].hasCockpit == false)
+          if(fuselageList[i].hasTail == false)
           {
-            fuselageList[i].hasCockpit = true;
+            fuselageList[i].hasTail = true;
             attachSnd.play();
-
           }
         }
       }
     }
+    
     this.drag = false;
 
     this.popBackToDefault();
+
   }
   
-  this.touchMoved = function()
+  this.touchMoved = function(fuselageList)
   {
     if(this.drag)
     {
