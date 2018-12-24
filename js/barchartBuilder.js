@@ -256,8 +256,9 @@ function displaySavedBarCharts(){
 * Retrieves all saved charts from the database.
 */
 function getAllBarChartObjects(){
-  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
-    itemDB.fetchAll("barchartDatastore", function(results){
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(result){
+    let db = result;
+    itemDB.fetchAll(db, "barchartDatastore", function(results){
       displayListOfBarCharts(results);
     });
   });
@@ -269,8 +270,9 @@ function getAllBarChartObjects(){
 * chartDBObject - object containing all the relevant properties of the chart to be saved
 */
 function sendBarChartToDB(chartDBObject){
-  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
-    itemDB.createItem("barchartDatastore", chartDBObject, function(){});
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(result){
+    let db = result;
+    itemDB.createItem("BarChartDatabase", "barchartDatastore", chartDBObject, function(){});
   });
 }
 
@@ -281,8 +283,9 @@ function sendBarChartToDB(chartDBObject){
 * id - the id of the chart stored in the database
 */
 function buildBarChartFromDatabase(id){
-  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
-    itemDB.fetchOneByKey("barchartDatastore", id, function(result){
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(result){
+    let db = result;
+    itemDB.fetchOneByKey(db, "barchartDatastore", id, function(result){
       $("#bar_chart_choice").addClass("hidden_toggle");
       $("#barchart_gate_chart").removeClass("hidden_toggle");
       showGateBarChart(result);
@@ -308,10 +311,13 @@ function returnToBarChartList(){
 * id - the id of the chart stored in the database
 */
 function deleteBarChartFromDatabase(id){
-  itemDB.deleteItem("barchartDatastore", id, function(){
-    document.getElementById("bar_saved_charts").innerHTML = "";
-    itemDB.fetchAll("barchartDatastore", function(results){
-      displayListOfBarCharts(results);
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(result){
+    let db = result;
+    itemDB.deleteItem(db, "barchartDatastore", id, function(){
+      document.getElementById("bar_saved_charts").innerHTML = "";
+      itemDB.fetchAll(db, "barchartDatastore", function(results){
+        displayListOfBarCharts(results);
+      });
     });
   });
 }

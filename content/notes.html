@@ -2,7 +2,7 @@
 <div class="row" style="padding:0 !important;">
 	<div class="col s12" style="padding:0 !important;">
 		<ul class="tabs" style="line-height:0 !important;">
-			<li class="tab col s3" style="line-height:0 !important;"><a id="calcLink" href="#calculations" class="active" style="padding-top:3px" onclick="setCalcColor()">
+			<li class="tab col s4 m4 l4" style="line-height:0 !important;"><a id="calcLink" href="#calculations" class="active" style="padding-top:3px" onclick="setCalcColor()">
 				<table>
 					<tr><td class="iconTab"><svg id="calculationsTabIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="padding-top:2px;">
 					<path id="calcsvg" class="calculatorIcon" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-17 5c0-1.654 1.346-3 3-3h6v9h-9v-6zm0 14v-6h9v9h-6c-1.654 0-3-1.346-3-3zm20 0c0 1.654-1.346 3-3 3h-6v-9h9v6zm0-8h-9v-9h6c1.654 0 3 1.346 3 3v6zm-2 6h-5v-1h5v1zm-5-11h5v1h-5v-1zm0 13v-1h5v1h-5zm-6-2v1h-2v2h-1v-2h-2v-1h2v-2h1v2h2zm-1.793-10.5l1.414 1.414-.707.707-1.414-1.414-1.414 1.414-.708-.707 1.414-1.414-1.414-1.414.707-.707 1.415 1.414 1.415-1.415.708.708-1.416 1.414zm9.793-2c0-.276.224-.5.5-.5s.5.224.5.5-.224.5-.5.5-.5-.224-.5-.5zm1 4c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5z" fill="#FFFFFF"
@@ -10,7 +10,7 @@
 					<tr><td class="iconTabText">Calculations</td></tr>
 				</table>
 			</a></li>
-			<li class="tab col s3" style="line-height:0 !important;"><a id="searchesLink" href="#searches" style="padding-top:3px" onclick="setSearchColor()" >
+			<li class="tab col s4 m4 l4" style="line-height:0 !important;"><a id="searchesLink" href="#searches" style="padding-top:3px" onclick="setSearchColor()" >
 			<table>
 					<tr><td class="iconTab">
 						<svg version="1.1" id="searchTabIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -25,7 +25,7 @@
 					<tr><td class="iconTabText">Searches</td></tr>
 				</table>
 			</a></li>
-			<li class="tab col s3"style="line-height:0 !important;"><a id="activityLink" href="#activityStatus" style="padding-top:3px" onclick="setActivityColor()">
+			<li class="tab col s4 m4 l4"style="line-height:0 !important;"><a id="activityLink" href="#activityStatus" style="padding-top:3px" onclick="setActivityColor()">
 			<table>
 					<tr><td class="iconTab">
 						<svg version="1.1" id="activityTabIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -76,9 +76,7 @@
 </div>
 
 <script type="text/javascript">
-openSearchDB();
-openUserInfoDB();
-openScoresDB();
+
 	$(document).ready(function(){
 		$('.tabs').tabs();
 		$('.collapsible').collapsible();

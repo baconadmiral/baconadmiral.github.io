@@ -1,6 +1,6 @@
 var itemDB = ( function() {
   var iDB = {};
-  let databases = [];
+  var databases = [];
   var datastores = [];
 
  /**
@@ -14,8 +14,8 @@ var itemDB = ( function() {
  */
   iDB.open = function(databaseName, version, datastoreName, key_path, indices, useAutoIncrement,callback) {
     // Open a connection to the datastore.
-    //console.log("version: " + version);
-    var request = indexedDB.open(databaseName, version);
+    console.log("Opening " + databaseName + " version " + version);
+    let request = indexedDB.open(databaseName, version);
 
     // Handle datastore upgrades.
     request.onupgradeneeded = function(e) {
@@ -32,13 +32,13 @@ var itemDB = ( function() {
 
       // Create a new datastore.
       if(useAutoIncrement){
-        var store = db.createObjectStore(datastoreName, {
+        let store = db.createObjectStore(datastoreName, {
           keyPath: "id",
           autoIncrement: true
         });
       }
       else{
-        var store = db.createObjectStore(datastoreName, {
+        let store = db.createObjectStore(datastoreName, {
           keyPath: key_path
         });
       }
@@ -63,12 +63,66 @@ var itemDB = ( function() {
 
       checkUsageAndEstimate();
       // Execute the callback.
-      callback();
+      callback(db);
     };
 
     // Handle errors when opening the datastore.
     request.onerror = iDB.onerror;
   };
+
+  iDB.openMultipleDatastores = function(databaseName, version, datastoreList, columns, cb) {
+    let request = indexedDB.open(databaseName, version);
+    console.log("Opening " + databaseName + " version " + version);
+    request.onupgradeneeded = (e) => {
+      console.log("in onupgradeneeded");
+
+      var db = e.target.result;
+
+      e.target.transaction.onerror = iDB.onerror;
+      //save local data for repopulation.
+
+      datastoreList.forEach( (name) => {
+        maintainDatastore(name, db, columns, true);
+      })
+    }
+
+    request.onsuccess = (e) => {
+      database = e.target.result;
+      isOpen = true;
+      cb(request.result);
+    };
+
+    request.onerror = (e) => {
+      console.log("ERROR: " + iDB.onerror);
+    };
+  };
+
+  function maintainDatastore(name, db, columns, useAutoIncrement) {
+
+    // Delete the old datastore.
+    if (db.objectStoreNames.contains(name)) {
+     db.deleteObjectStore(name);
+   }
+   datastores[name] = name;
+
+   // Create a new datastore.
+   if(useAutoIncrement){
+     var store = db.createObjectStore(name, {
+       keyPath: "id",
+       autoIncrement: true
+     });
+   }
+   else{
+     var store = db.createObjectStore(name, {
+       keyPath: key_path
+     });
+   }
+
+   console.log("In onupgradeneeded...");
+   columns.forEach( (prop) => {
+     store.createIndex(prop, prop, { unique: false});
+   });
+ }
 
   iDB.close = (databaseName, callback) => {
     databases[databaseName].close();
@@ -87,7 +141,7 @@ var itemDB = ( function() {
   */
    iDB.simpleOpen = function(databaseName, version, datastoreName, callback){
      // Open a connection to the datastore.
-     console.log("version: " + version);
+     console.log("Opening " + databaseName + " version " + version);
      var request = indexedDB.open(databaseName, version);
 
      // Handle successful datastore access.
@@ -140,8 +194,8 @@ var itemDB = ( function() {
   * value - the value of the object we wish to match.
   * callback - function to call once the database has been opened.
   */
-  iDB.fetchAllByQuery = (datastoreName, property, value, callback) => {
-      let db = datastores[datastoreName];
+  iDB.fetchAllByQuery = (databaseName, datastoreName, property, value, callback) => {
+      let db = databaseName;
       let transaction = db.transaction([datastoreName], 'readwrite');
       let objStore = transaction.objectStore(datastoreName);
 
@@ -164,8 +218,8 @@ var itemDB = ( function() {
   * value - the value of the object we wish to match.
   * callback - function to call once the database has been opened.
   */
- iDB.fetchOneByIndex = function(datastoreName, property, value, callback) {
-   let db = datastores[datastoreName];
+ iDB.fetchOneByIndex = function(databaseName, datastoreName, property, value, callback) {
+   let db = databaseName;
    let transaction = db.transaction([datastoreName], 'readwrite');
    let objStore = transaction.objectStore(datastoreName);
 
@@ -189,8 +243,8 @@ var itemDB = ( function() {
  * key - the key of the object we wish to match to keyPath.
  * callback - function to call once the database has been opened.
  */
-iDB.fetchOneByKey = function(datastoreName, key, callback) {
-  let db = datastores[datastoreName];
+iDB.fetchOneByKey = function(databaseName, datastoreName, key, callback) {
+  let db = databaseName;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
@@ -213,12 +267,11 @@ iDB.fetchOneByKey = function(datastoreName, key, callback) {
 * datastoreName - string name of the datastore in the database.
 * callback - function to call once the database has been opened.
 */
-iDB.fetchAll = (datastoreName, callback) => {
-  let db = datastores[datastoreName];
+iDB.fetchAll = (databaseName, datastoreName, callback) => {
+  let db = databaseName;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
-  var keyRange = IDBKeyRange.lowerBound(0);
   var cursorRequest = objStore.openCursor();
 
   let items = [];
@@ -247,16 +300,59 @@ iDB.fetchAll = (datastoreName, callback) => {
 };
 
 /**
+* Returns all records of a particular datastore. Use this when trying to
+* fetch all from multiple datastores. The index gets returned in the
+* result set, giving an identifier for which transaction this call is.
+* Parameters:
+* databaseName - database object used to create transaction.
+* datastoreName - string name of the datastore in the database.
+* index - Used to keep track during multiple database transactions
+* callback - function to call once the database has been opened.
+*/
+iDB.fetchAllAsynchronous = (databaseName, datastoreName, index, callback) => {
+  let db = databaseName;
+  let transaction = db.transaction([datastoreName], 'readwrite');
+  let objStore = transaction.objectStore(datastoreName);
+
+  var keyRange = IDBKeyRange.lowerBound(0);
+  var cursorRequest = objStore.openCursor();
+
+  let items = [];
+  cursorRequest.onsuccess = (event) => { // STILL NOT WORKING
+    let cursor = event.target.result;
+
+    if (!!cursor == false) {
+      return;
+    }
+
+    items.push(cursor.value);
+    //console.log("added to 'items' " + JSON.stringify(cursor.value));
+    cursor.continue();
+  };
+
+  transaction.oncomplete = function(e) {
+    // Execute the callback function.
+    callback(items, index);
+  };
+
+  transaction.onerror = (e) => {
+    console.log(e);
+  }
+
+  cursorRequest.onerror = iDB.onerror;
+};
+
+/**
 * Create a new item.
 * Parameters:
 * datastoreName: string name of the datastore in the database.
 * item - the JSON object to store.
 * callback - function to call once the database has been opened.
 */
-iDB.createItem = function(datastoreName, item, callback) {
+iDB.createItem = function(databaseName, datastoreName, item, callback) {
   //console.log("In createItem of " + datastoreName + "...");
   // Get a reference to the db.
-  var db = datastores[datastoreName];
+  let db = databaseName;
 
   // Initiate a new transaction.
   var transaction = db.transaction([datastoreName], 'readwrite');
@@ -288,8 +384,8 @@ iDB.createItem = function(datastoreName, item, callback) {
 * key - the key to identify the item to delete.
 * callback - function to call once the database has been opened.
 */
-iDB.deleteItem = function(datastoreName, key, callback) {
-  var db = datastores[datastoreName];
+iDB.deleteItem = function(databaseName, datastoreName, key, callback) {
+  let db = databaseName;
   var transaction = db.transaction([datastoreName], 'readwrite');
   var objStore = transaction.objectStore(datastoreName);
 
@@ -305,7 +401,7 @@ iDB.deleteItem = function(datastoreName, key, callback) {
 };
 
 iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, callback) {
-  var db = datastores[datastoreName];
+  let db = databaseName;
   var transaction = db.transaction([datastoreName], "readwrite");
   var store       = transaction.objectStore(datastoreName);
   var index       = store.index(property);
@@ -324,7 +420,7 @@ iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, c
 
 iDB.updateItemById = (datastoreName, id, item, callback) => {
   //console.log("updating item by ID");
-  let db = datastores[datastoreName];
+  let db = databaseName;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
@@ -341,9 +437,9 @@ iDB.updateItemById = (datastoreName, id, item, callback) => {
   };
 };
 
-iDB.updateItemByUniqueProperty = (datastoreName, property, value, item, callback) => {
+iDB.updateItemByUniqueProperty = (databaseName, datastoreName, property, value, item, callback) => {
 
-  let db = datastores[datastoreName];
+  let db = databaseName;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
@@ -367,9 +463,9 @@ iDB.updateItemByUniqueProperty = (datastoreName, property, value, item, callback
 * item - The updated object to change in the database.
 * callback - function to call once the database has been opened.
 */
-iDB.updateItem = (datastoreName, key_path, key, item, callback) => {
+iDB.updateItem = (databaseName, datastoreName, key_path, key, item, callback) => {
   console.log("Updating item in '" + datastoreName + "'...");
-  let db = datastores[datastoreName];
+  let db = databaseName;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 

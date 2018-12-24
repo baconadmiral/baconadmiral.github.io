@@ -16,22 +16,23 @@ let currentDatastore;
 
 function openQuestionsNScores() {
 	//Open connection to the quizEngineQuestions database and each of the datastores
-	quizEngineDB.openDB(questionDBName, questionVersion, datastores, questionColumns, () => {
+	itemDB.openMultipleDatastores(questionDBName, questionVersion, datastores, questionColumns, (result) => {
 		console.log(questionDBName + " database opened...");
+		let db = result;
 
 		//load questions into db
 		for (index = 0; index < datastores.length; index++) {
 			//console.log(index);
-			quizEngineDB.fetchAll(datastores[index], index, (results, myIndex) => {
+			itemDB.fetchAllAsynchronous(db, datastores[index], index, (results, myIndex) => {
 				if (results[0] == null) {
 					//console.log(myIndex);
 
 					// get questions from file.
-					let questions = questionFunctionNames[myIndex]();
+					let questions = questionFunctionNames[index]();
 
 					//loop through questions to insert into database.
 					questions.forEach((question) => {
-						quizEngineDB.createItem(datastores[myIndex], question, () => {
+						itemDB.createItem(db, datastores[myIndex], question, () => {
 							console.log("added question to " + datastores[myIndex]);
 						});
 					});
@@ -41,9 +42,7 @@ function openQuestionsNScores() {
 	})
 
 	//Open connection the the QuizScores database and its quizScores datastore, using Subject as the key_path
-	itemDB.open(scoreDBName, scoreVersion, scoreDSName, "Subject", scoreIndecies, false, () => {
-		console.log("QuizScores Database opened...");
-	});
+
 }
 
 
@@ -75,42 +74,47 @@ function readQuestions(datastoreName) {
 }
 
 function createScore() {
-	itemDB.fetchOneByIndex(scoreDSName, "Subject", questions[0].Subject, (result) => {
-		//Grab score from db if exists
-		if (result != null) {
-			score = result;
-			//If the quiz has already been finished, display the results div showing the score received
-			if (score.currentQuestion == score.TotalPossible) {
-				displayQuizResultsHTML();
+	itemDB.open(scoreDBName, scoreVersion, scoreDSName, "Subject", scoreIndecies, false, (db) => {
+
+		itemDB.fetchOneByIndex(db, scoreDSName, "Subject", questions[0].Subject, (result) => {
+			//Grab score from db if exists
+			if (result != null) {
+				score = result;
+				//If the quiz has already been finished, display the results div showing the score received
+				if (score.currentQuestion == score.TotalPossible) {
+					displayQuizResultsHTML();
+				}
+				else {
+					createQuiz();
+				}
 			}
+			//Create new score and add it to db
 			else {
-				createQuiz();
+				score = {
+					"Subject": questions[0].Subject,
+					"Topic": questions[0].Topic,
+					"TotalPossible": questions.length,
+					"ActualScore": 0,
+					"currentQuestion": 0
+				};
+
+				itemDB.createItem(db, scoreDSName, score, () => {
+					createQuiz();
+				});
 			}
-		}
-		//Create new score and add it to db
-		else {
-			score = {
-				"Subject": questions[0].Subject,
-				"Topic": questions[0].Topic,
-				"TotalPossible": questions.length,
-				"ActualScore": 0,
-				"currentQuestion": 0
-			};
-
-			itemDB.createItem(scoreDSName, score, () => {
-				createQuiz();
-			});
-		}
-
+		});
 
 	});
 }
 
 function getQuestions(datastoreName, callback) {
-	quizEngineDB.fetchAll(datastoreName, null, (results) => {
-		//TODO: shuffle the results.
-		questions = results;
-		callback();
+	itemDB.open(questionDBName, questionVersion, datastoreName, "", questionColumns, true, (result) => {
+		let db = result;
+		itemDB.fetchAll(db, datastoreName, (results) => {
+			//TODO: shuffle the results.
+			questions = results;
+			callback();
+		});
 	});
 }
 
@@ -245,12 +249,12 @@ function nextQuestion() {
 function addRadioClickEvents() {
 	$(document).on("click", "[name='answerRadioGroup']", function (e) {
 		var str = e.currentTarget.id;
-		var i = str.charAt(str.length-1);
+		var i = str.charAt(str.length - 1);
 		document.getElementById(i.toString()).checked = true;
 		radioButtonClicked();
 	});
 	var elements = document.getElementsByName("answerRadioGroup")
-	for(var i = 0; i < elements.length; i++){
+	for (var i = 0; i < elements.length; i++) {
 		e = elements[i];
 		e.style.pointerEvents = 'auto';
 	}
@@ -263,7 +267,7 @@ function addRadioClickEvents() {
 */
 function removeRadioClickEvents() {
 	var elements = document.getElementsByName("answerRadioGroup")
-	for(var i = 0; i < elements.length; i++){
+	for (var i = 0; i < elements.length; i++) {
 		e = elements[i];
 		e.style.pointerEvents = 'none';
 	}
@@ -329,16 +333,22 @@ function checkAnswer() {
 }
 
 function saveAndCloseQuiz() {
-	itemDB.updateItem(scoreDSName, "Subject", score.Subject, score, () => {
-		console.log("updated score " + score.Subject);
-		isEventListenersAdded = 0;
-		loadQuizList();
+	itemDB.open(scoreDBName, scoreVersion, scoreDSName, "Subject", scoreIndecies, false, (result) => {
+		let db = result;
+		itemDB.updateItem(db, scoreDSName, "Subject", score.Subject, score, () => {
+			console.log("updated score " + score.Subject);
+			isEventListenersAdded = 0;
+			loadQuizList();
+		});
 	});
 }
 
 function saveQuizScore() {
-	itemDB.updateItem(scoreDSName, "Subject", score.Subject, score, () => {
-		console.log("updated score " + score.Subject);
+	itemDB.open(scoreDBName, scoreVersion, scoreDSName, "Subject", scoreIndecies, false, (result) => {
+		let db = result;
+		itemDB.updateItem(db, scoreDSName, "Subject", score.Subject, score, () => {
+			console.log("updated score " + score.Subject);
+		});
 	});
 }
 
@@ -371,7 +381,7 @@ function displayQuizResultsHTML() {
 	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 	document.getElementById("submitQuestionButton").removeEventListener("click", checkAnswer);
-	document.getElementById("nextButton").removeEventListener("click", checkIfNextQuestionNeeded); 
+	document.getElementById("nextButton").removeEventListener("click", checkIfNextQuestionNeeded);
 
 	document.getElementById("closeQuizButton").addEventListener("click", loadQuizList);
 	document.getElementById("retakeQuizButton").addEventListener("click", retakeQuiz);
@@ -389,10 +399,10 @@ function displayQuizHTML() {
 	document.getElementById("scoreBanner").style.display = "none";
 	document.getElementById("finishQuiz").style.display = "none";
 	document.getElementById("currentScore").style.display = "none";
-	
+
 	document.getElementById("submitQuestionButton").addEventListener("click", checkAnswer);
 	document.getElementById("nextButton").value = "Next";
-	document.getElementById("nextButton").addEventListener("click", checkIfNextQuestionNeeded); 
+	document.getElementById("nextButton").addEventListener("click", checkIfNextQuestionNeeded);
 
 	document.getElementById("closeQuizButton").removeEventListener("click", loadQuizList);
 	document.getElementById("retakeQuizButton").removeEventListener("click", retakeQuiz);

@@ -236,8 +236,9 @@ function displaySavedCharts(){
 * Retrieves all saved charts from the database.
 */
 function getAllChartObjects(){
-  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
-    itemDB.fetchAll("barchartDatastore", function(results){
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(result){
+    let db = result;
+    itemDB.fetchAll(db, "barchartDatastore", function(results){
       displayListOfCharts(results);
     });
   });
@@ -250,8 +251,9 @@ function getAllChartObjects(){
 */
 function sendChartToDB(chartDBObject){
 
-  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
-    itemDB.createItem("barchartDatastore", chartDBObject, function(){});
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(result){
+    let db = result;
+    itemDB.createItem(db, "barchartDatastore", chartDBObject, function(){});
   });
 }
 

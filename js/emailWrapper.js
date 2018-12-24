@@ -1,12 +1,5 @@
 
-function setUpEmail() {
-  // open up the userInformation DB.
-  openUserInfoDB();
-  // open up the calculator DB.
-  openCalculationsDB();
-  // open up the activity DB.
-  openScoresDB();
-}
+
 
 function setP2ToS2To(callback) {
   getUserInfo( (info) => {

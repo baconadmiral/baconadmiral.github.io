@@ -1,31 +1,97 @@
 var slideIndex = 1;
 var total = 50;
 let currentQuiz;
-
 /* todd overlay */
 
-function openIOverlay(fLink) {
+var iframe; 
+
+function openIOverlay(fLink, pageType) {
   // alert('IOverlay clicked');
 
-  let iframe = document.createElement('iframe');
+  iframe = document.createElement('iframe');
   let iOl = document.getElementById("iOverlay");
+  iframe = document.createElement('iframe');
+  iOl = document.getElementById("iOverlay");
   iOl.width = window.innerWidth;
   iOl.height = window.innerHeight;
+  iOl.setAttribute("style", "background-color:#000");
+  iframe.setAttribute("style", "background-color:#000");
   iframe.width = window.innerWidth;
   iframe.height = window.innerHeight;
   iframe.id = "iOlFrame";
   iframe.frameBorder = 0;
   iframe.sandbox = 'allow-modals allow-scripts allow-same-origin';
   iframe.setAttribute("src", fLink);
+  iframe.setAttribute("class", "iframeStyle");  
   iOl.appendChild(iframe);
   iOl.style.height = "100%";
+
+   if(pageType === "Game")
+  {
+    var mql = window.matchMedia("(orientation: portrait)");
+    var orientation = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
+      window.addEventListener("orientationchange", function() 
+      {
+        var mql1 = window.matchMedia("(orientation: portrait)");
+        var orientation1 = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
+    
+        if (orientation1 === "landscape-primary") 
+        {
+          iframe.setAttribute("class", "iframeStyleLandscape");
+        } 
+        else if (orientation1 === "landscape-secondary") 
+        {
+          iframe.setAttribute("class", "iframeStyleLandscape");
+        } 
+        else if (orientation1 === "portrait-secondary" || orientation === "portrait-primary") 
+        {
+          iframe.setAttribute("class", "iframeStylePortrait"); 
+        } 
+        else if (orientation1 === undefined) 
+        {
+          if(mql1.matches)
+          {  
+            iframe.setAttribute("class", "iframeStyleLandscape");
+          } 
+          else 
+          {  
+            iframe.setAttribute("class", "iframeStylePortrait");  
+          }
+        }
+      }     , false);
+
+  if (orientation === "landscape-primary") 
+        {
+          iframe.setAttribute("class", "iframeStyleLandscape");
+        } 
+        else if (orientation === "landscape-secondary") 
+        {
+          iframe.setAttribute("class", "iframeStyleLandscape");
+        } 
+        else if (orientation === "portrait-secondary" || orientation === "portrait-primary") 
+        {
+          iframe.setAttribute("class", "iframeStylePortrait"); 
+        } 
+        else if (orientation === undefined) 
+        {
+          if(mql.matches)
+          {  
+            iframe.setAttribute("class", "iframeStylePortrait");  
+          } 
+          else 
+          {  
+             iframe.setAttribute("class", "iframeStyleLandscape");
+          }
+        }
+
+    }
 }
 
 function closeIOverlay() {
   //alert('IOverlayClose clicked');
-
-  let iframe = document.getElementById('iOlFrame');
+  iframe = document.getElementById('iOlFrame');
   let iOl = document.getElementById("iOverlay");
+
   //iframe.setAttribute("src", "about:blank");
   iOl.removeChild(iframe);
   iOl.style.height = "0%";
@@ -229,9 +295,12 @@ function loadSearchModal(){
       dismissible:false
     });
     $('#modal1').modal('open');
-
-
   }
+
+  function clickExitSlideshow()
+  {
+    window.location.href ="index.html";
+     }
 
   function loadNotesModal(){
 

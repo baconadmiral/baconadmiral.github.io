@@ -1,14 +1,35 @@
-function Fuselage(sketch, fuselageImg, airplaneCompImg, cockpitImg, fuselageCImg, fuselageTImg, fuselageWImg, fuselageCTImg, fuselageCWImg, fuselageWTImg, wingsImg)
+function Fuselage(sketch, fuselageImg, airplaneCompImg, cockpitImg, fuselageCImg, fuselageTImg, fuselageWImg, fuselageCTImg, fuselageCWImg, fuselageWTImg, wingsImg, flowTime)
 {
   this.posX = -55;
   this.posY = sketch.height/2 - 35;
-  
+
   this.hasTail = false;
   this.hasWings = false;
   this.hasCockpit = false;
-  
+  this.flowTime = flowTime
+
+
+  this.decrementFlowTime = function()
+  {
+    this.flowTime = this.flowTime - 1;
+  }
+
   this.update = function(velocity)
   {
+    if(this.flowTime <= 3 && (!this.hasTail || !this.hasWings || !this.hasCockpit))
+    {
+      sketch.fill("red");
+    }
+    else if(this.hasTail && this.hasWings && this.hasCockpit)
+    {
+      sketch.fill("green");
+    }
+    else
+    {
+      sketch.fill("black");
+    }
+    sketch.text(this.flowTime + " s", this.posX, this.posY);
+
     if(this.posX < sketch.width)
     {
       //Move the fuselage forward
@@ -55,7 +76,7 @@ function Fuselage(sketch, fuselageImg, airplaneCompImg, cockpitImg, fuselageCImg
         sketch.image(fuselageImg, this.posX, this.posY + 30, 90, 20);
 
       }
-  
+
     }
   }
 }

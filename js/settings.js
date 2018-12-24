@@ -11,11 +11,10 @@ userInfoVersion = 1;
 userInfoProp = ["name", "primaryEmail", "secondaryEmail", "decimalPrecision"];
 
 function openUserInfoDBset() {
-  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, () => {
-    console.log(userInfoDBName + " database opened...");
-
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, (result) => {
+    let db = result;
     // prepopulate inputs if info exists.
-    itemDB.fetchAll(userInfoDSName, (results) => {
+    itemDB.fetchAll(db, userInfoDSName, (results) => {
       if (results[0] != null) {
         document.getElementById("name").value = results[0].name;
         document.getElementById("email_primary").value = results[0].primaryEmail;
@@ -27,22 +26,16 @@ function openUserInfoDBset() {
   });
 }
 
-function openUserInfoDB(callback) {
-  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, () => {
-    console.log(userInfoDBName + " database opened...");
-    if (callback) {
-      callback();
-    }
-  });
-}
-
 function createOrUpdate() {
-  itemDB.fetchAll(userInfoDSName, (results) => {
-    if (results[0] != null) {
-      updateUserInfo(results[0].id);
-    } else {
-      createUserInfo();
-    }
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, (result) => {
+    let db = result;
+    itemDB.fetchAll(db, userInfoDSName, (results) => {
+      if (results[0] != null) {
+        updateUserInfo(results[0].id);
+      } else {
+        createUserInfo();
+      }
+    });
   });
 };
 
@@ -59,19 +52,25 @@ function createUserInfo() {
     "decimalPrecision": precision
   };
 
-  itemDB.createItem(userInfoDSName, info, () => {
-    console.log("User Info Saved Successfully...");
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, (result) => {
+    let db = result;
+    itemDB.createItem(db, userInfoDSName, info, () => {
+      console.log("User Info Saved Successfully...");
+    });
   });
 }
 
 function getUserInfo(callback) {
-  itemDB.fetchAll(userInfoDSName, (results) => {
-    if (results[0] != null) {
-      callback(results[0]);
-    } else {
-      console.log("User info not found...");
-      callback(results[0]);
-    }
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, (result) => {
+    let db = result;
+    itemDB.fetchAll(db, userInfoDSName, (results) => {
+      if (results[0] != null) {
+        callback(results[0]);
+      } else {
+        console.log("User info not found...");
+        callback(results[0]);
+      }
+    });
   });
 }
 
@@ -105,17 +104,22 @@ function updateUserInfo(id) {
     "secondaryEmail": sEmail,
     "decimalPrecision": precision
   };
-
-  itemDB.updateItemById(userInfoDSName, id, updatedInfo, () => {
-    console.log("Updated user Information");
-    setPrecision();
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, (result) => {
+    let db = result;
+    itemDB.updateItemById(db, userInfoDSName, id, updatedInfo, () => {
+      console.log("Updated user Information");
+      setPrecision();
+    });
   });
 }
 
 function deleteUserInfo() {
-  itemDB.fetchAll(userInfoDSName, (results) => {
-    itemDB.deleteItem(userInfoDSName, results[0].id, () => {
-      console.log("User Info Deleted...");
-    })
+  itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, (result) => {
+    let db = result;
+    itemDB.fetchAll(db, userInfoDSName, (results) => {
+      itemDB.deleteItem(db, userInfoDSName, results[0].id, () => {
+        console.log("User Info Deleted...");
+      })
+    });
   });
 }

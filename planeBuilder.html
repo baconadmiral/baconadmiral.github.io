@@ -9,7 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-  <style>    
+  <style> 
+
     #canvas {
       margin: 0;
       position: absolute;
@@ -17,6 +18,27 @@
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
        }
+
+    @media screen and (orientation:portrait){
+     .iframeStyle{
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vh;
+      height: 100%;
+      border: 0;
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      overflow-x: hidden;
+     }  
+   }
+   
+   html{
+    background-color:#000;
+   }
+   body{
+    background-color:#000;
+   }
   </style>
 </head>
   <body style="overflow: hidden; position: fixed;">
@@ -29,9 +51,10 @@
     <script language="javascript" type="text/javascript" src="js/planeBuilder/fuselage.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/conveyerBeltPlane.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/statsDisplay.js"></script>
+    <script language="javascript" type="text/javascript" src="js/planeBuilder/modalRenderers.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/sketch.js"></script>
     <script>
-    
+
     
     $("body").bind("touchstart", function(e) {
         if(e.target.nodeName === "BODY"){
@@ -43,6 +66,12 @@
       $("#app_cont").empty();
       plane_S = new p5(planeBuilderSim,'app_cont');
     });
+    
+    window.onload = function(e){
+        renderStartGameMenu();
+            }
     </script>
+    
+    <div id="factory_modal_content"></div>
   </body>
 </html>

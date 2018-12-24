@@ -524,18 +524,17 @@ function buildCalcObj(name, group, calcObj){
   return calcDBObject;
 }
 
-function openCalculationsDB(){
-  itemDB.open(databaseName, version, databaseStore, "", properties, true, function() {});
-}
-
 function saveResults(){
   if(enableCalc && $("#fld_save_name").val()){
     var myName = $("#fld_save_name").val();
     var myGroup = $("#fld_save_group").val();
     myCalcDBObject = buildCalcObj(myName, myGroup, calcObj);
-    itemDB.createItem(databaseStore, myCalcDBObject, function() {
+    itemDB.open(databaseName, version, databaseStore, "", properties, true, function(result) {
+      let db = result;
+      itemDB.createItem(db, databaseStore, myCalcDBObject, function() {
       //console.log(myName + " calculation saved...");
     });
+  });
     //document.getElementById('btn_display_results').style.display="block";
   }
   $("#saveCalcButton").addClass("hidden_toggle");
@@ -574,7 +573,6 @@ function setCalcType(cType) {
    case 0:
    calcObj = wip_w_thruput;
  }
- openCalculationsDB();
  setCalcHTML();
 }
 

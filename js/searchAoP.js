@@ -17,12 +17,6 @@ const searchTermsDS = "searchTerms";
 const searchTermVersion = 1;
 const searchTermProp = ["terms", "domains"];
 
-function openSearchDB() {
-  itemDB.open(searchTermsDB, searchTermVersion, searchTermsDS, "", searchTermProp, true, () => {
-    console.log("SearchTerms Database opened...");
-  });
-}
-
 var searchDomain = [];
 
 function saveSearch() {
@@ -51,37 +45,42 @@ function saveSearch() {
       thisSearch.domains.push("handbook");
     }
 
-    itemDB.createItem(searchTermsDS, thisSearch, () => {
-      console.log(terms + " search saved successfully...");
+    itemDB.open(searchTermsDB, searchTermVersion, searchTermsDS, "", searchTermProp, true, (result) => {
+      let db = result;
+      itemDB.createItem(db, searchTermsDS, thisSearch, () => {
+        console.log(terms + " search saved successfully...");
+      });
     });
   }
 }
 
 function getAllSearches(callback) {
 
-  itemDB.fetchAll(searchTermsDS, (results) => {
+  itemDB.open(searchTermsDB, searchTermVersion, searchTermsDS, "", searchTermProp, true, (result) => {
+    let db = result;
+    itemDB.fetchAll(db, searchTermsDS, (results) => {
 
-    callback(results);
+      callback(results);
+    });
   });
 }
 
-function searchInKey(nameKey, myArray){
-  for (var i=0; i < myArray.length; i++) {
-      if (myArray[i].key.includes(nameKey)) {
-        area = myArray[i].area;
-        if(area === 'gloss')
-        {
-          firstLetter = nameKey[0].toUpperCase();
-        }
-        else {
-          firstLetter = nameKey[0].toLowerCase();
-
-        }
-
-          return nameKey + " - " + myArray[i].value;
+function searchInKey(nameKey, myArray) {
+  for (var i = 0; i < myArray.length; i++) {
+    if (myArray[i].key.includes(nameKey)) {
+      area = myArray[i].area;
+      if (area === 'gloss') {
+        firstLetter = nameKey[0].toUpperCase();
       }
+      else {
+        firstLetter = nameKey[0].toLowerCase();
+
+      }
+
+      return nameKey + " - " + myArray[i].value;
     }
-    return "No Result Found";
+  }
+  return "No Result Found";
 }
 
 function searchInValue(term, myArray) {
@@ -92,7 +91,7 @@ function searchInValue(term, myArray) {
       area = myArray[i].area;
       if (area === "handbook-pdf") {
         let link = term + ' - <a href="pdf/aop-handbook.pdf#page=' + myArray[i].page + '" target="_blank">' +
-        myArray[i].key + '</a></br>'
+          myArray[i].key + '</a></br>'
         results.push(link);
       } else {
         let result = term + " - " + myArray[i].value + "</br>";
@@ -107,9 +106,8 @@ function searchInValue(term, myArray) {
   }
 }
 
-function clearSearchInput()
-{
-  $("#autocomplete-input").value="";
+function clearSearchInput() {
+  $("#autocomplete-input").value = "";
 }
 
 function searchTerm() {
@@ -118,7 +116,7 @@ function searchTerm() {
 
   if (term.value != '') {
     $("#search_title").html(term.value);
-    $("#search_result").html( searchInValue(term.value, searchDomain) );
+    $("#search_result").html(searchInValue(term.value, searchDomain));
   } else {
     $("#search_result").html("Search Term Required.");
   }
@@ -129,10 +127,10 @@ function loadAcrnmIndecies() {
 
   // determine if the checkbox is checked.
   //if (checkbox.checked === true) {
-    // put the indecies in the searchDomain.
-    acrnmDomain.forEach( (index) => {
-      searchDomain.push(index);
-    });
+  // put the indecies in the searchDomain.
+  acrnmDomain.forEach((index) => {
+    searchDomain.push(index);
+  });
   // } else {
   //   // remove the indecies from the searchDomain.
   // }
@@ -143,10 +141,10 @@ function loadGlossIndecies() {
 
   // determine if the checkbox is checked.
   //if (checkbox.checked === true) {
-    // put the indecies in the searchDomain.
-    glossDomain.forEach( (index) => {
-      searchDomain.push(index);
-    });
+  // put the indecies in the searchDomain.
+  glossDomain.forEach((index) => {
+    searchDomain.push(index);
+  });
   // } else {
   //   // remove the indecies from the searchDomain.
   // }
@@ -158,10 +156,10 @@ function loadHandbookIndecies() {
 
   // determine if the checkbox is checked.
   //if (checkbox.checked === true) {
-    // put the indecies in the searchDomain.
-    handbookDomain.forEach( (index) => {
-      searchDomain.push(index);
-    });
+  // put the indecies in the searchDomain.
+  handbookDomain.forEach((index) => {
+    searchDomain.push(index);
+  });
   // } else {
   //   // remove the indecies from the searchDomain.
   // }
@@ -171,7 +169,7 @@ function loadHandbookIndecies() {
 // loadAcrnmIndecies();
 // loadGlossIndecies();
 // loadHandbookIndecies();
-setTimeout( () => {
+setTimeout(() => {
   loadAcrnmIndecies();
   loadGlossIndecies();
   loadHandbookIndecies();
@@ -185,7 +183,7 @@ function getIndex(type) {
   let book = document.getElementById("aop-handbook");
   let index;
 
-  if (type === "Gloss"){
+  if (type === "Gloss") {
 
   } else if (type === "Handbook") {
 
@@ -198,7 +196,7 @@ function displaySearchesInBinder() {
   //viewResults.innerHTML = "";
 
 
-  getAllSearches( (results) => {
+  getAllSearches((results) => {
     if (results.length === 0) {
       document.getElementById("searchesBlurb").style.display = "block";
     } else {
@@ -206,35 +204,35 @@ function displaySearchesInBinder() {
     }
 
 
-    results.forEach( (result) => {
+    results.forEach((result) => {
 
       $('<div>', {
         id: "collapseSearch" + result.id,
         class: "row collapseGroup"
-      }).append( $('<ul>', {
+      }).append($('<ul>', {
         class: "collapsible",
         style: "background-color:#eeeeee;"
-      }).append( $('<li>', {
-      }).append( $('<div>', {
+      }).append($('<li>', {
+      }).append($('<div>', {
         id: result.id,
-        class:  "col s11 collapsible-header",
+        class: "col s11 collapsible-header",
         text: result.terms
-      })).append( $('<div>', {
+      })).append($('<div>', {
         class: "col s1 headerCollapsible",
         style: "padding:0"
-      }).append( $('<img>', {
+      }).append($('<img>', {
         src: "css/svg/trash.svg",
         id: "trashImg",
         style: "vertical-align:middle; width: 20px; height: 20px;",
         onclick: "deleteSearchItem(" + result.id + ");"
-      }))).append( $('<div>', {
+      }))).append($('<div>', {
         class: "col 12 collapsible-body collapseBody"
-      }).append( $('<ul>', {
-         id: "searchDomains" + result.id
+      }).append($('<ul>', {
+        id: "searchDomains" + result.id
       }))))).appendTo('#savedSearches');
       $('.collapsible').collapsible();
       var ul = document.getElementById("searchDomains" + result.id);
-      result.domains.forEach( (domain) =>{
+      result.domains.forEach((domain) => {
         //var candidate = document.getElementById("candidate");
         var li = document.createElement("li");
         //li.setAttribute('id',candidate.value);
@@ -246,9 +244,12 @@ function displaySearchesInBinder() {
 }
 
 function deleteSearchItem(searchId) {
-  itemDB.deleteItem(searchTermsDS, searchId, (e) => {
-    console.log("Deleted Search Item '" + searchId + "'");
-    displaySearchesInBinder();
+  itemDB.open(searchTermsDB, searchTermVersion, searchTermsDS, "", searchTermProp, true, (result) => {
+    let db = result;
+    itemDB.deleteItem(db, searchTermsDS, searchId, (e) => {
+      console.log("Deleted Search Item '" + searchId + "'");
+      displaySearchesInBinder();
+    });
   });
 }
 

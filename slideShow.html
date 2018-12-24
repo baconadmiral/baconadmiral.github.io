@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<!-- <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/> -->
+<style>
+* {box-sizing: border-box}
+body {
+  font-family: Verdana, sans-serif; 
+  margin:0
+}
+.mySlides {
+  display: none
+}
+
+.closeButton{
+  background-color:blue;
+  height:50px;
+  width:50px;
+  border-radius:50%;
+  top:5px;
+  position:absolute;
+  padding:5px;
+}
+
+.closeGlyph{
+  background-image: url("../images/logout.svg");
+  height:40px;
+  width:40px;
+}
+
+
+
+@media screen and (orientation: landscape){
+img {
+    vertical-align: middle;
+    height: 90vh;
+    margin-left:auto;
+    margin-right:auto;
+    width: auto;
+    display:block;
+}
+
+}
+
+@media screen and (orientation:portrait){
+  img {
+  vertical-align: middle;
+  width:100%;
+  height:auto;
+}
+}
+
+
+/* Slideshow container */
+.slideshow-container {
+   max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: darkgray;
+  font-weight: bold;
+  font-size: 26px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #000;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<div id="slideShowContainer" class="slideshow-container">
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+<div class="closeButton">
+<a href="javascript:(window.top.closeOverlay())">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="transform:rotate(180deg);enable-background:new 0 0 512 512;" xml:space="preserve" width="35px" height="35px">
+<g>
+  <g>
+    <g>
+      <path d="M510.371,226.513c-1.088-2.603-2.645-4.971-4.629-6.955l-63.979-63.979c-8.341-8.32-21.824-8.32-30.165,0     c-8.341,8.341-8.341,21.845,0,30.165l27.584,27.584H320.013c-11.797,0-21.333,9.557-21.333,21.333s9.536,21.333,21.333,21.333     h119.168l-27.584,27.584c-8.341,8.341-8.341,21.845,0,30.165c4.16,4.181,9.621,6.251,15.083,6.251s10.923-2.069,15.083-6.251     l63.979-63.979c1.984-1.963,3.541-4.331,4.629-6.955C512.525,237.606,512.525,231.718,510.371,226.513z" fill="#FFFFFF"/>
+      <path d="M362.68,298.667c-11.797,0-21.333,9.557-21.333,21.333v106.667h-85.333V85.333c0-9.408-6.187-17.728-15.211-20.437     l-74.091-22.229h174.635v106.667c0,11.776,9.536,21.333,21.333,21.333s21.333-9.557,21.333-21.333v-128     C384.013,9.557,374.477,0,362.68,0H21.347c-0.768,0-1.451,0.32-2.197,0.405c-1.003,0.107-1.92,0.277-2.88,0.512     c-2.24,0.576-4.267,1.451-6.165,2.645c-0.469,0.299-1.045,0.32-1.493,0.661C8.44,4.352,8.376,4.587,8.205,4.715     C5.88,6.549,3.939,8.789,2.531,11.456c-0.299,0.576-0.363,1.195-0.597,1.792c-0.683,1.621-1.429,3.2-1.685,4.992     c-0.107,0.64,0.085,1.237,0.064,1.856c-0.021,0.427-0.299,0.811-0.299,1.237V448c0,10.176,7.189,18.923,17.152,20.907     l213.333,42.667c1.387,0.299,2.795,0.427,4.181,0.427c4.885,0,9.685-1.685,13.525-4.843c4.928-4.053,7.808-10.091,7.808-16.491     v-21.333H362.68c11.797,0,21.333-9.557,21.333-21.333V320C384.013,308.224,374.477,298.667,362.68,298.667z" fill="#FFFFFF"/>
+    </g>
+  </g>
+</g>
+</svg>
+</a>
+</div>
+
+</div>
+<br>
+
+<!-- <div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span> 
+  <span class="dot" onclick="currentSlide(3)"></span> 
+</div> -->
+
+
+<script>
+
+var slideIndex = 1;
+var total = 50;
+var slideContainer = document.getElementById("slideShowContainer"); 
+
+    for(var i = slideIndex; i <= total; i++)
+    {
+    	var slideDiv = document.createElement("div"); 
+    	slideDiv.setAttribute('class','mySlides fade'); 
+    	var textDiv = document.createElement("div"); 
+    	textDiv.setAttribute('class', 'numberText'); 
+    	textDiv.setAttribute('style', 'color:#000');
+    	var textNode = document.createTextNode(i + "/" + total); 
+    	textDiv.appendChild(textNode); 
+
+    	var slideImage = document.createElement("img"); 
+      	slideImage.setAttribute("src","../images/IntermediateLevelAoP/slide"+i+".jpg");
+      	slideDiv.appendChild(slideImage);
+      	slideDiv.appendChild(textDiv); 
+      	slideContainer.appendChild(slideDiv);
+    }
+
+	/*var slideIndex = 1;*/
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+ /* dots[slideIndex-1].className += " active";*/
+}	
+</script>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/aop.js"></script>
+<script language="javascript" type="text/javascript" src="/js/indexedDBWrapper.js"></script>
+<script language="javascript" type="text/javascript" src="/js/settings.js"></script>
+
+
+</body>
+</html>

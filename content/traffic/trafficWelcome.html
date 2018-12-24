@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script language="javascript" type="text/javascript" src="js/traffic/trafficRenderingFunctions.js"></script>
+  <style>
+
+  /* The Modal (background) */
+  .modal {
+    display: block; /* Block by default */
+    position: fixed; /* Stay in place */
+    z-index: 5; /* Sit on top */
+    padding-top: 80px; /* Location of the box */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    margin: 10px;
+    border: 5px solid #fff;
+    background-color: #03AA4F;
+    width: 85%;
+    border-radius:10px; -webkit-box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
+    z-index:500;
+    position: absolute;
+    top: 0;
+  }
+  .stick{
+    z-index:300;
+    height:100%;
+    width:40px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    background:linear-gradient(to right, #757575 0%,#757575 50%,#757575 50%, #757575 80%,#424242 80%,#424242 100%);
+
+  }
+
+  .modal-title{
+    text-align:center;
+    color:#FFF;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .close {
+    float: right;
+    padding-top:5px;
+    padding-right:5px;
+  }
+
+  .close:hover,.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-icon{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height:100px;
+  }
+
+  .modal-button{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  .instructionBtn{
+    width: 80%;
+    padding: 10px;
+    border: 3px solid white;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 20px;
+    margin-bottom:10px;
+    background-color: #1B661B;
+    font-weight: bold;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+   <div class="stick"></div>
+    <div class="modal-content">
+      <span class="close"><img src="css/svg/close-button.svg" height="20px" width="20px"></span>
+      <div>
+        <h1 class="modal-title">TRAFFIC GATE</h1>
+        <img class="modal-icon" src="../css/svg/car.svg"/>
+       <input class="instructionBtn modal-button arrow-right" type="button"value="PLAY" onclick="renderLaneNumberSelector();"/>
+        <input class="instructionBtn modal-button" type="button" value="INSTRUCTIONS"/>
+      </div>
+    </div>
+  </div>
+
+<script>
+  var modal = document.getElementById('myModal');
+  var btn = document.getElementById("myBtn");
+  var span = document.getElementsByClassName("close")[0];
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

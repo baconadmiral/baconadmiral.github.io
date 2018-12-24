@@ -3,15 +3,17 @@ function Wings(sketch, posX, posY, wingsImg)
   this.drag = false;
   this.xPos = posX;
   this.yPos = posY;
-  
+
   this.update = function()
   {
+    sketch.fill("white");
     sketch.rect(posX - 4 , posY - 28 , 65 , 65,5);
     sketch.image(wingsImg, this.xPos - 4, this.yPos - 20, 50, 50);
     sketch.textSize(22);
+    sketch.fill("black");
     sketch.text("Wings", posX, posY - 30);
   }
-  
+
   this.touchStarted = function(wingXpos, wingYpos)
   {
     if(sketch.dist(sketch.mouseX, sketch.mouseY, wingXpos, wingYpos) < 60)
@@ -22,10 +24,10 @@ function Wings(sketch, posX, posY, wingsImg)
       this.drag = false;
     }
   }
-  
+
   this.touchEnded = function(attachSnd)
   {
-    
+
     //I dont exactly like this but not sure atm how else to do it
     if(this.drag)
     {
@@ -45,7 +47,7 @@ function Wings(sketch, posX, posY, wingsImg)
 
     this.popBackToDefault();
   }
-  
+
   this.touchMoved = function()
   {
     if(this.drag)
@@ -54,7 +56,7 @@ function Wings(sketch, posX, posY, wingsImg)
       this.yPos = sketch.mouseY - 20;
     }
   }
-  
+
   this.popBackToDefault = function()
   {
     this.xPos = posX;

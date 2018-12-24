@@ -3,15 +3,17 @@ function Cockpit(sketch, posX, posY, cockpitImg)
   this.drag = false;
   this.xPos = posX;
   this.yPos = posY;
-  
+
   this.update = function()
   {
+    sketch.fill("white");
     sketch.rect(posX + 4 , posY - 28 , 65 , 65,5);
     sketch.image(cockpitImg, this.xPos + 9, this.yPos - 10, 60, 20);
     sketch.textSize(22);
+    sketch.fill("black");
     sketch.text("Cockpit", posX, posY - 30);
   }
-  
+
   this.touchStarted = function(cockpitXpos, cockpitYpos)
   {
     if(sketch.dist(sketch.mouseX, sketch.mouseY, cockpitXpos + 30, cockpitYpos+20) < 60)
@@ -22,7 +24,7 @@ function Cockpit(sketch, posX, posY, cockpitImg)
       this.drag = false;
     }
   }
-  
+
   this.touchEnded = function(attachSnd)
   {
     //I dont exactly like this but not sure atm how else to do it
@@ -45,7 +47,7 @@ function Cockpit(sketch, posX, posY, cockpitImg)
 
     this.popBackToDefault();
   }
-  
+
   this.touchMoved = function()
   {
     if(this.drag)
@@ -54,7 +56,7 @@ function Cockpit(sketch, posX, posY, cockpitImg)
       this.yPos = sketch.mouseY - 20;
     }
   }
-  
+
   this.popBackToDefault = function()
   {
     this.xPos = posX;
