@@ -21,11 +21,16 @@
 
   /* Modal Content */
   .modal-content {
+
       margin: auto;
+
       padding: 20px;
-      border: 1px solid #888;
+      padding-bottom: 0px;
+      padding-top: 10px;
       background-color: white;
-      width: 85%;
+      width: 60%;
+      border-radius: 25px;
+      border: 2px solid #73AD21;
   }
 
   .close {
@@ -40,18 +45,48 @@
       text-decoration: none;
       cursor: pointer;
   }
+
+  .airplaneIcon{
+    height: 20%;
+    width: 25%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .playIcon{
+    height: 10%;
+    width: 20%;
+    display: block;
+ margin-left: auto;
+ margin-right: auto;
+ margin-bottom: 0px;
+margin-top: 0px;
+  }
+
+  #rcorners {
+
+}
 </style>
 </head>
 <body>
 
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="myModal" class="modal rcorners">
 
   <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Congratulations You Win, Proceed to Level 3?</p>
-      <a onclick="startFactory(3);">Start Level 3</a><br/>
+    <a href="javascript:void(0)" class="closebtn" onclick="window.top.closeOverlay()">Close Game</a>
+    <img src="images/game/planeBuilder/airplaneComp.png" class="airplaneIcon">
+
+      <p>Congratulations you can really build airplanes!</p>
+      <p>...But we need another 10 airplanes!</p>
+      <p>We need them even faster!</p>
+    </br>
+      <p>Can you handle a flowtime of 6 seconds?</p>
+
+        <img src="images/game/play.png" class="playIcon"  onclick="startFactory(3);">
+      <br/>
   </div>
 
 </div>
@@ -62,10 +97,6 @@ var modal = document.getElementById('myModal');
 var btn = document.getElementById("myBtn");
 
 var span = document.getElementsByClassName("close")[0];
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
 
 </script>
 

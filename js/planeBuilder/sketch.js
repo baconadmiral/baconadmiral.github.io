@@ -22,7 +22,8 @@ var planeBuilderSim = function(sketch) {
   var converyerBelt;
   var fuselage;
   var velocity = 2;
-  var startFlowtime = 12;
+  var startFlowtime = 10;
+  var speedTxt = "Slow";
 
   var gameRunning = true;
   var winCount = 0;
@@ -31,7 +32,7 @@ var planeBuilderSim = function(sketch) {
   var successSnd;
   var gameOverSnd;
 
-  var numberForWin = 2;
+  var numberForWin = 3;
 
   this.fuselageList = [];
 
@@ -44,7 +45,27 @@ var planeBuilderSim = function(sketch) {
       this.level = level;
       winCount = 0;
       gameRunning = true;
-      addFuselage();
+
+      if(this.level == 1)
+      {
+        speedTxt = "Slow";
+        velocity = 1.75;
+        startFlowtime = 11;
+      }
+      else if(this.level == 2)
+      {
+        speedTxt = "Medium";
+        velocity = 2.50;
+        startFlowtime = 8;
+      }
+      else if(this.level == 3)
+      {
+        speedTxt = "Fast";
+        velocity = 3;
+        startFlowtime = 7;
+      }
+
+      setTimeout(addFuselage, 1000);
       flowTimeTimeout = setTimeout(decrementFlowTimes, 1000);
   }
 
@@ -81,7 +102,7 @@ var planeBuilderSim = function(sketch) {
     {
       sketch.background(this.bgImg);
 
-      statsDisplay.update(winCount, startFlowtime-1);
+      statsDisplay.update(winCount, startFlowtime-1, speedTxt);
 
       sketch.textSize(28);
       //sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
@@ -188,21 +209,15 @@ var planeBuilderSim = function(sketch) {
 
     if(this.level == 1)
     {
-      velocity = 2;
-      startFlowtime = 13;
       fuselageTimeout = setTimeout(addFuselage, 3000);
     }
     else if(this.level == 2)
     {
-      velocity = 3;
-      startFlowtime = 8;
-      fuselageTimeout = setTimeout(addFuselage, 2000);
+      fuselageTimeout = setTimeout(addFuselage, 2500);
     }
     else if(this.level == 3)
     {
-      velocity = 4;
-      startFlowtime = 5;
-      fuselageTimeout = setTimeout(addFuselage, 1000);
+      fuselageTimeout = setTimeout(addFuselage, 1800);
     }
 
   }

@@ -10,7 +10,7 @@ function StatsDisplay(sketch)
   this.flowtimeClkLocX = sketch.width/2 - this.largeWidth/2;
   this.wipLocX = (sketch.width * 3/4) - this.smallWidth/2;
 
-  this.update = function(numComplete, startingFlowTime)
+  this.update = function(numComplete, startingFlowTime, speed)
   {
     //Speed Dialog
     sketch.fill("white");
@@ -20,7 +20,7 @@ function StatsDisplay(sketch)
     sketch.text("Speed", this.speedLocX + 10, 60);
 
     sketch.textSize(12);
-    sketch.text("Medium", this.speedLocX + 12, 78);
+    sketch.text(speed, this.speedLocX + 12, 78);
 
     //FlowTime Clock
     sketch.fill("white");
