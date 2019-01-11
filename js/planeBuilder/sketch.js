@@ -40,7 +40,7 @@ var planeBuilderSim = function(sketch) {
 
 
   startFactory = function(level) {
-     
+
       removeAllFuselage();
       closeModal();
       this.level = 3;
@@ -50,19 +50,19 @@ var planeBuilderSim = function(sketch) {
       if(this.level == 1)
       {
         speedTxt = "Slow";
-        velocity = 1.75;
+        velocity = 2.25;
         startFlowtime = 11;
       }
       else if(this.level == 2)
       {
         speedTxt = "Medium";
-        velocity = 2.50;
+        velocity = 3.15;
         startFlowtime = 8;
       }
       else if(this.level == 3)
       {
         speedTxt = "Fast";
-        velocity = 3;
+        velocity = 3.75;
         startFlowtime = 7;
       }
 
@@ -121,8 +121,7 @@ var planeBuilderSim = function(sketch) {
       //Remove non displayed fuselages
       if(fuselageList[0] != null && this.fuselageList[0].posX >= sketch.width)
       {
-        //if(this.fuselageList[0].hasTail && this.fuselageList[0].hasWings && this.fuselageList[0].hasCockpit)
-        if(true)
+        if(this.fuselageList[0].hasTail && this.fuselageList[0].hasWings && this.fuselageList[0].hasCockpit)
         {
           successSnd.play();
           winCount++;
