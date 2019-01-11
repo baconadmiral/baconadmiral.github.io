@@ -9,36 +9,42 @@
       display: block; /* Block by default */
       position: fixed; /* Stay in place */
       z-index: 1; /* Sit on top */
-      padding-top: 20px; /* Location of the box */
+      padding-top: 30px; /* Location of the box */
       left: 0;
       top: 0;
       width: 100%; /* Full width */
       height: 100%; /* Full height */
       overflow: auto; /* Enable scroll if needed */
       /* background-color: rgb(0,0,0); /* Fallback color */ */
-      background-color: white; /* Black w/ opacity */
+      background-color: rgba(0,0,0,.5);
   }
 
   /* Modal Content */
   .modal-content {
       margin: auto;
       padding: 20px;
-      border: 1px solid #888;
-      background-color: white;
-      width: 85%;
+      padding-bottom:5px;
+      border: 8px solid #BA1852;
+      background-color: #FFDADB;
+      width: 55%;
+      border-radius:10px;
+      box-shadow: 10px 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
-  .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
+  .qualityMsg{
+    height: 35px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-bottom: 5px;
   }
 
-  .close:hover,.close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
+  .parts{
+    height:85px;
+  }
+
+  .msg{
+    margin-bottom:0px;
   }
 </style>
 </head>
@@ -49,9 +55,21 @@
 <div id="myModal" class="modal">
 
   <div class="modal-content">
-      <a href="javascript:void(0)" class="closebtn" onclick="window.top.closeOverlay()">Close Game</a>
-      <p>Oh No! You let a plane not get completed, Retry to Level 1?</p>
-      <a onclick="startFactory(1);">Retry Level 1</a><br/>
+    <img class="closeBtn" src ="images/game/conveyerImgs/CloseButton.png" 
+      onclick="window.top.closeOverlay()">
+    <img class="failed" src ="images/game/conveyerImgs/Failed.png" > 
+    <img class="level" src="images/game/conveyerImgs/Level1.png">
+    <img class="msg" src="images/game/conveyerImgs/Unfinished_msg.png">
+    <img class="qualityMsg" src="images/game/conveyerImgs/qualityMsg.png">
+    <img class="parts" src ="images/game/conveyerImgs/Parts.png">
+
+    <div class="btnDiv">
+      <img class="retryBtn" src ="images/game/conveyerImgs/RetryButton.png" 
+          onclick="startFactory(1);">
+      <img class="quitBtn" src ="images/game/conveyerImgs/QuitButton.png" 
+          onclick="window.top.closeOverlay()">
+    </div> 
+
   </div>
 
 </div>
@@ -61,7 +79,7 @@ var modal = document.getElementById('myModal');
 
 var btn = document.getElementById("myBtn");
 
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("closeBtn")[0];
 
 span.onclick = function() {
     modal.style.display = "none";

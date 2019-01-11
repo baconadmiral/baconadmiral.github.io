@@ -6,87 +6,84 @@
 
   /* The Modal (background) */
   .modal {
-      display: block; /* Block by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 20px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      /* background-color: rgb(0,0,0); /* Fallback color */ */
-      background-color: white; /* Black w/ opacity */
+    display: block; /* Block by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 30px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,.5);
   }
 
   /* Modal Content */
   .modal-content {
-
-      margin: auto;
-
-      padding: 20px;
-      padding-bottom: 0px;
-      padding-top: 10px;
-      background-color: white;
-      width: 60%;
-      border-radius: 25px;
-      border: 2px solid #73AD21;
+    margin: auto;
+    padding: 20px;
+    padding-bottom:5px;
+    border: 8px solid #02741F;
+    background-color: #b9f6af;
+    width: 55%;
+    border-radius:10px;
+    box-shadow: 10px 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
-  .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
+
+  .flowtimeMsg{
+    width: 310px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 10px;
   }
 
-  .close:hover,.close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
+  .butMsg{
+    width:250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  .fasterMsg{
+    height:25px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 
   .airplaneIcon{
-    height: 20%;
-    width: 25%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
 
-  .playIcon{
-    height: 10%;
-    width: 20%;
-    display: block;
- margin-left: auto;
- margin-right: auto;
- margin-bottom: 0px;
-margin-top: 0px;
-  }
 
-  #rcorners {
-
-}
 </style>
 </head>
 <body>
 
 
 <!-- The Modal -->
-<div id="myModal" class="modal rcorners">
+<div id="myModal" class="modal">
 
   <div class="modal-content">
-    <a href="javascript:void(0)" class="closebtn" onclick="window.top.closeOverlay()">Close Game</a>
+    <img class="closeBtn" src ="images/game/conveyerImgs/CloseButton.png" 
+      onclick="window.top.closeOverlay()">
+    <img class="cleared" src ="images/game/conveyerImgs/Cleared.png" > 
+    <img class="level" src="images/game/conveyerImgs/Level3.png">
+    <img class="butMsg" src="images/game/conveyerImgs/butMsg.png">
+    <img class="fasterMsg" src="images/game/conveyerImgs/fasterMsg.png">
     <img src="images/game/planeBuilder/airplaneComp.png" class="airplaneIcon">
+    <img class="flowtimeMsg" src="images/game/conveyerImgs/6SecondFlowtime.png">
+        
+    <div class="btnDiv">
+      <img src="images/game/conveyerImgs/PlayButton.png" class="continuePlayBtn"  
+        onclick="startFactory(3);">
+      <img class="quitBtn" src ="images/game/conveyerImgs/QuitButton.png" 
+        onclick="window.top.closeOverlay()">
+    </div>
 
-      <p>Congratulations you can really build airplanes!</p>
-      <p>...But we need another 10 airplanes!</p>
-      <p>We need them even faster!</p>
-    </br>
-      <p>Can you handle a flowtime of 6 seconds?</p>
-
-        <img src="images/game/play.png" class="playIcon"  onclick="startFactory(3);">
-      <br/>
   </div>
 
 </div>

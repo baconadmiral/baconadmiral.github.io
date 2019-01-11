@@ -7,13 +7,13 @@ var iframe;
 
 function openIOverlay(fLink, pageType) {
   // alert('IOverlay clicked');
-
   iframe = document.createElement('iframe');
   let iOl = document.getElementById("iOverlay");
   iframe = document.createElement('iframe');
   iOl = document.getElementById("iOverlay");
   iOl.width = window.innerWidth;
   iOl.height = window.innerHeight;
+  
   iOl.setAttribute("style", "background-color:#000");
   iframe.setAttribute("style", "background-color:#000");
   iframe.width = window.innerWidth;

@@ -32,26 +32,28 @@
     position: absolute;
     top: 100%;
     left: 0;
+    /*width: 100vh;
+    height: 100%;*/
     width: 100vh;
-    height: 100%;
-    border: 0;
+    height: 47%;
     transform: rotate(-90deg);
     transform-origin: left top;
-    overflow-x: hidden;
+    background-color: #31EABB;
+    border:0;
+   /* overflow-x: hidden;*/
 }
 
 .iframeStyleLandscape{
-     position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border: 0;
+    background-color: #31EABB;
 }
 
 /* end todd overlay */
-
-
 
 nav{
  /* background-color:#01579b;*/
@@ -996,3 +998,77 @@ background: linear-gradient(to right, rgba(252,234,33,1) 0%, rgba(251,178,6,1) 2
   padding-left:10px; 
   margin:.3rem 0 .3rem 0;
 }
+
+/*-------CSS for Conveyer Game----------------------------------------*/
+  .quitBtn{
+    height:45px;
+  }
+
+  .retryBtn{
+    height:45px;
+    margin-right:5px;
+  }
+
+  .continuePlayBtn{
+    height:45px;
+    margin-right:5px;
+  }
+
+  .btnDiv{
+    text-align:center;
+  }
+
+  .closeBtn{
+    float: right;
+    height: 45px;
+    margin-right: -36px;
+    margin-top: -45px;
+  }
+
+  .failed{
+    height:45px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -45px;
+  }
+
+   .cleared{
+    height:45px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -45px;
+  }
+
+  .parts{
+    height:90px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom:10px;
+  }
+
+  .level{
+    height: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 5px;
+  }
+
+  .msg{
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom:10px;
+  }
+  
+  .airplaneIcon{
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
