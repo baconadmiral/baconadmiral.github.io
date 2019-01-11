@@ -43,7 +43,7 @@ var planeBuilderSim = function(sketch) {
 
       removeAllFuselage();
       closeModal();
-      this.level = 3;
+      this.level = level;
       winCount = 0;
       gameRunning = true;
 
