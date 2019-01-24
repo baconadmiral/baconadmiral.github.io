@@ -1,5 +1,4 @@
 function renderStartGameMenu() {
-  console.log("startFactoryGame()");
   $("#factory_modal_content").load("content/planeBuilder/startLevel1.html");
 }
 

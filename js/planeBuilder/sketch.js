@@ -73,7 +73,10 @@ var planeBuilderSim = function(sketch) {
   }
 
   stopFactory = function() {
+    stopGame();
+  }
 
+  function stopGame(){
      removeAllFuselage();
      gameRunning = false;
      winCount = 0;
@@ -191,7 +194,7 @@ var planeBuilderSim = function(sketch) {
     //return true if back button is clicked
     if(backBtn.mousePressed())
     {
-      stopGame();
+      stopFactory();
     }
   }
 
