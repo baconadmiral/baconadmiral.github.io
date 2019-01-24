@@ -48,7 +48,8 @@
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
   }
-
+  
+  /*
   .close {
     float: right;
     padding-top:5px;
@@ -60,6 +61,7 @@
     text-decoration: none;
     cursor: pointer;
   }
+  */
 
   .modal-icon{
     margin-left: auto;
@@ -75,17 +77,35 @@
     display: block;
   }
 
-  .instructionBtn{
-    width: 80%;
-    padding: 10px;
-    border: 3px solid white;
-    border-radius: 2px;
-    color: #fff;
-    font-size: 20px;
-    margin-bottom:10px;
-    background-color: #1B661B;
-    font-weight: bold;
+  .BackBtn{
+    float: left;
+    margin-top: -10px;
+    margin-left: -15px;
+    height: 45px;
   }
+
+.trafficTitle{
+  width:96%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.playTrafficBtn{
+  height:45px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom:8px;
+}
+.instructionBtn
+{
+  height:45px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom:8px;
+}
 
 </style>
 </head>
@@ -95,12 +115,14 @@
   <div id="myModal" class="modal">
    <div class="stick"></div>
     <div class="modal-content">
-      <span class="close"><img src="css/svg/close-button.svg" height="20px" width="20px"></span>
+
+       <img class="BackBtn" src ="images/game/conveyerImgs/BackButton.png" onclick="window.top.closeOverlay()">
+      <!-- <span class="close"><img src="css/svg/close-button.svg" height="20px" width="20px"></span> -->
       <div>
-        <h1 class="modal-title">TRAFFIC GATE</h1>
+        <img class="trafficTitle" src="images/game/trafficsim/road/trafficGameTitle.png">
         <img class="modal-icon" src="../css/svg/car.svg"/>
-       <input class="instructionBtn modal-button arrow-right" type="button"value="PLAY" onclick="renderLaneNumberSelector();"/>
-        <input class="instructionBtn modal-button" type="button" value="INSTRUCTIONS"/>
+        <img class="playTrafficBtn" src="images/game/trafficsim/road/playBtnPurple.png" onclick="renderLaneNumberSelector();"/>
+        <img class="instructionBtn" src="images/game/trafficsim/road/instructionsBtn.png">
       </div>
     </div>
   </div>

@@ -55,7 +55,7 @@
   <div class="modal-content">
     <div class="wrapper"></div>
     <img class="closeBtn" src ="images/game/conveyerImgs/CloseButton.png" 
-      onclick="window.top.closeOverlay()">
+      onclick="stopFactory();">
     <img class="cleared" src ="images/game/conveyerImgs/Completed.png" > 
     <img class="winner" src ="images/game/conveyerImgs/Winner.png" >
 
@@ -65,8 +65,6 @@
       <img class="quitBtn" src ="images/game/conveyerImgs/QuitButton.png" 
         onclick="window.top.closeOverlay()">
     </div>
-
-     
   </div>
 
 </div>
@@ -76,12 +74,6 @@ var modal = document.getElementById('myModal');
 
 var btn = document.getElementById("myBtn");
 
-var span = document.getElementsByClassName("close")[0];
-
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
 </script>
 
 </body>

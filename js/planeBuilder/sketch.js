@@ -1,5 +1,5 @@
 var planeBuilderSim = function(sketch) {
-
+//test
   var fuselageImg;
   var tailImg;
   var wingsImg;
@@ -11,10 +11,12 @@ var planeBuilderSim = function(sketch) {
   var fuselageCWImg;
   var fuselageWTImg;
   var airplaneCompImg;
+  var backBtnImg;
 
   var fuselageTimeout;
   var flowTimeTimeout;
 
+  var backBtn;
   var statsDisplay;
   var wings;
   var tail;
@@ -70,6 +72,15 @@ var planeBuilderSim = function(sketch) {
       flowTimeTimeout = setTimeout(decrementFlowTimes, 1000);
   }
 
+  stopFactory = function() {
+
+     removeAllFuselage();
+     gameRunning = false;
+     winCount = 0;
+
+     renderStartGameMenu();
+  }
+
   sketch.setup = function() {
 
     loadImages();
@@ -87,7 +98,10 @@ var planeBuilderSim = function(sketch) {
 
     let defaultToolsLocationX = sketch.width/2 -32;
     let defaultToolsLocationY = sketch.height - sketch.height/6;
+    let backBtnPosX = 10;
+    let backBtnPosY = 20;
 
+    backBtn = new BackBtn(sketch, backBtnPosX, backBtnPosY, backBtnImg);
     wings = new Wings(sketch, defaultToolsLocationX, defaultToolsLocationY, wingsImg);
     tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY, tailImg);
     cockpit = new Cockpit(sketch, defaultToolsLocationX + 100, defaultToolsLocationY, cockpitImg );
@@ -114,6 +128,7 @@ var planeBuilderSim = function(sketch) {
         this.fuselageList[i].update(velocity);
       }
 
+      backBtn.update();
       wings.update();
       tail.update();
       cockpit.update();
@@ -170,6 +185,16 @@ var planeBuilderSim = function(sketch) {
     }
 
   }
+
+  sketch.mousePressed = function()
+  {
+    //return true if back button is clicked
+    if(backBtn.mousePressed())
+    {
+      stopGame();
+    }
+  }
+
   sketch.touchStarted = function()
   {
     wings.touchStarted(wings.xPos, wings.yPos);
@@ -243,5 +268,8 @@ var planeBuilderSim = function(sketch) {
     fuselageCWImg = sketch.loadImage("images/game/planeBuilder/fuselageCW.png");
     fuselageWTImg = sketch.loadImage("images/game/planeBuilder/fuselageWT.png");
     airplaneCompImg = sketch.loadImage("images/game/planeBuilder/airplaneComp.png");
+    backBtnImg = sketch.loadImage("images/game/conveyerImgs/BackButton.png");
   }
+
+
 }

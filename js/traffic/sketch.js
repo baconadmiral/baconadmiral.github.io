@@ -8,10 +8,14 @@ var trafficSim = function(sketch) {
     var spawnedCarCount = 0;
     var startTime;
     var timePassedMs = 0.0;
+    var targetThroughput;
+    var targetTime;
+    var wip;
 
     // Run Speed config
     var timeGranularityMs = 100;
     var completionCount = 25;
+    var flowtime = 1;
     var velocity = 15;
     var intervalTime = 1000;
 
@@ -22,7 +26,7 @@ var trafficSim = function(sketch) {
     var carHeight = 100;
     var canvasWidth = 360;
     var canvasHeight = 640;
-    var ySpawnWindowHeight = Math.max(0,(velocity * frameRate * (intervalTime / 1000) - carHeight));
+    var ySpawnWindowHeight = 0;
     var carImgs = [];
     var carLaneXs = [];
     this.carList = [];
@@ -30,15 +34,26 @@ var trafficSim = function(sketch) {
 
 
 
-  startCars = function(numLanes, compCount, velo, inter) {
+  startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds) {
+    sketch.frameRate(frameRate);
+
     numberOfOpenLanes = numLanes;
     completionCount = compCount;
-    velocity = velo;
-    intervalTime = inter;
+    flowtime = flowTimeSeconds;
+    velocity = (canvasHeight + carHeight)/(flowtime*frameRate);
+    intervalTime = intervalTimeSeconds * 1000;
+
+    // Null variables so they calculate based on this run configuration
+    targetThroughput = null;
+    targetTime = null;
+    wip = null;
+    ySpawnWindowHeight = Math.max(0,(velocity * frameRate * (intervalTime / 1000) - carHeight));
+
+    // Start cars for each open lane
     for (let i = 1; i <= numberOfOpenLanes; i++) {
       addCar(i);
     }
-    sketch.frameRate(frameRate);
+
     $("#startOptions").hide();
     $("#runInfo").show();
   }
@@ -55,18 +70,20 @@ var trafficSim = function(sketch) {
 
   sketch.draw = function()
   {
+    // Draw background dynamically based on the number of open lanes
     sketch.background(this.empty_road);
-
     for (let laneNumber = 3; laneNumber > numberOfOpenLanes; laneNumber--)
     {
       sketch.image(gate, (can.width / numberOfLanes) * (laneNumber - 1), 0, (can.width / numberOfLanes), 10);
     }
-
     sketch.image(this.tower, (can.width / numberOfLanes) - 15, -15, 30, 30);
     sketch.image(this.tower, (can.width / numberOfLanes) * 2 - 15, -15, 30, 30);
 
+    // Sim run
     if (!complete)
     {
+      // Set furthest car height as the bottom of the canvas.
+      // This gets updated during render until we start the timer.
       if (timePassedMs == 0)
       {
         var furthstCarYpos = canvasHeight;
@@ -88,32 +105,68 @@ var trafficSim = function(sketch) {
       }
 
       // Start timer once we have a "stableish" system
-      if (timePassedMs == 0 && furthstCarYpos <= ((-1*carHeight) + ySpawnWindowHeight/2) )
+      if (timePassedMs == 0 && furthstCarYpos <= ((-1*(carHeight/2)) + ySpawnWindowHeight/2) )
       {
         console.log("starting timer when the furthest car reched yPos " + ((-1*carHeight) + ySpawnWindowHeight/2) );
         runTimer();
       }
     }
+
+    // Show results once finished car count has been reached.
     if (finishedCarCount >= completionCount)
     {
       complete = true;
       $("#questionResult").show();
     }
+
+    // Update debug output
+    // sketch.fill(255);
+    // sketch.text("Cars Spawned: " + spawnedCarCount + "\tFinished: " + finishedCarCount, 10, 10);
+    // sketch.text("Flowtime: " + flowtime, 10, 20);
+    // sketch.text("Throughput: " + calcTargetThroughput() + "\tSimulated: " + calcSimThroughput(), 10, 30);
+    // sketch.text("Target time: " + calcTargetTime() + "\tSimulated: " + (Math.round(timePassedMs)/1000) , 10, 40);
+    // sketch.text("WIP: " + calcWip(), 10, 50);
+
     $("#spawnedCarCount").text(spawnedCarCount);
     $("#finishedCarCount").text(finishedCarCount);
-    $("#avgThroughput").text(calcAvgThroughput());
+    $("#flowtime").text(flowtime);
+    $("#targetThroughput").text(calcTargetThroughput());
     $("#simThroughput").text(calcSimThroughput());
-    $("#timer").text(Math.round(timePassedMs)/1000);
+    $("#targetTime").text(calcTargetTime());
+    $("#wip_out").text(calcWip());
+    $("#simTimer").text(Math.round(timePassedMs/100)/10);
   }
 
-  function calcAvgThroughput()
+  function calcTargetThroughput()
   {
-    return Math.round( (numberOfOpenLanes/(intervalTime/1000)) * 100) / 100;
+    if (!targetThroughput)
+    {
+      targetThroughput = Math.round( (numberOfOpenLanes/(intervalTime/1000)) * 100) / 100;
+    }
+    return targetThroughput;
+  }
+
+  function calcTargetTime()
+  {
+    if (!targetTime)
+    {
+      targetTime = completionCount / targetThroughput;
+    }
+    return targetTime;
+  }
+
+  function calcWip()
+  {
+    if (!wip)
+    {
+      wip = Math.round(flowtime * targetThroughput * 10) / 10;
+    }
+    return wip;
   }
 
   function calcSimThroughput()
   {
-    return Math.round((finishedCarCount/(timePassedMs/1000))*100)/100;
+    return Math.round((finishedCarCount/(timePassedMs/1000))*10)/10;
   }
 
   function setTimePassedMs()
@@ -144,6 +197,7 @@ var trafficSim = function(sketch) {
         can.height + yStart, carWidth, carHeight));
     spawnedCarCount++;
 
+    // Only continue to spawn cars for as long as nessesary to meet the desired count
     if (!complete) {
       crateTimeout = setTimeout(function() {
         addCar(lane);
