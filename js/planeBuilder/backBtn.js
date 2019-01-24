@@ -10,7 +10,7 @@ function BackBtn(sketch, posX, posY, backBtnImg)
 
   this.mousePressed = function()
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, this.xPos, this.yPos) < 35)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, this.xPos, this.yPos) < 50)
     {
       return true;
     }
