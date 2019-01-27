@@ -28,7 +28,7 @@ function openQuestionsNScores() {
 					//console.log(myIndex);
 
 					// get questions from file.
-					let questions = questionFunctionNames[index]();
+					let questions = questionFunctionNames[myIndex]();
 
 					//loop through questions to insert into database.
 					questions.forEach((question) => {

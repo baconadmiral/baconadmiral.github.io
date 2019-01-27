@@ -50,20 +50,14 @@
 <div id="myModal" class="modal">
 
   <div class="modal-content">
-    <span class="close">&times;</span>
-    <span id="question">
-      <p>Given a throughput of 3 and a flow time of 8 minuets, what is your WIP? </p>
-      <input/>
-      <button onclick="startCars(1,30,15,1000);"/>
-    </span>
-
-    <span id="runInfo" style="display:none;">
-      <p id="cars">Cars
-         Spawned: <span id="spawnedCarCount"></span> Finished: <span id="finishedCarCount"></span> </p>
-      <p id="wip">WIP: <span id="wip_out"></span></p>
-      <p id="throughput">Throughput
-         Avg: <span id="avgThroughput"></span> Simulated: <span id="simThroughput"></span> </p>
-      <p>Time: <span id="timer"></span></p>
+   <span class="close" onclick="renderTrafficWelcome();">&times;</span>
+    <span id="startOptions">
+      <p>Given a WIP of 6 units, and a FLOWTTIME of 1.5s, what is the THROUGHPUT? </p>
+      <h1 style="margin-top: -15px; margin-bottom:-15px;">
+        <a onclick="startCars(3,30,1.5,.28, false); closeModal();"  style="margin-right:100px">11 </a>
+        <a onclick="startCars(3,30,1.5,.75, true); closeModal();" style="margin-right:100px">4 </a>
+        <a onclick="startCars(3,30,1.5,.5, false); closeModal();" >6</a>
+      </h1>
     </span>
   </div>
 
@@ -75,10 +69,6 @@ var modal = document.getElementById('myModal');
 var btn = document.getElementById("myBtn");
 
 var span = document.getElementsByClassName("close")[0];
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
 
 </script>
 

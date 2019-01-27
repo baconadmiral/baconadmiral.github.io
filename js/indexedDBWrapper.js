@@ -30,16 +30,14 @@ var itemDB = ( function() {
         db.deleteObjectStore(datastoreName);
       }
 
+      let store = db.createObjectStore(datastoreName, {
+          keyPath: key_path
+        });
       // Create a new datastore.
       if(useAutoIncrement){
-        let store = db.createObjectStore(datastoreName, {
+        store = db.createObjectStore(datastoreName, {
           keyPath: "id",
           autoIncrement: true
-        });
-      }
-      else{
-        let store = db.createObjectStore(datastoreName, {
-          keyPath: key_path
         });
       }
 
