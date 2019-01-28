@@ -27,16 +27,10 @@
   overflow-x: hidden;
   overflow-y: hidden;
   background-color: #31EABB;
-}
-
-.playBtn{
-  width:25%;
-  display:block;
-  margin-left: 39%;
-  margin-right: auto;
-  position:absolute;
-  bottom:0;
-  margin-bottom: 10px;
+  background-image: url("/images/game/conveyerImgs/instructions_2.png");
+  background-repeat: no-repeat;
+  background-size:100%;
+  background-position: right;
 }
 
 .BackBtn{
@@ -58,31 +52,6 @@
   margin-right:5px;
 }
 
-.gameTitle{
-  width:50%;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  top: 20%;
-  position: fixed;
-  left: 25%;
-}
-
-.conveyorBackground{
- background-image: url("/images/game/conveyerImgs/ConveyorStartScreen.png");
- background-repeat: no-repeat;
- background-size:auto 100%;
- background-position: center;
-}
-
-.overlay{
-  background-color: #31EABB !important;
-}
-
-.airplaneIcon{
-    height: 30%;
-    width: 45%;
-}
 </style>
 </head>
 <body>
@@ -90,14 +59,8 @@
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
   <div class="modal-content">
-    <img src="images/game/planeBuilder/airplaneComp.png" class="airplaneIcon">
-
-    <p>Instructions Page 2: Describe that Planes Cannot Fall off the Conveyer with Red X</p>
-
     <img class="BackBtn" src ="images/game/conveyerImgs/BackButton.png" onclick="loadInstructions1();">
-
     <img class="ForwardBtn" src ="images/game/conveyerImgs/ForwardButton.png"  onclick="loadInstructions3();">
   </div>
 
@@ -105,9 +68,7 @@
 
 <script>
 var modal = document.getElementById('myModal');
-
 var btn = document.getElementById("myBtn");
-
 </script>
 
 </body>
