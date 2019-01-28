@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* The Modal (background) */
+.modal {
+    display: block; /* Block by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100% !important; /* Full height */
+    max-height: 100% !important;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: white; /* Black w/ opacity */
+    border-radius:0px;
+}
+
+/* Modal Content */
+.modal-content {
+  height: 100%;
+  width:100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #31EABB;
+  background-image: url("/images/game/conveyerImgs/instructions_3.png");
+  background-repeat: no-repeat;
+  background-size:100%;
+  background-position: right;
+}
+.playBtn{
+  width:25%;
+  display:block;
+  margin-left: 39%;
+  margin-right: auto;
+  position:absolute;
+  bottom:0;
+  margin-bottom: 10px;
+}
+
+.BackBtn{
+  width:9.5%;
+  display:block;
+  position:absolute;
+  bottom:0;
+  margin-bottom:10px;
+  margin-left:10px;
+}
+</style>
+</head>
+<body>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <img class="BackBtn" src ="images/game/conveyerImgs/BackButton.png" onclick="loadInstructions2();">
+    <img class="playBtn" src ="images/game/conveyerImgs/PlayButton.png" onclick="startFactory(1);">
+  </div>
+</div>
+
+<script>
+var modal = document.getElementById('myModal');
+
+var btn = document.getElementById("myBtn");
+
+</script>
+
+</body>
+</html>

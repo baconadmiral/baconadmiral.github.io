@@ -9,35 +9,48 @@
   .modal {
     display: block; /* Block by default */
     position: fixed; /* Stay in place */
-    z-index: 5; /* Sit on top */
-    padding-top: 80px; /* Location of the box */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: 100% !important; /* Full height */
+    max-height: 100% !important;
     overflow: auto; /* Enable scroll if needed */
+    background-color: white; /* Black w/ opacity */
+    border-radius:0px;
   }
 
   /* Modal Content */
   .modal-content {
-    margin: 10px;
-    border: 5px solid #fff;
-    background-color: #03AA4F;
-    width: 85%;
-    border-radius:10px; -webkit-box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
-    z-index:500;
-    position: absolute;
-    top: 0;
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #999999;
+    background-image: url("images/game/trafficSim/background.png");
+    background-repeat: no-repeat;
+    background-size:100% auto;
   }
-  .stick{
-    z-index:300;
-    height:100%;
-    width:40px;
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
-    background:linear-gradient(to right, #757575 0%,#757575 50%,#757575 50%, #757575 80%,#424242 80%,#424242 100%);
 
+  @media screen and (orientation:landscape) {
+    .gameTitle{
+      padding-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 30%;
+    }
+  }
+
+  @media screen and (orientation:portrait) {
+    .gameTitle{
+      padding-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 60%;
+    }
   }
 
   .modal-title{
@@ -48,20 +61,6 @@
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
   }
-  
-  /*
-  .close {
-    float: right;
-    padding-top:5px;
-    padding-right:5px;
-  }
-
-  .close:hover,.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  */
 
   .modal-icon{
     margin-left: auto;
@@ -79,33 +78,40 @@
 
   .BackBtn{
     float: left;
-    margin-top: -10px;
-    margin-left: -15px;
-    height: 45px;
+    height: 70px;
+    bottom: 0;
+    position: absolute;
+    padding-left: 10px;
+    padding-bottom: 10px;
   }
 
-.trafficTitle{
-  width:96%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.playTrafficBtn{
-  height:45px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom:8px;
-}
-.instructionBtn
-{
-  height:45px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom:8px;
-}
+
+  .playTrafficBtn{
+    height:70px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:8px;
+  }
+  .instructionBtn
+  {
+    height: 70px;
+    bottom: 0;
+    position: absolute;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    right:0;
+  }
+
+
+
+  .playDiv{
+    width: 100%;
+    position: absolute;
+    bottom: 20%;
+    margin: 0 auto;
+  }
 
 </style>
 </head>
@@ -113,29 +119,27 @@
 
   <!-- The Modal -->
   <div id="myModal" class="modal">
-   <div class="stick"></div>
     <div class="modal-content">
 
-       <img class="BackBtn" src ="images/game/conveyerImgs/BackButton.png" onclick="window.top.closeOverlay()">
-      <!-- <span class="close"><img src="css/svg/close-button.svg" height="20px" width="20px"></span> -->
-      <div>
-        <img class="trafficTitle" src="images/game/trafficsim/road/trafficGameTitle.png">
-        <img class="modal-icon" src="../css/svg/car.svg"/>
-        <img class="playTrafficBtn" src="images/game/trafficsim/road/playBtnPurple.png" onclick="renderLaneNumberSelector();"/>
-        <img class="instructionBtn" src="images/game/trafficsim/road/instructionsBtn.png">
+      <img class="gameTitle" src="images/game/trafficSim/trafficGateTitle.png">
+      <img class="BackBtn" src ="images/game/trafficSim/backBtnRed.png" onclick="window.top.closeOverlay()">
+      <div class="playDiv">
+        <img class="playTrafficBtn" src="images/game/trafficSim/playBtnGreen.png" onclick="renderQuestion1();"/>
       </div>
+      <img class="instructionBtn" src="images/game/trafficSim/infoBtnYellow.png">
+
     </div>
   </div>
 
-<script>
-  var modal = document.getElementById('myModal');
-  var btn = document.getElementById("myBtn");
-  var span = document.getElementsByClassName("close")[0];
+  <script>
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
 
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-</script>
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+  </script>
 
 </body>
 </html>

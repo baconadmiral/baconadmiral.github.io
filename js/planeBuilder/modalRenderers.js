@@ -6,6 +6,18 @@ function closeModal(){
   modal.style.display = "none";
 }
 
+function loadInstructions1(){
+  $("#factory_modal_content").load("content/planeBuilder/planeBuilderTutorial1.html");
+}
+
+function loadInstructions2(){
+  $("#factory_modal_content").load("content/planeBuilder/planeBuilderTutorial2.html");
+}
+
+function loadInstructions3(){
+  $("#factory_modal_content").load("content/planeBuilder/planeBuilderTutorial3.html");
+}
+
 function openModal(){
   modal.style.display = "block";
 }

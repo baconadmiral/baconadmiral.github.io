@@ -31,11 +31,23 @@ var trafficSim = function(sketch) {
     var carLaneXs = [];
     this.carList = [];
 
+    var correct = false;
 
 
+function resetGame(correctIn)
+{
+    spawnedCarCount = 0;
+    complete = false;
+    correct = correctIn;
+    finishedCarCount = 0;
+    timePassedMs = 0;
+    carList = [];
+}
 
-  startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds) {
+  startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds, correctIn) {
     sketch.frameRate(frameRate);
+
+    resetGame(correctIn);
 
     numberOfOpenLanes = numLanes;
     completionCount = compCount;
@@ -185,6 +197,13 @@ var trafficSim = function(sketch) {
       crateTimeout = setTimeout(function() {
         runTimer();
       }, timeGranularityMs);
+    }
+    else
+    {
+      if(correct)
+        renderQuestion1Correct();
+      else
+        renderQuestion1Wrong();
     }
   }
 
