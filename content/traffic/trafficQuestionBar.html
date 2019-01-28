@@ -10,6 +10,14 @@
       height: 80px;
       background-color: grey;
   }
+
+  .blink_me {
+    animation: blinker 0.5s linear infinite;
+  }
+
+  @keyframes blinker {  
+    50% { opacity: 0; }
+  }
 </style>
 </head>
 <body>
@@ -18,11 +26,11 @@
 <!-- The Modal -->
 <div id="myQuestionBar" class="questionBar">
     <span id="runInfo" style="display:none; color:white;">
-      <p id="wip_flow" style="margin-top:2px; margin-bottom:2px;">
+      <p id="wipLabel" style="margin-top:2px; margin-bottom:2px;">
         WIP: <span id="wip_out"></span></p>
-      <p id="wip_flow" style="margin-top:2px; margin-bottom:2px;">
+      <p id="flowtimeLabel" style="margin-top:2px; margin-bottom:2px;">
         Flowtime: <span id="flowtime"></span></p>
-      <p id="throughput" style="margin-top:2px; margin-bottom:2px;">
+      <p id="throughputLabel" style="margin-top:2px; margin-bottom:2px;">
         Throughput: <span id="simThroughput"></span> </p>
     </span>
 </div>

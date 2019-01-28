@@ -32,6 +32,7 @@ var trafficSim = function(sketch) {
     this.carList = [];
 
     var correct = false;
+    var llQuestionType;
 
 
 function resetGame(correctIn)
@@ -44,11 +45,12 @@ function resetGame(correctIn)
     carList = [];
 }
 
-  startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds, correctIn) {
+  startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds, correctIn, llQuestionTypeIn) {
     sketch.frameRate(frameRate);
 
     resetGame(correctIn);
 
+    llQuestionType = llQuestionTypeIn;
     numberOfOpenLanes = numLanes;
     completionCount = compCount;
     flowtime = flowTimeSeconds;
@@ -136,9 +138,16 @@ function resetGame(correctIn)
     }
 
     // Update output
+
+    $("#flowtime").removeClass('blink_me');
+    $("#simThroughput").removeClass('blink_me');    
+    $("#wip_out").removeClass('blink_me');
+
     $("#flowtime").text(flowtime);
-    $("#simThroughput").text(calcSimThroughput());
+    $("#simThroughput").text(calcSimThroughput());  
     $("#wip_out").text(calcWip());
+    $("#"+llQuestionType).addClass('blink_me');
+
     // Update debug output
     $("#spawnedCarCount").text(spawnedCarCount);
     $("#finishedCarCount").text(finishedCarCount);
