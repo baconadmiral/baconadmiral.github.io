@@ -1,21 +1,42 @@
-
-function renderQuestion1()
+function resetQuestionPosition()
 {
-		$("#traffic_modal_content").load("content/traffic/question1.html");
+  questionNumber = 1;
+  maxQuestions = 3;
 }
 
-function renderQuestion1Correct()
+function renderTrafficQuestion()
 {
-    $("#traffic_modal_content").load("content/traffic/question1Correct.html");
+  console.log("renderTrafficQuestion()");
+  $("#traffic_modal_content").load("content/traffic/question.html");
 }
 
-function renderQuestion1Wrong()
+function showTrafficQuestion()
 {
-    $("#traffic_modal_content").load("content/traffic/question1Wrong.html");
+  console.log("showTrafficQuestion()" + questionNumber + ", " + maxQuestions);
+  if(questionNumber > maxQuestions)
+  {
+    resetQuestionPosition();
+    $("#traffic_modal_content").load("content/traffic/trafficWelcome.html");
+  }
+  else
+  {
+    $('[id*=trafficQuestion]').hide();
+    $('#trafficQuestion' + questionNumber).show();
+  }
+}
+
+function renderQuestionCorrect()
+{
+  questionNumber++;
+  $("#traffic_modal_content").load("content/traffic/questionCorrect.html");
+}
+
+function renderQuestionIncorrect()
+{
+    $("#traffic_modal_content").load("content/traffic/questionIncorrect.html");
 }
 
 //Old Functions
-
 function renderLaneNumberSelector() {
   console.log("renderLaneNumberSelector()");
   $("#traffic_modal_content").load("content/traffic/laneNumberSelector.html");
@@ -29,14 +50,9 @@ function renderQuestionBar() {
 
 function renderTrafficWelcome(){
   console.log("renderTrafficWelcome()");
+  resetQuestionPosition();
   $("#traffic_modal_content").load("content/traffic/trafficWelcome.html");
 }
-
-function renderTrafficWelcome(){
-  console.log("renderTrafficWelcome()");
-  $("#traffic_modal_content").load("content/traffic/trafficWelcome.html");
-}
-
 
 function closeModal(){
   modal.style.display = "none";

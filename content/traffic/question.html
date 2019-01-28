@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script language="javascript" type="text/javascript">
+
+  showTrafficQuestion();
+
+</script>
+<style>
+
+  /*question.html*/
+  /* The Modal (background) */
+  .modal {
+      display: block; /* Block by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 80px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      /* background-color: rgb(0,0,0); /* Fallback color */ */
+      background-color: white; /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      background-color: white;
+      width: 85%;
+  }
+
+  .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,.close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+
+<!-- The Modals -->
+<div id="trafficQuestion1" class="modal">
+  <div class="modal-content">
+   <span class="close" onclick="renderTrafficWelcome();">&times;</span>
+    <span id="startOptions">
+      <p id="questionText">Given a WIP of 6 units, and a FLOWTTIME of 1.5s, what is the THROUGHPUT? </p>
+      <h1 style="margin-top: -15px; margin-bottom:-15px;">
+        <a onclick="startCars(3,30,1.5,.75, false); closeModal();"  style="margin-right:100px">11 </a>
+        <a onclick="startCars(3,0,1.5,.75, true); closeModal();" style="margin-right:100px">4 </a>
+        <a onclick="startCars(3,30,1.5,.75, false); closeModal();" >6</a>
+      </h1>
+    </span>
+  </div>
+</div>
+
+<div id="trafficQuestion2" class="modal">
+  <div class="modal-content">
+   <span class="close" onclick="renderTrafficWelcome();">&times;</span>
+    <span id="startOptions">
+      <p id="questionText">Given a FLOWTIME of 3.0s and a THROUGHPUT of 4 cars/sec what is the WIP? </p>
+      <h1 style="margin-top: -15px; margin-bottom:-15px;">
+        <a onclick="startCars(3,30,3.0,.75, false); closeModal();"  style="margin-right:100px">7 </a>
+        <a onclick="startCars(3,0,3.0,.75, true); closeModal();" style="margin-right:100px">12 </a>
+        <a onclick="startCars(3,30,3.0,.75, false); closeModal();" >9.66</a>
+      </h1>
+    </span>
+  </div>
+</div>
+
+<div id="trafficQuestion3" class="modal">
+  <div class="modal-content">
+   <span class="close" onclick="renderTrafficWelcome();">&times;</span>
+    <span id="startOptions">
+      <p id="questionText">Given a WIP of 14 and a THROUGHPUT of 6 what is the FLOWTIME? </p>
+      <h1 style="margin-top: -15px; margin-bottom:-15px;">
+        <a onclick="startCars(3,30,2.33,.5, false); closeModal();"  style="margin-right:100px">6.28 </a>
+        <a onclick="startCars(3,0,2.33,.5, true); closeModal();" style="margin-right:100px">2.33 </a>
+        <a onclick="startCars(3,30,2.33,.5, false); closeModal();" >9.65</a>
+      </h1>
+    </span>
+  </div>
+</div>
+
+<script>
+var modal = document.getElementById('myModal');
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+</script>
+
+</body>
+</html>

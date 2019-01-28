@@ -66,7 +66,7 @@ function resetGame(correctIn)
       addCar(i);
     }
 
-    $("#startOptions").hide();
+    $("[id*=trafficQuestion]").hide();
     $("#runInfo").show();
   }
 
@@ -125,27 +125,25 @@ function resetGame(correctIn)
     }
 
     // Show results once finished car count has been reached.
-    if (finishedCarCount >= completionCount)
+    if (!complete && finishedCarCount >= completionCount)
     {
       complete = true;
-      $("#questionResult").show();
+      sketch.frameRate(1);
+      if(correct)
+        renderQuestionCorrect();
+      else
+        renderQuestionIncorrect();
     }
 
+    // Update output
+    $("#flowtime").text(flowtime);
+    $("#simThroughput").text(calcSimThroughput());
+    $("#wip_out").text(calcWip());
     // Update debug output
-    // sketch.fill(255);
-    // sketch.text("Cars Spawned: " + spawnedCarCount + "\tFinished: " + finishedCarCount, 10, 10);
-    // sketch.text("Flowtime: " + flowtime, 10, 20);
-    // sketch.text("Throughput: " + calcTargetThroughput() + "\tSimulated: " + calcSimThroughput(), 10, 30);
-    // sketch.text("Target time: " + calcTargetTime() + "\tSimulated: " + (Math.round(timePassedMs)/1000) , 10, 40);
-    // sketch.text("WIP: " + calcWip(), 10, 50);
-
     $("#spawnedCarCount").text(spawnedCarCount);
     $("#finishedCarCount").text(finishedCarCount);
-    $("#flowtime").text(flowtime);
     $("#targetThroughput").text(calcTargetThroughput());
-    $("#simThroughput").text(calcSimThroughput());
     $("#targetTime").text(calcTargetTime());
-    $("#wip_out").text(calcWip());
     $("#simTimer").text(Math.round(timePassedMs/100)/10);
   }
 
@@ -197,13 +195,6 @@ function resetGame(correctIn)
       crateTimeout = setTimeout(function() {
         runTimer();
       }, timeGranularityMs);
-    }
-    else
-    {
-      if(correct)
-        renderQuestion1Correct();
-      else
-        renderQuestion1Wrong();
     }
   }
 
