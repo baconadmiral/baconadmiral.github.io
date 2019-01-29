@@ -101,8 +101,8 @@ var planeBuilderSim = function(sketch) {
 
     let defaultToolsLocationX = sketch.width/2 -32;
     let defaultToolsLocationY = sketch.height - sketch.height/6;
-    let backBtnPosX = 10;
-    let backBtnPosY = 20;
+    let backBtnPosX = 80;
+    let backBtnPosY = 40;
 
     backBtn = new BackBtn(sketch, backBtnPosX, backBtnPosY, backBtnImg);
     wings = new Wings(sketch, defaultToolsLocationX, defaultToolsLocationY, wingsImg);
