@@ -2,10 +2,50 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
   <script language="javascript" type="text/javascript">
 
   showTrafficQuestion();
   // hideQuestionBar();
+
+  function loadActivityCalculatorModal() {//actionCallBack) { /*(){ */ //
+  
+  alert('insde loadActivityCalculatorModal');
+
+  var defaultColor= "#424242";
+  //var pageTitle = $("#pageTitle").text();
+  //if(pageTitle !== "Little's Law Calculator"){
+    $("#modal_content").load("content/calculator.html");
+    $("#calcContainer").css('padding-top','0px');
+    $("#calcLabel").css('color','#0EABDA');
+    //$("#calcsvg").attr("fill","#0EABDA");
+    $(".calculator").css("fill", "#0EABDA");
+    //$("#calcsvg").css({fill: #0eABDA});
+    //$("#calcsvg").css('color','#0EABDA');
+    //$("#calcsvg").css({ fill: "#ff0000" });
+    //$('#calcsvg').css({fill: defaultColor});
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+  
+  //testCalcCallFunction();
+  //  if(actionCallBack == undefined) {
+  //      setCalcAction(null);
+  //} else {
+  //  setCalcAction(actionCallBack);
+  //  } 
+    
+  $(document).ready(function(){
+      $('#modal1').modal();
+    });
+
+    $('#modal1').modal({
+      dismissible:false
+    });
+    $('#modal1').modal('open');
+
+  //} 
+}
+
 
   </script>
   <style>
@@ -128,7 +168,7 @@ li {
           </li>
         </ul>
         <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
-         onclick="alert('car question 1')">
+         onclick="loadActivityCalculatorModal();">
     </div>
    </div>
 
@@ -179,6 +219,36 @@ li {
      <!--  <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();"  style="margin-right:100px">6.28 </a>
       <a onclick="startCars(3,10,2.33,.5, true, 'flowtime'); closeModal();" style="margin-right:100px">2.33 </a>
       <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();" >9.65</a> -->
+  
+  
+</div>
+
+<div id="modal_cont">
+  <div id="modal1"  class="modal calcModal" style="box-shadow: none;background-color:transparent;">
+    <div class="modal-header" style="text-align: right;">
+      <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())"
+      style="    border: 3px solid white;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      padding: 5px;">
+      <img src="css/svg/close-button.svg" height="24px" width="24px">
+    </a>
+  </div>
+  <div id="modal_content" class="modal-content calcModal"
+    style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
+  </div>
+</div>
+</div>
+</div>
+
+
+<script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
+<script language="javascript" type="text/javascript" src="js/settings.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script src="js/aopCalc.js"></script>
+<script src="js/aop.js"></script>
 
 <script>
   var modal = document.getElementById('myModal');

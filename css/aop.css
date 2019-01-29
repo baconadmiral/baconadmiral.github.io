@@ -489,7 +489,7 @@ ul#horizontal-list li{
 }
 
 .modal{
-  z-index:1600;
+  z-index:2600;
   border-radius: 5px;
   max-height:95% !important;
   /*overflow-y:hidden !important;*/
@@ -497,6 +497,7 @@ ul#horizontal-list li{
 
 .calcModal{
  top:2% !important;
+ padding:5px !important;
 }
 
 @media only screen and (max-width:992px)
@@ -512,11 +513,6 @@ ul#horizontal-list li{
     overflow-y:visible !important;
   }
 }
-
-.calcModal{
-  padding:5px !important;
-}
-
 
 .comingSoon{
   color:#2E64D2;
