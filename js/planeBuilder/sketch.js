@@ -223,18 +223,21 @@ var planeBuilderSim = function(sketch) {
       airplaneCompImg, cockpitImg, fuselageCImg, fuselageTImg,
       fuselageWImg, fuselageCTImg, fuselageCWImg, fuselageWTImg, wingsImg, startFlowtime));
 
-    if(this.level == 1)
-    {
-      fuselageTimeout = setTimeout(addFuselage, 3000);
-    }
-    else if(this.level == 2)
-    {
-      fuselageTimeout = setTimeout(addFuselage, 2500);
-    }
-    else if(this.level == 3)
-    {
-      fuselageTimeout = setTimeout(addFuselage, 1800);
-    }
+    $(window).focus(function () {
+
+        if(this.level == 1)
+        {
+          fuselageTimeout = setTimeout(addFuselage, 3000);
+        }
+        else if(this.level == 2)
+        {
+          fuselageTimeout = setTimeout(addFuselage, 2500);
+        }
+        else if(this.level == 3)
+        {
+          fuselageTimeout = setTimeout(addFuselage, 1800);
+        }
+      });
 
   }
 
