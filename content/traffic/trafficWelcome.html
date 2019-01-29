@@ -49,7 +49,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 60%;
+      width: 50vw;
     }
   }
 
@@ -85,8 +85,6 @@
     padding-bottom: 10px;
   }
 
-
-
   .playTrafficBtn{
     height:70px;
     display: block;
@@ -94,6 +92,7 @@
     margin-right: auto;
     margin-bottom:8px;
   }
+
   .instructionBtn
   {
     height: 70px;
@@ -104,10 +103,8 @@
     right:0;
   }
 
-
-
   .playDiv{
-    width: 100%;
+    width: 90%;
     position: absolute;
     bottom: 20%;
     margin: 0 auto;
@@ -120,14 +117,12 @@
   <!-- The Modal -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-
       <img class="gameTitle" src="images/game/trafficSim/trafficGateTitle.png">
       <img class="BackBtn" src ="images/game/trafficSim/backBtnRed.png" onclick="window.top.closeOverlay()">
       <div class="playDiv">
         <img class="playTrafficBtn" src="images/game/trafficSim/playBtnGreen.png" onclick="renderTrafficQuestion();"/>
       </div>
       <img class="instructionBtn" src="images/game/trafficSim/infoBtnYellow.png">
-
     </div>
   </div>
 

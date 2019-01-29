@@ -6,35 +6,17 @@
   <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
   <script language="javascript" type="text/javascript">
 
-  showTrafficQuestion();
+    showTrafficQuestion();
   // hideQuestionBar();
 
-  function loadActivityCalculatorModal() {//actionCallBack) { /*(){ */ //
-  
-  alert('insde loadActivityCalculatorModal');
-
-  var defaultColor= "#424242";
-  //var pageTitle = $("#pageTitle").text();
-  //if(pageTitle !== "Little's Law Calculator"){
+  function loadActivityCalculatorModal() {
+    alert('insde loadActivityCalculatorModal');
     $("#modal_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
     $("#calcLabel").css('color','#0EABDA');
-    //$("#calcsvg").attr("fill","#0EABDA");
     $(".calculator").css("fill", "#0EABDA");
-    //$("#calcsvg").css({fill: #0eABDA});
-    //$("#calcsvg").css('color','#0EABDA');
-    //$("#calcsvg").css({ fill: "#ff0000" });
-    //$('#calcsvg').css({fill: defaultColor});
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-  
-  //testCalcCallFunction();
-  //  if(actionCallBack == undefined) {
-  //      setCalcAction(null);
-  //} else {
-  //  setCalcAction(actionCallBack);
-  //  } 
-    
-  $(document).ready(function(){
+    $(document).ready(function(){
       $('#modal1').modal();
     });
 
@@ -42,59 +24,57 @@
       dismissible:false
     });
     $('#modal1').modal('open');
+  }
 
-  //} 
+
+</script>
+<style>
+
+/*question.html*/
+/* The Modal (background) */
+.modalBlock {
+  display: block; /* Block by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,.5);
+}
+
+/* Modal Content */
+.modal-container {
+  margin: auto;
+  padding: 5px;
+  border: 1px solid #888;
+  background-color: white;
+  width: 85%;
 }
 
 
-  </script>
-  <style>
+.questionModal{
+  margin: auto;
+  padding: 20px;
+  padding-bottom:5px;
+  border: 4px solid #FFF;
+  background-color: #009245;
+  width: 80%;
+  border-radius:10px;
+  box-shadow: 10px 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
-  /*question.html*/
-  /* The Modal (background) */
-  .modal {
-    display: block; /* Block by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 50px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,.5);
-  }
+.quizTitle{
+ height:7vh;
+ margin-left: auto;
+ margin-right: auto;
+ display: block;
+ margin-top: -45px;
+}
 
-  /* Modal Content */
-  .modal-content {
-    margin: auto;
-    padding: 5px;
-    border: 1px solid #888;
-    background-color: white;
-    width: 85%;
-  }
-
-
-  .questionModal{
-    margin: auto;
-    padding: 20px;
-    padding-bottom:5px;
-    border: 4px solid #FFF;
-    background-color: #009245;
-    width: 80%;
-    border-radius:10px;
-    box-shadow: 10px 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .quizTitle{
-   height:45px;
-   margin-left: auto;
-   margin-right: auto;
-   display: block;
-   margin-top: -45px;
- }
-
- .question{
+.question{
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
@@ -103,7 +83,7 @@
 
 @media screen and (orientation:portrait){
   .question{
-    width:100%;      
+    width:100%;
   }
 }
 @media screen and (orientation:landscape){
@@ -113,7 +93,7 @@
 }
 
 .answer{
-  height:80px;
+  height:10vh;
 }
 
 ul{
@@ -137,7 +117,7 @@ li {
 }
 
 .calculatorBtn{
-  height:45px;
+  height:7vh;
   display:block;
   margin-left:auto;
   margin-right:auto;
@@ -145,39 +125,46 @@ li {
   padding-top:10px;
 }
 
+.closeBtn {
+    float: right;
+    height: 5vh;
+    margin-right: -46px;
+    margin-top: -45px;
+}
+
 </style>
 </head>
 <body>
   <!-- The Modals -->
-  <div id="trafficQuestion1" class="modal">
-    <div class="modal-content questionModal">
+  <div id="trafficQuestion1" class="modalBlock">
+    <div class="modal-container questionModal">
       <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
       <img class="quizTitle" src="images/game/trafficSim/quiz/question_1_title.png">
-       <img class="question" src="images/game/trafficSim/quiz/question_1.png">
-       <ul>
-         <li>
-            <img class="answer" src="images/game/trafficSim/quiz/btn_11.png"
-           onclick="startCars(3,30,1.5,.75, false, 'tp_out'); closeModal();"></li>
-          <li>
-            <img class="answer" src="images/game/trafficSim/quiz/btn_4.png"
-             onclick="startCars(3,30,1.5,.75, true, 'tp_out'); closeModal();">
-          </li>
-          <li>
-            <img class="answer" src="images/game/trafficSim/quiz/btn_6.png"
-             onclick="startCars(3,30,1.5,.75, false, 'tp_out'); closeModal();">
-          </li>
-        </ul>
-        <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
-         onclick="loadActivityCalculatorModal();">
+      <img class="question" src="images/game/trafficSim/quiz/question_1.png">
+      <ul>
+       <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_11.png"
+        onclick="startCars(3,30,1.5,.75, false, 'tp_out');"></li>
+        <li>
+          <img class="answer" src="images/game/trafficSim/quiz/btn_4.png"
+          onclick="startCars(3,10,1.5,.75, true, 'tp_out');">
+        </li>
+        <li>
+          <img class="answer" src="images/game/trafficSim/quiz/btn_6.png"
+          onclick="startCars(3,30,1.5,.75, false, 'tp_out');">
+        </li>
+      </ul>
+      <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
+      onclick="loadActivityCalculatorModal();">
     </div>
-   </div>
+  </div>
 
-   <div id="trafficQuestion2" class="modal">
-    <div class="modal-content questionModal">
-       <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
-        <img class="quizTitle" src="images/game/trafficSim/quiz/question_2_title.png">
-    <img class="question" src="images/game/trafficSim/quiz/question_2.png">
-    <ul>
+  <div id="trafficQuestion2" class="modalBlock">
+    <div class="modal-container questionModal">
+     <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
+     <img class="quizTitle" src="images/game/trafficSim/quiz/question_2_title.png">
+     <img class="question" src="images/game/trafficSim/quiz/question_2.png">
+     <ul>
       <li>
         <img class="answer" src="images/game/trafficSim/quiz/btn_7.png" onclick="startCars(3,30,3.0,.75, false, 'wip_out');">
       </li>
@@ -189,12 +176,12 @@ li {
       </li>
     </ul>
     <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
-     onclick="alert('car question 2')">
+    onclick="alert('car question 2')">
   </div>
 </div>
 
-<div id="trafficQuestion3" class="modal">
-  <div class="modal-content questionModal">
+<div id="trafficQuestion3" class="modalBlock">
+  <div class="modal-container questionModal">
    <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
     <img class="quizTitle" src="images/game/trafficSim/quiz/question_3_title.png">
     <img class="question" src="images/game/trafficSim/quiz/question_3.png">
@@ -213,15 +200,8 @@ li {
     onclick="alert('car question 3')">
   </div>
 </div>
-
-
-
-     <!--  <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();"  style="margin-right:100px">6.28 </a>
-      <a onclick="startCars(3,10,2.33,.5, true, 'flowtime'); closeModal();" style="margin-right:100px">2.33 </a>
-      <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();" >9.65</a> -->
-  
-  
 </div>
+
 
 <div id="modal_cont">
   <div id="modal1"  class="modal calcModal" style="box-shadow: none;background-color:transparent;">
@@ -233,15 +213,13 @@ li {
       width: 40px;
       padding: 5px;">
       <img src="css/svg/close-button.svg" height="24px" width="24px">
-    </a>
+      </a>
+    </div>
+    <div id="modal_content" class="modal-content calcModal"
+      style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
+    </div>
   </div>
-  <div id="modal_content" class="modal-content calcModal"
-    style="box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3); background-color:#fff; border-radius:5px;" >
-  </div>
 </div>
-</div>
-</div>
-
 
 <script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
 <script language="javascript" type="text/javascript" src="js/settings.js"></script>
