@@ -134,29 +134,46 @@ li {
 
    <div id="trafficQuestion2" class="modal">
     <div class="modal-content questionModal">
-     <span class="close" onclick="renderTrafficWelcome();">&times;</span>
-     <span id="startOptions">
-      <p id="questionText">Given a FLOWTIME of 3.0s and a THROUGHPUT of 4 cars/sec what is the WIP? </p>
-      <h1 style="margin-top: -15px; margin-bottom:-15px;">
-        <a onclick="startCars(3,30,3.0,.75, false, 'wip_out'); closeModal();"  style="margin-right:100px">7 </a>
-        <a onclick="startCars(3,10,3.0,.75, true, 'wip_out'); closeModal();" style="margin-right:100px">12 </a>
-        <a onclick="startCars(3,30,3.0,.75, false, 'wip_out'); closeModal();" >9.66</a>
-      </h1>
-    </span>
+       <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
+        <img class="quizTitle" src="images/game/trafficSim/quiz/question_2_title.png">
+    <img class="question" src="images/game/trafficSim/quiz/question_2.png">
+    <ul>
+      <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_7.png" onclick="startCars(3,30,3.0,.75, false, 'wip_out'); closeModal();">
+      </li>
+      <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_12.png" onclick="startCars(3,10,3.0,.75, true, 'wip_out'); closeModal();">
+      </li>
+      <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_966.png" onclick="startCars(3,30,3.0,.75, false, 'wip_out'); closeModal();">
+      </li>
+    </ul>
+    <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png">
   </div>
 </div>
 
 <div id="trafficQuestion3" class="modal">
-  <div class="modal-content">
-   <span class="close" onclick="renderTrafficWelcome();">&times;</span>
-   <span id="startOptions">
-    <p id="questionText">Given a WIP of 14 and a THROUGHPUT of 6 what is the FLOWTIME? </p>
-    <h1 style="margin-top: -15px; margin-bottom:-15px;">
-      <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();"  style="margin-right:100px">6.28 </a>
+  <div class="modal-content questionModal">
+   <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
+    <img class="quizTitle" src="images/game/trafficSim/quiz/question_3_title.png">
+    <img class="question" src="images/game/trafficSim/quiz/question_3.png">
+    <ul>
+      <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_628.png" onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();">
+      </li>
+      <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_233.png" onclick="startCars(3,10,2.33,.5, true, 'flowtime'); closeModal();">
+      </li>
+      <li>
+        <img class="answer" src="images/game/trafficSim/quiz/btn_965.png" onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();">
+      </li>
+    </ul>
+    <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png">
+     <!--  <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();"  style="margin-right:100px">6.28 </a>
       <a onclick="startCars(3,10,2.33,.5, true, 'flowtime'); closeModal();" style="margin-right:100px">2.33 </a>
-      <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();" >9.65</a>
-    </h1>
-  </span>
+      <a onclick="startCars(3,30,2.33,.5, false, 'flowtime'); closeModal();" >9.65</a> -->
+  
+  
 </div>
 </div>
 
