@@ -1,26 +1,9 @@
 //Jan 11 2019
 let leadershipDiagram = () => {
-	return [{
-		"Subject": "Leadership Management Chart",
-		"Topic": "Common Goals",
-		"Question": "One AFSC Strategic Goal is",
-		"Answers": [
-			"Meet warfighter commitments.",
-			"Focus on the immediate needs of the organization.",
-			"Deliver quality product, regardless of cost.",
-			"Improve processes for aircraft maintenance."
-		],
-		"CorrectAnswers": ["Meet warfighter commitments."],
-		"Justifications": [
-			"Always focus on the needs of our men and women on the field and in the air.",
-			"Need to implement a strategic technology roadmap.",
-			"Deliver more capability at less cost.",
-			"Perfect our processes and accountability for the Nuclear Enterprise."
-		]
-	},
+	return [
 	//NEW LEADERSHIP QUESTIONS BELOW
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "Common Goals",
 		"Question": "The Leadership Model is the ____________ of AoP?",
 		"Answers": [
@@ -38,7 +21,7 @@ let leadershipDiagram = () => {
 		]
 	},
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "Common Goals",
 		"Question": "Common Goals serves what purpose?",
 		"Answers": [
@@ -58,7 +41,7 @@ let leadershipDiagram = () => {
 		]
 	},
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "Common Goals",
 		"Question": "AFSC developed the Leadership Model to communicate:",
 		"Answers": [
@@ -76,7 +59,7 @@ let leadershipDiagram = () => {
 		]
 	},
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "Common Goals",
 		"Question": "What are the desired attributes that create a culture of problem solvers?",
 		"Answers": [
@@ -94,7 +77,7 @@ let leadershipDiagram = () => {
 		]
 	},
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "People",
 		"Question": "Every workforce needs:",
 		"Answers": [
@@ -112,7 +95,7 @@ let leadershipDiagram = () => {
 		]
 	},
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "Speed, Safety, Quality",
 		"Question": "Safety is enhanced by:",
 		"Answers": [
@@ -130,7 +113,7 @@ let leadershipDiagram = () => {
 		]
 	},
 	{
-		"Subject": "Leadership Management Chart",
+		"Subject": "Leadership Model",
 		"Topic": "Cost Effective Readiness",
 		"Question": "What is required to reduce the cost to sustain weapon systems?",
 		"Answers": [
@@ -152,34 +135,7 @@ let leadershipDiagram = () => {
 
 
 let littlesLaw = () => {
-	return [{
-		"Subject": "Little's Law",
-		"Topic": "Takt Time",
-		"Question": "Takt Time is the reciprocal of Throughput?  True or False",
-		"Answers": [
-			"True",
-			"False"
-		],
-		"CorrectAnswers": ["True"],
-		"Justifications": [
-			"Takt Time is the time divided by unit, which is the reciprocal of Throughput.",
-			"Takt Time is the reciprocal of Throughput"
-		]
-	},
-	{
-		"Subject": "Little's Law",
-		"Topic": "Takt Time",
-		"Question": "Little's Law and Takt time are flow management tools designed to manage WIP?  True or False",
-		"Answers": [
-			"True",
-			"False"
-		],
-		"CorrectAnswers": ["True"],
-		"Justifications": [
-			"Creates a steady state in which work is released into the process machine.",
-			"Both flow management and Takt time can be used to manage WIP."
-		]
-	},
+	return [
 	//NEW LITTLES LAW QUESTIONS BELOW
 	{
 		"Subject": "Little's Law",
@@ -321,24 +277,6 @@ let radiatorChart = () => {
 }
 let criticalPath = () => {
 	return [
-	{
-		"Subject": "Critical Path",
-		"Topic": "Critical Path",
-		"Question": "What is fast tracking?",
-		"Answers": [
-			"A high speed train.",
-			"A way to decrease critical path by performing activities in series.",
-			"A way to decrease critical path by performing activities in parallel.",
-			"A way to increase critical path."
-		],
-		"CorrectAnswers": ["A way to decrease critical path by performing activities in parallel."],
-		"Justifications": [
-			"Train systems may use critical path for delivery optimization, but is not the fast tracking used in critical path planning.",
-			"Planning activities in series is not the best approach for reducing time.",
-			"Organizing activities, which can work independently from each other, allows for increasing time of delivery.",
-			"Should not increase, but rather descrease."
-		]
-	},
 	//NEW QUESTIONS BELOW FOR CRITICAL PATH
 	{
 		"Subject": "Critical Path",
@@ -384,7 +322,7 @@ let criticalPath = () => {
 		"Answers": [
 			"Panic.",
 			"Declare an Andon to elevate the constraint to your leadership for help in resolving it.",
-			"Blame the someone.",
+			"Blame someone.",
 			"Ask for overtime."
 		],
 		"CorrectAnswers": ["Declare an Andon to elevate the constraint to your leadership for help in resolving it."],
