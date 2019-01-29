@@ -59,7 +59,3 @@ function renderTrafficWelcome(){
   resetQuestionPosition();
   $("#traffic_modal_content").load("content/traffic/trafficWelcome.html");
 }
-
-function closeModal(){
-  modal.style.display = "none";
-}
