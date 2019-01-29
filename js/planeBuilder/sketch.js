@@ -189,6 +189,15 @@ var planeBuilderSim = function(sketch) {
 
   }
 
+  sketch.onMousePressed = function()
+  {
+    //return true if back button is clicked
+    if(backBtn.mousePressed())
+    {
+      stopFactory();
+    }
+  }
+
   sketch.mousePressed = function()
   {
     //return true if back button is clicked
