@@ -1,72 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script language="javascript" type="text/javascript" src="js/traffic/trafficRenderingFunctions.js"></script>
-<style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script language="javascript" type="text/javascript" src="js/traffic/trafficRenderingFunctions.js"></script>
+  <style>
 
   /* The Modal (background) */
   .modal {
-      display: block; /* Block by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 80px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      /* background-color: rgb(0,0,0); /* Fallback color */ */
-      background-color: white; /* Black w/ opacity */
+    display: block; /* Block by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,.5);
   }
 
   /* Modal Content */
   .modal-content {
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      background-color: white;
-      width: 85%;
+    margin: auto;
+    padding: 20px;
+    padding-bottom:5px;
+    border: 4px solid #FFF;
+    background-color: #009245;
+    width: 80%;
+    border-radius:10px;
+    box-shadow: 10px 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
   }
 
   .close:hover,.close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
   }
+
+  .quizTitle{
+   height:45px;
+   margin-left: auto;
+   margin-right: auto;
+   display: block;
+   margin-top: -45px;
+ }
+
+ .rightMsg{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.star{
+  height:100px;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10px;
+}
+
+.nextBtn{
+  height:45px;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:5px;
+  padding-top:10px;
+}
 </style>
 </head>
 <body>
 
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+     <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
+    
+     <img class="quizTitle" src="images/game/trafficSim/quiz/correct_title.png">
+     <img class="star" src="images/game/trafficSim/quiz/star.png">
+     <img class="rightMsg" src="images/game/trafficSim/quiz/gotItRight.png">
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+     <img class="nextBtn" src="images/game/trafficSim/quiz/next_btn.png" onclick="renderTrafficQuestion();">
+   </div>
+ </div>
 
-  <div class="modal-content">
-    <span class="close" onclick="renderTrafficWelcome();">&times;</span>
-    <span id="startOptions">
-      <p>Good Job, that is Correct!</p>
-      <h1 style="margin-top: -15px; margin-bottom:-15px;">
-        <a onclick="renderTrafficQuestion();"  style="margin-right:100px">Next</a>
-      </h1>
-    </span>
-  </div>
+ <script>
+  var modal = document.getElementById('myModal');
 
-</div>
+  var btn = document.getElementById("myBtn");
 
-<script>
-var modal = document.getElementById('myModal');
-
-var btn = document.getElementById("myBtn");
-
-var span = document.getElementsByClassName("close")[0];
+  var span = document.getElementsByClassName("close")[0];
 
 </script>
 
