@@ -1,6 +1,6 @@
 const questionDBName = "quizEngineQuestions";
 // const questionDSName = "questions";
-const questionVersion = 4;
+const questionVersion = 5;
 const datastores = ["leadershipDiagram", "littlesLaw", "radiatorChart", "criticalPath"];
 const questionColumns = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
 

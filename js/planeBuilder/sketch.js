@@ -189,29 +189,16 @@ var planeBuilderSim = function(sketch) {
 
   }
 
-  sketch.onMousePressed = function()
-  {
-    //return true if back button is clicked
-    if(backBtn.mousePressed())
-    {
-      stopFactory();
-    }
-  }
-
-  sketch.mousePressed = function()
-  {
-    //return true if back button is clicked
-    if(backBtn.mousePressed())
-    {
-      stopFactory();
-    }
-  }
-
   sketch.touchStarted = function()
   {
     wings.touchStarted(wings.xPos, wings.yPos);
     tail.touchStarted(tail.xPos, tail.yPos);
     cockpit.touchStarted(cockpit.xPos, cockpit.yPos);
+
+    if(backBtn.mousePressed())
+    {
+      stopFactory();
+    }
 
   }
 
@@ -220,6 +207,8 @@ var planeBuilderSim = function(sketch) {
     wings.touchEnded(attachSnd);
     tail.touchEnded(attachSnd);
     cockpit.touchEnded(attachSnd);
+
+
   }
 
   sketch.touchMoved = function()
