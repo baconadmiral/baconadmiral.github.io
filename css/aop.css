@@ -489,7 +489,7 @@ ul#horizontal-list li{
 }
 
 .modal{
-  z-index:600;
+  z-index:1600;
   border-radius: 5px;
   max-height:95% !important;
   /*overflow-y:hidden !important;*/
