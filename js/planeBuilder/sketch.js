@@ -223,7 +223,7 @@ var planeBuilderSim = function(sketch) {
       airplaneCompImg, cockpitImg, fuselageCImg, fuselageTImg,
       fuselageWImg, fuselageCTImg, fuselageCWImg, fuselageWTImg, wingsImg, startFlowtime));
 
-    $(window).focus(function () {
+    //$(window).focus(function () {
 
         if(this.level == 1)
         {
@@ -237,7 +237,7 @@ var planeBuilderSim = function(sketch) {
         {
           fuselageTimeout = setTimeout(addFuselage, 1800);
         }
-      });
+      //});
 
   }
 
