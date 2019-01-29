@@ -54,7 +54,7 @@ function resetGame(correctIn)
     numberOfOpenLanes = numLanes;
     completionCount = compCount;
     flowtime = flowTimeSeconds;
-    velocity = (canvasHeight + carHeight)/flowtime/frameRate;
+    velocity = (canvasHeight + carHeight)/(flowtime * 2)/frameRate;
     console.log("velocity" + velocity + "    fps: " + frameRate);
     intervalTime = intervalTimeSeconds * 1000;
 
@@ -155,7 +155,7 @@ function resetGame(correctIn)
           $("#flowtime").text(flowtime);
           $("#throughput").text(calcTargetThroughput());
           break;
-        case 'flowtime':
+        case 'ft':
           // Ilistrate flowtime
           $("#wip").text(calcWip());
           // TODO show increasing timer of cars as the pass
