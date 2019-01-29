@@ -100,6 +100,7 @@
 							</div>
 						</div>
 						<div class="row" style="margin-bottom:10px">
+						    <a class="tip tooltipped" data-position="top" data-tooltip="abc123xyz890" id="tiptest">Hey</a> 
 							<input type="button" value="Calculate" id="btn_calc" onclick="calcResult()" class="btn waves-effect waves-light darken-1" style="width:100%;font-weight:bold;background:#651fa9">
 						</div>
 						<div class="row" style="margin-bottom:5px">
@@ -107,7 +108,7 @@
 								<input type="button" value="Clear" id="btn_clear" onclick="clearVals()" class="btn waves-effect waves-light" style="width:100%;color:black; background-color:#FFFFFF;">
 							</div>
 							<div class="col s6 m6 resetCalcButton" >
-								<input type="button" value="Reset" id="btn_reset" onclick="resetChoice()" class="btn waves-effect waves-light black lighten-1" style="width:100%;color:white;">
+								<input type="button" value="Calc Menu" id="btn_reset" onclick="resetChoice()" class="btn waves-effect waves-light black lighten-1" style="width:100%;color:white;">
 							</div>
 						</div>
 					</div>
@@ -168,7 +169,7 @@
 						
 						<div class="row">
 							<i class="col s12" style="float:right; ">
-								<a id="openSaveButton" class='btn' href="javascript:openSave()" style="font-weight:bold;width:100%">Click To Save</a>
+								<a id="actionCalcButton" class='btn hidden_toggle' href="javascript:actionCalc()" style="font-weight:bold;width:100%">CLICK ME</a><!-- SAVE RESULT -->
 							    <a id="saveCalcButton" class='btn hidden_toggle' href="javascript:saveResults()" style="font-weight:bold;width:100%">Save Calculation</a>
 							</i>
 						</div>	

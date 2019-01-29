@@ -63,6 +63,7 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
 
  const calc1 = function (v1,v2) {return v1 * v2};
  const calc2 = function (v1,v2) {if(v2==0) {return 0} else {return v1 / v2}};
+ 
 
  const wipCalc = function (value, time) {
   let valueUnits = time_type2_val;
@@ -82,6 +83,9 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
   return round(wip);
 }
 
+ var calcResultVal = 0;
+ var calcActionLbl = '';
+ 
  wip_w_thruput.calculate = wipCalc;
  wip_w_takt.calculate = wipCalc;
  thruput.calculate = calc2;
@@ -121,7 +125,7 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
      } else {
        precision = 1000;
      }
-     console.log("Rounding Precision set to: " + precision);
+    // console.log("Rounding Precision set to: " + precision);
    });
  }
 
@@ -189,13 +193,13 @@ function onTabToggle(tab) {
 
  function setFocus() {
   $("#inpt_val1").focus();
-  // $("#inpt_val1").select();
+  $("#inpt_val1").select();
  }
 
- /* function setFocusTab2() {
+ function setFocusTab2() {
   $("#inpt_ttk").focus();
    $("#inpt_ttk").select();
- } */
+ } 
 
  function setTimeTypeFromWiz(val,isT,isToggle){
    if(!$("#timetype2").hasClass("hidden_toggle")) {
@@ -257,7 +261,6 @@ function onTabToggle(tab) {
    if(thruput_val != 0 || isToggle) {
       setTimeTypeFromWiz(thruput_val,true,isToggle);
     setTTCalcHTML();
-    //alert('about to use thruput and switch');
     $("#calc_sect").removeClass("hidden_toggle");
       $("#takt_sect").addClass("hidden_toggle");
     $("#tab_tt").removeClass("active");
@@ -266,11 +269,9 @@ function onTabToggle(tab) {
  }
 
  function taktClicked(isToggle) {
-   //alert('takt clicked');
    if(takt_time_val != 0 || isToggle) {
    setTimeTypeFromWiz(takt_time_val,false,isToggle);
    setTTCalcHTML();
-   // alert('about to use takt and switch');
    $("#tab_tt").removeClass("active");
      $("#tab_calc").addClass("active");
    $("#calc_sect").removeClass("hidden_toggle");
@@ -441,12 +442,14 @@ function setCalcHTML() {
 }
 
 function calcResult() {
+
+   //Materialize.toast({html:'message',displayLength:1000});
   if(enableCalc) {
     let val1 = $("#inpt_val1").val();
     let val2 = $("#inpt_val2").val();
     $("#val1").text(val1);
     $("#val2").text(val2);
-    let calcResultVal = calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val());
+    calcResultVal = calcObj.calculate($("#inpt_val1").val(),$("#inpt_val2").val());
     if(!isRounded) {
       calcResultVal = round(calcResultVal);
     }
@@ -457,7 +460,8 @@ function calcResult() {
     } else {
       $("#result2units").text(calcObj.res_typ);
     }
-    
+  $("#actionCalcButton").text(calcActionLbl);
+    $("#actionCalcButton").removeClass("hidden_toggle");
   }
   isRounded = false;
 }
@@ -539,16 +543,14 @@ function saveResults(){
   }
   $("#saveCalcButton").addClass("hidden_toggle");
   $("#save_sect").addClass("hidden_toggle");
-  $("#openSaveButton").removeClass("hidden_toggle");
+  $("#actionCalcButton").removeClass("hidden_toggle");
   
 }
 
 function openSave() {
-  if(enableCalc) {
-    $("#openSaveButton").addClass("hidden_toggle");
-    $("#save_sect").removeClass("hidden_toggle");
-    $("#saveCalcButton").removeClass("hidden_toggle");
-  }
+   $("#actionCalcButton").addClass("hidden_toggle");
+   $("#save_sect").removeClass("hidden_toggle");
+   $("#saveCalcButton").removeClass("hidden_toggle");
 }
 
 function setCalcType(cType) {
@@ -574,6 +576,26 @@ function setCalcType(cType) {
    calcObj = wip_w_thruput;
  }
  setCalcHTML();
+}
+
+function testCalcCallFunction() {
+  alert('inside test call');
+}
+
+function setCalcAction(activityCallBack) {
+   if(activityCallBack == null) {
+      calActionFunc = openSave;
+    calcActionLbl = 'CLICK TO SAVE RESULT';
+   } else { 
+      calActionFunc = activityCallBack;
+    calcActionLbl = 'ANSWER WITH RESULT';
+   }
+}
+
+function actionCalc() {
+  if(enableCalc) {
+    calActionFunc(calcResultVal);
+  }
 }
 
 /* $('.numb_input').on('change keyup', function() {
