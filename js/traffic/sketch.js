@@ -160,21 +160,21 @@ var trafficSim = function(sketch) {
 
   function updateRunMetrics()
   {
-    // switch (llQuestionType)
-    // {
-    //   case 'wip_out':
-    //     // Ilistrate Wip
-    //     $("#wip_out").text(calcNumberOfCarsOnScreen());
-    //     break;
-    //   case 'ft_out':
-    //     // Ilistrate flowtime
-    //     // TODO show increasing timer of cars as the pass
-    //     break;
-    //   case 'tp_out':
-    //     // Simulated throughput
-    //     $("#tp_out").text(calcSimThroughput());
-    //     break;
-    // }
+    switch (llQuestionType)
+    {
+      case 'wip_out':
+        // Ilistrate Wip
+        $("#wip_out").text(calcNumberOfCarsOnScreen());
+        break;
+      case 'ft_out':
+        // Ilistrate flowtime
+        // TODO show increasing timer of cars as the pass
+        break;
+      case 'tp_out':
+        // Simulated throughput
+        $("#tp_out").text(calcSimThroughput());
+        break;
+    }
    
     // Update debug output
     // $("#spawnedCarCount").text(spawnedCarCount);
