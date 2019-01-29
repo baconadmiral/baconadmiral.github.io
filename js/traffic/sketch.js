@@ -1,52 +1,61 @@
 var trafficSim = function(sketch) {
-    // Lane config
-    var numberOfLanes = 3;
-    var numberOfOpenLanes = 3;
+  // Lane config
+  var numberOfLanes = 3;
+  var numberOfOpenLanes = 3;
 
-    // Run stats
-    var finishedCarCount = 0;
-    var spawnedCarCount = 0;
-    var startTime;
-    var timePassedMs = 0.0;
-    var targetThroughput;
-    var targetTime;
-    var wip;
-    var numberOfCarsOnScreen = 0;
+  // Run stats
+  var finishedCarCount = 0;
+  var spawnedCarCount = 0;
+  var startTime;
+  var timePassedMs = 0.0;
+  var targetThroughput;
+  var targetTime;
+  var wip;
+  var numberOfCarsOnScreen = 0;
 
-    // Run Speed config
-    var timeGranularityMs = 100;
-    var completionCount = 25;
-    var flowtime = 1;
-    var velocity = 15;
-    var intervalTime = 1000;
+  // Assets and graphical properties
+  var complete = false;
+  var frameRate = 30;
+  var carWidth = 50;
+  var carHeight = 100;
+  var canvasWidth = 360;
+  var canvasHeight = 640;
+  var ySpawnWindowHeight = 0;
+  var carImgs = [];
+  var carLaneXs = [];
+  this.carList = [];
 
-    // Assets and graphical properties
-    var complete = false;
-    var frameRate = 30;
-    var carWidth = 50;
-    var carHeight = 100;
-    var canvasWidth = 360;
-    var canvasHeight = 640;
-    var ySpawnWindowHeight = 0;
-    var carImgs = [];
-    var carLaneXs = [];
-    this.carList = [];
-
-    var correct = false;
-    var llQuestionType;
+  // Run config
+  var timeGranularityMs = 1000/frameRate;
+  var completionCount = 25;
+  var flowtime = 1;
+  var velocity = 15;
+  var intervalTimeMs = 1000;
+  var correct = false;
+  var llQuestionType;
 
 
-function resetGame(correctIn)
-{
-    spawnedCarCount = 0;
-    complete = false;
-    correct = correctIn;
-    finishedCarCount = 0;
-    timePassedMs = 0;
-    carList = [];
-}
+  function resetGame(correctIn)
+  {
+      spawnedCarCount = 0;
+      complete = false;
+      correct = correctIn;
+      finishedCarCount = 0;
+      timePassedMs = 0;
+      carList = [];
+  }
 
-  startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds, correctIn, llQuestionTypeIn) {
+  sketch.setup = function()
+  {
+    can = sketch.createCanvas(canvasWidth, canvasHeight);
+    sketch.frameRate(frameRate);
+    loadImages();
+    const canvasElt = can.elt;
+    canvasElt.style.width = '100%', canvasElt.style.height = "100%";
+    carLaneXs = calcLaneSpawnPosition(numberOfLanes);
+  }
+
+  startCars = function(numLanes, compCount, flowTimeSeconds, durationBetweenCarSpawnInSeconds, correctIn, llQuestionTypeIn) {
     console.log('Starting simulation');
     resetGame(correctIn);
 
@@ -54,15 +63,16 @@ function resetGame(correctIn)
     numberOfOpenLanes = numLanes;
     completionCount = compCount;
     flowtime = flowTimeSeconds;
-    velocity = (canvasHeight + carHeight)/(flowtime * 2)/frameRate;
+    velocity = (canvasHeight + carHeight)/flowtime/frameRate;
     console.log("velocity" + velocity + "    fps: " + frameRate);
-    intervalTime = intervalTimeSeconds * 1000;
+    intervalTimeMs = durationBetweenCarSpawnInSeconds * 1000;
 
     // Null variables so they calculate based on this run configuration
     targetThroughput = null;
     targetTime = null;
     wip = null;
-    ySpawnWindowHeight = Math.max(0,(velocity * frameRate * (intervalTime / 1000) - carHeight));
+    ySpawnWindowHeight = Math.max(0,Math.round(velocity * frameRate * durationBetweenCarSpawnInSeconds - carHeight));
+    console.log("ySpawnWindowHeight " + ySpawnWindowHeight);
 
     // Start cars for each open lane
     for (let i = 1; i <= numberOfOpenLanes; i++) {
@@ -72,20 +82,14 @@ function resetGame(correctIn)
     $("[id*=trafficQuestion]").hide();
     $("#runInfo").show();
 
-    $("#wip").removeClass('blink_me');
-    $("#flowtime").removeClass('blink_me');
-    $("#throughput").removeClass('blink_me');
-    $("#"+llQuestionType).addClass('blink_me');
-  }
+    $("#wip_out").attr("style", "color: white");
+    $("#ft_out").attr("style", "color: white");
+    $("#tp_out").attr("style", "color: white");
+    $("#"+llQuestionType).attr("style", "color: red");
 
-  sketch.setup = function()
-  {
-    loadImages();
-    can = sketch.createCanvas(canvasWidth, canvasHeight);
-    const canvasElt = can.elt;
-    canvasElt.style.width = '100%', canvasElt.style.height = "100%";
-    carLaneXs = calcLaneSpawnPosition(numberOfLanes);
-    sketch.frameRate(frameRate);
+    $("#tp_out").text(calcTargetThroughput());
+    $("#wip_out").text(calcWip());
+    $("#ft_out").text(flowtime);
   }
 
   sketch.draw = function()
@@ -112,7 +116,6 @@ function resetGame(correctIn)
       for (let i = 0; i < carList.length; i++)
       {
         // Update car position and remove completed ones.
-        var carComplete = this.carList[i].update(velocity);
         if (this.carList[i].update(velocity) == false) {
           carList.splice(i, 1);
           finishedCarCount++;
@@ -144,49 +147,45 @@ function resetGame(correctIn)
         renderQuestionIncorrect();
     }
 
-    // Update output
-    if (!complete)
-    {
-      switch (llQuestionType)
-      {
-        case 'wip':
-          // Ilistrate Wip
-          $("#wip").text(calcNumberOfCarsOnScreen());
-          $("#flowtime").text(flowtime);
-          $("#throughput").text(calcTargetThroughput());
-          break;
-        case 'ft':
-          // Ilistrate flowtime
-          $("#wip").text(calcWip());
-          // TODO show increasing timer of cars as the pass
-          $("#throughput").text(calcTargetThroughput());
-          break;
-        case 'throughput':
-          // Simulated throughput
-          $("#wip").text(calcWip());
-          $("#flowtime").text(flowtime);
-          $("#throughput").text(calcSimThroughput());
-          break;
-      }
-    }
-    else
-    {      
-          $("#wip").text(calcWip());
-          $("#flowtime").text(flowtime);
-          $("#throughput").text(calcTargetThroughput());
+    // Run Metrics updated with time interval
+    // Update output when complete
+    if (complete)
+    {     
+      $("#wip_out").text(calcWip());
+      $("#ft_out").text(flowtime);
+      $("#tp_out").text(calcTargetThroughput());
     }
 
+  }
+
+  function updateRunMetrics()
+  {
+    // switch (llQuestionType)
+    // {
+    //   case 'wip_out':
+    //     // Ilistrate Wip
+    //     $("#wip_out").text(calcNumberOfCarsOnScreen());
+    //     break;
+    //   case 'ft_out':
+    //     // Ilistrate flowtime
+    //     // TODO show increasing timer of cars as the pass
+    //     break;
+    //   case 'tp_out':
+    //     // Simulated throughput
+    //     $("#tp_out").text(calcSimThroughput());
+    //     break;
+    // }
+   
     // Update debug output
-    $("#spawnedCarCount").text(spawnedCarCount);
-    $("#finishedCarCount").text(finishedCarCount);
-    $("#targetThroughput").text(calcTargetThroughput());
-    $("#targetTime").text(calcTargetTime());
-    $("#simTimer").text(Math.round(timePassedMs/100)/10);
+    // $("#spawnedCarCount").text(spawnedCarCount);
+    // $("#finishedCarCount").text(finishedCarCount);
+    // $("#targetThroughput").text(calcTargetThroughput());
+    // $("#targetTime").text(calcTargetTime());
+    // $("#simTimer").text(Math.round(timePassedMs/100)/10);
   }
 
   function calcNumberOfCarsOnScreen()
   {
-
       numberOfCarsOnScreen = carList.length;
       for (let i = 0; i < carList.length; i++)
       {
@@ -199,11 +198,16 @@ function resetGame(correctIn)
       return numberOfCarsOnScreen;
   }
 
+  function calcSimThroughput()
+  {
+    return Math.round((finishedCarCount/(timePassedMs/1000))*10)/10;
+  }
+
   function calcTargetThroughput()
   {
     if (!targetThroughput)
     {
-      targetThroughput = Math.round( (numberOfOpenLanes/(intervalTime/1000)) * 100) / 100;
+      targetThroughput = Math.round( (numberOfOpenLanes/(intervalTimeMs/1000)) * 100) / 100;
     }
     return targetThroughput;
   }
@@ -224,11 +228,6 @@ function resetGame(correctIn)
       wip = Math.round(flowtime * targetThroughput * 10) / 10;
     }
     return wip;
-  }
-
-  function calcSimThroughput()
-  {
-    return Math.round((finishedCarCount/(timePassedMs/1000))*10)/10;
   }
 
   function setTimePassedMs()
@@ -263,7 +262,7 @@ function resetGame(correctIn)
     if (!complete) {
       crateTimeout = setTimeout(function() {
         addCar(lane);
-      }, intervalTime);
+      }, intervalTimeMs);
     }
   }
 
