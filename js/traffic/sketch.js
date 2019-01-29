@@ -11,6 +11,7 @@ var trafficSim = function(sketch) {
     var targetThroughput;
     var targetTime;
     var wip;
+    var numberOfCarsOnScreen = 0;
 
     // Run Speed config
     var timeGranularityMs = 100;
@@ -46,15 +47,15 @@ function resetGame(correctIn)
 }
 
   startCars = function(numLanes, compCount, flowTimeSeconds, intervalTimeSeconds, correctIn, llQuestionTypeIn) {
-    sketch.frameRate(frameRate);
-
+    console.log('Starting simulation');
     resetGame(correctIn);
 
     llQuestionType = llQuestionTypeIn;
     numberOfOpenLanes = numLanes;
     completionCount = compCount;
     flowtime = flowTimeSeconds;
-    velocity = (canvasHeight + carHeight)/(flowtime*frameRate);
+    velocity = (canvasHeight + carHeight)/flowtime/frameRate;
+    console.log("velocity" + velocity + "    fps: " + frameRate);
     intervalTime = intervalTimeSeconds * 1000;
 
     // Null variables so they calculate based on this run configuration
@@ -70,16 +71,21 @@ function resetGame(correctIn)
 
     $("[id*=trafficQuestion]").hide();
     $("#runInfo").show();
+
+    $("#wip").removeClass('blink_me');
+    $("#flowtime").removeClass('blink_me');
+    $("#throughput").removeClass('blink_me');
+    $("#"+llQuestionType).addClass('blink_me');
   }
 
   sketch.setup = function()
   {
     loadImages();
-    sketch.frameRate(1);
     can = sketch.createCanvas(canvasWidth, canvasHeight);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height = "100%";
     carLaneXs = calcLaneSpawnPosition(numberOfLanes);
+    sketch.frameRate(frameRate);
   }
 
   sketch.draw = function()
@@ -102,19 +108,21 @@ function resetGame(correctIn)
       {
         var furthstCarYpos = canvasHeight;
       }
+
       for (let i = 0; i < carList.length; i++)
       {
-        // Find the furthest car to start timer
-        if (timePassedMs == 0 && carList[i].posY < furthstCarYpos)
-        {
-          furthstCarYpos = carList[i].posY;
-        }
-
         // Update car position and remove completed ones.
+        var carComplete = this.carList[i].update(velocity);
         if (this.carList[i].update(velocity) == false) {
           carList.splice(i, 1);
           finishedCarCount++;
           i--;
+        }
+
+        // Find the furthest car to start timer
+        if (timePassedMs == 0 && carList[i].posY < furthstCarYpos)
+        {
+          furthstCarYpos = carList[i].posY;
         }
       }
 
@@ -130,7 +138,6 @@ function resetGame(correctIn)
     if (!complete && finishedCarCount >= completionCount)
     {
       complete = true;
-      sketch.frameRate(1);
       if(correct)
         renderQuestionCorrect();
       else
@@ -138,15 +145,36 @@ function resetGame(correctIn)
     }
 
     // Update output
-
-    $("#flowtime").removeClass('blink_me');
-    $("#simThroughput").removeClass('blink_me');    
-    $("#wip_out").removeClass('blink_me');
-
-    $("#flowtime").text(flowtime);
-    $("#simThroughput").text(calcSimThroughput());  
-    $("#wip_out").text(calcWip());
-    $("#"+llQuestionType).addClass('blink_me');
+    if (!complete)
+    {
+      switch (llQuestionType)
+      {
+        case 'wip':
+          // Ilistrate Wip
+          $("#wip").text(calcNumberOfCarsOnScreen());
+          $("#flowtime").text(flowtime);
+          $("#throughput").text(calcTargetThroughput());
+          break;
+        case 'flowtime':
+          // Ilistrate flowtime
+          $("#wip").text(calcWip());
+          // TODO show increasing timer of cars as the pass
+          $("#throughput").text(calcTargetThroughput());
+          break;
+        case 'throughput':
+          // Simulated throughput
+          $("#wip").text(calcWip());
+          $("#flowtime").text(flowtime);
+          $("#throughput").text(calcSimThroughput());
+          break;
+      }
+    }
+    else
+    {      
+          $("#wip").text(calcWip());
+          $("#flowtime").text(flowtime);
+          $("#throughput").text(calcTargetThroughput());
+    }
 
     // Update debug output
     $("#spawnedCarCount").text(spawnedCarCount);
@@ -154,6 +182,21 @@ function resetGame(correctIn)
     $("#targetThroughput").text(calcTargetThroughput());
     $("#targetTime").text(calcTargetTime());
     $("#simTimer").text(Math.round(timePassedMs/100)/10);
+  }
+
+  function calcNumberOfCarsOnScreen()
+  {
+
+      numberOfCarsOnScreen = carList.length;
+      for (let i = 0; i < carList.length; i++)
+      {
+        // update numberOfCarsOnScreen to account for cars off screen
+        if (carList[i].posY >= canvasHeight)
+        {
+          numberOfCarsOnScreen--;
+        }
+      }
+      return numberOfCarsOnScreen;
   }
 
   function calcTargetThroughput()

@@ -46,6 +46,12 @@ function renderLaneNumberSelector() {
 function renderQuestionBar() {
   console.log("renderQuestionBar()");
   $("#traffic_top_bar").load("content/traffic/trafficQuestionBar.html");
+  $("#traffic_top_bar").show();
+}
+
+function hideQuestionBar() {
+  console.log("hideQuestionBar()");
+  // $("#traffic_top_bar").hide();
 }
 
 function renderTrafficWelcome(){

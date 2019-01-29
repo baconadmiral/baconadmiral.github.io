@@ -15,6 +15,12 @@
     animation: blinker 0.5s linear infinite;
   }
 
+  .close:hover,.close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
   @keyframes blinker {  
     50% { opacity: 0; }
   }
@@ -27,11 +33,11 @@
 <div id="myQuestionBar" class="questionBar">
     <span id="runInfo" style="display:none; color:white;">
       <p id="wipLabel" style="margin-top:2px; margin-bottom:2px;">
-        WIP: <span id="wip_out"></span></p>
+        WIP: <span id="wip"></span></p>
       <p id="flowtimeLabel" style="margin-top:2px; margin-bottom:2px;">
         Flowtime: <span id="flowtime"></span></p>
       <p id="throughputLabel" style="margin-top:2px; margin-bottom:2px;">
-        Throughput: <span id="simThroughput"></span> </p>
+        Throughput: <span id="throughput"></span> </p>
     </span>
 </div>
 
