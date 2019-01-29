@@ -53,23 +53,22 @@ var planeBuilderSim = function(sketch) {
       {
         speedTxt = "Slow";
         velocity = 2.25;
-        startFlowtime = 11;
+        startFlowtime = 10;
       }
       else if(this.level == 2)
       {
         speedTxt = "Medium";
         velocity = 3.15;
-        startFlowtime = 8;
+        startFlowtime = 7;
       }
       else if(this.level == 3)
       {
         speedTxt = "Fast";
         velocity = 3.75;
-        startFlowtime = 7;
+        startFlowtime = 6;
       }
 
       setTimeout(addFuselage, 1000);
-      flowTimeTimeout = setTimeout(decrementFlowTimes, 1000);
   }
 
   stopFactory = function() {
@@ -120,7 +119,7 @@ var planeBuilderSim = function(sketch) {
     {
       sketch.background(this.bgImg);
 
-      statsDisplay.update(winCount, startFlowtime-1, speedTxt);
+      statsDisplay.update(winCount, startFlowtime, speedTxt);
 
       sketch.textSize(28);
       //sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
@@ -216,16 +215,6 @@ var planeBuilderSim = function(sketch) {
     wings.touchMoved();
     tail.touchMoved();
     cockpit.touchMoved();
-  }
-
-  function decrementFlowTimes()
-  {
-    for(let i = 0; i < fuselageList.length; i++)
-    {
-      this.fuselageList[i].decrementFlowTime();
-    }
-
-    flowTimeTimeout = setTimeout(decrementFlowTimes, 1000);
   }
 
   function addFuselage()

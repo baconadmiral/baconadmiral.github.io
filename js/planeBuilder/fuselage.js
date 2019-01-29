@@ -9,14 +9,11 @@ function Fuselage(sketch, fuselageImg, airplaneCompImg, cockpitImg, fuselageCImg
   this.flowTime = flowTime
 
 
-  this.decrementFlowTime = function()
-  {
-    this.flowTime = this.flowTime - 1;
-  }
-
   this.update = function(velocity)
   {
-    if(this.flowTime <= 3 && (!this.hasTail || !this.hasWings || !this.hasCockpit))
+    this.displayFlowtime = this.flowTime - Math.round((this.posX / sketch.width) * this.flowTime);
+
+    if(this.displayFlowtime <= 3 && (!this.hasTail || !this.hasWings || !this.hasCockpit))
     {
       sketch.fill("red");
     }
@@ -28,7 +25,7 @@ function Fuselage(sketch, fuselageImg, airplaneCompImg, cockpitImg, fuselageCImg
     {
       sketch.fill("black");
     }
-    sketch.text(this.flowTime + " s", this.posX, this.posY);
+    sketch.text(this.displayFlowtime + " s", this.posX, this.posY);
 
     if(this.posX < sketch.width)
     {
