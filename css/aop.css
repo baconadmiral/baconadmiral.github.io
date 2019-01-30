@@ -53,6 +53,21 @@
     background-color: #31EABB;
 }
 
+.iframeStylePortraitCar{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /*width: 100vh;
+    height: 100%;*/
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    background-color: #31EABB;
+    border:0;
+   /* overflow-x: hidden;*/
+}
+
 /* end todd overlay */
 
 nav{

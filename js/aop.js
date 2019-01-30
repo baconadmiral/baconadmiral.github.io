@@ -26,65 +26,124 @@ function openIOverlay(fLink, pageType) {
   iOl.appendChild(iframe);
   iOl.style.height = "100%";
 
-   if(pageType === "Game")
+  if(pageType === "Game")
   {
     var mql = window.matchMedia("(orientation: portrait)");
     var orientation = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
-      window.addEventListener("orientationchange", function() 
+    window.addEventListener("orientationchange", function() 
+    {
+      var mql1 = window.matchMedia("(orientation: portrait)");
+      var orientation1 = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
+
+      if (orientation1 === "landscape-primary") 
       {
-        var mql1 = window.matchMedia("(orientation: portrait)");
-        var orientation1 = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
-    
-        if (orientation1 === "landscape-primary") 
-        {
+        iframe.setAttribute("class", "iframeStyleLandscape");
+      } 
+      else if (orientation1 === "landscape-secondary") 
+      {
+        iframe.setAttribute("class", "iframeStyleLandscape");
+      } 
+      else if (orientation1 === "portrait-secondary" || orientation === "portrait-primary") 
+      {
+        iframe.setAttribute("class", "iframeStylePortrait"); 
+      } 
+      else if (orientation1 === undefined) 
+      {
+        if(mql1.matches)
+        {  
           iframe.setAttribute("class", "iframeStyleLandscape");
         } 
-        else if (orientation1 === "landscape-secondary") 
-        {
-          iframe.setAttribute("class", "iframeStyleLandscape");
-        } 
-        else if (orientation1 === "portrait-secondary" || orientation === "portrait-primary") 
-        {
-          iframe.setAttribute("class", "iframeStylePortrait"); 
-        } 
-        else if (orientation1 === undefined) 
-        {
-          if(mql1.matches)
-          {  
-            iframe.setAttribute("class", "iframeStyleLandscape");
-          } 
-          else 
-          {  
-            iframe.setAttribute("class", "iframeStylePortrait");  
-          }
+        else 
+        {  
+          iframe.setAttribute("class", "iframeStylePortrait");  
         }
-      }     , false);
+      }
+    }     , false);
 
-  if (orientation === "landscape-primary") 
-        {
-          iframe.setAttribute("class", "iframeStyleLandscape");
+    if (orientation === "landscape-primary") 
+    {
+      iframe.setAttribute("class", "iframeStyleLandscape");
+    } 
+    else if (orientation === "landscape-secondary") 
+    {
+      iframe.setAttribute("class", "iframeStyleLandscape");
+    } 
+    else if (orientation === "portrait-secondary" || orientation === "portrait-primary") 
+    {
+      iframe.setAttribute("class", "iframeStylePortrait"); 
+    } 
+    else if (orientation === undefined) 
+    {
+      if(mql.matches)
+      {  
+        iframe.setAttribute("class", "iframeStylePortrait");  
+      } 
+      else 
+      {  
+       iframe.setAttribute("class", "iframeStyleLandscape");
+     }
+   }
+ }
+ else if (pageType === "GameLand")
+ {
+    var mql = window.matchMedia("(orientation: portrait)");
+    var orientation = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
+    window.addEventListener("orientationchange", function() 
+    {
+      var mql1 = window.matchMedia("(orientation: portrait)");
+      var orientation1 = screen.msOrientation || (screen.orientation || screen.mozOrientation || {}).type;
+
+      if (orientation1 === "landscape-primary") 
+      {
+        iframe.setAttribute("class", "iframeStylePortraitCar");
+      } 
+      else if (orientation1 === "landscape-secondary") 
+      {
+        iframe.setAttribute("class", "iframeStylePortraitCar");
+      } 
+      else if (orientation1 === "portrait-secondary" || orientation === "portrait-primary") 
+      {
+        iframe.setAttribute("class", "iframeStyleLandscape"); 
+      } 
+      else if (orientation1 === undefined) 
+      {
+        if(mql1.matches)
+        {  
+          iframe.setAttribute("class", "iframeStylePortraitCar");
         } 
-        else if (orientation === "landscape-secondary") 
-        {
-          iframe.setAttribute("class", "iframeStyleLandscape");
-        } 
-        else if (orientation === "portrait-secondary" || orientation === "portrait-primary") 
-        {
-          iframe.setAttribute("class", "iframeStylePortrait"); 
-        } 
-        else if (orientation === undefined) 
-        {
-          if(mql.matches)
-          {  
-            iframe.setAttribute("class", "iframeStylePortrait");  
-          } 
-          else 
-          {  
-             iframe.setAttribute("class", "iframeStyleLandscape");
-          }
+        else 
+        {  
+          iframe.setAttribute("class", "iframeStyleLandscape");  
         }
+      }
+    }     , false);
 
-    }
+    if (orientation === "landscape-primary") 
+    {
+      iframe.setAttribute("class", "iframeStylePortraitCar");
+    } 
+    else if (orientation === "landscape-secondary") 
+    {
+      iframe.setAttribute("class", "iframeStylePortraitCar");
+    } 
+    else if (orientation === "portrait-secondary" || orientation === "portrait-primary") 
+    {
+      iframe.setAttribute("class", "iframeStyleLandscape"); 
+    } 
+    else if (orientation === undefined) 
+    {
+      if(mql.matches)
+      {  
+        iframe.setAttribute("class", "iframeStyleLandscape");  
+      } 
+      else 
+      {  
+       iframe.setAttribute("class", "iframeStylePortraitCar");
+     }
+   }
+ }
+
+
 }
 
 function closeIOverlay() {
@@ -233,7 +292,7 @@ function loadCalculator(){
 }
 
 function loadCalculatorModal(actionCallBack) { /*(){ */ //
-  
+
   alert('insde loadCalculatorModal');
 
   var defaultColor= "#424242";
@@ -249,24 +308,24 @@ function loadCalculatorModal(actionCallBack) { /*(){ */ //
     //$("#calcsvg").css({ fill: "#ff0000" });
     //$('#calcsvg').css({fill: defaultColor});
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-  
+
   //testCalcCallFunction();
-    if(actionCallBack == undefined) {
-        setCalcAction(null);
+  if(actionCallBack == undefined) {
+    setCalcAction(null);
   } else {
     setCalcAction(actionCallBack);
-    } 
-    
-  $(document).ready(function(){
-      $('#modal1').modal();
-    });
-
-    $('#modal1').modal({
-      dismissible:false
-    });
-    $('#modal1').modal('open');
-
   } 
+
+  $(document).ready(function(){
+    $('#modal1').modal();
+  });
+
+  $('#modal1').modal({
+    dismissible:false
+  });
+  $('#modal1').modal('open');
+
+} 
 }
 
 
@@ -310,7 +369,7 @@ function loadSearchModal(){
   function clickExitSlideshow()
   {
     window.location.href ="index.html";
-     }
+  }
 
   function loadNotesModal(){
 
@@ -665,17 +724,17 @@ function clickBackToQuiz()
 
 function portraitStyle()
 {
-    $("#mobileFooter").css('display', 'unset');
-      $("#sliderScreen").css('margin-top', '0px');
-      $(".footerIcons").css('display', 'unset');
-      $(".page-footer").css('display', 'unset');
-      $("nav").css('height', '56px');
-      $("nav").css('transition', 'none');
-      $(".imageStyle").css('background-size', 'contain');
-      $(".myProgress").css('bottom', '65px');
-       $('nav').hover(function() {
-      $(this).stop().css('height','56px')
-      })
+  $("#mobileFooter").css('display', 'unset');
+  $("#sliderScreen").css('margin-top', '0px');
+  $(".footerIcons").css('display', 'unset');
+  $(".page-footer").css('display', 'unset');
+  $("nav").css('height', '56px');
+  $("nav").css('transition', 'none');
+  $(".imageStyle").css('background-size', 'contain');
+  $(".myProgress").css('bottom', '65px');
+  $('nav').hover(function() {
+    $(this).stop().css('height','56px')
+  })
 }
 
 function resetActivityArrow()
@@ -744,7 +803,7 @@ function loadQuiz(name, datastoreName){
 
   $("#app_cont").load("content/quizPage.html");
   $("#pageTitle").text(name + " Quiz");
-   $("#menuButton").hide();
+  $("#menuButton").hide();
   $("#backQuizButton").show();
   animateQuizArrow();
 }
