@@ -349,6 +349,32 @@ function loadSearchModal(){
 
   }
 
+//Old Search Function
+  function search(nameKey, myArray){
+  for (var i=0; i < myArray.length; i++) {
+      if (myArray[i].key === nameKey) {
+        area = myArray[i].area;
+        if(area === 'gloss')
+        {
+          firstLetter = nameKey[0].toUpperCase();
+        }
+        else {
+          firstLetter = nameKey[0].toLowerCase();
+
+        }
+
+          return nameKey + " - " + myArray[i].value;
+      }
+    }
+    return "No Result Found";
+}
+
+function clearSearchInput()
+{
+  $("#autocomplete-input").value="";
+}
+
+
   function loadEmailModal(){
 
     $("#modal_content").load("content/email.html");

@@ -2,6 +2,152 @@
   <div class="card-content" style="padding: 10px 20px 5px 20px">
     <div class="row" style="margin-bottom:0; width: 100%;">
       <div class="input-field col s12 m12">
+          <input type="text" id="autocomplete-input" onfocus="this.value=''" class="autocomplete">
+          <label for="autocomplete-input">Search</label>
+      </div>
+  </div>
+  <div class="row" style="margin-bottom:0">
+    <div class="input-field col s6 m6" style = "width: 100%;">
+      <p></p>
+      <div class="card-content white-text">
+        <!--  <span id="search_title" class="card-title" style = "color: #000 !important;"></span> -->
+          <p id = "search_result" style = "color: #000 !important;"></p>
+        </div>
+        <div class="card-action">
+          <a onclick="loadAcronyms();">Acronyms and Glossary</a>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+  $('input.autocomplete').autocomplete({
+    data: {
+      "AA " : null,
+      "ABSS " : null,
+      "ABW " : null,
+      "ACF " : null,
+      "AFI " : null,
+      "AFMAN " : null,
+      "AFPC " : null,
+      "AFPD " : null,
+      "AFRIMS " : null,
+      "AFSAS " : null,
+      "AFSOC " : null,
+      "AMOC " : null,
+      "AO " : null,
+      "AOC " : null,
+      "AOR " : null,
+      "CER " : null,
+      "CoF " : null,
+      "CPI " : null,
+      "DBR " : null,
+      "DLA " : null,
+      "DMAIC " : null,
+      "DMAWG " : null,
+      "DoD " : null,
+      "DOTmLPF-P " : null,
+      "DP " : null,
+      "FDB " : null,
+      "FM " : null,
+      "FRIP " : null,
+      "GMT " : null,
+      "GPC " : null,
+      "IA " : null,
+      "ICE " : null,
+      "IM " : null,
+      "IMS " : null,
+      "IMSC " : null,
+      "IPV " : null,
+      "JA " : null,
+      "LAIRMCM " : null,
+      "LGS " : null,
+      "LRIP " : null,
+      "LRS " : null,
+      "LRU " : null,
+      "MAPO " : null,
+      "MDS " : null,
+      "METL " : null,
+      "METs " : null,
+      "MGA " : null,
+      "MIPR " : null,
+      "MLG " : null,
+      "MORD " : null,
+      "NAF " : null,
+      "OC-ALC " : null,
+      "OO-ALC/OBP " : null,
+      "OFPS " : null,
+      "OMS " : null,
+      "OO-ALC " : null,
+      "ORB " : null,
+      "OPR " : null,
+      "OSHA " : null,
+      "PCS " : null,
+      "PDM " : null,
+      "PM " : null,
+      "PPA-HQ " : null,
+      "PPPO " : null,
+      "PPSO " : null,
+      "QA " : null,
+      "RCA " : null,
+      "RDS " : null,
+      "RIE " : null,
+      "SIO " : null,
+      "SME " : null,
+      "SPO " : null,
+      "ToC " : null,
+      "TSP " : null,
+      "UDLM " : null,
+      "USR " : null,
+      "VPP " : null,
+      "WCD " : null,
+      "WIP " : null,
+      "WR-ALC " : null,
+      "Art of the Possible (AoP) " : null,
+      "AFTO-202 " : null,
+      "Andon " : null,
+      "Comfortable in Red " : null,
+      "Constraint " : null,
+      "Critical Path " : null,
+      "Flowtime " : null,
+      "Implied Tasks " : null,
+      "Manloading " : null,
+      "Maturity Matrix " : null,
+      "Process Machine " : null,
+      "Pull System " : null,
+      "Push System " : null,
+      "Queue " : null,
+      "Radiator Chart " : null,
+      "Rapid Improvment Events (RIE) " : null,
+      "Road To... " : null,
+      "Root Cause Analysis (RCA) " : null,
+      "Specified Tasks " : null,
+      "Standard Work " : null,
+      "Tactical Management " : null,
+      "Takt Time " : null,
+      "Theory of Constraints (ToC) " : null,
+      "Throughput " : null,
+      "Urgency Tools " : null,
+      "Value Stream Analysis (VSA) " : null,
+      "Value Stream Map (VSM) " : null,
+      "Visual Managment " : null,
+      "Wall Walk " : null,
+    },
+    onAutocomplete: function(txt, val, val) {
+      $("#search_title").html(txt);
+      $("#search_result" ).html( search(txt, searchDomain) );
+    },
+    limit: 20,
+  });
+});
+</script>
+
+
+<!-- <div id="searchContainer" class="container"  >
+  <div class="card-content" style="padding: 10px 20px 5px 20px">
+    <div class="row" style="margin-bottom:0; width: 100%;">
+      <div class="input-field col s12 m12">
         <table>
           <tr>
             <td>
@@ -43,7 +189,7 @@
           </a>
         </i></td>
       </tr>
-    </table>
+    </table> -->
 
         <!-- <i class="prefix" style="color: gray; vertical-align: middle; float: right; fill: gray">
           <a href="javascript:searchTerm()">
@@ -60,7 +206,7 @@
         </i> -->
         <!-- <input type="text" id="autocomplete-input" onfocus="this.value=''" class="autocomplete">
           <label for="autocomplete-input">Search</label> -->
-        <!-- <i class="prefix" >
+<!--         <i class="prefix" >
           <a href="javascript:saveSearch()">
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                height="24px" width="24px" viewBox="0 0 438.533 438.533" style="enable-background:new 0 0 438.533 438.533;"
@@ -80,19 +226,19 @@
               <g></g>
             </svg>
           </a>
-        </i> -->
+        </i>
       </div>
-    </div>
-    <div class="row" style="margin-bottom:0">
+    </div> -->
+<!--     <div class="row" style="margin-bottom:0">
       <div class="input-field col s6 m6" style = "width: 100%;">
         <p></p>
         <div class="card-content white-text">
-          <!--  <span id="search_title" class="card-title" style = "color: #000 !important;"></span> -->
-          <p id = "search_result" style = "color: #000 !important;"></p>
+          <span id="search_title" class="card-title" style = "color: #000 !important;"></span>         
+           <p id = "search_result" style = "color: #000 !important;"></p>
         </div>
         <div class="card-action">
-          <!-- <a onclick="loadAcronyms();">Acronyms and Glossary</a> -->
-          <div>
+          <a onclick="loadAcronyms();">Acronyms and Glossary</a> -->
+          <!--<div>
             <input type="checkbox" id="acrnm" checked="checked" onclick="loadAcrnmIndecies();"/>
             <label for="acrnm">Acronyms</label>
           </div>
@@ -103,14 +249,14 @@
           <div>
             <input type="checkbox" id="aop-handbook" checked="checked" onclick="loadHandbookIndecies();"/>
             <label for="aop-handbook">AoP Handbook</label>
-          </div></br>
+          </div></br>-->
 
-        </br></br>
+<!--         </br></br>
       </div>
     </div>
   </div>
 </div>
-</div>
+</div> -->
 <!-- <script>
   window.onload = () => {
     loadAcrnmIndecies();
@@ -118,7 +264,7 @@
     loadHandbookIndecies();
   }
 </script> -->
-<script>
+<!-- <script>
   openSearchDB();
   $(document).ready(function(){
     $('input.autocomplete').autocomplete({
@@ -250,3 +396,7 @@
 //style="color: gray; vertical-align: middle; float: right; fill: gray"
 
 </script>
+ -->
+
+
+
