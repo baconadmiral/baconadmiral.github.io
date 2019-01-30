@@ -291,10 +291,7 @@ function loadCalculator(){
 
 }
 
-function loadCalculatorModal(actionCallBack) { /*(){ */ //
-
-  alert('insde loadCalculatorModal');
-
+function loadCalculatorModal(actionCallBack) { 
   var defaultColor= "#424242";
   var pageTitle = $("#pageTitle").text();
   if(pageTitle !== "Little's Law Calculator"){

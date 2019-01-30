@@ -1,186 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
-  <link type="text/css" rel="stylesheet" href="css/aop.css"  media="screen,projection"/>
-  <script language="javascript" type="text/javascript">
-
+<script language="javascript" type="text/javascript">
     showTrafficQuestion();
   // hideQuestionBar();
-
-  function loadActivityCalculatorModal() {
-    alert('insde loadActivityCalculatorModal');
-    $("#modal_content").load("content/calculator.html");
-    $("#calcContainer").css('padding-top','0px');
-    $("#calcLabel").css('color','#0EABDA');
-    $(".calculator").css("fill", "#0EABDA");
-    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-    $(document).ready(function(){
-      $('#modal1').modal();
-    });
-
-    $('#modal1').modal({
-      dismissible:false
-    });
-    $('#modal1').modal('open');
-  }
-
-
-</script>
-<style>
-
-  .hidden_toggle {
-    display: none;
-  }
-
-/*question.html*/
-/* The Modal (background) */
-.modalBlock {
-  display: block; /* Block by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 50px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,.5);
-}
-
-/* Modal Content */
-.modal-container {
-  margin: auto;
-  padding: 5px;
-  border: 1px solid #888;
-  background-color: white;
-  width: 85%;
-}
-
-
-.questionModal{
-  margin: auto;
-  padding: 20px;
-  padding-bottom:5px;
-  border: 4px solid #FFF;
-  background-color: #009245;
-  width: 80%;
-  border-radius:10px;
-  box-shadow: 10px 8px 20px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.quizTitle{
- height:7vh;
- margin-left: auto;
- margin-right: auto;
- display: block;
- margin-top: -45px;
-}
-
-.question{
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-@media screen and (orientation:portrait){
-  .question{
-    width:100%;
-  }
-}
-@media screen and (orientation:landscape){
-  .question{
-    width:50%;
-  }
-}
-
-.answer{
-  height:10vh;
-}
-
-ul{
-  text-align:justify;
-  padding-left:0px;
-}
-ul:after {
-  content: '';
-  display: inline-block;
-  width: 100%;
-}
-ul:before {
-  content: '';
-  display: block;
-  margin-top: -1.25em;
-}
-li {
-  display: inline-block;
-  position: relative;
-  top: 1.25em;
-}
-
-.calculatorBtn{
-  height:7vh;
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
-  margin-bottom:5px;
-  padding-top:10px;
-}
-
-.closeBtn {
-  float: right;
-  height: 5vh;
-  margin-right: -46px;
-  margin-top: -45px;
-}
-
-
-h2, h3, h4, h5, h6{
-  font-family: 'American Purpose', Arial, sans-serif;
-  font-weight:normal;
-  font-style:normal;
-  color:#fff;
-  text-align:center;
-  padding: 0px;
-  margin: 0px;
-}
-
-@media only screen and (min-width: 700px)
-{
-  .answerButton{
-    border:5px solid #fff;
-    background-color:#6B109F;
-    border-radius:50%;
-    height: 10vw;
-    width: 10vw;
+  </script>
+  <style>
+    h2, h3, h4, h5, h6{
+      font-family: 'American Purpose', Arial, sans-serif;
+      font-weight:normal;
+      font-style:normal;
+      color:#fff;
+      text-align:center;
+      padding: 0px;
+      margin: 0px;
     }
-}
-@media only screen and (max-width: 699px)
-{
-  .answerButton{
-    border:5px solid #fff;
-    background-color:#6B109F;
-    border-radius:50%;
-    height:20vw;
-    width:20vw;
-    }
-}
-
-.symbols{
-  font-family: 'Impact', Arial, sans-serif;
-  font-weight:normal;
-  font-style:normal;
-  color:#fff;
-  text-align:center;
-  padding: 0px;
-  margin: 0px;
-}
 
 </style>
-</head>
-<body>
   <!-- The Modals -->
   <div id="trafficQuestion1" class="modalBlock">
     <div class="modal-container questionModal">
@@ -221,7 +54,7 @@ h2, h3, h4, h5, h6{
     </li>
   </ul>
   <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
-  onclick="alert('car question 2')">
+   onclick="loadActivityCalculatorModal();">
 </div>
 </div>
 
@@ -242,7 +75,7 @@ h2, h3, h4, h5, h6{
    </li>
  </ul>
  <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
- onclick="alert('car question 3')">
+  onclick="loadActivityCalculatorModal();">
 </div>
 </div>
 </div>
@@ -265,12 +98,6 @@ h2, h3, h4, h5, h6{
 </div>
 </div>
 </div>
-
-<script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
-<script language="javascript" type="text/javascript" src="js/settings.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/materialize.min.js"></script>
-
 <script>
   var modal = document.getElementById('myModal');
 
@@ -279,6 +106,3 @@ h2, h3, h4, h5, h6{
   var span = document.getElementsByClassName("close")[0];
 
 </script>
-
-</body>
-</html>

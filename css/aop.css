@@ -13,6 +13,9 @@
 }
 
 
+ .hidden_toggle {
+    display: none;
+  }
 
 /* todd overlay */
 
