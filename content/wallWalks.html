@@ -1,4 +1,31 @@
-<div>
+<style type="text/css">
+	.auto-resizable-iframe {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+	}
 
-<iframe src="https://www.dvidshub.net/video/embed/656479" width="640" height="360" frameborder="0" allowtransparency allowfullscreen></iframe>
+	/*.auto-resizable-iframe > div {
+		position: relative;
+		padding-bottom: 75%;
+		height: 0px;
+	}*/
+
+	.auto-resizable-iframe iframe {
+		position: absolute;
+		width:100%;
+		height:100%;
+		object-fit:contain;
+		position:absolute;
+	}
+	.fill {object-fit: fill;}
+	.contain {object-fit: contain;}
+	.cover {object-fit: cover;}
+	.scale-down {object-fit: scale-down;}
+	.none {object-fit: none;}
+</style>
+
+
+<div class="auto-resizable-iframe">
+	<iframe src="https://www.dvidshub.net/video/embed/656479" frameborder="0" allowtransparency allowfullscreen></iframe>
 </div>
