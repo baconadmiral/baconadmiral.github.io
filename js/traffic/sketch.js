@@ -15,7 +15,7 @@ var trafficSim = function(sketch) {
 
   // Assets and graphical properties
   var complete = false;
-  var frameRate = 30;
+  var frameRate = 60;
   var carWidth = 50;
   var carHeight = 100;
   var canvasWidth = 360;
@@ -76,7 +76,10 @@ var trafficSim = function(sketch) {
 
     // Start cars for each open lane
     for (let i = 1; i <= numberOfOpenLanes; i++) {
-      addCar(i);
+      if (llQuestionType === 'ft_out')
+        addCar(i, true);
+      else
+        addCar(i, false);
     }
 
     $("[id*=trafficQuestion]").hide();
@@ -149,8 +152,12 @@ var trafficSim = function(sketch) {
 
     // Run Metrics updated with time interval
     // Update output when complete
-    if (complete)
+    if (!complete)
     {     
+      updateRunMetrics();
+    }
+    else
+    {
       $("#wip_out").text(calcWip());
       $("#ft_out").text(flowtime);
       $("#tp_out").text(calcTargetThroughput());
@@ -249,19 +256,19 @@ var trafficSim = function(sketch) {
     }
   }
 
-  function addCar(lane) {
+  function addCar(lane, showTimer) {
     var laneWidth = can.width / numberOfLanes;
     var yStart = Math.random() * ySpawnWindowHeight;
     var carImg = carImgs[Math.floor(Math.random() * (carImgs.length))];
     this.carList.push(
       new Car(sketch, carImg, carLaneXs[lane],
-        can.height + yStart, carWidth, carHeight));
+        can.height + yStart, carWidth, carHeight,showTimer));
     spawnedCarCount++;
 
     // Only continue to spawn cars for as long as nessesary to meet the desired count
     if (!complete) {
       crateTimeout = setTimeout(function() {
-        addCar(lane);
+        addCar(lane, showTimer);
       }, intervalTimeMs);
     }
   }
