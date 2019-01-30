@@ -1,31 +1,81 @@
 <style type="text/css">
-	.auto-resizable-iframe {
-		width: 100%;
-		height: auto;
-		overflow: hidden;
-	}
-
-	/*.auto-resizable-iframe > div {
-		position: relative;
-		padding-bottom: 75%;
-		height: 0px;
+/*	.auto-resizable-iframe {
+		margin-left:atuo;
+		margin-right:atuo;
+		display:block;
 	}*/
-
 	.auto-resizable-iframe iframe {
 		position: absolute;
-		width:100%;
+		width:75%;
 		height:100%;
-		object-fit:contain;
-		position:absolute;
 	}
-	.fill {object-fit: fill;}
-	.contain {object-fit: contain;}
-	.cover {object-fit: cover;}
-	.scale-down {object-fit: scale-down;}
-	.none {object-fit: none;}
 </style>
 
-
-<div class="auto-resizable-iframe">
-	<iframe src="https://www.dvidshub.net/video/embed/656479" frameborder="0" allowtransparency allowfullscreen></iframe>
+<div id="sliderScreen" class="slider fullscreen container" data-interval="false" 
+style="overflow-x: hidden;overflow-y: hidden;" ondblclick="javascript:(loadLandscapeModal())" onload="javascript:(loadLandscapeSlide())">
+	<div class="auto-resizable-iframe">
+		<iframe src="https://www.dvidshub.net/video/embed/656479" frameborder="0" allowtransparency allowfullscreen></iframe>
+	</div>
 </div>
+
+
+<script>
+
+  $(document).ready(function() {
+    console.log(orientation);
+    if(orientation === 90 && $("#pageTitle").text()==="Wall Walks" )
+    {
+      landscapeStyle();
+    }
+    else{
+      portraitStyle();
+    }
+    $(window).on('orientationchange', function(event) {
+      console.log("script running");
+      if(orientation === 90 && $("#pageTitle").text()==="Wall Walks" )
+      {
+       landscapeStyle();
+     }
+     else{
+      portraitStyle();
+    }
+  });
+
+    function portraitStyle()
+    {
+      $("#mobileFooter").css('display', 'unset');
+      $("#sliderScreen").css('margin-top', '56px');
+      $(".footerIcons").css('display', 'unset');
+      $(".page-footer").css('display', 'unset');
+      $("nav").css('height', '56px');
+      $("nav").css('transition', 'none');
+      $(".imageStyle").css('background-size', 'contain');
+      $('nav').hover(function() {
+        $(this).stop().css('height','56px')
+      })
+    }
+
+    function landscapeStyle()
+    {
+     $("#mobileFooter").css('display', 'none !important');
+     $("#sliderScreen").css('margin-top', '10px');
+      $("#sliderScreen").css('margin-bottom', '17px');
+     $(".imageStyle").css('background-size', 'auto 100%');
+     $(".myProgress").css('bottom', '5px');
+
+     $(".footerIcons").css('display', 'none');
+     $(".page-footer").css('display', 'none');
+     $('nav').css('height', '10px');
+     $('nav').css('transition', 'height .5s');
+     $("nav:hover").css('height', '56px');
+     $('nav').hover(function() {
+      $(this).css('height','56px')
+    }, function(){
+      $(this).stop().css('height','10px')
+    })
+   }
+
+ });
+
+</script>
+
