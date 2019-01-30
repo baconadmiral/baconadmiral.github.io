@@ -132,7 +132,8 @@ li {
   margin-top: -45px;
 }
 
-h2{
+
+h2, h3, h4, h5, h6{
   font-family: 'American Purpose', Arial, sans-serif;
   font-weight:normal;
   font-style:normal;
@@ -142,23 +143,25 @@ h2{
   margin: 0px;
 }
 
-
-h3{
-  font-family: 'American Purpose', Arial, sans-serif;
-  font-weight:normal;
-  font-style:normal;
-  color:#fff;
-  text-align:center;
-  padding: 0px;
-  margin: 0px;
+@media only screen and (min-width: 700px)
+{
+  .answerButton{
+    border:5px solid #fff;
+    background-color:#6B109F;
+    border-radius:50%;
+    height: 10vw;
+    width: 10vw;
+    }
 }
-
-.answerButton{
-  border:5px solid #fff;
-  background-color:#6B109F;
-  border-radius:50%;
-  height:80px;
-  width:80px;
+@media only screen and (max-width: 699px)
+{
+  .answerButton{
+    border:5px solid #fff;
+    background-color:#6B109F;
+    border-radius:50%;
+    height:20vw;
+    width:20vw;
+    }
 }
 
 .symbols{
@@ -180,7 +183,7 @@ h3{
       <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
       <img class="quizTitle" src="images/game/trafficSim/quiz/question_1_title.png">
 
-      <h3 class="question">Given a WIP of 6 units, and a FLOWTIME of 1.5s, what is the THROUGHPUT?</h3>
+      <h4 class="question">Given a WIP of 6 units, and a FLOWTIME of 1.5s, what is the THROUGHPUT?</h4>
       <ul>
        <li>
         <button class="answerButton" onclick="startCars(3,30,1.5,.75, false, 'tp_out');"><h2>3</h2></button>
@@ -201,17 +204,16 @@ h3{
   <div class="modal-container questionModal">
    <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
    <img class="quizTitle" src="images/game/trafficSim/quiz/question_2_title.png">
-   <!-- <img class="question" src="images/game/trafficSim/quiz/question_2.png"> -->
-   <h3>Given a FLOWTIME of 3.0s and a THROUGHPUT of 4 cars per sec what is the WIP?</h3>
+   <h4>Given a FLOWTIME of 3.0s and a THROUGHPUT of 4 cars per sec what is the WIP?</h4>
    <ul>
     <li>
-      <img class="answer" src="images/game/trafficSim/quiz/btn_7.png" onclick="startCars(3,30,3.0,.75, false, 'wip_out');">
+      <button class="answerButton" onclick="startCars(3,30,3.0,.75, false, 'wip_out');"><h2>7</h2></button>
     </li>
     <li>
-      <img class="answer" src="images/game/trafficSim/quiz/btn_966.png" onclick="startCars(3,30,3.0,.75, false, 'wip_out');">
+       <button class="answerButton" onclick="startCars(3,30,3.0,.75, false, 'wip_out');"><h2>2</h2></button>
     </li>
     <li>
-      <img class="answer" src="images/game/trafficSim/quiz/btn_12.png" onclick="startCars(3,30,3.0,.75, true, 'wip_out');">
+        <button class="answerButton" onclick="startCars(3,30,3.0,.75, true, 'wip_out');"><h2>12</h2></button>
     </li>
   </ul>
   <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
@@ -223,23 +225,16 @@ h3{
   <div class="modal-container questionModal">
    <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
    <img class="quizTitle" src="images/game/trafficSim/quiz/question_3_title.png">
-   <h3>Given a WIP of 15 and a throughput of 3 what is the flowtime?</h3>
-   <!-- <img class="question" src="images/game/trafficSim/quiz/question_3.png"> -->
+   <h4>Given a WIP of 15 and a throughput of 3 what is the flowtime?</h4>
    <ul>
     <li>
       <button class="answerButton" onclick="startCars(3,30,5,1, true, 'ft_out');"><h2>5</h2></button>
-      <!--  <h1 onclick="startCars(3,30,5,1, true, 'ft_out');">5</h1> -->
-      <!-- <img class="answer" src="images/game/trafficSim/quiz/btn_628.png" onclick="startCars(3,30,5,1, true, 'ft_out');"> -->
     </li>
     <li>
       <button class="answerButton" onclick="startCars(3,30,5,1, false, 'ft_out');"><h2>12</h2></button>
-      <!--  <h1 >12</h1> -->
-      <!-- <img class="answer" src="images/game/trafficSim/quiz/btn_233.png" onclick="startCars(3,30,5,1, false, 'ft_out');"> -->
     </li>
     <li>
      <button class="answerButton" onclick="startCars(3,30,5,1, false, 'ft_out');"><h2>9</h2></button>
-     <!--  <h1 >9</h1> -->
-     <!-- <img class="answer" src="images/game/trafficSim/quiz/btn_965.png" onclick="startCars(3,30,5,1, false, 'ft_out');"> -->
    </li>
  </ul>
  <img class="calculatorBtn" src="images/game/trafficSim/quiz/use_calculator_btn.png"
