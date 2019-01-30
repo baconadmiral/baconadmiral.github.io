@@ -175,7 +175,6 @@ var trafficSim = function(sketch) {
         break;
       case 'ft_out':
         // Ilistrate flowtime
-        // TODO show increasing timer of cars as the pass
         break;
       case 'tp_out':
         // Simulated throughput
@@ -207,7 +206,8 @@ var trafficSim = function(sketch) {
 
   function calcSimThroughput()
   {
-    return Math.round((finishedCarCount/(timePassedMs/1000))*10)/10;
+    var val = Math.round((finishedCarCount/(timePassedMs/1000))*10)/10
+    return val ? val : 0.0;
   }
 
   function calcTargetThroughput()
