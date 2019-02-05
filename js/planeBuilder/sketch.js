@@ -96,7 +96,7 @@ var planeBuilderSim = function(sketch) {
 
     sketch.frameRate(40);
     can = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
-    //can = sketch.createCanvas(700, 350);
+    can = sketch.createCanvas(700, 350);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
 
@@ -119,7 +119,7 @@ var planeBuilderSim = function(sketch) {
     conveyerBelt = new ConveyerBelt(sketch, 0);
 
     statsDisplay = new StatsDisplay(sketch);
- sketch.resizeCanvas(700, 350);
+
   }
 
   sketch.draw = function() {

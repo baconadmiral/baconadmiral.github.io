@@ -31,6 +31,11 @@
       transform-origin: left top;
       overflow-x: hidden;
      }  
+
+     .factory_modal_content{
+      width: 100vh;
+      height: 100vh;
+     }
    }
 
    html{
@@ -71,12 +76,14 @@
             }
 
     $(function(){
-      $("#app_cont").empty();
-      plane_S = new p5(planeBuilderSim,'app_cont');
+      $("#gameCont").empty();
+      plane_S = new p5(planeBuilderSim,'gameCont');
     });
 
     </script>
    
+   <div id="gameCont">
+   </div>
    
   </body>
 </html>

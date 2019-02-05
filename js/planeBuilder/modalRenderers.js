@@ -2,6 +2,11 @@ function renderStartGameMenu() {
   $("#factory_modal_content").load("content/planeBuilder/startLevel1.html");
 }
 
+function startGame(){
+  $("#app_cont").empty();
+      plane_S = new p5(planeBuilderSim,'app_cont');
+}
+
 function closeModal(){
   modal.style.display = "none";
 }
