@@ -106,6 +106,7 @@ var planeBuilderSim = function(sketch) {
     sketch.frameRate(40);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%'; canvasElt.style.height = "100%";
+    canvasElt.style.border="2px solid red"; 
 
     let defaultToolsLocationX = sketch.width/2 -32;
     let defaultToolsLocationY = sketch.height - sketch.height/6;
