@@ -98,7 +98,13 @@ var planeBuilderSim = function(sketch) {
     //can = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
     can = sketch.createCanvas(700, 350);
     const canvasElt = can.elt;
-    canvasElt.style.width = '100vw', canvasElt.style.height="100vh";
+
+    if((sketch.windowWidth / sketch.windowHeight) < 1.4) {
+      canvasElt.style.width = '100vw', canvasElt.style.height="100%";
+    }
+    else {
+      canvasElt.style.width = '100vw', canvasElt.style.height="100vh";  
+    }
 
     //can = sketch.createCanvas(canvasWidth, canvasHeight);
     //console.log(sketch.windowHeight);
@@ -125,7 +131,7 @@ var planeBuilderSim = function(sketch) {
   sketch.draw = function() {
     if(gameRunning)
     {
-     
+
       sketch.background(this.bgImg);
 
       statsDisplay.update(winCount, startFlowtime, speedTxt);
