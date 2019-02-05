@@ -34,6 +34,9 @@ var planeBuilderSim = function(sketch) {
   var successSnd;
   var gameOverSnd;
 
+  var canvasHeight = 350;
+  var canvasWidth = 700;
+
   var numberForWin = 3;
 
   this.fuselageList = [];
@@ -92,11 +95,15 @@ var planeBuilderSim = function(sketch) {
     gameOverSnd = sketch.loadSound('sounds/gameOver.mp3');
     levelWinSnd = sketch.loadSound('sounds/levelWin.mp3');
 
-    sketch.frameRate(40);
+    /*sketch.frameRate(40);
     can = sketch.createCanvas(700, 350);
     const canvasElt = can.elt;
-    canvasElt.style.width = '100%', canvasElt.style.height="100%";
+    canvasElt.style.width = '100%', canvasElt.style.height="100%";*/
 
+    can = sketch.createCanvas(canvasWidth, canvasHeight);
+    sketch.frameRate(40);
+    const canvasElt = can.elt;
+    canvasElt.style.width = '100%', canvasElt.style.height = "100%";
 
     let defaultToolsLocationX = sketch.width/2 -32;
     let defaultToolsLocationY = sketch.height - sketch.height/6;
