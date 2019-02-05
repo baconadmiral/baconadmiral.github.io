@@ -96,7 +96,7 @@ var planeBuilderSim = function(sketch) {
     levelWinSnd = sketch.loadSound('sounds/levelWin.mp3');
 
     sketch.frameRate(40);
-    can = sketch.createCanvas(700, 350);
+    can = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
 
