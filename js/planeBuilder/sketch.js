@@ -34,8 +34,8 @@ var planeBuilderSim = function(sketch) {
   var successSnd;
   var gameOverSnd;
 
-  var canvasHeight = 350;
-  var canvasWidth = 700;
+  var canvasHeight = 768;
+  var canvasWidth = 1024;
 
   var numberForWin = 3;
 
@@ -104,9 +104,8 @@ var planeBuilderSim = function(sketch) {
     //console.log(sketch.windowHeight);
     can = sketch.createCanvas(700, 350);
     sketch.frameRate(40);
-    const canvasElt = can.elt;
-    canvasElt.style.width = '100%'; canvasElt.style.height = "100%";
-    canvasElt.style.border="2px solid red"; 
+    //const canvasElt = can.elt;
+    //canvasElt.style.width = '100%'; canvasElt.style.height = "100%";
 
     let defaultToolsLocationX = sketch.width/2 -32;
     let defaultToolsLocationY = sketch.height - sketch.height/6;
