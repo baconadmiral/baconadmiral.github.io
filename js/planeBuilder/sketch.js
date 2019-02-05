@@ -95,15 +95,15 @@ var planeBuilderSim = function(sketch) {
     gameOverSnd = sketch.loadSound('sounds/gameOver.mp3');
     levelWinSnd = sketch.loadSound('sounds/levelWin.mp3');
 
-    /*sketch.frameRate(40);
+    sketch.frameRate(40);
     can = sketch.createCanvas(700, 350);
     const canvasElt = can.elt;
-    canvasElt.style.width = '100%', canvasElt.style.height="100%";*/
+    canvasElt.style.width = '100%', canvasElt.style.height="100%";
 
     //can = sketch.createCanvas(canvasWidth, canvasHeight);
-    console.log(sketch.windowHeight);
-    can = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
-    sketch.frameRate(40);
+    //console.log(sketch.windowHeight);
+    //can = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
+    //sketch.frameRate(40);
     //const canvasElt = can.elt;
     //canvasElt.style.width = '100%'; canvasElt.style.height = "100%";
 
@@ -123,7 +123,6 @@ var planeBuilderSim = function(sketch) {
   }
 
   sketch.draw = function() {
-
     if(gameRunning)
     {
       sketch.background(this.bgImg);
