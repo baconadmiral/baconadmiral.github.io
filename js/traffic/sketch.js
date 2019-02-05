@@ -51,7 +51,7 @@ var trafficSim = function(sketch) {
     sketch.frameRate(frameRate);
     loadImages();
     const canvasElt = can.elt;
-    canvasElt.style.width = '100vw', canvasElt.style.height = "100vh";
+    canvasElt.style.width = '100%', canvasElt.style.height = "100%";
     carLaneXs = calcLaneSpawnPosition(numberOfLanes);
   }
 
