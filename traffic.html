@@ -37,6 +37,8 @@
         renderTrafficWelcome();
     }
 
+  function actCallBack() {}
+  
      function loadActivityCalculatorModal() {
     $("#modal_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
@@ -46,8 +48,10 @@
     $(document).ready(function(){
       $('#modal1').modal();
     });
-    setCalcAction(null);
-    $('#modal1').modal({
+  
+    setCalcAction(actCallBack);
+    
+  $('#modal1').modal({
       dismissible:false
     });
     $('#modal1').modal('open');

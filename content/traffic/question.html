@@ -70,21 +70,23 @@
       height:10vh;
     }
 
-    ul{
+    
+  .ulStyle
+  {
       text-align:justify;
       padding-left:0px;
     }
-    ul:after {
+    .ulStyle:after {
       content: '';
       display: inline-block;
       width: 100%;
     }
-    ul:before {
+    .ulStyle:before {
       content: '';
       display: block;
       margin-top: -1.25em;
     }
-    li {
+    .liStyle {
       display: inline-block;
       position: relative;
       top: 1.25em;
@@ -155,14 +157,14 @@
       <img class="quizTitle" src="images/game/trafficSim/quiz/question_1_title.png">
 
       <h4 class="question">Given a WIP of 6 units, and a FLOWTIME of 1.5s, what is the THROUGHPUT?</h4>
-      <ul>
-       <li>
+      <ul class="ulStyle">
+       <li class="liStyle">
         <button class="answerButton" onclick="startCars(3,30,1.5,.75, false, 'tp_out');"><h2>3</h2></button>
       </li>
-      <li>
+      <li  class="liStyle">
         <button class="answerButton" onclick="startCars(3,30,1.5,.75, true, 'tp_out');"><h2>4</h2></button>
       </li>
-      <li>
+      <li  class="liStyle">
         <button class="answerButton" onclick="startCars(3,30,1.5,.75, false, 'tp_out');"><h2>6</h2></button>
       </li>
     </ul>
@@ -176,14 +178,14 @@
    <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
    <img class="quizTitle" src="images/game/trafficSim/quiz/question_2_title.png">
    <h4>Given a FLOWTIME of 3.0s and a THROUGHPUT of 4 cars per sec what is the WIP?</h4>
-   <ul>
-    <li>
+   <ul class="ulStyle">
+    <li  class="liStyle">
       <button class="answerButton" onclick="startCars(3,30,3.0,.75, false, 'wip_out');"><h2>7</h2></button>
     </li>
-    <li>
+    <li  class="liStyle">
        <button class="answerButton" onclick="startCars(3,30,3.0,.75, false, 'wip_out');"><h2>2</h2></button>
     </li>
-    <li>
+    <li  class="liStyle">
         <button class="answerButton" onclick="startCars(3,30,3.0,.75, true, 'wip_out');"><h2>12</h2></button>
     </li>
   </ul>
@@ -197,14 +199,14 @@
    <img class="closeBtn" src="images/game/trafficSim/road/closeBtnRed.png" onclick="renderTrafficWelcome();">
    <img class="quizTitle" src="images/game/trafficSim/quiz/question_3_title.png">
    <h4>Given a WIP of 15 and a throughput of 3 what is the flowtime?</h4>
-   <ul>
-    <li>
+   <ul class="ulStyle">
+    <li class="liStyle">
       <button class="answerButton" onclick="startCars(3,30,5,1, true, 'ft_out');"><h2>5</h2></button>
     </li>
-    <li>
+    <li class="liStyle">
       <button class="answerButton" onclick="startCars(3,30,5,1, false, 'ft_out');"><h2>12</h2></button>
     </li>
-    <li>
+    <li class="liStyle">
      <button class="answerButton" onclick="startCars(3,30,5,1, false, 'ft_out');"><h2>9</h2></button>
    </li>
  </ul>
@@ -216,7 +218,7 @@
 
 
 <div id="modal_cont">
-  <div id="modal1"  class="modal calcModal" style="box-shadow: none;background-color:transparent;">
+  <div id="modal1"  class="modal calcModal" style="box-shadow: none;background-color:transparent;width:95% !important">
     <div class="modal-header" style="text-align: right;">
       <a href="#!" class="modal-close waves-effect " onclick="javaScript:(clearColor())"
       style="    border: 3px solid white;

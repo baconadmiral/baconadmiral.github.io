@@ -192,13 +192,13 @@ function onTabToggle(tab) {
  } */
 
  function setFocus() {
-  $("#inpt_val1").focus();
-  $("#inpt_val1").select();
+ // $("#inpt_val1").focus();
+ // $("#inpt_val1").select();
  }
 
  function setFocusTab2() {
-  $("#inpt_ttk").focus();
-   $("#inpt_ttk").select();
+ // $("#inpt_ttk").focus();
+ //  $("#inpt_ttk").select();
  } 
 
  function setTimeTypeFromWiz(val,isT,isToggle){
@@ -276,7 +276,7 @@ function onTabToggle(tab) {
      $("#tab_calc").addClass("active");
    $("#calc_sect").removeClass("hidden_toggle");
      $("#takt_sect").addClass("hidden_toggle");
-   }
+   }   
  }
 
  function refreshTHelp() {
@@ -460,8 +460,10 @@ function calcResult() {
     } else {
       $("#result2units").text(calcObj.res_typ);
     }
-  $("#actionCalcButton").text(calcActionLbl);
-    $("#actionCalcButton").removeClass("hidden_toggle");
+    $("#actionCalcButton").text(calcActionLbl);
+  if(calActionFunc == openSave) {  //remove if when activity callback is used
+      $("#actionCalcButton").css("display","block"); //removeClass("hidden_toggle");
+  }
   }
   isRounded = false;
 }
@@ -541,16 +543,16 @@ function saveResults(){
   });
     //document.getElementById('btn_display_results').style.display="block";
   }
-  $("#saveCalcButton").addClass("hidden_toggle");
+  $("#saveCalcButton").css("display","none"); //addClass("hidden_toggle");
   $("#save_sect").addClass("hidden_toggle");
-  $("#actionCalcButton").removeClass("hidden_toggle");
+  $("#actionCalcButton").css("display","block"); //removeClass("hidden_toggle");
   
 }
 
 function openSave() {
-   $("#actionCalcButton").addClass("hidden_toggle");
+   $("#actionCalcButton").css("display","none"); //addClass("hidden_toggle");
    $("#save_sect").removeClass("hidden_toggle");
-   $("#saveCalcButton").removeClass("hidden_toggle");
+   $("#saveCalcButton").css("display","block"); //removeClass("hidden_toggle");
 }
 
 function setCalcType(cType) {
@@ -578,9 +580,6 @@ function setCalcType(cType) {
  setCalcHTML();
 }
 
-function testCalcCallFunction() {
-  alert('inside test call');
-}
 
 function setCalcAction(activityCallBack) {
    if(activityCallBack == null) {
@@ -588,7 +587,10 @@ function setCalcAction(activityCallBack) {
     calcActionLbl = 'CLICK TO SAVE RESULT';
    } else { 
       calActionFunc = activityCallBack;
-    calcActionLbl = 'ANSWER WITH RESULT';
+      calcActionLbl = 'ANSWER WITH RESULT';
+   // alert(calcActionLbl);
+   // $("#actionCalcButton").css("display","none");
+     // $("#saveCalcButton").css("display","none");
    }
 }
 

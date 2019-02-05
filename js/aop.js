@@ -291,7 +291,7 @@ function loadCalculator(){
 
 }
 
-function loadCalculatorModal(actionCallBack) { 
+function loadCalculatorModal() { 
   var defaultColor= "#424242";
   var pageTitle = $("#pageTitle").text();
   if(pageTitle !== "Little's Law Calculator"){
@@ -306,12 +306,9 @@ function loadCalculatorModal(actionCallBack) {
     //$('#calcsvg').css({fill: defaultColor});
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
 
-  //testCalcCallFunction();
-  if(actionCallBack == undefined) {
-    setCalcAction(null);
-  } else {
-    setCalcAction(actionCallBack);
-  } 
+
+  setCalcAction(null);
+
 
   $(document).ready(function(){
     $('#modal1').modal();

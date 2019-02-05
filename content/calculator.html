@@ -26,12 +26,13 @@
 	<div class="row">
 		<div id="tab_sect" class="hidden_toggle col s12" style="padding:0;">
 			<ul class="tabs" style="height:35;">
-				<li class="tab col s5"><a href="javascript:(onTabToggle('c'))" id="tab_calc" style="font-size:90%;" class="active" >Calculate</a></li>
+				<li class="tab col s5"><a href="javascript:(onTabToggle('c'))" id="tab_calc" style="font-size:90%;line-height:20px; padding-top:5px;" class="active" >Calculate</a></li>
 				<li class="tab col s7"><a href="javascript:(onTabToggle('t'))" id="tab_tt" style="font-size:90%;line-height:20px; padding-top:5px;">
-					<ul>
+					Throughput/Takt <br/> Guide
+					<!--<ul>
 						<li>Throughput/Takt</li>
 						<li>Guide</li>
-					</ul>
+					</ul> -->
 				</a></li>
 				<li>
 				</ul>
@@ -100,7 +101,7 @@
 							</div>
 						</div>
 						<div class="row" style="margin-bottom:10px">
-						    <a class="tip tooltipped" data-position="top" data-tooltip="abc123xyz890" id="tiptest">Hey</a> 
+						 <!--   <a class="tip tooltipped" data-position="top" data-tooltip="abc123xyz890" id="tiptest">Hey</a> -->
 							<input type="button" value="Calculate" id="btn_calc" onclick="calcResult()" class="btn waves-effect waves-light darken-1" style="width:100%;font-weight:bold;background:#651fa9">
 						</div>
 						<div class="row" style="margin-bottom:5px">
@@ -169,8 +170,8 @@
 						
 						<div class="row">
 							<i class="col s12" style="float:right; ">
-								<a id="actionCalcButton" class='btn hidden_toggle' href="javascript:actionCalc()" style="font-weight:bold;width:100%">CLICK ME</a><!-- SAVE RESULT -->
-							    <a id="saveCalcButton" class='btn hidden_toggle' href="javascript:saveResults()" style="font-weight:bold;width:100%">Save Calculation</a>
+								<a id="actionCalcButton" class='btn' href="javascript:actionCalc()" style="font-weight:bold;width:100%;display:none;">CLICK ME</a><!-- SAVE RESULT -->
+							    <a id="saveCalcButton" class='btn' href="javascript:saveResults()" style="font-weight:bold;width:100%;display:none;">Save Calculation</a>
 							</i>
 						</div>	
 					</div>
