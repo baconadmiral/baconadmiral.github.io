@@ -100,7 +100,7 @@ var planeBuilderSim = function(sketch) {
     const canvasElt = can.elt;
 
     if((sketch.windowWidth / sketch.windowHeight) < 1.4) {
-      canvasElt.style.width = '100vw', canvasElt.style.height="100%", canvasElt.style.marginTop=(sketch.windowHeight - 600)/2+"px", canvasElt.style.marginBottom=(sketch.windowHeight - 570)/2+"px";
+      canvasElt.style.width = '100vw', canvasElt.style.height="100%", canvasElt.style.marginTop=(sketch.windowHeight - 600)/2+"px", canvasElt.style.marginBottom=(sketch.windowHeight - 560)/2+"px";
     }
     else {
       canvasElt.style.width = '100vw', canvasElt.style.height="100vh";
