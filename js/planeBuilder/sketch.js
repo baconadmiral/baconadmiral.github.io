@@ -33,9 +33,7 @@ var planeBuilderSim = function(sketch) {
   var attachSnd;
   var successSnd;
   var gameOverSnd;
-
-  var canvasHeight = 768;
-  var canvasWidth = 1024;
+  var can;
 
   var numberForWin = 3;
 
@@ -77,6 +75,16 @@ var planeBuilderSim = function(sketch) {
     stopGame();
   }
 
+  resizePlaneCanvas = function(){
+
+     if((sketch.windowWidth / sketch.windowHeight) < 1.4) {
+          can.elt.style.width = '100vw', can.elt.style.height="100%", can.elt.style.marginTop=(sketch.windowHeight - 600)/2+"px", can.elt.style.marginBottom=(sketch.windowHeight - 525)/2+"px";
+        }
+    else {
+      can.elt.style.width = '100vw', can.elt.style.height="100vh";
+    }
+  }
+
   function stopGame(){
      removeAllFuselage();
      gameRunning = false;
@@ -97,14 +105,8 @@ var planeBuilderSim = function(sketch) {
     sketch.frameRate(40);
     //can = sketch.createCanvas(sketch.windowWidth, sketch.windowHeight);
     can = sketch.createCanvas(700, 350);
-    const canvasElt = can.elt;
 
-    if((sketch.windowWidth / sketch.windowHeight) < 1.4) {
-      canvasElt.style.width = '100vw', canvasElt.style.height="100%", canvasElt.style.marginTop=(sketch.windowHeight - 600)/2+"px", canvasElt.style.marginBottom=(sketch.windowHeight - 550)/2+"px";
-    }
-    else {
-      canvasElt.style.width = '100vw', canvasElt.style.height="100vh";
-    }
+    resizePlaneCanvas();
 
     //can = sketch.createCanvas(canvasWidth, canvasHeight);
     //console.log(sketch.windowHeight);
@@ -131,7 +133,7 @@ var planeBuilderSim = function(sketch) {
   sketch.draw = function() {
     if(gameRunning)
     {
-
+      
       sketch.background(this.bgImg);
 
       statsDisplay.update(winCount, startFlowtime, speedTxt);
