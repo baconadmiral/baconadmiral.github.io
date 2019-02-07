@@ -170,6 +170,7 @@ function initalLoad(){
   $("#backActivityButton").hide();
   $("#backChartsButton").hide();
   $("#backQuizButton").hide();
+  $("#backVideoButton").hide();
 
 
   loadSidenav();
@@ -626,10 +627,41 @@ function loadWallWalks(){
   clearColor();
   closeGame();
 
-  $("#app_cont").load("content/wallWalks.html");
+  $("#app_cont").load("content/videoList.html");
   $("#pageTitle").text("Wall Walks");
 
   animateArrow();
+}
+
+//Larry's building company video
+function loadVideo1(){
+  clearColor();
+  closeGame();
+   $("#app_cont").load("content/video.html");
+  $("#pageTitle").text("Larry's Building Company");
+
+  animateVideoArrow();
+}
+
+
+//Jimmy's repair shop video
+function loadVideo2(){
+  clearColor();
+  closeGame();
+   $("#app_cont").load("content/video.html");
+  $("#pageTitle").text("Jimmy's Repair Shop");
+
+  animateVideoArrow();
+}
+
+//Intro to AoP video
+function loadVideo3(){
+  clearColor();
+  closeGame();
+   $("#app_cont").load("content/video.html");
+  $("#pageTitle").text("AoP Intro");
+
+  animateVideoArrow();
 }
 
 function animateArrow()
@@ -644,6 +676,22 @@ function animateArrow()
   topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
 }
+
+function animateVideoArrow()
+{
+  $("#menuButton").hide();
+  $("#backButton").hide();
+  $("#backVideoButton").show();
+
+  var topPatty = document.getElementById("patVideo1");
+  var bottomPatty = document.getElementById("patVideo3");
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%";
+
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
+  bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
+}
+
+
 
 //activity page back arrow
 function animateActivityArrow()
@@ -717,6 +765,19 @@ function clickBackToResources()
   portraitStyle();
 }
 
+function clickBackToVideoList(){
+   $("#backVideoButton").hide();
+  var burger1 = document.getElementById("patVideo1");
+  var burger3 = document.getElementById("patVideo1");
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";
+  loadWallWalks();
+  resetVideoArrow();
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+  portraitStyle();
+}
+
 function clickBackToCharts()
 {
   var burger1 = document.getElementById("patChart1");
@@ -785,6 +846,14 @@ function resetQuizArrow()
 {
   var topPatty = document.getElementById("patQuiz1");
   var bottomPatty = document.getElementById("patQuiz3");
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
+}
+
+function resetVideoArrow()
+{
+  var topPatty = document.getElementById("patVideo1");
+  var bottomPatty = document.getElementById("patVideo3");
   topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }

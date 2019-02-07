@@ -1,29 +1,44 @@
 <style type="text/css">
-/*	.auto-resizable-iframe {
-		margin-left:atuo;
-		margin-right:atuo;
-		display:block;
-	}*/
-	.auto-resizable-iframe iframe {
-		position: absolute;
-		width:75%;
-		height:100%;
-	}
+/*  .auto-resizable-iframe {
+    margin-left:atuo;
+    margin-right:atuo;
+    display:block;
+  }*/
+  .auto-resizable-iframe iframe {
+    position: absolute;
+    width:75%;
+    height:100%;
+  }
 </style>
 
 <div id="sliderScreen" class="slider fullscreen container" data-interval="false" 
 style="overflow-x: hidden;overflow-y: hidden;" ondblclick="javascript:(loadLandscapeModal())" onload="javascript:(loadLandscapeSlide())">
-	<div class="auto-resizable-iframe">
-    <iframe src="https://www.dvidshub.net/video/embed/657183"  frameborder="0" allowtransparency allowfullscreen></iframe>
-	</div>
+  <div class="auto-resizable-iframe">
+ <iframe id="videoContainer"   frameborder="0" allowtransparency allowfullscreen></iframe>
+  </div>
 </div>
 
-
 <script>
-
   $(document).ready(function() {
+    var site1 = "https://www.dvidshub.net/video/embed/657183"; 
+    var site2 = "https://www.dvidshub.net/video/embed/658631"; 
+    var site3 = ""; 
     console.log(orientation);
-    if(orientation === 90 && $("#pageTitle").text()==="Wall Walks" )
+
+    if($("#pageTitle").text() === "Larry's Building Company")
+    {
+       document.getElementById('videoContainer').src = site1;
+    }
+    else if ($("#pageTitle").text() === "Jimmy's Repair Shop")
+    {
+      document.getElementById('videoContainer').src = site2;
+    }
+    else if ($("#pageTitle").text() === "AoP Intro")
+    {
+      document.getElementById('videoContainer').src = site3;
+    }
+
+    if(orientation === 90 && $("#pageTitle").text()==="Larry's Building Company" )
     {
       landscapeStyle();
     }
@@ -32,7 +47,7 @@ style="overflow-x: hidden;overflow-y: hidden;" ondblclick="javascript:(loadLands
     }
     $(window).on('orientationchange', function(event) {
       console.log("script running");
-      if(orientation === 90 && $("#pageTitle").text()==="Wall Walks" )
+      if(orientation === 90 && $("#pageTitle").text()==="Larry's Building Company" )
       {
        landscapeStyle();
      }
