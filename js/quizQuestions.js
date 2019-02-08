@@ -27,7 +27,7 @@ let leadershipDiagram = () => {
 		"Answers": [
 			"A meeting charter.",
 			"They are the rallying point for everyone in AFSC.",
-			"They drive us to “best on the planet” sustainment support.",
+			"They drive us to &quot;best on the planet&quot; sustainment support.",
 			"B & C",
 			"None of the above"
 		],
@@ -161,7 +161,7 @@ let littlesLaw = () => {
 		],
 		"CorrectAnswers": ["True"],
 		"Justifications": [
-			"These “science of flow” allow you to determine target WIP levels and how fast you must output a product/service with actual WIP.",
+			"These &quot;science of flow&quot; allow you to determine target WIP levels and how fast you must output a product/service with actual WIP.",
 			"Both flow management and Takt time can be used to manage WIP."
 		]
 	},
@@ -318,7 +318,7 @@ let criticalPath = () => {
 	{
 		"Subject": "Critical Path",
 		"Topic": "Critical Path",
-		"Question": "You and your team have identified the critical path and are monitoring progress.  You realize that work has stopped at one step and there is no work around despite your team’s best efforts. Your project is “off critical path” and will be late to the targeted deadline.  You should?",
+		"Question": "You and your team have identified the critical path and are monitoring progress.  You realize that work has stopped at one step and there is no work around despite your team’s best efforts. Your project is &quot;off critical path&quot; and will be late to the targeted deadline.  You should?",
 		"Answers": [
 			"Panic.",
 			"Declare an Andon to elevate the constraint to your leadership for help in resolving it.",
@@ -355,11 +355,11 @@ let criticalPath = () => {
 		"Question": "The Radiator Chart Horizontal Bars depict:",
 		"Answers": [
 			"Complicated steps.",
-			"A “playbook” of step by which you can implement AoP effectively.",
+			"A &quot;playbook&quot; of step by which you can implement AoP effectively.",
 			"A list of tasks that you must get approval to address.",
 			"None of the above."
 		],
-		"CorrectAnswers": ["A “playbook” of step by which you can implement AoP effectively."],
+		"CorrectAnswers": ["A &quot;playbook&quot; of step by which you can implement AoP effectively."],
 		"Justifications": [
 			"AoP is supposed to be simple.",
 			"Playbooks give an overall view of how to accomplish goals",
